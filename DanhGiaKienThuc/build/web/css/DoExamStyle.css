@@ -1,0 +1,147 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 18, 2017, 11:37:01 PM
+    Author     : NTL
+*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;  
+}
+
+ul li a {
+    text-transform: uppercase;
+}
+
+body {
+    overflow: auto;
+    font-family: "Times New Roman";
+}
+
+#top {
+    width: 100%;
+    height: 36px;
+    margin: auto;
+    background-color: rgba(53, 21, 121, 1);
+}
+
+#top-right {
+    float: right;
+/*    position: relative;*/
+    display: inline-block;
+    cursor: pointer;
+}
+
+#top-right ul {
+    background: rgba(53, 21, 121, 1);
+    position: relative;
+    padding: 0;    
+}
+
+#top-right ul li {
+    height: 36px;
+    display: inline-block;
+    position:relative;
+}
+
+#top-right ul li a {
+    font-size: 15px;
+    padding: 9px 15px 0 10px;
+    font-weight: bold;
+    display: block;  
+    color: rgb(255,255,255);    
+    font-family:'Roboto';
+}
+
+#top-right ul li a:hover {    
+    color: rgba(200, 7, 207, 1);
+}
+
+#user-info:hover .sub-top-right {
+    display: block;
+}
+
+#top-left a {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(255,255,255);
+    padding: 10px 19px 0px 0px;
+    margin: 0px 0px 0px 10px;
+    text-transform: uppercase;
+    font-family:'Roboto';
+}
+
+#question {
+    margin-top: 10px;
+/*    margin-left: 40px;*/
+}
+
+p {
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+#timer {
+    float: right;
+}
+
+#timer.stick {
+    margin-top: 0 !important;
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+}
+
+#btnTaoDe {
+    width: 100px;
+    background: rgba(53, 21, 121, 1);
+    color: rgb(255,255,255);
+    font-size:16px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    border:none;
+    margin-left: 700px;
+    text-transform: uppercase;
+    font-family:'Roboto';
+}
+
+#btnTaoDe:hover {
+    cursor: pointer;
+    color: rgba(200, 7, 207, 1);
+}
+
+#createExam {
+    margin-top: 25px;
+}
+
+#createExam h5 {
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(6,114,28);
+}
+
+#main {
+    width: 96%;
+    margin: 25px auto;
+}
+
+#main h2 {
+    text-align: center;
+    font-weight: bold;
+    color: red;
+    font-family: Arial, sans-serif;
+}

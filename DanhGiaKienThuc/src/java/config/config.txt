@@ -1,0 +1,3 @@
+jdbc:mysql://localhost:3306/danhgiakienthucport=3306
+root
+admin

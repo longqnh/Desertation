@@ -1,0 +1,166 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 24, 2017, 10:41:18 PM
+    Author     : NTL
+*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;  
+}
+
+ul li a {
+    text-transform: uppercase;
+}
+
+body {
+    font-family:'Roboto';
+    font-size: 13px;
+}
+
+.clr {
+    clear: both;
+}
+
+.container {
+    width: 96%;
+    height: 800px;
+    margin: 20px auto;
+    overflow: auto;
+/*    border: 1px black solid;*/
+}
+
+#main-left {
+    width: 300px;
+    height: 790px;
+    float: left;
+    /*border: 1px black solid;*/
+}
+
+#main-right {
+    width: 945px;
+    margin-left: 25px;
+    height: 775px;
+    float: left;
+    border: 1px solid black;
+    padding: 10px 0px 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+#main-right h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgb(6,114,28);
+}
+
+#main-right ol {
+    margin-top: 10px;
+    padding-left: 25px;
+    color: blue;
+}
+
+#main-right ol li {
+    padding-left: 10px;
+}
+
+#main-right ol li a {
+    color: blue;
+}
+
+#main-right p {
+    color: black;
+}
+
+#main-left-top {
+    width: 300px;
+    height: 100px;
+    float: left;
+}
+
+#search {
+    width: 320px;
+    height: 50px;
+    margin-top: 15px;
+    float: left; 
+    position: relative;
+}
+
+#textsearch {
+    height: 25px;
+    width: 250px; 
+    margin-left: 10px;
+    border: 1px solid black;
+    padding-left: 10px;
+}
+
+#search-button {
+    height: 25px;
+    width: 34px;
+    margin-left: auto;
+    position: absolute;
+    z-index: 99;
+    border: 0;
+    cursor: pointer;
+    background: url(../images/search-button.jpg);
+    background-repeat: no-repeat;
+}
+
+#main-left-bottom {
+    width: 300px;
+    height: 690px;
+    margin-top: 5px;
+    float: left;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #f8f8ff;
+}
+
+input {
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 20px;
+}
+
+#main-left-bottom > ul {
+    padding: 10px 0px 20px 20px;
+}
+
+#main-left-bottom li {
+    line-height: 26px;
+    padding-left: 25px;
+    padding-top: 10px;
+    background: url(../images/menuicon.png) no-repeat 0px 18px;    
+}
+
+#main-left-bottom li ul {
+    display: none;
+}
+
+.submnu li {
+    padding-left: 24px;
+    /*background: url(../images/arrow.png) no-repeat 12px 10px;*/
+}
+
+#main-left-bottom a {
+    color: #1e90ff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#main-left-bottom a:hover {
+    color: red;
+}
