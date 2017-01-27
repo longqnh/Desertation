@@ -38,7 +38,7 @@
                             </ul>
                         </li>
                         
-                        <li><a> Lý thuyết trắc nghiệm</a>
+                        <li><a href="LyThuyetTracNghiem.jsp"> Lý thuyết trắc nghiệm</a>
                     </ul>
                 </div>
                 

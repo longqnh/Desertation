@@ -38,7 +38,7 @@
                             </ul>
                         </li>
 
-                        <li><a> Lý thuyết trắc nghiệm</a></li>
+                        <li><a href="LyThuyetTracNghiem.jsp"> Lý thuyết trắc nghiệm</a></li>
                     </ul>
                 </div>
                 
@@ -49,30 +49,21 @@
                 <h2>Ôn tập lý thuyết toán 12</h2>
                 <ol type="I">
                     <li>
-                        <a href="" class="lythuyet"> Hàm số </a>
+                        <a href="" class="content"> Hàm số </a>
                         <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
                     </li>
                     <li>
-                        <a href="" class="lythuyet"> Lũy thừa - mũ - logarit </a>
+                        <a href="" class="content"> Lũy thừa - mũ - logarit </a>
                         <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
                     </li>
-                    <li><a href="" class="lythuyet"> Tích phân </a></li>
-                    <li><a href="" class="lythuyet"> Số phức </a></li>
-                    <li><a href="" class="lythuyet"> Hình học không gian </a></li>
-                    <li><a href="" class="lythuyet"> Giải tích không gian Oxyz </a></li>
+                    <li><a href="" class="content"> Tích phân </a></li>
+                    <li><a href="" class="content"> Số phức </a></li>
+                    <li><a href="" class="content"> Hình học không gian </a></li>
+                    <li><a href="" class="content"> Giải tích không gian Oxyz </a></li>
                 </ol>
             </div>
 
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('.lythuyet').next('p').slideToggle();
-                    $('.lythuyet').click(function(){   
-                        $('.lythuyet').next('p').slideUp();
-                        $(this).next('p').slideToggle(); 
-                        return false;
-                    });
-                });
-            </script>
+            <script src="js/DisplayContent.js" type="text/javascript"></script>
         </div>
         
         <script src="js/autoscroll.js" type="text/javascript"></script>

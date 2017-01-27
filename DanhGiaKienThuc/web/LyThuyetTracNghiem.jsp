@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Lop12
-    Created on : Jan 25, 2017, 11:16:44 PM
+    Document   : LyThuyetTracNghiem
+    Created on : Jan 27, 2017, 2:30:17 PM
     Author     : NTL
 --%>
 
@@ -38,7 +38,7 @@
                             </ul>
                         </li>
 
-                        <li><a href="LyThuyetTracNghiem.jsp"> Lý thuyết trắc nghiệm</a></li>
+                        <li><a> Lý thuyết trắc nghiệm</a></li>
                     </ul>
                 </div>
                 
@@ -46,20 +46,45 @@
             </div>
             
             <div id="main-right">
-                <h2>Ôn tập lý thuyết toán 12</h2>
+                <h2>Lý thuyết trắc nghiệm</h2>
                 <ol type="I">
                     <li>
-                        <a href="" class="content"> Hàm số </a>
+                        <a href="" class="lythuyet"> Các dạng bài tập trắc nghiệm </a>
+                        <ol>
+                            <li>
+                                <a href="" class="content"> Trắc nghiệm đúng - sai: </a>
+                                <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            </li>
+                            <li>
+                                <a href="" class="content"> Trắc nghiệm đa đáp án: </a>
+                                <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            </li> 
+                            <li>
+                                <a href="" class="content"> Trắc nghiệm điền khuyết: </a>
+                                <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            </li>
+                            <li>
+                                <a href="" class="content"> Trắc nghiệm đối chiếu: </a>
+                                <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            </li>                          
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="" class="content"> Tính tinh cậy </a>
                         <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
                     </li>
                     <li>
-                        <a href="" class="content"> Lũy thừa - mũ - logarit </a>
+                        <a href="" class="content"> Tính giá trị </a>
                         <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
                     </li>
-                    <li><a href="" class="content"> Tích phân </a></li>
-                    <li><a href="" class="content"> Số phức </a></li>
-                    <li><a href="" class="content"> Hình học không gian </a></li>
-                    <li><a href="" class="content"> Giải tích không gian Oxyz </a></li>
+                    <li>
+                        <a href="" class="content"> Độ khó </a>
+                        <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                    </li>
+                    <li>
+                        <a href="" class="content"> Độ phân cách </a>
+                        <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                    </li>                    
                 </ol>
             </div>
 

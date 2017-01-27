@@ -65,9 +65,10 @@ body {
     text-transform: uppercase;
     font-weight: bold;
     color: rgb(6,114,28);
+    font-family: Arial, sans-serif;
 }
 
-#main-right ol {
+#main-right > ol {
     margin-top: 10px;
     padding-left: 25px;
     color: blue;
