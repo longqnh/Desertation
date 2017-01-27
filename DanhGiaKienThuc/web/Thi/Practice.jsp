@@ -11,12 +11,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>LUYỆN TẬP</title>
-        <link rel="stylesheet" href="css/DoExamStyle.css" type="text/css">
+        <link rel="stylesheet" href="../css/DoExamStyle.css" type="text/css">
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>    
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="../js/materialize.min.js"></script>
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">
             MathJax.Hub.Config({
                 extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
@@ -66,7 +66,7 @@
             </div>
 
             <div id="top-left">
-                <a href="index.jsp">website đánh giá kiến thức toán thpt</a>
+                <a href="../index.jsp">website đánh giá kiến thức toán thpt</a>
             </div>
         </div>
             

@@ -20,7 +20,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>LÀM ĐỀ THI</title>
-        <link rel="stylesheet" href="css/DoExamStyle.css" type="text/css">
+        <link rel="stylesheet" href="../css/DoExamStyle.css" type="text/css">
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>    
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">
@@ -71,12 +71,12 @@
             </div>
 
             <div id="top-left">
-                <a href="index.jsp">website đánh giá kiến thức toán thpt</a>
+                <a href="../index.jsp">website đánh giá kiến thức toán thpt</a>
             </div>
         </div>
         
         <div id="main">
-            <form id="doExam" name="doExam" action="CheckAnswer" method="POST">
+            <form id="doExam" name="doExam" action="../CheckAnswer" method="POST">
                 <h2>ĐỀ LUYỆN TẬP</h2>
                 <%
                     String[] noidung = request.getParameterValues("kienthuc");
@@ -93,7 +93,7 @@
                             <p><b>Câu <%=i+1%>: </b> <%=q.getNoidung()%></p>
                             <%
                                 if (q.getHasImage()==1) { %>
-                                    <img src="images/<%=q.getId()%>.JPG">
+                                    <img src="../images/<%=q.getId()%>.JPG">
                             <% } %>
                             <p><b>A. </b><input type="radio" name="question<%=q.getId()%>" value="A"> <%=q.getDapanA()%></p>
                             <p><b>B. </b><input type="radio" name="question<%=q.getId()%>" value="B"> <%=q.getDapanB()%></p>
