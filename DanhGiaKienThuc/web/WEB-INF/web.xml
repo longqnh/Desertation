@@ -21,8 +21,8 @@
         <servlet-class>controller.UserDoExam</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CheckAnswer</servlet-name>
-        <servlet-class>controller.CheckAnswer</servlet-class>
+        <servlet-name>FinishExam</servlet-name>
+        <servlet-class>controller.FinishExam</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CheckEmailServlet</servlet-name>
@@ -45,8 +45,8 @@
         <url-pattern>/UserDoExam</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CheckAnswer</servlet-name>
-        <url-pattern>/CheckAnswer</url-pattern>
+        <servlet-name>FinishExam</servlet-name>
+        <url-pattern>/FinishExam</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

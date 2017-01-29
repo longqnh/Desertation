@@ -5,16 +5,8 @@
  */
 package connect;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,11 +14,15 @@ import java.util.logging.Logger;
  */
 public class DBConnect {
 
+    private static String dbURL="jdbc:mysql://localhost:3306/danhgiakienthuc";
+    private static String dbUser="root";
+    private static String dbPassword="admin";
+    
     public static Connection getConnecttion() {
         Connection cons = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            cons = DriverManager.getConnection("jdbc:mysql://localhost:3306/danhgiakienthuc", "root", "admin");
+            cons = DriverManager.getConnection(dbURL,dbUser,dbPassword);
         } catch (Exception e) {
             e.printStackTrace();
         }

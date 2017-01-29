@@ -71,7 +71,8 @@ public class UserServlet extends HttpServlet {
                     session.setAttribute("user", users);
                     url = "/index.jsp";
                 } else {
-                    url = "/LoginFail.jsp";
+                    request.setAttribute("errorMessage", "Sai tài khoản hoặc mật khẩu");
+                    request.getRequestDispatcher("/login.jsp").forward(request, response);
                 }
                 break;
             case "logout":

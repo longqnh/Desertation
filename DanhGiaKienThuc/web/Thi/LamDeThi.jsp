@@ -52,7 +52,7 @@
 //                response.sendRedirect("login.jsp");
 //            }
         %>
-
+        
         <div id="top">
             <div id="top-right">
                 <% if (users!=null) { %>
@@ -73,14 +73,38 @@
             <div id="top-left">
                 <a href="../index.jsp">website đánh giá kiến thức toán thpt</a>
             </div>
+
+            <div id="sticky-anchor"></div>
+            <div class="timer"></div>
+            
+            <script type="text/javascript">
+                function sticky_relocate() {
+                    var window_top = $(window).scrollTop();
+                    var div_top = $('#sticky-anchor').offset().top;
+                    if (window_top > div_top) {
+                        $('.timer').addClass('stick');
+                        $('#sticky-anchor').height($('.timer').outerHeight());
+                    } else {
+                        $('.timer').removeClass('stick');
+                        $('#sticky-anchor').height(0);
+                    }
+                }
+
+                $(function() {
+                    $(window).scroll(sticky_relocate);
+                    sticky_relocate();
+                });
+            </script>            
         </div>
         
-        <div id="main">
-            <form id="doExam" name="doExam" action="../CheckAnswer" method="POST">
+        <div id="main">           
+            <form id="doExam" name="doExam" action="../FinishExam" method="POST">
                 <h2>ĐỀ LUYỆN TẬP</h2>
                 <%
                     String[] noidung = request.getParameterValues("kienthuc");
                     String level = request.getParameter("dokho");
+                    int time = Integer.parseInt(request.getParameter("time"));
+                    
                     QuestionDAO questionDAO = new QuestionDAO();
                     List exam = questionDAO.CreateExam(noidung,level); 
 

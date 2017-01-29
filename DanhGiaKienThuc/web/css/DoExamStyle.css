@@ -145,3 +145,20 @@ p {
     color: red;
     font-family: Arial, sans-serif;
 }
+
+#top .timer {
+    width: 350px;
+    height: 300px;
+    float: right;
+    margin: 100px 20px auto;
+    border: 1px black solid;
+    border-radius: 10px;
+}
+
+.timer.stick {
+    margin-top: 0 !important;
+    position: fixed;
+    top: 20px;
+    right: 0;
+    z-index: 10000;
+}
