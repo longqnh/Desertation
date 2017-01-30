@@ -35,13 +35,7 @@
             });
         </script>
     </head>
-    <body>
-
-<!--        <div id="sticky-anchor"></div>
-        <div id="timer"></div>
-        
-        <script type="text/javascript" src="js/TimeCounter.js"></script>-->
-        
+    <body>      
         <%
             Users users = null;
             if (session.getAttribute("user")!=null) {
@@ -74,40 +68,54 @@
                 <a href="../index.jsp">website đánh giá kiến thức toán thpt</a>
             </div>
 
-            <div id="sticky-anchor"></div>
-            <div class="timer"></div>
+            <%
+                String[] noidung = request.getParameterValues("kienthuc");
+                String level = request.getParameter("dokho");
+                int time = Integer.parseInt(request.getParameter("time")); 
+                
+                QuestionDAO questionDAO = new QuestionDAO();
+                List exam = questionDAO.CreateExam(noidung,level); 
+            %>
+                    
+                <div id="sticky-anchor"></div>
+                <div id="user-answer">
+                    <div id="timer"></div>
+                    <div id="answer-table">
+                        <%
+                            for (int i = 0; i < exam.size(); i++) { %>
+                                <div class="numberCircle"><%=i+1%></div>
+                            <% } %>
+                    </div>
+                </div>
             
-            <script type="text/javascript">
-                function sticky_relocate() {
-                    var window_top = $(window).scrollTop();
-                    var div_top = $('#sticky-anchor').offset().top;
-                    if (window_top > div_top) {
-                        $('.timer').addClass('stick');
-                        $('#sticky-anchor').height($('.timer').outerHeight());
-                    } else {
-                        $('.timer').removeClass('stick');
-                        $('#sticky-anchor').height(0);
+                <script type="text/javascript">
+                    function sticky_relocate() {
+                        var window_top = $(window).scrollTop();
+                        var div_top = $('#sticky-anchor').offset().top;
+                        if (window_top > div_top) {
+                            $('#user-answer').addClass('stick');
+                            $('#sticky-anchor').height($('#user-answer').outerHeight());
+                        } else {
+                            $('#user-answer').removeClass('stick');
+                            $('#sticky-anchor').height(0);
+                        }
                     }
-                }
 
-                $(function() {
-                    $(window).scroll(sticky_relocate);
-                    sticky_relocate();
-                });
-            </script>            
+                    $(function() {
+                        $(window).scroll(sticky_relocate);
+                        sticky_relocate();
+                    });
+                </script>            
         </div>
         
-        <div id="main">           
+        <div id="main">
             <form id="doExam" name="doExam" action="../FinishExam" method="POST">
                 <h2>ĐỀ LUYỆN TẬP</h2>
-                <%
-                    String[] noidung = request.getParameterValues("kienthuc");
-                    String level = request.getParameter("dokho");
-                    int time = Integer.parseInt(request.getParameter("time"));
-                    
-                    QuestionDAO questionDAO = new QuestionDAO();
-                    List exam = questionDAO.CreateExam(noidung,level); 
+              
+                <input type="hidden" id="examtime" value="<%=time%>">
+                <script src="../js/TimeCounterJS.js" type="text/javascript"></script>
 
+                <%    
                     List IDlist = new ArrayList(); // save id of every question
 
                     for (int i = 0; i < exam.size(); i++) {
