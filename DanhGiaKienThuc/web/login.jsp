@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>ĐÁNH GIÁ KIẾN THỨC THPT</title>
+        <title>ĐĂNG NHẬP</title>
         <link rel="stylesheet" href="css/HeaderStyle.css" type="text/css">
         <link rel="stylesheet" href="css/LoginStyle.css" type="text/css">
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>

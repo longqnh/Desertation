@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>ĐÁNH GIÁ KIẾN THỨC THPT</title>
+        <title>ĐĂNG KÝ TÀI KHOẢN</title>
         <link rel="stylesheet" href="css/LoginStyle.css" type="text/css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
         <script src="js/CheckExist.js" type="text/javascript"></script>

@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/OtherStyle.css" type="text/css">
-        <title>ĐÁNH GIÁ KIẾN THỨC THPT</title>
+        <title>GIỚI THIỆU</title>
     </head>
     <body>
         <jsp:include page="WebInterface/header.jsp"></jsp:include>
@@ -33,8 +33,8 @@
                         <li><a href="index.jsp"> Trang chủ</a></li>                       
                         <li><a> Làm đề thi </a>
                             <ul class="submnu">
-                                <li><a href="MockTest.jsp"> Thi thử </a></li>
-                                <li><a href="Practice.jsp"> Luyện tập </a></li>
+                                <li><a href="Thi/MockTest.jsp"> Thi thử </a></li>
+                                <li><a href="Thi/Practice.jsp"> Luyện tập </a></li>
                             </ul>
                         </li>
                         <li><a href="LyThuyet.jsp"> Lý thuyết</a></li>
