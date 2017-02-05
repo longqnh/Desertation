@@ -78,7 +78,8 @@
                     <option value="" disabled selected>Độ khó</option>
                     <option value="0">Dễ</option>
                     <option value="1">Trung bình</option>
-                    <option value="2">Khó</option>
+                    <option value="2">Trung bình - khó</option>
+                    <option value="3">Khó</option>
                 </select>
             </div>
 

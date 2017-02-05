@@ -79,7 +79,7 @@ public class FinishExam extends HttpServlet {
 
         for (int i=0; i<IDlist.size(); i++) {
             String temp = IDlist.get(i).toString();
-            String sql = "select answer from table_cauhoi where id='" + temp + "'";
+            String sql = "select answer from table_hamso where id='" + temp + "'";
         
             PreparedStatement ps;
             try {
@@ -87,7 +87,7 @@ public class FinishExam extends HttpServlet {
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     String correct = rs.getString("answer");
-                    String user_select = request.getParameter("question" + temp);
+                    String user_select = request.getParameter(temp);
                     PrintWriter out = response.getWriter();
                     
                     if (user_select == null) {

@@ -12,14 +12,14 @@ package model;
 public class Question {
     private String id;
     private String noidung, dapanA, dapanB, dapanC, dapanD, answer;
-    private String dangtoan;
+    private String dangtoan, dangbt;
     private int level;
     private int HasImage;
     
     public Question() {
     }
 
-    public Question(String id, String noidung, String dapanA, String dapanB, String dapanC, String dapanD, String answer, String dangtoan, int level, int HasImage) {
+    public Question(String id, String noidung, String dapanA, String dapanB, String dapanC, String dapanD, String answer, String dangtoan, String dangbt, int level, int HasImage) {
         this.id = id;
         this.noidung = noidung;
         this.dapanA = dapanA;
@@ -28,6 +28,7 @@ public class Question {
         this.dapanD = dapanD;
         this.answer = answer;
         this.dangtoan = dangtoan;
+        this.dangbt = dangbt;
         this.level = level;
         this.HasImage = HasImage;
     }
@@ -94,6 +95,14 @@ public class Question {
 
     public void setDangtoan(String dangtoan) {
         this.dangtoan = dangtoan;
+    }
+
+    public String getDangbt() {
+        return dangbt;
+    }
+
+    public void setDangbt(String dangbt) {
+        this.dangbt = dangbt;
     }
 
     public int getLevel() {

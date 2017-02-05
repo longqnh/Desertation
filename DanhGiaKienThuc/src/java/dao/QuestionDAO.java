@@ -38,7 +38,7 @@ public class QuestionDAO {
         
         String lv = "and level=" + level;
         
-        String sql = "select * from table_cauhoi where " + nd + lv; //where dangtoan='" + dangtoan + "' and type='" + type + "'";
+        String sql = "select * from table_hamso where " + nd + lv; //where dangtoan='" + dangtoan + "' and type='" + type + "'";
 	List exam = new ArrayList();
         PreparedStatement ps;
 	try {
@@ -55,6 +55,7 @@ public class QuestionDAO {
                 question.setDapanD(rs.getString("dapanD"));
                 question.setAnswer(rs.getString("answer"));
                 question.setDangtoan(rs.getString("dangtoan"));
+                question.setDangbt(rs.getString("dangbt"));
                 question.setLevel(rs.getInt("level"));
                 question.setHasImage(rs.getInt("hasImage"));
                 exam.add(question);

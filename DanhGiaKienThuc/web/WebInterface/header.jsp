@@ -31,7 +31,7 @@
                         <ul>
                             <li id="user-info"><a href="#" style="text-transform: none; text-align: center;"><%=users.getUsername()%></a>
                                 <ul class="sub-top-right">
-                                    <li><a href="#">Quản lý tài khoản</a></li>
+                                    <li><a href="User/Admin.jsp">Quản lý tài khoản</a></li>
                                     <form action="UserServlet"method="POST">
                                         <input id="btnlogout" type="submit" value="Thoát">
                                         <input type="hidden" value="logout" name="command">

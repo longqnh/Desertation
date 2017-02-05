@@ -82,17 +82,11 @@
                     <div id="timer"></div>
                     <div id="answer-table">
                         <%
-                            for (int i = 0; i < exam.size(); i++) { %>
-                                <div class="numberCircle" id="cau<%=i+1%>"><%=i+1%></div>
+                            for (int i = 0; i < exam.size(); i++) { 
+                                Question q = (Question) exam.get(i); %>
+                                <div class="numberCircle" id="<%=q.getId()%>"><%=i+1%></div>
                             <% } %>
                     </div>
-                    
-                    <script type="text/javascript">
-                        $("#cau1").click(function() {
-                            $('html,body').animate({
-                                scrollTop: $("#answer-table > #cau5").offset().top},'slow');    
-                        });
-                    </script>
                     
                     <script type="text/javascript">
                         function SubmitExam() {
@@ -138,16 +132,16 @@
                     for (int i = 0; i < exam.size(); i++) {
                         Question q = (Question) exam.get(i); %>
 
-                        <div onclick="Answered(<%=q.getId()%>)">
+                        <div onclick="Answered('<%=q.getId()%>')">
                             <p><b>Câu <%=i+1%>: </b> <%=q.getNoidung()%></p>
                             <%
                                 if (q.getHasImage()==1) { %>
-                                    <img src="../images/<%=q.getId()%>.JPG">
+                                    <img src="../images/<%=q.getDangtoan()%>/<%=q.getId()%>.JPG">
                             <% } %>
-                            <p><b>A. </b><input type="radio" id="question<%=q.getId()%>" name="question<%=q.getId()%>" value="A"> <%=q.getDapanA()%></p>
-                            <p><b>B. </b><input type="radio" id="question<%=q.getId()%>" name="question<%=q.getId()%>" value="B"> <%=q.getDapanB()%></p>
-                            <p><b>C. </b><input type="radio" id="question<%=q.getId()%>" name="question<%=q.getId()%>" value="C"> <%=q.getDapanC()%></p>
-                            <p><b>D. </b><input type="radio" id="question<%=q.getId()%>" name="question<%=q.getId()%>" value="D"> <%=q.getDapanD()%></p>
+                            <p><b>A. </b><input type="radio" name="<%=q.getId()%>" value="A"> <%=q.getDapanA()%></p>
+                            <p><b>B. </b><input type="radio" name="<%=q.getId()%>" value="B"> <%=q.getDapanB()%></p>
+                            <p><b>C. </b><input type="radio" name="<%=q.getId()%>" value="C"> <%=q.getDapanC()%></p>
+                            <p><b>D. </b><input type="radio" name="<%=q.getId()%>" value="D"> <%=q.getDapanD()%></p>
                         </div>
                     <%
                         IDlist.add(q.getId()); 
@@ -157,18 +151,14 @@
                     
                     <script type="text/javascript">
                         function Answered(i) {
-                            var radios = document.getElementsByName("question" + i);
+                            var radios = document.getElementsByName(i);
 
                             for (var j = 0, length = radios.length; j < length; j++) {
                                 if (radios[j].checked) {
-                                    document.getElementById("cau"+i).style.backgroundColor = "gray";
+                                    document.getElementById(i).style.backgroundColor = "gray";
                                     break;
                                 }
                             }
-//                            var id = document.getElementById("question" + i);
-//                            if(document.querySelectorAll('input[type="radio"][name="' + id + '"]:checked').length < 1) {
-//                                document.getElementById("test"+i).style.backgroundColor = "gray";
-//                            }
                         }
                     </script>
             </form>
