@@ -31,21 +31,11 @@
     </head>
     
     <body>
-
-<!--        <div id="sticky-anchor"></div>
-        <div id="timer"></div>
-        
-        <script type="text/javascript" src="js/TimeCounter.js"></script>-->
-        
         <%
             Users users = null;
             if (session.getAttribute("user")!=null) {
                 users = (Users) session.getAttribute("user");
             }
-            
-//            if (users==null) {
-//                response.sendRedirect("login.jsp");
-//            }
         %>
 
         <div id="top">
@@ -54,8 +44,11 @@
                     <ul>
                         <li id="user-info"><a href="#" style="text-transform: none; text-align: center;"><%=users.getUsername()%></a>
                             <ul class="sub-top-right">
-                                <li><a href="#">Quản lý tài khoản</a></li>
-                                <form action="UserServlet"method="POST">
+                                <%
+                                    String page_redirect= "../Member/User.jsp?username=" + users.getUsername();
+                                %>
+                                <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
+                                <form action="../UserServlet"method="POST">
                                     <input id="btnlogout" type="submit" value="Thoát">
                                     <input type="hidden" value="logout" name="command">
                                 </form>
@@ -113,7 +106,6 @@
             </script>
             
             <input id="btnTaoDe" type="submit" value="Tạo đề"> <!-- css in DoExamStyle -->
-        </form>
-            
+        </form>   
     </body>
 </html>

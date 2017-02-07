@@ -22,6 +22,13 @@
             if (session.getAttribute("user")!=null) {
                 users = (Users) session.getAttribute("user");
             }
+
+            String strpage = request.getRequestURL().toString();
+            if (strpage.toLowerCase().contains("Member/User.jsp".toLowerCase())) { 
+                strpage = "../";
+            } else {
+                strpage = "";
+            }
         %>
         
         <div id="sticky-anchor"></div>
@@ -31,8 +38,11 @@
                         <ul>
                             <li id="user-info"><a href="#" style="text-transform: none; text-align: center;"><%=users.getUsername()%></a>
                                 <ul class="sub-top-right">
-                                    <li><a href="User/Admin.jsp">Quản lý tài khoản</a></li>
-                                    <form action="UserServlet"method="POST">
+                                    <%
+                                        String page_redirect= strpage + "Member/User.jsp?username=" + users.getUsername();
+                                    %>
+                                    <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
+                                    <form action="<%=strpage%>UserServlet"method="POST">
                                         <input id="btnlogout" type="submit" value="Thoát">
                                         <input type="hidden" value="logout" name="command">
                                     </form>
@@ -48,7 +58,7 @@
             </div>
 
             <div id="top-left">
-                <a href="index.jsp">website đánh giá kiến thức toán thpt</a>
+                <a href="<%=strpage%>index.jsp">website đánh giá kiến thức toán thpt</a>
             </div>
         </div>
 
@@ -79,18 +89,18 @@
         <!-- Menu -->
         <div id="menu">
             <ul>
-                <li><a href="index.jsp" <!--class="selected"-->Trang chủ</a></li>
+                <li><a href="<%=strpage%>index.jsp" <!--class="selected"-->Trang chủ</a></li>
                 <li><a href="#">Làm đề thi</a>
                     <ul class="submenu">
-                        <li><a href="Thi/MockTest.jsp">Thi thử</a></li>
-                        <li><a href="Thi/Practice.jsp">Luyện tập</a></li>
+                        <li><a href="<%=strpage%>Thi/MockTest.jsp">Thi thử</a></li>
+                        <li><a href="<%=strpage%>Thi/Practice.jsp">Luyện tập</a></li>
                     </ul>
                 </li>
-                <li><a href="LyThuyet.jsp">Lý thuyết</a>
+                <li><a href="<%=strpage%>LyThuyet.jsp">Lý thuyết</a>
                 </li>
-                <li><a href="tutorial.jsp">Hướng dẫn</a></li>
-                <li><a href="information.jsp">Giới thiệu</a></li>
-                <li><a href="contact.jsp">Liên hệ - góp ý</a></li>
+                <li><a href="<%=strpage%>tutorial.jsp">Hướng dẫn</a></li>
+                <li><a href="<%=strpage%>information.jsp">Giới thiệu</a></li>
+                <li><a href="<%=strpage%>contact.jsp">Liên hệ - góp ý</a></li>
             </ul>
             
             <script type="text/javascript">
