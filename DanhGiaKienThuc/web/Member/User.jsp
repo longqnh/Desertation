@@ -4,6 +4,7 @@
     Author     : NTL
 --%>
 
+<%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,11 @@
     </head>
     <body>
         <jsp:include page="../WebInterface/header.jsp"></jsp:include>
+        
+        <%
+            Users users = null;
+            users = (Users) session.getAttribute("user");
+        %>
         
         <div id="clr"></div>
         <div class="container">
@@ -46,7 +52,7 @@
             </div>
             
             <div id="main-right">
-
+                <h2>Xin chào <%=users.getUsername()%></h2>
             </div>
 
             <script src="../js/DisplayContent.js" type="text/javascript"></script>
