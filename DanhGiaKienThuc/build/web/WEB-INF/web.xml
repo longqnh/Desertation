@@ -24,6 +24,10 @@
         <servlet-name>FinishExam</servlet-name>
         <servlet-class>controller.FinishExam</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserUpdate</servlet-name>
+        <servlet-class>controller.UserUpdate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckEmailServlet</servlet-name>
         <url-pattern>/CheckEmailServlet</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>FinishExam</servlet-name>
         <url-pattern>/FinishExam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserUpdate</servlet-name>
+        <url-pattern>/UserUpdate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

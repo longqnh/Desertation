@@ -106,6 +106,9 @@ body {
     margin-left: 10px;
     border: 1px solid black;
     padding-left: 10px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 20px;    
 }
 
 #search-button {
@@ -128,12 +131,6 @@ body {
     border: 1px solid black;
     border-radius: 10px;
     background-color: #f8f8ff;
-}
-
-input {
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    border-radius: 20px;
 }
 
 #main-left-bottom > ul {

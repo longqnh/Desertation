@@ -24,7 +24,7 @@
             }
 
             String strpage = request.getRequestURL().toString();
-            if (strpage.toLowerCase().contains("Member/User.jsp".toLowerCase())) { 
+            if (strpage.toLowerCase().contains("Member/".toLowerCase())) { 
                 strpage = "../";
             } else {
                 strpage = "";

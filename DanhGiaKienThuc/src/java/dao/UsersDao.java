@@ -95,4 +95,23 @@ public class UsersDao {
 	}
 	return null;
     }
+    
+    public Users updateUser(Users user) {
+	Connection con = DBConnect.getConnecttion();
+	String sql = "select * from table_user where username='" + user.getUsername() + "';";
+	PreparedStatement ps;
+	try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Users u = new Users();
+                
+                con.close();
+                return u;
+            }
+	} catch (SQLException e) {
+            e.printStackTrace();
+	}
+	return null;
+    }
 }

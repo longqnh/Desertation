@@ -1,0 +1,59 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 10, 2017, 1:08:32 AM
+    Author     : NTL
+*/
+
+.edit-info {
+    margin: 50px auto auto 100px;
+    font-size: 18px;
+}
+
+input[type=text], input[type=password], textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 50px;
+    border: 1px solid #DDDDDD;
+    width: 250px;
+}
+ 
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 50px;
+    border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.edit-field {
+    margin-top: 20px;
+}
+
+.edit-field label {
+    font-weight: bold;
+    width: 200px;
+    display: inline-block;
+    text-align: right;
+}
+
+#btnEdit {
+    width: 85px;
+    height: 30px;
+    background: rgba(53, 21, 121, 1);
+    color: rgb(255,255,255);
+    border: none;
+    font-size: 16px;
+    margin: 20px auto auto 425px;
+}
+
+#btnEdit:hover {
+    cursor: pointer;
+    color: rgba(200, 7, 207, 1);
+}

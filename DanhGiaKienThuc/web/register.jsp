@@ -43,18 +43,7 @@
                     <label>Xác nhận mật khẩu</label>
                     <span id="confirm_password-result"></span>
                 </div>
-                <script type="text/javascript">
-                    $('#confirm_password').on('keyup', function () {
-                        if ($(this).val() != "") {
-                            if ($(this).val() == $('#password').val()) {
-                                $('#confirm_password-result').html('Mật khẩu trùng khớp').css('color', 'green');
-                            } else 
-                                $('#confirm_password-result').html('Mật khẩu không trùng khớp').css('color', 'red');
-                        }
-                        else
-                            $('#confirm_password-result').html('');
-                    });    
-                </script>
+                <script type="text/javascript" src="js/CheckPass.js"></script>
                 
                 <div class="group">      
                     <input type="text" required name="name" id="name">
