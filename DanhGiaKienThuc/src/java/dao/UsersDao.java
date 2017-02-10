@@ -96,22 +96,19 @@ public class UsersDao {
 	return null;
     }
     
-    public Users updateUser(Users user) {
-	Connection con = DBConnect.getConnecttion();
-	String sql = "select * from table_user where username='" + user.getUsername() + "';";
-	PreparedStatement ps;
-	try {
-            ps = (PreparedStatement) con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Users u = new Users();
-                
-                con.close();
-                return u;
-            }
-	} catch (SQLException e) {
-            e.printStackTrace();
-	}
-	return null;
+    public boolean UpdateUser (Users user) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "UPDATE table_user SET name='" + user.getName() + "', email='" + user.getEmail() +  
+                "', password='" + user.getPassword() + "' WHERE username='" + user.getUsername() + "'";
+        try {
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.execute(sql);
+            connection.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
     }
 }

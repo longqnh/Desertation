@@ -11,10 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>QUẢN LÝ TÀI KHOẢN</title>
-        <link rel="stylesheet" href="../css/OtherStyle.css" type="text/css">
-        <link rel="stylesheet" href="../css/HeaderStyle.css" type="text/css">
-        <link rel="stylesheet" href="../css/FooterStyle.css" type="text/css">
-        <link rel="stylesheet" href="../css/MemberStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/MemberStyle.css" type="text/css">
     </head>
     <body>
         <jsp:include page="../WebInterface/header.jsp"></jsp:include>
@@ -54,17 +54,17 @@
                     </ul>
                 </div>
                 
-                <script src="../js/DisplaySubmenu.js" type="text/javascript"></script>
+                <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
             
             <div id="main-right">
                 <h2>Thông tin tài khoản</h2>
                 
-                <form action="../UserUpdate" method="POST">
+                <form action="../UserServlet" method="POST">
                     <div class="edit-info">
                         <div class="edit-field">
                             <label>Tên tài khoản: </label>
-                            <input type="text" readonly value="<%=users.getUsername()%>">
+                            <input type="text" name="username" id="username" readonly value="<%=users.getUsername()%>">
                         </div>
 
                         <div class="edit-field">
@@ -72,6 +72,11 @@
                             <input type="text" name="name" id="name" value="<%=users.getName()%>">
                         </div>
 
+                        <div class="edit-field">
+                            <label>Địa chỉ Email: </label>
+                            <input type="text" name="email" id="email" value="<%=users.getEmail()%>">
+                        </div>
+                        
                         <div class="edit-field">
                             <label>Mật khẩu mới (nếu đổi): </label>
                             <input type="password" name="password" id="password">
@@ -84,15 +89,18 @@
                         </div>
                         <script type="text/javascript" src="../js/CheckPass.js"></script>
                         
+                        <h4> ${requestScope.SuccMessage} </h4> <br>
+                        
                         <input id="btnEdit" type="submit" value="Cập nhật">
+                        <input type="hidden" value="update" name="command">      
                     </div>
                 </form>
             </div>
 
-            <script src="../js/DisplayContent.js" type="text/javascript"></script>
+            <script src="${pageContext.request.contextPath}/js/DisplayContent.js" type="text/javascript"></script>
         </div>
         
-        <script src="../js/autoscroll.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/autoscroll.js" type="text/javascript"></script>
         
         <jsp:include page="../WebInterface/footer.jsp"></jsp:include>
     </body>

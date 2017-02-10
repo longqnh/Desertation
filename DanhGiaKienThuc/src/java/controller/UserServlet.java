@@ -72,13 +72,26 @@ public class UserServlet extends HttpServlet {
                     url = "/index.jsp";
                 } else {
                     request.setAttribute("errorMessage", "Sai tài khoản hoặc mật khẩu");
-                    request.getRequestDispatcher("/login.jsp").forward(request, response);
+                    url="/login.jsp";
                 }
                 break;
             case "logout":
 //                users = null;
                 session.setAttribute("user", null);
                 url = "/index.jsp";
+                break;
+            case "update":
+                users.setUsername(request.getParameter("username"));
+                users.setPassword(MD5.encryption(request.getParameter("password")));
+                users.setName(request.getParameter("name"));
+                users.setEmail(request.getParameter("email"));
+                
+                usersDao.UpdateUser(users);
+                
+                session.setAttribute("user", users);
+                request.setAttribute("SuccMessage", "Cập nhật thành công");
+                
+                url="/Member/User.jsp";
                 break;
         }
         RequestDispatcher rd = getServletContext().getRequestDispatcher(url);

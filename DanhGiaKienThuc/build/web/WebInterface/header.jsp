@@ -39,7 +39,7 @@
                             <li id="user-info"><a href="#" style="text-transform: none; text-align: center;"><%=users.getUsername()%></a>
                                 <ul class="sub-top-right">
                                     <%
-                                        String page_redirect= strpage + "Member/User.jsp?username=" + users.getUsername();
+                                        String page_redirect= strpage + "Member/User.jsp";
                                     %>
                                     <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
                                     <form action="<%=strpage%>UserServlet"method="POST">
