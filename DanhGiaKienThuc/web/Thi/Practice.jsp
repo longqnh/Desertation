@@ -73,8 +73,7 @@
                     <option value="" disabled selected>Độ khó</option>
                     <option value="0">Dễ</option>
                     <option value="1">Trung bình</option>
-                    <option value="2">Trung bình - khó</option>
-                    <option value="3">Khó</option>
+                    <option value="2">Khó</option>
                 </select>
             </div>
 
@@ -83,7 +82,7 @@
                 <select name="time" required>
                     <option value="" disabled selected>Thời gian</option>
                     <option value="15">15'</option>
-                    <option value="45">45'</option>
+                    <option value="60">60'</option>
                     <option value="90">90'</option>
                 </select>
             </div>

@@ -21,24 +21,50 @@ import model.Users;
  * @author NTL
  */
 public class QuestionDAO {
-    public List CreateExam(String[] noidung, String level) {
+    public List CreateExam(String[] noidung, int level, int numQuestion) {
         Connection connection = DBConnect.getConnecttion();
         
-        String nd = "(";
-        for (int i = 0; i < noidung.length; i++) {
-            String temp = "dangtoan='";
-            temp+=noidung[i];
-            temp+="'";
-            if (i<noidung.length-1) {
-                temp+=" or ";
-            }
-            nd+=temp;
+        int socauDe, socauTB, socauTBK, socauKho;
+    
+        switch (level) {
+            case 0:
+                socauDe = (int) 0.5*numQuestion;
+                socauTB = (int) 0.3*numQuestion;
+                socauTBK = (int) 0.1*numQuestion;
+                socauKho = (int) 0.1*numQuestion;
+                break;
+            case 1:
+                socauDe = (int) 0.4*numQuestion;
+                socauTB = (int) 0.4*numQuestion;
+                socauTBK = (int) 0.1*numQuestion;
+                socauKho = (int) 0.1*numQuestion;
+                break;
+            default:
+                socauDe = (int) 0.3*numQuestion;
+                socauTB = (int) 0.3*numQuestion;
+                socauTBK = (int) 0.2*numQuestion;
+                socauKho = (int) 0.2*numQuestion;                
+                break;
         }
-        nd+=") ";
-        
-        String lv = "and level=" + level;
-        
-        String sql = "select * from table_hamso where " + nd + lv; //where dangtoan='" + dangtoan + "' and type='" + type + "'";
+
+        String sql = "SELECT * FROM (" +
+                        "(SELECT * FROM table_hamso WHERE level=0 ORDER BY RAND() LIMIT 3) " +
+                        "UNION ALL " +
+                        "(SELECT * FROM table_hamso WHERE level=1 ORDER BY RAND() LIMIT 4) " +
+                        "UNION ALL " +
+                        "(SELECT * FROM table_hamso WHERE level=2 ORDER BY RAND() LIMIT 2) " +
+                        "UNION ALL " +
+                        "(SELECT * FROM table_hamso WHERE level=3 ORDER BY RAND() LIMIT 2) " +
+                        "UNION ALL " +
+                        "(SELECT * FROM table_loga WHERE level=0 ORDER BY RAND() LIMIT 4) " +
+                        "UNION ALL " +
+                        "(SELECT * FROM table_loga WHERE level=1 ORDER BY RAND() LIMIT 4) " +
+                        "UNION ALL " +
+                        "(SELECT * FROM table_loga WHERE level=2 ORDER BY RAND() LIMIT 1) " +
+                        "UNION ALL " +
+                        "(SELECT * FROM table_loga WHERE level=3 ORDER BY RAND() LIMIT 1) " +
+                    ") AS foo;";
+                
 	List exam = new ArrayList();
         PreparedStatement ps;
 	try {

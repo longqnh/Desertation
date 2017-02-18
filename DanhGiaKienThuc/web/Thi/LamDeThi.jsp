@@ -73,11 +73,13 @@
 
             <%
                 String[] noidung = request.getParameterValues("kienthuc");
-                String level = request.getParameter("dokho");
+                int level = Integer.parseInt(request.getParameter("dokho"));
                 int time = Integer.parseInt(request.getParameter("time")); 
                 
+                int numQuestion = (time == 15 ? 10 : (time == 60 ? 40 : 50));
+                
                 QuestionDAO questionDAO = new QuestionDAO();
-                List exam = questionDAO.CreateExam(noidung,level); 
+                List exam = questionDAO.CreateExam(noidung,level,numQuestion); 
             %>
                     
                 <div id="sticky-anchor"></div>
@@ -96,6 +98,8 @@
                             document.getElementById("doExam").submit();
                         }
                     </script>
+                    
+                    <script type="text/javascript" src="../js/SelectQuestion.js"></script>
                     
                     <button id="btnSubmit" onclick="SubmitExam()">
                         Nộp bài
@@ -135,7 +139,7 @@
                     for (int i = 0; i < exam.size(); i++) {
                         Question q = (Question) exam.get(i); %>
 
-                        <div onclick="Answered('<%=q.getId()%>')">
+                        <div id="Q<%=q.getId()%>" onclick="Answered('<%=q.getId()%>')">
                             <p><b>Câu <%=i+1%>: </b> <%=q.getNoidung()%></p>
                             <%
                                 if (q.getHasImage()==1) { %>

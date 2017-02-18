@@ -28,10 +28,10 @@
                             <img src="images/slider2.jpg" />
                         </li>
                         <li>
-                            <img src="images/slider3.jpg" />
+                            <img src="images/slider4.png" />
                         </li>
                         <li>
-                            <img src="images/slider4.png" />
+                            <img src="images/lich_thi.jpg" />
                         </li>
                     </ul>
                 </div>
