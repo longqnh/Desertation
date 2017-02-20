@@ -49,8 +49,15 @@
                                 <li><a href="#"> Đổi mật khẩu </a></li>
                             </ul>-->
                         </li>
-
-                        <li><a href="QuanLyHocTap.jsp"> Quản lý học tập</a></li>
+                        <%
+                            if (users.getUsername().equals("admin")) { %>
+                                <li><a href="../Admin/QLTK.jsp"> Quản lý các tài khoản</a></li>
+                                <li><a href="../Admin/QLKD.jsp"> Quản lý kho đề</a></li>
+                        <%  }
+                            else {
+                        %>
+                            <li><a href="QuanLyHocTap.jsp"> Quản lý học tập</a></li>
+                        <% } %>
                     </ul>
                 </div>
                 
@@ -89,8 +96,10 @@
                         </div>
                         <script type="text/javascript" src="../js/CheckPass.js"></script>
                         
-                        <h4> ${requestScope.SuccMessage} </h4> <br>
-                        
+                        <h4> ${sessionScope.SuccMessage} </h4> <br>
+                        <%
+                            session.setAttribute("SuccMessage", null);
+                        %>
                         <input id="btnEdit" type="submit" value="Cập nhật">
                         <input type="hidden" value="update" name="command">      
                     </div>

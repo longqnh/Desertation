@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -74,7 +75,9 @@ public class FinishExam extends HttpServlet {
         if (session.getAttribute("ID_List")!=null) {
             IDlist = (List) session.getAttribute("ID_List");
         }
-
+        
+        int score = 0;
+        
         Connection con = DBConnect.getConnecttion();        
 
         for (int i=0; i<IDlist.size(); i++) {
@@ -88,23 +91,25 @@ public class FinishExam extends HttpServlet {
                 if (rs.next()) {
                     String correct = rs.getString("answer");
                     String user_select = request.getParameter(temp);
-                    PrintWriter out = response.getWriter();
                     
                     if (user_select == null) {
-                        out.println("chua lam");
+                        //out.println("chua lam");
                     } else {
                         if (correct.equals(user_select)) {
-                            out.println("correct");
+                            //out.println("correct");
+                            score++;
                         } else {
-                            out.println("wrong");
+                            //out.println("wrong");
                         }
                     }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-//            con.close();     
         }
+                                 
+        session.setAttribute("DiemThi", score);   
+        response.sendRedirect("Thi/FinishExam.jsp");
     }
 
     /**

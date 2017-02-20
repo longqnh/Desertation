@@ -32,7 +32,7 @@
                     <span class="bar"></span>
                     <label>Mật khẩu</label>
                 </div>
-                <h4 style="color: red;"> ${requestScope.errorMessage} </h4> <br>
+                <h4 style="color: red;"> ${requestScope.errorMessage} </h4> <br>    
                 <input id="btnDangNhap" type="submit" value="Đăng nhập">
                 <input type="hidden" value="login" name="command">                
                 <div id="noti">

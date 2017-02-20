@@ -95,7 +95,9 @@
                     
                     <script type="text/javascript">
                         function SubmitExam() {
-                            document.getElementById("doExam").submit();
+                            if (confirm('Bạn có chắc chắn muốn nộp bài không?') == true) {
+                                document.getElementById("doExam").submit();
+                            }
                         }
                     </script>
                     

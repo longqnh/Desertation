@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import model.Question;
 import model.Users;
@@ -92,5 +94,66 @@ public class QuestionDAO {
             e.printStackTrace();
 	}
 	return null;
+    }
+    
+    public boolean InsertQuestion(Question q) {
+        Connection connection= DBConnect.getConnecttion();
+        String sql = "INSERT INTO table_" + q.getDangtoan() + " VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        
+        try {
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.setString(1, q.getId());
+            ps.setString(2, q.getNoidung());
+            ps.setString(3, q.getDapanA());
+            ps.setString(4, q.getDapanB());
+            ps.setString(5, q.getDapanC());
+            ps.setString(6, q.getDapanD());
+            ps.setString(7, q.getAnswer());
+            ps.setString(8, q.getDangtoan());
+            ps.setString(9, q.getDangbt());
+            ps.setInt(10, q.getLevel());
+            ps.setInt(11, q.getHasImage());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    
+    public boolean updateQuestion(Question q) throws SQLException {
+        Connection con = DBConnect.getConnecttion();
+        String sql = "update table_" + q.getDangtoan() + " set noidung=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, answer=? where id=?";
+        PreparedStatement ps;
+        
+        try {
+            ps = con.prepareCall(sql);
+            ps.setString(2, q.getNoidung());
+            ps.setString(3, q.getDapanA());
+            ps.setString(4, q.getDapanB());
+            ps.setString(5, q.getDapanC());
+            ps.setString(6, q.getDapanD());
+            ps.setString(6, q.getAnswer());
+            ps.executeUpdate();
+                return true;
+        } catch (SQLException ex) {
+                ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean DeleteQuestion(String maCH) {
+        Connection con = DBConnect.getConnecttion();
+        String sql = "delete from table_ where id='" + maCH + "'";
+        PreparedStatement ps;
+        try {
+                ps = con.prepareCall(sql);
+                ps.executeUpdate();
+                return true;
+        } catch (SQLException ex) {
+                ex.printStackTrace();
+        }
+        return false;
     }
 }

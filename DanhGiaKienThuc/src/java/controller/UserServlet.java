@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,6 +70,12 @@ public class UserServlet extends HttpServlet {
                 users = usersDao.login(request.getParameter("username"), MD5.encryption(request.getParameter("password")));
                 if (users != null) {
                     session.setAttribute("user", users);
+                    Cookie cUserName = new Cookie("cookuser", users.getUsername());
+                    Cookie cPassword = new Cookie("cookpass", users.getPassword());
+                    cUserName.setMaxAge(60 * 60 * 24 * 15);//15 days
+                    cPassword.setMaxAge(60 * 60 * 24 * 15);
+                    response.addCookie(cUserName);
+                    response.addCookie(cPassword);
                     url = "/index.jsp";
                 } else {
                     request.setAttribute("errorMessage", "Sai tài khoản hoặc mật khẩu");
@@ -78,6 +85,12 @@ public class UserServlet extends HttpServlet {
             case "logout":
 //                users = null;
                 session.setAttribute("user", null);
+                Cookie cUserName = new Cookie("cookuser", null);
+                Cookie cPassword = new Cookie("cookpass", null);
+                cUserName.setMaxAge(0);
+                cPassword.setMaxAge(0);
+                response.addCookie(cUserName);
+                response.addCookie(cPassword);
                 url = "/index.jsp";
                 break;
             case "update":
@@ -89,10 +102,11 @@ public class UserServlet extends HttpServlet {
                 usersDao.UpdateUser(users);
                 
                 session.setAttribute("user", users);
-                request.setAttribute("SuccMessage", "Cập nhật thành công");
+                session.setAttribute("SuccMessage", "Cập nhật thành công");
                 
-                url="/Member/User.jsp";
-                break;
+                response.sendRedirect("Member/User.jsp");
+                return;
+//                break;
         }
         RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
         rd.forward(request, response);
