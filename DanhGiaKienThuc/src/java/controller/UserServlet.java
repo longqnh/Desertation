@@ -99,7 +99,7 @@ public class UserServlet extends HttpServlet {
                 users.setName(request.getParameter("name"));
                 users.setEmail(request.getParameter("email"));
                 
-                usersDao.UpdateUser(users);
+                usersDao.updateUser(users);
                 
                 session.setAttribute("user", users);
                 session.setAttribute("SuccMessage", "Cập nhật thành công");

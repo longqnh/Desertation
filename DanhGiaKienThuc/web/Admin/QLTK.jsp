@@ -18,97 +18,71 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/MemberStyle.css" type="text/css">
+<!--        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/MemberStyle.css" type="text/css">-->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        
+        <!-- Include one of jTable styles. -->
+        <link href="${pageContext.request.contextPath}/css/metro/blue/jtable.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/css/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
+        <!-- Include jTable script file. -->
+        <script src="${pageContext.request.contextPath}/js/jquery-1.8.2.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/jquery.jtable.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#TableContainer').jtable({
+                    title: 'Danh sách tài khoản',
+                    paging: true, //Enable paging
+                    pageSize: 10, //Set page size (default: 10)
+                    sorting: true, //Enable sorting
+                    defaultSorting: 'id ASC',
+                    selecting: true, //Enable selecting
+                    multiselect: true, //Allow multiple selecting
+                    selectingCheckboxes: true, //Show checkboxes on first column
+                    selectOnRowClick: false, //Click row on check box
+                    actions: {
+                        listAction: '${pageContext.request.contextPath}/CRUDController?action=list',
+                        createAction: '${pageContext.request.contextPath}/CRUDController?action=create',
+                        updateAction: '${pageContext.request.contextPath}/CRUDController?action=update',
+                        deleteAction: '${pageContext.request.contextPath}/CRUDController?action=delete'
+                    },
+                    fields: {
+                        username: {
+                            title: 'Username',
+                            width: '30%',
+                            key: true,
+                            list: true,
+                            edit: true,
+                            create: true
+                        },
+                        password: {
+                            title: 'Password',
+                            width: '30%',
+                            type: 'text',
+                            edit: true
+                        },
+                        name: {
+                            title: 'Họ tên',
+                            width: '30%',
+                            type: 'text',
+                            edit: true
+                        },
+                        email: {
+                            title: 'Email',
+                            width: '30%',
+                            type: 'text',
+                            edit: true
+                        }                     
+                    }
+                });
+                $('#TableContainer').jtable('load');
+            });
+        </script>
     </head>
     <body>
-        <jsp:include page="../WebInterface/header.jsp"></jsp:include>
-        
-        <%
-            Users users = null;
-            if (session.getAttribute("user")!=null) {
-                users = (Users) session.getAttribute("user");
-            } else {
-                response.sendRedirect("../login.jsp");
-            }
-        %>
-        
-        <div id="clr"></div>
-        <div class="container">
-            <div id="main-left">
-                <div id="main-left-top">
-                        <h2 style="text-align: center; text-transform: uppercase; margin-top: 5px; font-family:'Roboto';">Tìm kiếm</h2>
-                        <div id="search">
-                            <form>
-                                <input type="text" placeholder="Search this site..." id="textsearch"/>
-                                <input type="submit" id="search-button" value=""/>
-                            </form>
-                        </div>                            
-                </div>
-
-                <div id="main-left-bottom">
-                    <ul>
-                        <li><a href="../Member/User.jsp"> Thông tin tài khoản </a></li>
-                        <%
-                            if (users.getUsername().equals("admin")) { %>
-                                <li><a href="QLTK.jsp"> Quản lý các tài khoản</a></li>
-                                <li><a href="QLKD.jsp"> Quản lý kho đề</a></li>
-                        <%  }
-                            else {
-                        %>
-                            <li><a href="QuanLyHocTap.jsp"> Quản lý học tập</a></li>
-                        <% } %>
-                    </ul>
-                </div>
-                
-                <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
-            </div>
-            
-            <div id="main-right">
-                <h2>QUẢN TRỊ CÁC TÀI KHOẢN</h2>
-                
-                <div class="row">
-                <%
-                    try {
-                            Connection connect=DBConnect.getConnecttion();
-                            String sql = "select * from table_user";
-                            PreparedStatement ps = connect.prepareCall(sql);
-                            ResultSet rs = ps.executeQuery(sql); %>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                        <th>Username</th>
-                                        <th>Họ và tên</th>
-                                        <th>Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%
-                                    while (rs != null && rs.next()) {
-                                %>
-                                        <tr>
-                                            <td><%=rs.getString("username")%></td>
-                                            <td><%=rs.getString("name")%></td>
-                                            <td><%=rs.getString("email")%></td>
-                                        </tr>
-                                <%
-                                    }
-                                %>
-                            </tbody>
-                        </table>
-                    </div>
-                <%
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                %>
-                </div>
-            </div>
+        <div style="width: 80%; margin-right: 10%; margin-left: 10%; text-align: center;">
+            <div id="TableContainer"></div>
         </div>
-        
-        <script src="${pageContext.request.contextPath}/js/autoscroll.js" type="text/javascript"></script>
-        
-        <jsp:include page="../WebInterface/footer.jsp"></jsp:include>
-
     </body>
 </html>

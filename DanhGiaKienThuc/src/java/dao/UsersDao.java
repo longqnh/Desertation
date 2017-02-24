@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Users;
@@ -96,7 +98,19 @@ public class UsersDao {
 	return null;
     }
     
-    public boolean UpdateUser (Users user) {
+    public void deleteUser(String username) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "DELETE FROM table_user WHERE username='" + username + "'";
+        try {
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.execute(sql);
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateUser(Users user) {
         Connection connection = DBConnect.getConnecttion();
         String sql = "UPDATE table_user SET name='" + user.getName() + "', email='" + user.getEmail() +  
                 "', password='" + user.getPassword() + "' WHERE username='" + user.getUsername() + "'";
@@ -104,11 +118,32 @@ public class UsersDao {
             PreparedStatement ps = connection.prepareCall(sql);
             ps.execute(sql);
             connection.close();
-            return true;
         } catch (SQLException ex) {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public List<Users> getAllUsers() {
+        Connection connection = DBConnect.getConnecttion();
+        List<Users> list = new ArrayList();
 
-        return false;
+        String sql = "SELECT * FROM table_user";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+
+                String username =rs.getString("username");
+                String password = rs.getString("password");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                
+                Users u = new Users(username, password, name, email);
+                list.add(u);
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return list;
     }
 }

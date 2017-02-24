@@ -24,6 +24,14 @@
         <servlet-name>FinishExam</servlet-name>
         <servlet-class>controller.FinishExam</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuestionServlet</servlet-name>
+        <servlet-class>controller.QuestionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CRUDController</servlet-name>
+        <servlet-class>controller.CRUDController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckEmailServlet</servlet-name>
         <url-pattern>/CheckEmailServlet</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>FinishExam</servlet-name>
         <url-pattern>/FinishExam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionServlet</servlet-name>
+        <url-pattern>/QuestionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CRUDController</servlet-name>
+        <url-pattern>/CRUDController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
