@@ -28,7 +28,6 @@
             }
         %>
         
-        <div id="clr"></div>
         <div class="container">
             <div id="main-left">
                 <div id="main-left-top">

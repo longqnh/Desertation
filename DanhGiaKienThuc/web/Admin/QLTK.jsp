@@ -50,7 +50,6 @@
                     fields: {
                         username: {
                             title: 'Username',
-                            width: '30%',
                             key: true,
                             list: true,
                             edit: true,
@@ -58,19 +57,16 @@
                         },
                         password: {
                             title: 'Password',
-                            width: '30%',
                             type: 'text',
                             edit: true
                         },
                         name: {
                             title: 'Họ tên',
-                            width: '30%',
                             type: 'text',
                             edit: true
                         },
                         email: {
                             title: 'Email',
-                            width: '30%',
                             type: 'text',
                             edit: true
                         }                     
@@ -80,8 +76,8 @@
             });
         </script>
     </head>
-    <body>
-        <div style="width: 80%; margin-right: 10%; margin-left: 10%; text-align: center;">
+    <body>    
+        <div>
             <div id="TableContainer"></div>
         </div>
     </body>

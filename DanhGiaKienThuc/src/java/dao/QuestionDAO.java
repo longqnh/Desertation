@@ -156,4 +156,35 @@ public class QuestionDAO {
         }
         return false;
     }
+    
+    public List<Question> getAllQuestion(String nd) {
+        Connection connection = DBConnect.getConnecttion();
+        List<Question> list = new ArrayList();
+
+        String sql = "SELECT * FROM table_" + nd;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+
+                String id = rs.getString("id");
+                String noidung = rs.getString("noidung");
+                String dapanA = rs.getString("dapanA");
+                String dapanB = rs.getString("dapanB");
+                String dapanC = rs.getString("dapanC");
+                String dapanD = rs.getString("dapanD");
+                String answer = rs.getString("answer");
+                String dangtoan = rs.getString("dangtoan");
+                String dangbt = rs.getString("dangbt");
+                int level = rs.getInt("level");
+                int hasImage = rs.getInt("hasImage");
+                
+                Question q = new Question(id, noidung, dapanA, dapanB, dapanC, dapanD, answer, dangtoan, dangbt, level, hasImage);
+                list.add(q);
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return list;
+    }    
 }
