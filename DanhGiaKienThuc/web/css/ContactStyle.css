@@ -53,7 +53,7 @@ label {
     position:absolute;
     pointer-events:none;
     left:5px;
-    top:10px;
+    top:-20px;
     transition:0.2s ease all; 
     -moz-transition:0.2s ease all; 
     -webkit-transition:0.2s ease all;
@@ -61,14 +61,14 @@ label {
 
 /* active state */
 input:focus ~ label{
-    top:-20px;
+    /*top:-20px;*/
     font-size:14px;
     color:#5264AE;
 }
 
 /*, input:valid ~ label*/
 textarea:focus ~ label {
-    top:-20px;
+    /*top:-20px;*/
     font-size:14px;
     color:#5264AE;    
 }

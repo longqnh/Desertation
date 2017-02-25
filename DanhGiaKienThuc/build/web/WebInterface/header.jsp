@@ -22,15 +22,6 @@
             if (session.getAttribute("user")!=null) {
                 users = (Users) session.getAttribute("user");
             }
-
-            String strpage = request.getRequestURL().toString();
-            if (strpage.toLowerCase().contains("Member/".toLowerCase()) || 
-                    strpage.toLowerCase().contains("Thi/".toLowerCase()) || 
-                    strpage.toLowerCase().contains("Admin/".toLowerCase())) { 
-                strpage = "../";
-            } else {
-                strpage = "";
-            }
         %>
         
         <div id="sticky-anchor"></div>
@@ -41,10 +32,10 @@
                             <li id="user-info"><a href="#" style="text-transform: none; text-align: center;"><%=users.getUsername()%></a>
                                 <ul class="sub-top-right">
                                     <%
-                                        String page_redirect= strpage + "Member/User.jsp";
+                                        String page_redirect= request.getContextPath() + "/Member/User.jsp";
                                     %>
                                     <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
-                                    <form action="<%=strpage%>UserServlet"method="POST">
+                                    <form action="<%=request.getContextPath()%>/UserServlet"method="POST">
                                         <input id="btnlogout" type="submit" value="Thoát">
                                         <input type="hidden" value="logout" name="command">
                                     </form>
@@ -60,7 +51,7 @@
             </div>
 
             <div id="top-left">
-                <a href="<%=strpage%>index.jsp">website đánh giá kiến thức toán thpt</a>
+                <a href="<%=request.getContextPath()%>/index.jsp">website đánh giá kiến thức toán thpt</a>
             </div>
         </div>
 
@@ -91,18 +82,18 @@
         <!-- Menu -->
         <div id="menu">
             <ul>
-                <li><a href="<%=strpage%>index.jsp" <!--class="selected"-->Trang chủ</a></li>
+                <li><a href="<%=request.getContextPath()%>/index.jsp" <!--class="selected"-->Trang chủ</a></li>
                 <li><a href="#">Làm đề thi</a>
                     <ul class="submenu">
-                        <li><a href="<%=strpage%>Thi/MockTest.jsp">Thi thử</a></li>
-                        <li><a href="<%=strpage%>Thi/Practice.jsp">Luyện tập</a></li>
+                        <li><a href="<%=request.getContextPath()%>/Thi/MockTest.jsp">Thi thử</a></li>
+                        <li><a href="<%=request.getContextPath()%>/Thi/Practice.jsp">Luyện tập</a></li>
                     </ul>
                 </li>
-                <li><a href="<%=strpage%>LyThuyet.jsp">Lý thuyết</a>
+                <li><a href="<%=request.getContextPath()%>/LyThuyet.jsp">Lý thuyết</a>
                 </li>
-                <li><a href="<%=strpage%>tutorial.jsp">Hướng dẫn</a></li>
-                <li><a href="<%=strpage%>information.jsp">Giới thiệu</a></li>
-                <li><a href="<%=strpage%>contact.jsp">Liên hệ - góp ý</a></li>
+                <li><a href="<%=request.getContextPath()%>/tutorial.jsp">Hướng dẫn</a></li>
+                <li><a href="<%=request.getContextPath()%>/information.jsp">Giới thiệu</a></li>
+                <li><a href="<%=request.getContextPath()%>/contact.jsp">Liên hệ - góp ý</a></li>
             </ul>
             
             <script type="text/javascript">

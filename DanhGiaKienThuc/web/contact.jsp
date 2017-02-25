@@ -4,6 +4,7 @@
     Author     : NTL
 --%>
 
+<%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,17 +15,29 @@
     </head>
     <body>
         <jsp:include page="WebInterface/header.jsp"></jsp:include>
+        
+        <%
+            Users users = null;
+            String hoten="";
+            String email="";
+            if (session.getAttribute("user")!=null) {
+                users = (Users) session.getAttribute("user");
+                hoten = users.getName();
+                email = users.getEmail();                
+            }
+        %>
+        
         <div class="container">
             <h2>LIÊN HỆ - GÓP Ý</h2>
             <form>
                 <div class="group">      
-                    <input type="text" required>
+                    <input type="text" value="<%=hoten%>" required>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Họ tên</label>
                 </div>
                 <div class="group">      
-                    <input type="email" required>
+                    <input type="email" value="<%=email%>" required>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Email</label>

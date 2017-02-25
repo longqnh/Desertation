@@ -5,23 +5,30 @@
  */
 package connect;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Properties;
 
 /**
  *
  * @author NTL
  */
 public class DBConnect {
-
-    private static String dbURL="jdbc:mysql://localhost:3306/danhgiakienthuc";
-    private static String dbUser="root";
-    private static String dbPassword="admin";
     
     public static Connection getConnecttion() {
         Connection cons = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Properties properties = new Properties();
+            InputStream inputStream = DBConnect.class.getClassLoader().getResourceAsStream("config/DBConfig.properties");
+            properties.load(inputStream);
+            
+            String driver = properties.getProperty("driver");
+            String dbURL = properties.getProperty("url");
+            String dbUser = properties.getProperty("user");
+            String dbPassword = properties.getProperty("password");
+            
+            Class.forName(driver);
             cons = DriverManager.getConnection(dbURL,dbUser,dbPassword);
         } catch (Exception e) {
             e.printStackTrace();
@@ -30,5 +37,6 @@ public class DBConnect {
     }
  
     public static void main(String[] args) {
+//        System.out.println(DBConnect.getConnecttion());
     }    
 }
