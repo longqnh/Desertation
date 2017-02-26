@@ -9,11 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/OtherStyle.css" type="text/css">
+        <link rel="stylesheet" href="../css/OtherStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">        
         <title>ÔN TẬP LÝ THUYẾT</title>
     </head>
     <body>
-        <jsp:include page="WebInterface/header.jsp"></jsp:include>
+        <jsp:include page="../WebInterface/header.jsp"></jsp:include>
         
         <div id="clr"></div>
         <div class="container">
@@ -33,8 +35,8 @@
                         <li><a> Toán </a>
                             <ul class="submnu">
                                 <li><a href="Lop12.jsp"> Lớp 12 </a></li>
-                                <li><a href="#"> Lớp 11 </a></li>
-                                <li><a href="#"> Lớp 10 </a></li>
+                                <li><a href="Lop11.jsp"> Lớp 11 </a></li>
+                                <li><a href="Lop10.jsp"> Lớp 10 </a></li>
                             </ul>
                         </li>
 
@@ -42,32 +44,31 @@
                     </ul>
                 </div>
                 
-                <script src="js/DisplaySubmenu.js" type="text/javascript"></script>
+                <script src="../js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
             
             <div id="main-right">
-                <h2>Ôn tập lý thuyết toán 12</h2>
+                <h2>Ôn tập lý thuyết toán 11</h2>
                 <ol type="I">
                     <li>
-                        <a href="" class="content"> Hàm số </a>
+                        <a href="" class="content"> Lượng giác </a>
                         <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
                     </li>
                     <li>
-                        <a href="" class="content"> Lũy thừa - mũ - logarit </a>
+                        <a href="" class="content"> Tổ hợp - Xác suất </a>
                         <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
                     </li>
-                    <li><a href="" class="content"> Tích phân </a></li>
-                    <li><a href="" class="content"> Số phức </a></li>
+                    <li><a href="" class="content"> Giới hạn - Đạo hàm </a></li>
+                    <li><a href="" class="content"> Phép dời hình </a></li>
                     <li><a href="" class="content"> Hình học không gian </a></li>
-                    <li><a href="" class="content"> Giải tích không gian Oxyz </a></li>
                 </ol>
             </div>
 
-            <script src="js/DisplayContent.js" type="text/javascript"></script>
+            <script src="../js/DisplayContent.js" type="text/javascript"></script>
         </div>
         
-        <script src="js/autoscroll.js" type="text/javascript"></script>
+        <script src="../js/autoscroll.js" type="text/javascript"></script>
  
-        <jsp:include page="WebInterface/footer.jsp"></jsp:include>
+        <jsp:include page="../WebInterface/footer.jsp"></jsp:include>
     </body>
 </html>

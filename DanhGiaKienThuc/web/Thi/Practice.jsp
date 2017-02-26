@@ -106,7 +106,14 @@
                 });
             </script>
             
-            <input id="btnTaoDe" type="submit" value="Tạo đề"> <!-- css in DoExamStyle -->
+            <script type="text/javascript">
+                function DoExam() {
+                    if (confirm('Bạn đã sẵn sàng làm bài chưa?') == true) {
+                        document.getElementById("createExam").submit();
+                    }
+                }
+            </script>
+            <input id="btnTaoDe" type="submit" value="Tạo đề" onclick="DoExam()"> <!-- css in DoExamStyle -->
         </form>   
     </body>
 </html>

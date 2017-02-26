@@ -37,7 +37,12 @@
                                 <li><a href="Thi/Practice.jsp"> Luyện tập </a></li>
                             </ul>
                         </li>
-                        <li><a href="LyThuyet.jsp"> Lý thuyết</a></li>
+                        <li><a> Lý thuyết</a>
+                            <ul class="submnu">
+                                <li><a href="OnLyThuyet/Lop12.jsp"> Toán 12 </a></li>
+                                <li><a href="OnLyThuyet/LyThuyetTracNghiem.jsp"> Lý Thuyết Trắc Nghiệm </a></li>
+                            </ul>                            
+                        </li>
                         <li><a href="tutorial.jsp"> Hướng dẫn</a></li>
                         <li><a href="information.jsp"> Giới thiệu</a></li>
                         <li><a href="contact.jsp"> Liên hệ - Góp ý</a></li>
@@ -48,7 +53,7 @@
             </div>
 
             <div id="main-right">
-
+                <h2>Thông tin giới thiệu</h2>
             </div>
         </div>
         

@@ -89,7 +89,13 @@
                         <li><a href="<%=request.getContextPath()%>/Thi/Practice.jsp">Luyện tập</a></li>
                     </ul>
                 </li>
-                <li><a href="<%=request.getContextPath()%>/LyThuyet.jsp">Lý thuyết</a>
+                <li><a href="#">Lý thuyết</a>
+                    <ul class="submenu">
+                        <li><a href="<%=request.getContextPath()%>/OnLyThuyet/Lop12.jsp">Toán 12</a></li>
+                        <li><a href="<%=request.getContextPath()%>/OnLyThuyet/Lop11.jsp">Toán 11</a></li>
+                        <li><a href="<%=request.getContextPath()%>/OnLyThuyet/Lop10.jsp">Toán 10</a></li>
+                        <li><a href="<%=request.getContextPath()%>/OnLyThuyet/LyThuyetTracNghiem.jsp">Lý Thuyết Trắc Nghiệm</a></li>
+                    </ul>
                 </li>
                 <li><a href="<%=request.getContextPath()%>/tutorial.jsp">Hướng dẫn</a></li>
                 <li><a href="<%=request.getContextPath()%>/information.jsp">Giới thiệu</a></li>

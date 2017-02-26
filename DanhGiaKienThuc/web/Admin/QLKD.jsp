@@ -200,7 +200,11 @@
                         <li><a href="<%=request.getContextPath()%>/Thi/Practice.jsp">Luyện tập</a></li>
                     </ul>
                 </li>
-                <li><a href="<%=request.getContextPath()%>/LyThuyet.jsp">Lý thuyết</a>
+                <li><a> Lý thuyết</a>
+                    <ul class="submnu">
+                        <li><a href="<%=request.getContextPath()%>/OnLyThuyet/Lop12.jsp"> Toán 12 </a></li>
+                        <li><a href="<%=request.getContextPath()%>/OnLyThuyet/LyThuyetTracNghiem.jsp"> Lý Thuyết Trắc Nghiệm </a></li>
+                    </ul>                            
                 </li>
                 <li><a href="<%=request.getContextPath()%>/tutorial.jsp">Hướng dẫn</a></li>
                 <li><a href="<%=request.getContextPath()%>/information.jsp">Giới thiệu</a></li>
@@ -218,6 +222,7 @@
             <h2 style="text-align: center; font-weight: bold; color: rgb(6,114,28); font-family: Arial, sans-serif;">QUẢN TRỊ KHO ĐỀ THI</h2>
         
             <form id="demo" action="${pageContext.request.contextPath}/QuestionCRUD?action=list" method="POST">
+                <!--<input type="text" name="action" id="action" value="list" hidden="">-->
                 <select id="kienthuc" name="kienthuc" onchange="this.form.submit()">
                     <option value="hamso">Hàm số</option>
                     <option value="loga">Lũy thừa - Mũ - Logarit</option>
@@ -226,9 +231,8 @@
                     <option value="hhkg">Hình học không gian</option>
                     <option value="oxyz">Oxyz</option>
                 </select>
-            
-                <div id="TableContainer"></div>
             </form>
+            <div id="TableContainer"></div>
         </div>
                 
         <script type="text/javascript" src="../js/autoscroll.js"></script>

@@ -23,6 +23,10 @@ and open the template in the editor.
 h2 {
     text-align:center; 
     margin-bottom:50px; 
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgb(6,114,28);
+    font-family: Arial, sans-serif;
 }
 
 /* form starting stylings ------------------------------- */
