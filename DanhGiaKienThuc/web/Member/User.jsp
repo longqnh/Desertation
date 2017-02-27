@@ -83,6 +83,8 @@
                             <input type="text" name="email" id="email" value="<%=users.getEmail()%>">
                         </div>
                         
+                        <input type="password" name="currentpass" id="currentpass" value="<%=users.getPassword()%>" hidden="">
+                        
                         <div class="edit-field">
                             <label>Mật khẩu mới (nếu đổi): </label>
                             <input type="password" name="password" id="password">

@@ -95,7 +95,11 @@ public class UserServlet extends HttpServlet {
                 break;
             case "update":
                 users.setUsername(request.getParameter("username"));
-                users.setPassword(MD5.encryption(request.getParameter("password")));
+                if (!request.getParameter("password").equals("")) {
+                    users.setPassword(MD5.encryption(request.getParameter("password")));
+                } else {
+                    users.setPassword(request.getParameter("currentpass"));
+                }
                 users.setName(request.getParameter("name"));
                 users.setEmail(request.getParameter("email"));
                 
