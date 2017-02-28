@@ -72,12 +72,18 @@ public class QuestionCRUD extends HttpServlet {
         if (action != null) {
             try {
                 if (action.equals("list")) {
-                    List = qdao.getAllQuestion(kienthuc);
+                    int startPageIndex = Integer.parseInt(request.getParameter("jtStartIndex"));
+                    int recordsPerPage = Integer.parseInt(request.getParameter("jtPageSize"));
+                    
+                    List = qdao.getAllQuestions(kienthuc,startPageIndex, recordsPerPage);
 
+                    // Get Total Record Count for Pagination
+                    int questionCount = qdao.getQuestionCount(kienthuc);
                     // Return in the format required by jTable plugin
                     JSONROOT.put("Result", "OK");
                     JSONROOT.put("Records", List);
-
+                    JSONROOT.put("TotalRecordCount", questionCount);
+                    
                     // Convert Java Object to Json
                     String jsonArray = gson.toJson(JSONROOT);
 

@@ -37,7 +37,7 @@
                     paging: true, //Enable paging
                     pageSize: 10, //Set page size (default: 10)
                     sorting: true, //Enable sorting
-                    defaultSorting: 'id ASC',
+                    defaultSorting: 'username ASC',
                     selecting: true, //Enable selecting
                     multiselect: true, //Allow multiple selecting
                     selectingCheckboxes: true, //Show checkboxes on first column

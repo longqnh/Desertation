@@ -70,12 +70,19 @@ public class CRUDController extends HttpServlet {
         if (action != null) {
             try {
                 if (action.equals("list")) {
-                    List = dao.getAllUsers();
+                    int startPageIndex = Integer.parseInt(request.getParameter("jtStartIndex"));
+                    int recordsPerPage = Integer.parseInt(request.getParameter("jtPageSize"));                    
+                    
+                    List = dao.getAllUsers(startPageIndex, recordsPerPage);
 
+                    // Get Total Record Count for Pagination
+                    int userCount = dao.getUserCount();
+                    
                     // Return in the format required by jTable plugin
                     JSONROOT.put("Result", "OK");
                     JSONROOT.put("Records", List);
-
+                    JSONROOT.put("TotalRecordCount", userCount);
+                    
                     // Convert Java Object to Json
                     String jsonArray = gson.toJson(JSONROOT);
 

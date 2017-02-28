@@ -157,11 +157,12 @@ public class QuestionDAO {
         return false;
     }
     
-    public List<Question> getAllQuestion(String nd) {
+    public List<Question> getAllQuestions(String nd, int startPageIndex, int recordsPerPage) {
         Connection connection = DBConnect.getConnecttion();
         List<Question> list = new ArrayList();
-
-        String sql = "SELECT * FROM table_" + nd;
+        
+        int range = startPageIndex+recordsPerPage;
+        String sql = "SELECT * FROM table_" + nd + " LIMIT " + startPageIndex + "," + range;//"SELECT * FROM table_" + nd;
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -187,4 +188,25 @@ public class QuestionDAO {
         }
         return list;
     }    
+    
+    public int getQuestionCount(String nd) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT COUNT(*) AS COUNT FROM table_" + nd;
+        
+	int count=0;
+	try 
+	{
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();	
+            while (rs.next()) 
+            {
+                count=rs.getInt("COUNT");
+            }
+	} 
+	catch (SQLException e) 
+	{
+            System.err.println(e.getMessage());
+	}
+	return count;
+    }
 }

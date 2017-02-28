@@ -146,4 +146,51 @@ public class UsersDao {
         }
         return list;
     }
+    
+    public List<Users> getAllUsers(int startPageIndex, int recordsPerPage) {
+        Connection connection = DBConnect.getConnecttion();
+        List<Users> list = new ArrayList();
+
+        int range = startPageIndex+recordsPerPage;
+        String sql = "SELECT * FROM table_user LIMIT " + startPageIndex + "," + range;
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+
+                String username =rs.getString("username");
+                String password = rs.getString("password");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                
+                Users u = new Users(username, password, name, email);
+                list.add(u);
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return list;
+    }    
+    
+    public int getUserCount() {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT COUNT(*) AS COUNT FROM table_user";
+        
+	int count=0;
+	try 
+	{
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();	
+            while (rs.next()) 
+            {
+                count=rs.getInt("COUNT");
+            }
+	} 
+	catch (SQLException e) 
+	{
+            System.err.println(e.getMessage());
+	}
+	return count;
+    }    
 }

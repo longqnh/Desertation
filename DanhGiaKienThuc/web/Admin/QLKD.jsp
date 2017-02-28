@@ -35,15 +35,15 @@
                 $('#TableContainer').jtable({
                     title: 'Danh sách câu hỏi',
                     paging: true, //Enable paging
-                    //pageSize: 15, //Set page size (default: 10)
-                    //sorting: true, //Enable sorting
-                    //defaultSorting: 'id ASC',
+                    pageSize: 10, //Set page size (default: 10)
+                    sorting: true, //Enable sorting
+                    defaultSorting: 'id ASC',
                     selecting: true, //Enable selecting
                     multiselect: true, //Allow multiple selecting
                     selectingCheckboxes: true, //Show checkboxes on first column
                     selectOnRowClick: false, //Click row on check box
                     actions: {
-                        listAction: '${pageContext.request.contextPath}/QuestionCRUD?action=list&kienthuc=hamso',
+                        listAction: '${pageContext.request.contextPath}/QuestionCRUD?action=list',
                         createAction: '${pageContext.request.contextPath}/QuestionCRUD?action=create',
                         updateAction: '${pageContext.request.contextPath}/QuestionCRUD?action=update',
                         deleteAction: '${pageContext.request.contextPath}/QuestionCRUD?action=delete'
@@ -106,26 +106,20 @@
                     }
                 });
                 
-//                $('#TableContainer').jtable('option', 'pageSize', 10);
-                $('#TableContainer').jtable('load');
+                //Re-load records when user click 'load records' button.
+                $('#LoadRecordsButton').click(function (e) {
+                    e.preventDefault();
+                    $('#TableContainer').jtable('load', {
+                        name: $('#name').val(),
+                        kienthuc: $('#kienthuc').val()
+                    });
+                });
+
+                //Load all records when page is first shown
+                $('#LoadRecordsButton').click();
+//                $('#TableContainer').jtable('load');
             });
         </script>   
-        
-        <script type="text/javascript">
-            function Ajax() {
-                var val = document.getElementById("noidung").value;
-                //alert(val);
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (xhttp.readyState==4 && xhttp.status==200) {
-                        document.getElementById("TableContainer").innerHTML=xhttp.responseText;
-                    }
-                };
-                xhttp.open("POST","${pageContext.request.contextPath}/QuestionCRUD?action=list&kienthuc="+val,true);
-                $('#TableContainer').jtable('reload');
-                xhttp.send();
-            }
-        </script>
     </head>
     <body>       
         <%
@@ -222,18 +216,23 @@
             
         <div class="container">
             <h2 style="text-align: center; font-weight: bold; color: rgb(6,114,28); font-family: Arial, sans-serif;">QUẢN TRỊ KHO ĐỀ THI</h2>
-        
-            <form id="demo" action="${pageContext.request.contextPath}/QuestionCRUD?action=list" method="POST">
-                <!--<input type="text" name="action" id="action" value="list" hidden="">-->
-                <select id="kienthuc" name="kienthuc" onchange="this.form.submit()">
-                    <option value="hamso">Hàm số</option>
-                    <option value="loga">Lũy thừa - Mũ - Logarit</option>
-                    <option value="tichphan">Nguyên hàm - Tích phân</option>
-                    <option value="sophuc">Số phức</option>
-                    <option value="hhkg">Hình học không gian</option>
-                    <option value="oxyz">Oxyz</option>
-                </select>
-            </form>
+
+            <div class="filtering">
+                <form>
+                    ID: <input type="text" name="name" id="name" />
+                    Kiến thức: 
+                    <select id="kienthuc" name="kienthuc">
+                        <option value="hamso" selected="selected">Hàm số</option>
+                        <option value="loga">Lũy thừa - Mũ - Logarit</option>
+                        <option value="tichphan">Nguyên hàm - Tích phân</option>
+                        <option value="sophuc">Số phức</option>
+                        <option value="hhkg">Hình học không gian</option>
+                        <option value="oxyz">Oxyz</option>
+                    </select>
+                    <button type="submit" id="LoadRecordsButton">Load records</button>
+                </form>
+            </div>                    
+            
             <div id="TableContainer"></div>
         </div>
                 
