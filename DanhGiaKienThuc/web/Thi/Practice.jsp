@@ -11,109 +11,116 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>LUYỆN TẬP</title>
-        <link rel="stylesheet" href="../css/DoExamStyle.css" type="text/css">
+        <!--<link rel="stylesheet" href="../css/DoExamStyle.css" type="text/css">-->
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>    
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="../js/materialize.min.js"></script>
-        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">
-            MathJax.Hub.Config({
-                extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
-                jax: ["input/TeX", "output/HTML-CSS"],
-                tex2jax: {
-                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-                    },
-                    "HTML-CSS": { availableFonts: ["TeX"] }
-            });
-        </script>
+        <link rel="stylesheet" href="../css/HeaderStyle.css" type="text/css">
+        <link rel="stylesheet" href="../css/FooterStyle.css" type="text/css">
+        <link rel="stylesheet" href="../css/OtherStyle.css" type="text/css">
+        <link rel="stylesheet" href="../css/MemberStyle.css" type="text/css">
+        <link rel="stylesheet" href="../css/multi-select.css" type="text/css">
+        <!--<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>-->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>    
     </head>
     
     <body>
-        <%
-            Users users = null;
-            if (session.getAttribute("user")!=null) {
-                users = (Users) session.getAttribute("user");
-            } /*else {
-                response.sendRedirect("../login.jsp");
-            }*/
-        %>
-
-        <div id="top">
-            <div id="top-right">
-                <% if (users!=null) { %>
+        <jsp:include page="../WebInterface/header.jsp"></jsp:include>
+        
+        <div class="container">
+            <div id="main-left">
+                <div id="main-left-top">
+                        <h2 style="text-align: center; text-transform: uppercase; margin-top: 5px; font-family:'Roboto';">Tìm kiếm</h2>
+                        <div id="search">
+                            <form>
+                                <input type="text" placeholder="Search this site..." id="textsearch"/>
+                                <input type="submit" id="search-button" value=""/>
+                            </form>
+                        </div>                            
+                </div>
+                
+                <div id="main-left-bottom">
                     <ul>
-                        <li id="user-info"><a href="#" style="text-transform: none; text-align: center;"><%=users.getUsername()%></a>
-                            <ul class="sub-top-right">
-                                <%
-                                    String page_redirect= "../Member/User.jsp?username=" + users.getUsername();
-                                %>
-                                <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
-                                <form action="../UserServlet"method="POST">
-                                    <input id="btnlogout" type="submit" value="Thoát">
-                                    <input type="hidden" value="logout" name="command">
-                                </form>
+                        <li><a href="<%=request.getContextPath()%>/index.jsp"> Trang chủ</a></li>                       
+                        <li><a> Làm đề thi </a>
+                            <ul class="submnu">
+                                <li><a href="<%=request.getContextPath()%>/Thi/MockTest.jsp"> Thi thử </a></li>
+                                <li><a href="<%=request.getContextPath()%>/Thi/Practice.jsp"> Luyện tập </a></li>
                             </ul>
                         </li>
+                        <li><a> Lý thuyết</a>
+                            <ul class="submnu">
+                                <li><a href="<%=request.getContextPath()%>/OnLyThuyet/Lop12.jsp"> Toán 12 </a></li>
+                                <li><a href="<%=request.getContextPath()%>/OnLyThuyet/LyThuyetTracNghiem.jsp"> Lý Thuyết Trắc Nghiệm </a></li>
+                            </ul>                            
+                        </li>
+                        <li><a href="<%=request.getContextPath()%>/tutorial.jsp"> Hướng dẫn</a></li>
+                        <li><a href="<%=request.getContextPath()%>/information.jsp"> Giới thiệu</a></li>
+                        <li><a href="<%=request.getContextPath()%>/contact.jsp"> Liên hệ - Góp ý</a></li>
                     </ul>
-                <% } %>
+                </div>
+                
+                <script src="<%=request.getContextPath()%>/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
 
-            <div id="top-left">
-                <a href="../index.jsp">website đánh giá kiến thức toán thpt</a>
+            <div id="main-right">
+                <h2>Thông tin đề thi</h2>
+                
+                <form id="createExam" name="createExam" action="LamDeThi.jsp" method="POST">
+                    <div class="search-field">
+                        <label>Chọn độ khó: </label>
+                        <select name="dokho" required>
+                            <option value="" disabled selected>Độ khó</option>
+                            <option value="0">Dễ</option>
+                            <option value="1">Trung bình</option>
+                            <option value="2">Khó</option>
+                        </select>
+                    </div>
+
+                    <div class="search-field">
+                        <label>Chọn thời gian làm bài: </label>
+                        <select name="time" required>
+                            <option value="" disabled selected>Thời gian</option>
+                            <option value="15">15'</option>
+                            <option value="60">60'</option>
+                            <option value="90">90'</option>
+                        </select>
+                    </div>
+                    
+                    <!--<label>Chọn các kiến thức có trong đề thi: </label>-->
+                    <div style="margin: 10px 0px 0px 115px">
+                        <select id="pre-selected-options" multiple="multiple" name="kienthuc" required>
+<!--                            <option value="" disabled selected>Kiến thức</option>-->
+                            <option value="hamso">Hàm số</option>
+                            <option value="loga">Lũy thừa - Mũ - Logarit</option>
+                            <option value="tichphan">Nguyên hàm - Tích phân</option>
+                            <option value="sophuc">Số phức</option>
+                            <option value="hhkg">Hình học không gian</option>
+                            <option value="oxyz">Oxyz</option>
+                        </select>
+                        
+                        <script type="text/javascript" src="../js/jquery.multi-select.js"></script>
+                        <script type="text/javascript">
+//                            $('#pre-selected-options').multiSelect();
+                            $('#pre-selected-options').multiSelect({
+                                selectableHeader: "<div class='custom-header' style='font-weight: bold;'>Kiến thức:</div>",
+                                selectionHeader: "<div class='custom-header' style='font-weight: bold;'>Kiến thức đã chọn:</div>"
+                            });
+                        </script>
+                    </div>
+
+                    <script type="text/javascript">
+                        function DoExam() {
+                            if (confirm('Bạn đã sẵn sàng làm bài chưa?') == true) {
+                                document.getElementById("createExam").submit();
+                            }
+                        }
+                    </script>
+                    <input id="btnTaoDe" type="submit" value="Tạo đề" onclick="DoExam()"> <!-- css in DoExamStyle -->
+                </form>   
             </div>
         </div>
+        
+        <script src="../js/autoscroll.js" type="text/javascript"></script>
             
-        <form id="createExam" name="createExam" action="LamDeThi.jsp" method="POST">
-            <h5>Thông tin đề thi</h5>
-            <div class="input-field col s12">
-                <p>Chọn độ khó: </p>
-                <select name="dokho" required>
-                    <option value="" disabled selected>Độ khó</option>
-                    <option value="0">Dễ</option>
-                    <option value="1">Trung bình</option>
-                    <option value="2">Khó</option>
-                </select>
-            </div>
-
-            <div class="input-field col s12">
-                <p>Chọn thời gian làm bài: </p>
-                <select name="time" required>
-                    <option value="" disabled selected>Thời gian</option>
-                    <option value="15">15'</option>
-                    <option value="60">60'</option>
-                    <option value="90">90'</option>
-                </select>
-            </div>
-
-            <div class="input-field col s12">
-                <p>Chọn các kiến thức có trong đề thi: </p>
-                <select multiple="" name="kienthuc" required>
-                    <option value="" disabled selected>Kiến thức</option>
-                    <option value="hs">Hàm số</option>
-                    <option value="loga">Lũy thừa - Mũ - Logarit</option>
-                    <option value="tp">Nguyên hàm - Tích phân</option>
-                    <option value="sp">Số phức</option>
-                    <option value="hkg">Hình học không gian</option>
-                    <option value="oxyz">Oxyz</option>
-                </select>
-            </div>
-
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $('select').material_select();
-                });
-            </script>
-            
-            <script type="text/javascript">
-                function DoExam() {
-                    if (confirm('Bạn đã sẵn sàng làm bài chưa?') == true) {
-                        document.getElementById("createExam").submit();
-                    }
-                }
-            </script>
-            <input id="btnTaoDe" type="submit" value="Tạo đề" onclick="DoExam()"> <!-- css in DoExamStyle -->
-        </form>   
+        <jsp:include page="../WebInterface/footer.jsp"></jsp:include>        
     </body>
 </html>

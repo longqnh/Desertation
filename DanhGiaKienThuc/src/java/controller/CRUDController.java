@@ -71,9 +71,10 @@ public class CRUDController extends HttpServlet {
             try {
                 if (action.equals("list")) {
                     int startPageIndex = Integer.parseInt(request.getParameter("jtStartIndex"));
-                    int recordsPerPage = Integer.parseInt(request.getParameter("jtPageSize"));                    
+                    int recordsPerPage = Integer.parseInt(request.getParameter("jtPageSize"));   
+                    String search_username = request.getParameter("name");
                     
-                    List = dao.getAllUsers(startPageIndex, recordsPerPage);
+                    List = dao.getAllUsers(search_username, startPageIndex, recordsPerPage);
 
                     // Get Total Record Count for Pagination
                     int userCount = dao.getUserCount();

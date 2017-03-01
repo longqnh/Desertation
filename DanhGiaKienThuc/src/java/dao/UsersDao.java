@@ -147,12 +147,11 @@ public class UsersDao {
         return list;
     }
     
-    public List<Users> getAllUsers(int startPageIndex, int recordsPerPage) {
+    public List<Users> getAllUsers(String search_username, int startPageIndex, int recordsPerPage) {
         Connection connection = DBConnect.getConnecttion();
         List<Users> list = new ArrayList();
 
-        int range = startPageIndex+recordsPerPage;
-        String sql = "SELECT * FROM table_user LIMIT " + startPageIndex + "," + range;
+        String sql = "SELECT * FROM table_user WHERE username LIKE '%" + search_username + "' LIMIT " + startPageIndex + "," + recordsPerPage;
 
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);

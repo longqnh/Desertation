@@ -68,6 +68,7 @@ public class QuestionCRUD extends HttpServlet {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         response.setContentType("application/json");
         String kienthuc = request.getParameter("kienthuc");
+        String searchID = request.getParameter("name");
         
         if (action != null) {
             try {
@@ -75,7 +76,7 @@ public class QuestionCRUD extends HttpServlet {
                     int startPageIndex = Integer.parseInt(request.getParameter("jtStartIndex"));
                     int recordsPerPage = Integer.parseInt(request.getParameter("jtPageSize"));
                     
-                    List = qdao.getAllQuestions(kienthuc,startPageIndex, recordsPerPage);
+                    List = qdao.getAllQuestions(kienthuc,searchID,startPageIndex, recordsPerPage);
 
                     // Get Total Record Count for Pagination
                     int questionCount = qdao.getQuestionCount(kienthuc);

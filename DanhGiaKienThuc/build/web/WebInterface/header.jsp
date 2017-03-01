@@ -44,8 +44,8 @@
                         </ul>
                     <% } else { %>
                         <ul>
-                            <li><a href="login.jsp">Đăng nhập</a></li>
-                            <li><a href="register.jsp">Đăng ký</a></li>
+                            <li><a href="<%=request.getContextPath()%>/login.jsp">Đăng nhập</a></li>
+                            <li><a href="<%=request.getContextPath()%>/register.jsp">Đăng ký</a></li>
                         </ul>
                     <% } %>
             </div>

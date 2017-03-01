@@ -73,7 +73,17 @@
                         }                     
                     }
                 });
-                $('#TableContainer').jtable('load');
+                //Re-load records when user click 'load records' button.
+                $('#LoadRecordsButton').click(function (e) {
+                    e.preventDefault();
+                    $('#TableContainer').jtable('load', {
+                        name: $('#name').val(),
+                        role: $('#role').val()
+                    });
+                });
+
+                //Load all records when page is first shown
+                $('#LoadRecordsButton').click();
             });
         </script>
     </head>
@@ -202,10 +212,24 @@
             
             <div id="main-right">
                 <h2>QUẢN TRỊ CÁC TÀI KHOẢN</h2>
-                
-                <div style="margin: 20px auto;">
+
+                <div class="filtering">
+                    <form>
+                        Username: <input type="text" name="name" id="name" />
+<!--                        Role: 
+                        <select id="role" name="role">
+                            <option value="admin" selected="selected">Admin</option>
+                            <option value="user">User</option>
+                        </select>-->
+                        <button type="submit" id="LoadRecordsButton">Load records</button>
+                    </form>
+                </div>                    
+
+                <div id="TableContainer"></div>
+            </div>                
+<!--                <div style="margin: 20px auto;">
                     <div id="TableContainer"></div>
-                </div>
+                </div>-->
             </div>
         </div>
             

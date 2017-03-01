@@ -27,45 +27,37 @@ public class QuestionDAO {
         Connection connection = DBConnect.getConnecttion();
         
         int socauDe, socauTB, socauTBK, socauKho;
-    
+        
         switch (level) {
             case 0:
-                socauDe = (int) 0.5*numQuestion;
-                socauTB = (int) 0.3*numQuestion;
-                socauTBK = (int) 0.1*numQuestion;
-                socauKho = (int) 0.1*numQuestion;
+                socauDe = (int) (0.5*numQuestion);
+                socauTB = (int) (0.3*numQuestion);
+                socauTBK = (int) (0.1*numQuestion);
+                socauKho = (int) (0.1*numQuestion);
                 break;
             case 1:
-                socauDe = (int) 0.4*numQuestion;
-                socauTB = (int) 0.4*numQuestion;
-                socauTBK = (int) 0.1*numQuestion;
-                socauKho = (int) 0.1*numQuestion;
+                socauDe = (int) (0.3*numQuestion);
+                socauTB = (int) (0.4*numQuestion);
+                socauTBK = (int) (0.2*numQuestion);
+                socauKho = (int) (0.1*numQuestion);
                 break;
             default:
-                socauDe = (int) 0.3*numQuestion;
-                socauTB = (int) 0.3*numQuestion;
-                socauTBK = (int) 0.2*numQuestion;
-                socauKho = (int) 0.2*numQuestion;                
+                socauDe = (int) (0.2*numQuestion);
+                socauTB = (int) (0.3*numQuestion);
+                socauTBK = (int) (0.3*numQuestion);
+                socauKho = (int) (0.2*numQuestion);   
                 break;
         }
 
         String sql = "SELECT * FROM (" +
-                        "(SELECT * FROM table_hamso WHERE level=0 ORDER BY RAND() LIMIT 3) " +
-                        "UNION ALL " +
-                        "(SELECT * FROM table_hamso WHERE level=1 ORDER BY RAND() LIMIT 4) " +
-                        "UNION ALL " +
-                        "(SELECT * FROM table_hamso WHERE level=2 ORDER BY RAND() LIMIT 2) " +
-                        "UNION ALL " +
-                        "(SELECT * FROM table_hamso WHERE level=3 ORDER BY RAND() LIMIT 2) " +
-                        "UNION ALL " +
-                        "(SELECT * FROM table_loga WHERE level=0 ORDER BY RAND() LIMIT 4) " +
-                        "UNION ALL " +
-                        "(SELECT * FROM table_loga WHERE level=1 ORDER BY RAND() LIMIT 4) " +
-                        "UNION ALL " +
-                        "(SELECT * FROM table_loga WHERE level=2 ORDER BY RAND() LIMIT 1) " +
-                        "UNION ALL " +
-                        "(SELECT * FROM table_loga WHERE level=3 ORDER BY RAND() LIMIT 1) " +
-                    ") AS foo;";
+                    "(SELECT * FROM table_" + noidung[0] + " WHERE level=0 ORDER BY RAND() LIMIT " + socauDe + ") " +
+                    "UNION ALL " +
+                    "(SELECT * FROM table_" + noidung[0] + " WHERE level=1 ORDER BY RAND() LIMIT " + socauTB + ") " +
+                    "UNION ALL " +
+                    "(SELECT * FROM table_" + noidung[0] + " WHERE level=2 ORDER BY RAND() LIMIT " + socauTBK + ") " +
+                    "UNION ALL " +
+                    "(SELECT * FROM table_" + noidung[0] + " WHERE level=3 ORDER BY RAND() LIMIT " + socauKho + ") " +
+                    ") AS foo;";        
                 
 	List exam = new ArrayList();
         PreparedStatement ps;
@@ -136,9 +128,9 @@ public class QuestionDAO {
             ps.setString(6, q.getDapanD());
             ps.setString(6, q.getAnswer());
             ps.executeUpdate();
-                return true;
+            return true;
         } catch (SQLException ex) {
-                ex.printStackTrace();
+            ex.printStackTrace();
         }
         return false;
     }
@@ -148,21 +140,20 @@ public class QuestionDAO {
         String sql = "delete from table_ where id='" + maCH + "'";
         PreparedStatement ps;
         try {
-                ps = con.prepareCall(sql);
-                ps.executeUpdate();
-                return true;
+            ps = con.prepareCall(sql);
+            ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
-                ex.printStackTrace();
+            ex.printStackTrace();
         }
         return false;
     }
     
-    public List<Question> getAllQuestions(String nd, int startPageIndex, int recordsPerPage) {
+    public List<Question> getAllQuestions(String nd, String search_id, int startPageIndex, int recordsPerPage) {
         Connection connection = DBConnect.getConnecttion();
         List<Question> list = new ArrayList();
         
-        int range = startPageIndex+recordsPerPage;
-        String sql = "SELECT * FROM table_" + nd + " LIMIT " + startPageIndex + "," + range;//"SELECT * FROM table_" + nd;
+        String sql = "SELECT * FROM table_" + nd + " WHERE id LIKE '%" + search_id + "' LIMIT " + startPageIndex + "," + recordsPerPage;//"SELECT * FROM table_" + nd;
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -187,7 +178,7 @@ public class QuestionDAO {
             System.err.println(e.getMessage());
         }
         return list;
-    }    
+    }
     
     public int getQuestionCount(String nd) {
         Connection connection = DBConnect.getConnecttion();
