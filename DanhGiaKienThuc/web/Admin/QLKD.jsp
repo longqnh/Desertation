@@ -205,6 +205,13 @@
                 <li><a href="<%=request.getContextPath()%>/tutorial.jsp">Hướng dẫn</a></li>
                 <li><a href="<%=request.getContextPath()%>/information.jsp">Giới thiệu</a></li>
                 <li><a href="<%=request.getContextPath()%>/contact.jsp">Liên hệ - góp ý</a></li>
+                <li><a href="#"><%=users.getUsername()%></a>
+                    <ul class="submenu">
+                        <li><a href="<%=request.getContextPath()%>/Member/User.jsp"> Thông tin tài khoản </a></li>                        
+                        <li><a href="<%=request.getContextPath()%>/Admin/QLTK.jsp">Quản lý các tài khoản</a></li>
+                        <li><a href="<%=request.getContextPath()%>/Admin/QLKD.jsp">Quản lý kho đề</a></li>
+                    </ul>
+                </li>
             </ul>
             
             <script type="text/javascript">

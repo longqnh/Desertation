@@ -114,7 +114,7 @@
                             }
                         }
                     </script>
-                    <input id="btnTaoDe" type="submit" value="Tạo đề" onclick="DoExam()"> <!-- css in DoExamStyle -->
+                    <input id="btnTaoDe" type="submit" value="Tạo đề" onclick="DoExam()"> <!-- css in MemberStyle -->
                 </form>   
             </div>
         </div>

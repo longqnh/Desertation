@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -47,23 +48,32 @@ public class QuestionDAO {
                 socauTBK = (int) (0.3*numQuestion);
                 socauKho = (int) (0.2*numQuestion);   
                 break;
-        }
-
-        String sql = "SELECT * FROM (" +
-                    "(SELECT * FROM table_" + noidung[0] + " WHERE level=0 ORDER BY RAND() LIMIT " + socauDe + ") " +
-                    "UNION ALL " +
-                    "(SELECT * FROM table_" + noidung[0] + " WHERE level=1 ORDER BY RAND() LIMIT " + socauTB + ") " +
-                    "UNION ALL " +
-                    "(SELECT * FROM table_" + noidung[0] + " WHERE level=2 ORDER BY RAND() LIMIT " + socauTBK + ") " +
-                    "UNION ALL " +
-                    "(SELECT * FROM table_" + noidung[0] + " WHERE level=3 ORDER BY RAND() LIMIT " + socauKho + ") " +
-                    ") AS foo;";        
+        }     
                 
 	List exam = new ArrayList();
-        PreparedStatement ps;
+
 	try {
-            ps = (PreparedStatement) connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            // excute multiple queries (sql1 and sql2)
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String sql1 = "TRUNCATE table_dethi";
+            String sql2 = "INSERT INTO table_dethi(`id`,`noidung`,`dapanA`,`dapanB`,`dapanC`,`dapanD`,`answer`,`dangtoan`,`dangbt`,`level`,`hasImage`) " +
+                        "SELECT * FROM (" +
+                        "(SELECT * FROM table_" + noidung[0] + " WHERE level=0 ORDER BY RAND() LIMIT " + socauDe + ") " +
+                        "UNION ALL " +
+                        "(SELECT * FROM table_" + noidung[0] + " WHERE level=1 ORDER BY RAND() LIMIT " + socauTB + ") " +
+                        "UNION ALL " +
+                        "(SELECT * FROM table_" + noidung[0] + " WHERE level=2 ORDER BY RAND() LIMIT " + socauTBK + ") " +
+                        "UNION ALL " +
+                        "(SELECT * FROM table_" + noidung[0] + " WHERE level=3 ORDER BY RAND() LIMIT " + socauKho + ") " +
+                        ") AS foo;";   
+            connection.setAutoCommit(false);
+            statement.addBatch(sql1);
+            statement.addBatch(sql2);
+            statement.executeBatch();
+            connection.commit();
+            
+            ResultSet rs = statement.executeQuery("SELECT * FROM table_dethi");
+            
             while (rs.next()) {
                 Question question = new Question();
                 

@@ -82,7 +82,7 @@ public class FinishExam extends HttpServlet {
 
         for (int i=0; i<IDlist.size(); i++) {
             String temp = IDlist.get(i).toString();
-            String sql = "select answer from table_hamso where id='" + temp + "'";
+            String sql = "SELECT answer FROM table_dethi WHERE id='" + temp + "'";
         
             PreparedStatement ps;
             try {
