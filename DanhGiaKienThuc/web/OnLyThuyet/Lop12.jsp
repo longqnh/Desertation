@@ -4,6 +4,7 @@
     Author     : NTL
 --%>
 
+<%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="../css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">        
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">     
         <title>ÔN TẬP LÝ THUYẾT</title>
     </head>
     <body>
@@ -63,8 +64,18 @@
                     <li><a href="" class="content"> Hình học không gian </a></li>
                     <li><a href="" class="content"> Giải tích không gian Oxyz </a></li>
                 </ol>
+                
+                <%
+                    Users users = null;
+                    if (session.getAttribute("user")!=null) {
+                        users = (Users) session.getAttribute("user");
+                        if (users.getUsername().equals("admin")) { %>
+                            <input type="submit" value="Cập nhật" onclick="window.location.href='<%=request.getContextPath()%>/Admin/updateLT.jsp'">
+                <%      } 
+                    }   
+                %>                
             </div>
-
+ 
             <script src="../js/DisplayContent.js" type="text/javascript"></script>
         </div>
         

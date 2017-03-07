@@ -36,6 +36,10 @@
         <servlet-name>QuestionCRUD</servlet-name>
         <servlet-class>controller.QuestionCRUD</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>JsonServlet</servlet-name>
+        <servlet-class>controller.JsonServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckEmailServlet</servlet-name>
         <url-pattern>/CheckEmailServlet</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>QuestionCRUD</servlet-name>
         <url-pattern>/QuestionCRUD</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JsonServlet</servlet-name>
+        <url-pattern>/JsonServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

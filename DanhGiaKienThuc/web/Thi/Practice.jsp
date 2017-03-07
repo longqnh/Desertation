@@ -4,6 +4,9 @@
     Author     : NTL
 --%>
 
+<%@page import="model.Lop"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.LopDAO"%>
 <%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +22,7 @@
         <link rel="stylesheet" href="../css/MemberStyle.css" type="text/css">
         <link rel="stylesheet" href="../css/multi-select.css" type="text/css">
         <!--<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>-->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>    
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>   
     </head>
     
     <body>
@@ -49,6 +52,8 @@
                         <li><a> Lý thuyết</a>
                             <ul class="submnu">
                                 <li><a href="<%=request.getContextPath()%>/OnLyThuyet/Lop12.jsp"> Toán 12 </a></li>
+                                <li><a href="<%=request.getContextPath()%>/OnLyThuyet/Lop11.jsp"> Toán 11 </a></li>
+                                <li><a href="<%=request.getContextPath()%>/OnLyThuyet/Lop10.jsp"> Toán 10 </a></li>
                                 <li><a href="<%=request.getContextPath()%>/OnLyThuyet/LyThuyetTracNghiem.jsp"> Lý Thuyết Trắc Nghiệm </a></li>
                             </ul>                            
                         </li>
@@ -65,6 +70,19 @@
                 <h2>Thông tin đề thi</h2>
                 
                 <form id="createExam" name="createExam" action="LamDeThi.jsp" method="POST">
+                    <div class="search-field">
+                        <label>Chọn lớp: </label>
+                        <select name="lop" id="lop" required onchange="Ajax()">
+                            <option value="" disabled selected>Lớp</option>
+                            <%
+                                LopDAO lopDAO = new LopDAO(); 
+                                List<Lop> dsLop = lopDAO.GetAllLop(); 
+                                for (Lop lop: dsLop) { %>
+                                    <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>                                  
+                            <%  } %>
+                        </select>
+                    </div>
+                    
                     <div class="search-field">
                         <label>Chọn độ khó: </label>
                         <select name="dokho" required>
@@ -84,11 +102,10 @@
                             <option value="90">90'</option>
                         </select>
                     </div>
-                    
-                    <!--<label>Chọn các kiến thức có trong đề thi: </label>-->
-                    <div style="margin: 10px 0px 0px 115px">
+                        
+                        <!--<label>Chọn các kiến thức có trong đề thi: </label>-->
+                    <div style="margin: 10px 0px 0px 115px" id="demo">
                         <select id="pre-selected-options" multiple="multiple" name="kienthuc" required>
-<!--                            <option value="" disabled selected>Kiến thức</option>-->
                             <option value="hamso">Hàm số</option>
                             <option value="loga">Lũy thừa - Mũ - Logarit</option>
                             <option value="tichphan">Nguyên hàm - Tích phân</option>
