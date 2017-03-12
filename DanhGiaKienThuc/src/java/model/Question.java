@@ -11,26 +11,30 @@ package model;
  */
 public class Question {
     private String id;
-    private String noidung, dapanA, dapanB, dapanC, dapanD, answer;
+    private String noidung, dapanA, dapanB, dapanC, dapanD, dapan;
     private String dangtoan, dangbt;
-    private int level;
-    private int HasImage;
-    
+    private int dokho;
+    private int dophancach;
+    private int malop;
+    private int hinh;
+
     public Question() {
     }
 
-    public Question(String id, String noidung, String dapanA, String dapanB, String dapanC, String dapanD, String answer, String dangtoan, String dangbt, int level, int HasImage) {
+    public Question(String id, String noidung, String dapanA, String dapanB, String dapanC, String dapanD, String dapan, String dangtoan, String dangbt, int dokho, int dophancach, int malop, int hinh) {
         this.id = id;
         this.noidung = noidung;
         this.dapanA = dapanA;
         this.dapanB = dapanB;
         this.dapanC = dapanC;
         this.dapanD = dapanD;
-        this.answer = answer;
+        this.dapan = dapan;
         this.dangtoan = dangtoan;
         this.dangbt = dangbt;
-        this.level = level;
-        this.HasImage = HasImage;
+        this.dokho = dokho;
+        this.dophancach = dophancach;
+        this.malop = malop;
+        this.hinh = hinh;
     }
 
     public String getId() {
@@ -81,12 +85,12 @@ public class Question {
         this.dapanD = dapanD;
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getDapan() {
+        return dapan;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setDapan(String dapan) {
+        this.dapan = dapan;
     }
 
     public String getDangtoan() {
@@ -105,19 +109,35 @@ public class Question {
         this.dangbt = dangbt;
     }
 
-    public int getLevel() {
-        return level;
+    public int getDokho() {
+        return dokho;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-    
-    public int getHasImage() {
-        return HasImage;
+    public void setDokho(int dokho) {
+        this.dokho = dokho;
     }
 
-    public void setHasImage(int HasImage) {
-        this.HasImage = HasImage;
+    public int getDophancach() {
+        return dophancach;
+    }
+
+    public void setDophancach(int dophancach) {
+        this.dophancach = dophancach;
+    }
+
+    public int getMalop() {
+        return malop;
+    }
+
+    public void setMalop(int malop) {
+        this.malop = malop;
+    }
+
+    public int getHinh() {
+        return hinh;
+    }
+
+    public void setHinh(int hinh) {
+        this.hinh = hinh;
     }
 }

@@ -121,9 +121,9 @@ public class QuestionCRUD extends HttpServlet {
                         q.setDapanD(dapanD);
                     }
                     
-                    if (request.getParameter("answer") != null) {
-                        String answer = request.getParameter("answer");
-                        q.setAnswer(answer);
+                    if (request.getParameter("dapan") != null) {
+                        String dapan = request.getParameter("dapan");
+                        q.setDapan(dapan);
                     }
                     
                     if (request.getParameter("dangtoan") != null) {
@@ -136,14 +136,24 @@ public class QuestionCRUD extends HttpServlet {
                         q.setDangbt(dangbt);
                     }
                                         
-                    if (request.getParameter("level") != null) {
-                        String level = request.getParameter("level");
-                        q.setLevel(Integer.parseInt(level));
+                    if (request.getParameter("dokho") != null) {
+                        String dokho = request.getParameter("dokho");
+                        q.setDokho(Integer.parseInt(dokho));
                     }
 
-                    if (request.getParameter("hasImage") != null) {
-                        String hasImage = request.getParameter("hasImage");
-                        q.setHasImage(Integer.parseInt(hasImage));
+                    if (request.getParameter("dophancach") != null) {
+                        String dophancach = request.getParameter("dophancach");
+                        q.setDophancach(Integer.parseInt(dophancach));
+                    }
+                    
+                    if (request.getParameter("malop") != null) {
+                        String malop = request.getParameter("malop");
+                        q.setMalop(Integer.parseInt(malop));
+                    }
+
+                    if (request.getParameter("hinh") != null) {
+                        String hinh = request.getParameter("hinh");
+                        q.setHinh(Integer.parseInt(hinh));
                     }
                     
                     if (action.equals("create")) {

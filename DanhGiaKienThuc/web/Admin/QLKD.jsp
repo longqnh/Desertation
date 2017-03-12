@@ -81,7 +81,7 @@
                             type: 'text',
                             edit: true
                         },
-                        answer: {
+                        dapan: {
                             title: 'Đáp án',
                             type: 'select',
                             options: {'A': 'A', 'B': 'B', 'C': 'C', 'D': 'D'},
@@ -92,15 +92,27 @@
                             type: 'text',
                             edit: true
                         },
-                        level: {
+                        dokho: {
                             title: 'Level',
                             type: 'select',
                             options: {'0': 'nhận biết', '1': 'thông hiểu', '2': 'vận dụng', '3': 'vận dụng cao'},
                             edit: true
                         },
-                        hasImage: {
+                        malop: {
+                            title: 'Lớp',
+                            type: 'select',
+                            options: {'12': '12', '11': '11', '10': '10'},
+                            edit: true
+                        },
+                        hinh: {
                             title: 'Hình',
-                            type: 'text',
+                            type: 'select',
+                            options: {'0': 'không có hình', '1': 'có hình'},
+                            display: function(data) {
+                                if (data.record.hinh==1) {
+                                    return '<a href="../images/' + data.record.dangtoan + '/' + data.record.id +'.JPG">Link</a>';
+                                }
+                            },
                             edit: true
                         }                      
                     }

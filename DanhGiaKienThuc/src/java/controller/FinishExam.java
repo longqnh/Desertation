@@ -76,7 +76,7 @@ public class FinishExam extends HttpServlet {
             IDlist = (List) session.getAttribute("ID_List");
         }
         
-        int score = 0;
+        int socaudung = 0;
         
         Connection con = DBConnect.getConnecttion();        
 
@@ -97,7 +97,7 @@ public class FinishExam extends HttpServlet {
                     } else {
                         if (correct.equals(user_select)) {
                             //out.println("correct");
-                            score++;
+                            socaudung++;
                         } else {
                             //out.println("wrong");
                         }
@@ -107,8 +107,9 @@ public class FinishExam extends HttpServlet {
                 e.printStackTrace();
             }
         }
-                                 
-        session.setAttribute("DiemThi", score);   
+                            
+        float score = socaudung*((float)10/IDlist.size());
+        session.setAttribute("DiemThi", score);
         response.sendRedirect("Thi/FinishExam.jsp");
     }
 

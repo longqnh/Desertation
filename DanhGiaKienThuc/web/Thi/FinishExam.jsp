@@ -57,9 +57,10 @@
                 <h2>Kết quả thi</h2>
 
                 <% 
-                    int Diem = (int) session.getAttribute("DiemThi"); 
+                    float Diem = (float) session.getAttribute("DiemThi"); 
                 %>
-                <h3>Bạn được <%=Diem%> điểm</h3>
+                <h3>Bạn được <%=Diem%>/10 điểm</h3>
+                
                 <form action="XemDapAn.jsp" method="POST">
                     <input type="submit" id="btnXemDA" value="Xem đáp án">
                 </form>                

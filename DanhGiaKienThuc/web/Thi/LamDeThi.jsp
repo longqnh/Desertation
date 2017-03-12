@@ -144,7 +144,7 @@
                         <div id="Q<%=q.getId()%>" onclick="Answered('<%=q.getId()%>')">
                             <p><b>Câu <%=i+1%>: </b> <%=q.getNoidung()%></p>
                             <%
-                                if (q.getHasImage()==1) { %>
+                                if (q.getHinh()==1) { %>
                                     <img src="../images/<%=q.getDangtoan()%>/<%=q.getId()%>.JPG">
                             <% } %>
                             <p><b>A. </b><input type="radio" name="<%=q.getId()%>" value="A"> <%=q.getDapanA()%></p>

@@ -56,15 +56,15 @@ public class QuestionDAO {
             // excute multiple queries (sql1 and sql2)
             Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String sql1 = "TRUNCATE table_dethi";
-            String sql2 = "INSERT INTO table_dethi(`id`,`noidung`,`dapanA`,`dapanB`,`dapanC`,`dapanD`,`answer`,`dangtoan`,`dangbt`,`level`,`hasImage`) " +
+            String sql2 = "INSERT INTO table_dethi(`id`,`noidung`,`dapanA`,`dapanB`,`dapanC`,`dapanD`,`dapan`,`dangtoan`,`dangbt`,`dokho`,`dophancach`,`malop`,`hinh`) " +
                         "SELECT * FROM (" +
-                        "(SELECT * FROM table_" + noidung[0] + " WHERE level=0 ORDER BY RAND() LIMIT " + socauDe + ") " +
+                        "(SELECT * FROM table_" + noidung[0] + " WHERE dokho=0 ORDER BY RAND() LIMIT " + socauDe + ") " +
                         "UNION ALL " +
-                        "(SELECT * FROM table_" + noidung[0] + " WHERE level=1 ORDER BY RAND() LIMIT " + socauTB + ") " +
+                        "(SELECT * FROM table_" + noidung[0] + " WHERE dokho=1 ORDER BY RAND() LIMIT " + socauTB + ") " +
                         "UNION ALL " +
-                        "(SELECT * FROM table_" + noidung[0] + " WHERE level=2 ORDER BY RAND() LIMIT " + socauTBK + ") " +
+                        "(SELECT * FROM table_" + noidung[0] + " WHERE dokho=2 ORDER BY RAND() LIMIT " + socauTBK + ") " +
                         "UNION ALL " +
-                        "(SELECT * FROM table_" + noidung[0] + " WHERE level=3 ORDER BY RAND() LIMIT " + socauKho + ") " +
+                        "(SELECT * FROM table_" + noidung[0] + " WHERE dokho=3 ORDER BY RAND() LIMIT " + socauKho + ") " +
                         ") AS foo;";   
             connection.setAutoCommit(false);
             statement.addBatch(sql1);
@@ -83,11 +83,13 @@ public class QuestionDAO {
                 question.setDapanB(rs.getString("dapanB"));
                 question.setDapanC(rs.getString("dapanC"));
                 question.setDapanD(rs.getString("dapanD"));
-                question.setAnswer(rs.getString("answer"));
+                question.setDapan(rs.getString("dapan"));
                 question.setDangtoan(rs.getString("dangtoan"));
                 question.setDangbt(rs.getString("dangbt"));
-                question.setLevel(rs.getInt("level"));
-                question.setHasImage(rs.getInt("hasImage"));
+                question.setDokho(rs.getInt("dokho"));
+                question.setDophancach(rs.getInt("dophancach"));
+                question.setMalop(rs.getInt("malop"));
+                question.setHinh(rs.getInt("hinh"));
                 exam.add(question);
             }
             connection.close();
@@ -100,7 +102,7 @@ public class QuestionDAO {
     
     public boolean InsertQuestion(Question q) {
         Connection connection= DBConnect.getConnecttion();
-        String sql = "INSERT INTO table_" + q.getDangtoan() + " VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO table_" + q.getDangtoan() + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareCall(sql);
@@ -110,11 +112,13 @@ public class QuestionDAO {
             ps.setString(4, q.getDapanB());
             ps.setString(5, q.getDapanC());
             ps.setString(6, q.getDapanD());
-            ps.setString(7, q.getAnswer());
+            ps.setString(7, q.getDapan());
             ps.setString(8, q.getDangtoan());
             ps.setString(9, q.getDangbt());
-            ps.setInt(10, q.getLevel());
-            ps.setInt(11, q.getHasImage());
+            ps.setInt(10, q.getDokho());
+            ps.setInt(11, q.getDophancach());
+            ps.setInt(12, q.getMalop());
+            ps.setInt(13, q.getHinh());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -126,17 +130,18 @@ public class QuestionDAO {
     
     public boolean updateQuestion(Question q) throws SQLException {
         Connection con = DBConnect.getConnecttion();
-        String sql = "update table_" + q.getDangtoan() + " set noidung=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, answer=? where id=?";
+        String sql = "update table_" + q.getDangtoan() + " set noidung=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, dapan=? where id=?";
         PreparedStatement ps;
         
         try {
             ps = con.prepareCall(sql);
-            ps.setString(2, q.getNoidung());
-            ps.setString(3, q.getDapanA());
-            ps.setString(4, q.getDapanB());
-            ps.setString(5, q.getDapanC());
-            ps.setString(6, q.getDapanD());
-            ps.setString(6, q.getAnswer());
+            ps.setString(1, q.getNoidung());
+            ps.setString(2, q.getDapanA());
+            ps.setString(3, q.getDapanB());
+            ps.setString(4, q.getDapanC());
+            ps.setString(5, q.getDapanD());
+            ps.setString(6, q.getDapan());
+            ps.setString(7, q.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -175,13 +180,15 @@ public class QuestionDAO {
                 String dapanB = rs.getString("dapanB");
                 String dapanC = rs.getString("dapanC");
                 String dapanD = rs.getString("dapanD");
-                String answer = rs.getString("answer");
+                String dapan = rs.getString("dapan");
                 String dangtoan = rs.getString("dangtoan");
                 String dangbt = rs.getString("dangbt");
-                int level = rs.getInt("level");
-                int hasImage = rs.getInt("hasImage");
+                int dokho = rs.getInt("dokho");
+                int dophancach = rs.getInt("dophancach");
+                int malop = rs.getInt("malop");
+                int hinh = rs.getInt("hinh");
                 
-                Question q = new Question(id, noidung, dapanA, dapanB, dapanC, dapanD, answer, dangtoan, dangbt, level, hasImage);
+                Question q = new Question(id, noidung, dapanA, dapanB, dapanC, dapanD, dapan, dangtoan, dangbt, dokho, dophancach, malop, hinh);
                 list.add(q);
             }
         } catch (SQLException e) {
