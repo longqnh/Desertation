@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -71,6 +72,8 @@ public class FinishExam extends HttpServlet {
         
         HttpSession session = request.getSession();
         
+        List<String> user_answer = new ArrayList<>();
+        
         List IDlist = null;
         if (session.getAttribute("ID_List")!=null) {
             IDlist = (List) session.getAttribute("ID_List");
@@ -82,15 +85,16 @@ public class FinishExam extends HttpServlet {
 
         for (int i=0; i<IDlist.size(); i++) {
             String temp = IDlist.get(i).toString();
-            String sql = "SELECT answer FROM table_dethi WHERE id='" + temp + "'";
+            String sql = "SELECT dapan FROM table_dethi WHERE id='" + temp + "'";
         
             PreparedStatement ps;
             try {
                 ps = (PreparedStatement) con.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    String correct = rs.getString("answer");
+                    String correct = rs.getString("dapan");
                     String user_select = request.getParameter(temp);
+                    user_answer.add(user_select);
                     
                     if (user_select == null) {
                         //out.println("chua lam");
@@ -110,6 +114,7 @@ public class FinishExam extends HttpServlet {
                             
         float score = socaudung*((float)10/IDlist.size());
         session.setAttribute("DiemThi", score);
+        session.setAttribute("UserAnswer", user_answer);
         response.sendRedirect("Thi/FinishExam.jsp");
     }
 

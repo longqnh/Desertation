@@ -24,7 +24,7 @@ import model.Users;
  * @author NTL
  */
 public class QuestionDAO {
-    public List CreateExam(String[] noidung, int level, int numQuestion) {
+    public void TaoDe(String[] noidung, int level, int numQuestion) {
         Connection connection = DBConnect.getConnecttion();
         
         int socauDe, socauTB, socauTBK, socauKho;
@@ -49,8 +49,6 @@ public class QuestionDAO {
                 socauKho = (int) (0.2*numQuestion);   
                 break;
         }     
-                
-	List exam = new ArrayList();
 
 	try {
             // excute multiple queries (sql1 and sql2)
@@ -71,8 +69,20 @@ public class QuestionDAO {
             statement.addBatch(sql2);
             statement.executeBatch();
             connection.commit();
-            
-            ResultSet rs = statement.executeQuery("SELECT * FROM table_dethi");
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+	}
+    }
+    
+    public List GetDeThi() {
+        Connection connection = DBConnect.getConnecttion();
+  
+	List exam = new ArrayList();
+
+	try {
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);            
+            ResultSet rs = statement.executeQuery("SELECT * FROM table_dethi ORDER BY dokho ASC");
             
             while (rs.next()) {
                 Question question = new Question();

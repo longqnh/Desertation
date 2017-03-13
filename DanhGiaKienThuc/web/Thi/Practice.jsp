@@ -70,18 +70,18 @@
                 <h2>Thông tin đề thi</h2>
                 
                 <form id="createExam" name="createExam" action="LamDeThi.jsp" method="POST">
-                    <div class="search-field">
+<!--                    <div class="search-field">
                         <label>Chọn lớp: </label>
                         <select name="lop" id="lop" required onchange="Ajax()">
-                            <option value="" disabled selected>Lớp</option>
-                            <%
+                            <option value="" disabled selected>Lớp</option>-->
+                            <%--
                                 LopDAO lopDAO = new LopDAO(); 
                                 List<Lop> dsLop = lopDAO.GetAllLop(); 
                                 for (Lop lop: dsLop) { %>
                                     <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>                                  
-                            <%  } %>
-                        </select>
-                    </div>
+                            <%  } --%>
+<!--                        </select>
+                    </div>-->
                     
                     <div class="search-field">
                         <label>Chọn độ khó: </label>
@@ -131,7 +131,7 @@
                             }
                         }
                     </script>
-                    <input id="btnTaoDe" type="submit" value="Tạo đề" onclick="DoExam()"> <!-- css in MemberStyle -->
+                    <input id="btnTaoDe" type="button" value="Tạo đề" onclick="DoExam()"> <!-- css in MemberStyle -->
                 </form>   
             </div>
         </div>

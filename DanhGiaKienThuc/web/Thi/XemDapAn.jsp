@@ -4,7 +4,9 @@
     Author     : NTL
 --%>
 
+<%@page import="model.Question"%>
 <%@page import="java.util.List"%>
+<%@page import="dao.QuestionDAO"%>
 <%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -31,19 +33,110 @@
         </script>    
     </head>
     <body>
-        <jsp:include page="../WebInterface/header.jsp"></jsp:include>
-        
-        <div class="container">
-            <%
-                List IDlist = null;
-                if (session.getAttribute("ID_List")!=null) {
-                    IDlist = (List) session.getAttribute("ID_List");
-                }
-            %>
-        </div>            
-        
-        <script src="../js/autoscroll.js" type="text/javascript"></script>
+        <%
+            Users users = null;
+            if (session.getAttribute("user")!=null) {
+                users = (Users) session.getAttribute("user");
+            }
             
-        <%--<jsp:include page="../WebInterface/footer.jsp"></jsp:include>--%>           
+//            if (users==null) {
+//                response.sendRedirect("login.jsp");
+//            }
+        %>
+        
+        <div id="top">
+            <div id="top-right">
+                <% if (users!=null) { %>
+                    <ul>
+                        <li id="user-info"><a href="#" style="text-transform: none; text-align: center;"><%=users.getUsername()%></a>
+                            <ul class="sub-top-right">
+                                <%
+                                    String page_redirect= "../Member/User.jsp?username=" + users.getUsername();
+                                %>
+                                <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
+                                <form action="../UserServlet"method="POST">
+                                    <input id="btnlogout" type="submit" value="Thoát">
+                                    <input type="hidden" value="logout" name="command">
+                                </form>
+                            </ul>
+                        </li>
+                    </ul>
+                <% } %>
+            </div>
+
+            <div id="top-left">
+                <a href="../index.jsp">website đánh giá kiến thức toán thpt</a>
+            </div>
+
+            <%
+                QuestionDAO questionDAO = new QuestionDAO();
+                List exam = questionDAO.GetDeThi();                
+                List UserAnswer = (List) session.getAttribute("UserAnswer");
+            %>         
+        </div>
+        
+        <script type="text/javascript">
+            function ShowAnswer(id, choice, answer) {
+                switch (choice) {
+                    case 'A':
+                        document.getElementById(id+'AA').checked = true;
+                        break;
+                    case 'B':
+                        document.getElementById(id+'BB').checked = true;
+                        break;
+                    case 'C':
+                        document.getElementById(id+'CC').checked = true;
+                        break;
+                    case 'D':
+                        document.getElementById(id+'DD').checked = true;
+                        break;
+                }
+
+                switch (answer) {
+                    case 'A':
+                        document.getElementById(id+'A').style.color = "green";
+                        break;
+                    case 'B':
+                        document.getElementById(id+'B').style.color = "green";
+                        break;
+                    case 'C':
+                        document.getElementById(id+'C').style.color = "green";
+                        break;
+                    case 'D':
+                        document.getElementById(id+'D').style.color = "green";
+                        break;
+                }
+                
+                if ((choice!=answer)) {
+                    document.getElementById(id+choice).style.color = "red";
+                }
+            }
+        </script>
+        
+        <div id="main">
+            <h2>ĐÁP ÁN</h2>
+
+            <%    
+                for (int i = 0; i < exam.size(); i++) {
+                    Question q = (Question) exam.get(i); 
+                    String user_select = (String) UserAnswer.get(i); %>
+                    
+                    <div>
+                        <p><b>Câu <%=i+1%>: </b> <%=q.getNoidung()%></p>
+                        <%
+                            if (q.getHinh()==1) { %>
+                                <img src="../images/<%=q.getDangtoan()%>/<%=q.getId()%>.JPG">
+                        <%  } %>
+                        <p id="<%=q.getId()%>A"><b>A. </b><input type="radio" disabled="" id="<%=q.getId()%>AA" name="<%=q.getId()%>" value="A"> <%=q.getDapanA()%></p>
+                        <p id="<%=q.getId()%>B"><b>B. </b><input type="radio" disabled="" id="<%=q.getId()%>BB" name="<%=q.getId()%>" value="B"> <%=q.getDapanB()%></p>
+                        <p id="<%=q.getId()%>C"><b>C. </b><input type="radio" disabled="" id="<%=q.getId()%>CC" name="<%=q.getId()%>" value="C"> <%=q.getDapanC()%></p>
+                        <p id="<%=q.getId()%>D"><b>D. </b><input type="radio" disabled="" id="<%=q.getId()%>DD" name="<%=q.getId()%>" value="D"> <%=q.getDapanD()%></p>
+                    </div>
+                    
+                    <script type="text/javascript">
+                        ShowAnswer('<%=q.getId()%>', '<%=user_select%>', '<%=q.getDapan()%>');
+                    </script>      
+                <% } %>
+        </div>
     </body>
 </html>

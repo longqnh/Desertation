@@ -79,7 +79,8 @@
                 int numQuestion = (time == 15 ? 10 : (time == 60 ? 40 : 50));
                 
                 QuestionDAO questionDAO = new QuestionDAO();
-                List exam = questionDAO.CreateExam(noidung,level,numQuestion); 
+                questionDAO.TaoDe(noidung, level, numQuestion);
+                List exam = questionDAO.GetDeThi(); 
             %>
                     
                 <div id="sticky-anchor"></div>
