@@ -69,7 +69,7 @@
                     Users users = null;
                     if (session.getAttribute("user")!=null) {
                         users = (Users) session.getAttribute("user");
-                        if (users.getUsername().equals("admin")) { %>
+                        if (users.getRole().equals("admin")) { %>
                             <input type="submit" value="Cập nhật" onclick="window.location.href='<%=request.getContextPath()%>/Admin/updateLT.jsp'">
                 <%      } 
                     }   

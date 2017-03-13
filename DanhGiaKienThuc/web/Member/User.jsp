@@ -49,7 +49,7 @@
                             </ul>-->
                         </li>
                         <%
-                            if (users.getUsername().equals("admin")) { %>
+                            if (users.getRole().equals("admin")) { %>
                                 <li><a href="../Admin/QLTK.jsp"> Quản lý các tài khoản</a></li>
                                 <li><a href="../Admin/QLKD.jsp"> Quản lý kho đề</a></li>
                         <%  }

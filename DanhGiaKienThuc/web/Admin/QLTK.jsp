@@ -70,7 +70,13 @@
                             title: 'Email',
                             type: 'text',
                             edit: true
-                        }                     
+                        },
+                        role: {
+                            title: 'Chức danh',
+                            type: 'select',
+                            options: {'admin': 'admin', 'user': 'user'},
+                            edit: true
+                        }
                     }
                 });
                 //Re-load records when user click 'load records' button.

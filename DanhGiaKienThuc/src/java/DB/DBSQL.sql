@@ -6,8 +6,9 @@ CREATE TABLE `danhgiakienthuc`.`table_user` (
   `password` VARCHAR(45) NULL,
   `name` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
+  `role` VARCHAR(45) NULL,
   PRIMARY KEY (`username`));
-INSERT INTO `danhgiakienthuc`.`table_user` (`username`, `password`, `name`, `email`) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'abc@xyz.com');
+INSERT INTO `danhgiakienthuc`.`table_user` (`username`, `password`, `name`, `email`, `role`) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'abc@xyz.com', 'admin');
 
 CREATE TABLE `danhgiakienthuc`.`table_hamso` (
   `id` VARCHAR(45) NOT NULL,

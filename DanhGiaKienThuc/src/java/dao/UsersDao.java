@@ -60,13 +60,14 @@ public class UsersDao {
     
     public boolean InsertUser (Users user) {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "INSERT INTO table_user VALUES(?,?,?,?)";
+        String sql = "INSERT INTO table_user VALUES(?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareCall(sql);
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
             ps.setString(3, user.getName());
             ps.setString(4, user.getEmail());
+            ps.setString(5, user.getRole());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -89,6 +90,7 @@ public class UsersDao {
                 u.setPassword(rs.getString("password"));
                 u.setName(rs.getString("name"));
                 u.setEmail(rs.getString("email"));
+                u.setRole(rs.getString("role"));
                 con.close();
                 return u;
             }
@@ -113,7 +115,7 @@ public class UsersDao {
     public void updateUser(Users user) {
         Connection connection = DBConnect.getConnecttion();
         String sql = "UPDATE table_user SET name='" + user.getName() + "', email='" + user.getEmail() +  
-                "', password='" + user.getPassword() + "' WHERE username='" + user.getUsername() + "'";
+                "', password='" + user.getPassword() + "', role='" + user.getRole() + "' WHERE username='" + user.getUsername() + "'";
         try {
             PreparedStatement ps = connection.prepareCall(sql);
             ps.execute(sql);
@@ -137,8 +139,9 @@ public class UsersDao {
                 String password = rs.getString("password");
                 String name = rs.getString("name");
                 String email = rs.getString("email");
+                String role = rs.getString("role");
                 
-                Users u = new Users(username, password, name, email);
+                Users u = new Users(username, password, name, email, role);
                 list.add(u);
             }
         } catch (SQLException e) {
@@ -162,8 +165,9 @@ public class UsersDao {
                 String password = rs.getString("password");
                 String name = rs.getString("name");
                 String email = rs.getString("email");
+                String role = rs.getString("role");
                 
-                Users u = new Users(username, password, name, email);
+                Users u = new Users(username, password, name, email, role);
                 list.add(u);
             }
         } catch (SQLException e) {
