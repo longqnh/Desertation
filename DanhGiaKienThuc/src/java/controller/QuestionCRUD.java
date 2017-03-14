@@ -90,9 +90,10 @@ public class QuestionCRUD extends HttpServlet {
 
                     response.getWriter().print(jsonArray);
                 } else if (action.equals("create") || action.equals("update")) {
+                    String id= null;
                     Question q = new Question();
                     if (request.getParameter("id") != null) {
-                        String id = request.getParameter("id");
+                        id = request.getParameter("id");
                         q.setId(id);
                     }
 
@@ -126,10 +127,30 @@ public class QuestionCRUD extends HttpServlet {
                         q.setDapan(dapan);
                     }
                     
-                    if (request.getParameter("dangtoan") != null) {
-                        String dangtoan = request.getParameter("dangtoan");
-                        q.setDangtoan(dangtoan);
+                    String temp = id.substring(0, 2);
+                    String dangtoan = null;
+                    
+                    switch (temp) {
+                        case "HS":
+                            dangtoan = "hamso";
+                            break;
+                        case "LO":
+                            dangtoan = "loga";
+                            break;
+                        case "TP":
+                            dangtoan = "tichphan";
+                            break;
+                        case "SP":
+                            dangtoan = "sophuc";
+                            break;
+                        case "HH":
+                            dangtoan = "hhkg";
+                            break;
+                        case "OX":
+                            dangtoan = "oxyz";
+                            break;
                     }
+                    q.setDangtoan(dangtoan);
 
                     if (request.getParameter("dangbt") != null) {
                         String dangbt = request.getParameter("dangbt");

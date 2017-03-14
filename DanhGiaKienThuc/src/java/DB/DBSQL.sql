@@ -174,6 +174,16 @@ INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtT
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('thucte', 'loga', 'Bài toán thực tế');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('bptmu', 'loga', 'Bất phương trình mũ');
 
+CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
+  `made` INT(5) ZEROFILL NOT NULL AUTO_INCREMENT,
+  `socau` INT NULL,
+  `noidung` VARCHAR(45) NULL,
+  `thoigian` INT NULL,
+  `diem` FLOAT NULL,
+  `ngaythi` DATETIME NULL,
+  `username` VARCHAR(25) NULL,
+  PRIMARY KEY (`made`));
+
 /* CREATE FOREIGN KEY */
 ALTER TABLE `danhgiakienthuc`.`table_hamso`
 	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokho`(`dokho`),
@@ -220,6 +230,8 @@ ALTER TABLE `danhgiakienthuc`.`table_dethi`
 ALTER TABLE `danhgiakienthuc`.`table_phanloaidangtoan` ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);	
 
 ALTER TABLE `danhgiakienthuc`.`table_phanloaibt` ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`);		
+
+ALTER TABLE `danhgiakienthuc`.`table_quanlydethi` ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`);
 
 /* Insert Data */
 INSERT INTO `danhgiakienthuc`.`table_hamso` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('HS001','Đường cong trong hình bên là đồ thị của một hàm số trong bốn hàm số được liệt kê ở bốn phương án A, B, C, D dưới đây. Hỏi hàm số đó là hàm số nào ? ','$y=-x^2+x-1$','$y=-x^3+3x-1$','$y=-x^4-x^2+1$','$y=-x^3-3x+1$','D','hamso','nhanbiet','0','NULL','12','1');

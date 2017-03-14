@@ -104,9 +104,7 @@
                     
                     <script type="text/javascript" src="../js/SelectQuestion.js"></script>
                     
-                    <button id="btnSubmit" onclick="SubmitExam()">
-                        Nộp bài
-                    </button>
+                    <button id="btnSubmit" onclick="SubmitExam()"> Nộp bài </button>
                 </div>
             
                 <script type="text/javascript">

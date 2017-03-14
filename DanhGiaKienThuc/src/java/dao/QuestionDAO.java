@@ -162,7 +162,31 @@ public class QuestionDAO {
 
     public boolean DeleteQuestion(String maCH) {
         Connection con = DBConnect.getConnecttion();
-        String sql = "delete from table_ where id='" + maCH + "'";
+        String temp = maCH.substring(0, 2);
+        String dangtoan = null;
+
+        switch (temp) {
+            case "HS":
+                dangtoan = "hamso";
+                break;
+            case "LO":
+                dangtoan = "loga";
+                break;
+            case "TP":
+                dangtoan = "tichphan";
+                break;
+            case "SP":
+                dangtoan = "sophuc";
+                break;
+            case "HH":
+                dangtoan = "hhkg";
+                break;
+            case "OX":
+                dangtoan = "oxyz";
+                break;
+        }
+        
+        String sql = "delete from table_" + dangtoan + " where id='" + maCH + "'";
         PreparedStatement ps;
         try {
             ps = con.prepareCall(sql);

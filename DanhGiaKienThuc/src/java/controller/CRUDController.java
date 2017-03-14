@@ -110,6 +110,11 @@ public class CRUDController extends HttpServlet {
                         user.setEmail(email);
                     }
 
+                    if (request.getParameter("role") != null) {
+                        String role = request.getParameter("role");
+                        user.setRole(role);
+                    }
+                                        
                     if (action.equals("create")) {
                         // Create new record
                         dao.InsertUser(user);

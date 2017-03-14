@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Users;
+import tools.MD5;
 
 /**
  *
@@ -64,7 +65,7 @@ public class UsersDao {
         try {
             PreparedStatement ps = connection.prepareCall(sql);
             ps.setString(1, user.getUsername());
-            ps.setString(2, user.getPassword());
+            ps.setString(2, MD5.encryption(user.getPassword()));
             ps.setString(3, user.getName());
             ps.setString(4, user.getEmail());
             ps.setString(5, user.getRole());

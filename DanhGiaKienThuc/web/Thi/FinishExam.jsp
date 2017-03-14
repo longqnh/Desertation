@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>HOÀN THÀNH BÀI THI</title>
+        <title>KẾT QUẢ THI</title>
         <link rel="stylesheet" href="../css/HeaderStyle.css">
         <link rel="stylesheet" href="../css/FooterStyle.css">
         <link rel="stylesheet" href="../css/OtherStyle.css">
@@ -63,7 +63,7 @@
                 
                 <form action="XemDapAn.jsp" method="POST">
                     <input type="submit" id="btnXemDA" value="Xem đáp án">
-                </form>                
+                </form>
             </div>
         </div>            
         

@@ -62,17 +62,53 @@
                         </li>
                     </ul>
                 <% } %>
+
+                <%
+                    QuestionDAO questionDAO = new QuestionDAO();
+                    List exam = questionDAO.GetDeThi();                
+                    List UserAnswer = (List) session.getAttribute("UserAnswer");
+                    float Diem = (float) session.getAttribute("DiemThi");
+                %>     
+                
+                <div id="sticky-anchor"></div>
+                <div id="user-answer">
+                    <div id="result"><p> Điểm thi: <%=Diem%>/10 </p></div>
+                    <div id="answer-table">
+                        <%
+                            for (int i = 0; i < exam.size(); i++) { 
+                                Question q = (Question) exam.get(i); %>
+                                <div class="numberCircle" id="<%=q.getId()%>"><%=i+1%></div>
+                            <% } %>
+                    </div>
+                    
+                    <script type="text/javascript" src="../js/SelectQuestion.js"></script>
+                    
+                    <button id="btnSubmit" onclick="window.location.href='<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp'"> Home </button>
+                </div>
+            
+                <script type="text/javascript">
+                    function sticky_relocate() {
+                        var window_top = $(window).scrollTop();
+                        var div_top = $('#sticky-anchor').offset().top;
+                        if (window_top > div_top) {
+                            $('#user-answer').addClass('stick');
+                            $('#sticky-anchor').height($('#user-answer').outerHeight());
+                        } else {
+                            $('#user-answer').removeClass('stick');
+                            $('#sticky-anchor').height(0);
+                        }
+                    }
+
+                    $(function() {
+                        $(window).scroll(sticky_relocate);
+                        sticky_relocate();
+                    });
+                </script>                            
             </div>
 
             <div id="top-left">
                 <a href="../index.jsp">website đánh giá kiến thức toán thpt</a>
-            </div>
-
-            <%
-                QuestionDAO questionDAO = new QuestionDAO();
-                List exam = questionDAO.GetDeThi();                
-                List UserAnswer = (List) session.getAttribute("UserAnswer");
-            %>         
+            </div>        
         </div>
         
         <script type="text/javascript">
@@ -89,6 +125,9 @@
                         break;
                     case 'D':
                         document.getElementById(id+'DD').checked = true;
+                        break;
+                    default:
+                        document.getElementById(id).style.backgroundColor = "RGB(255,51,51)";
                         break;
                 }
 
@@ -109,6 +148,9 @@
                 
                 if ((choice!=answer)) {
                     document.getElementById(id+choice).style.color = "red";
+                    document.getElementById(id).style.backgroundColor = "RGB(255,51,51)";
+                } else {
+                    document.getElementById(id).style.backgroundColor = "RGB(51,255,51)";
                 }
             }
         </script>
@@ -121,7 +163,7 @@
                     Question q = (Question) exam.get(i); 
                     String user_select = (String) UserAnswer.get(i); %>
                     
-                    <div>
+                    <div id="Q<%=q.getId()%>">
                         <p><b>Câu <%=i+1%>: </b> <%=q.getNoidung()%></p>
                         <%
                             if (q.getHinh()==1) { %>
@@ -135,7 +177,7 @@
                     
                     <script type="text/javascript">
                         ShowAnswer('<%=q.getId()%>', '<%=user_select%>', '<%=q.getDapan()%>');
-                    </script>      
+                    </script>
                 <% } %>
         </div>
     </body>

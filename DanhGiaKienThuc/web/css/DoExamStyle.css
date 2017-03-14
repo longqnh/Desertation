@@ -189,6 +189,21 @@ p {
     font-family: "Times New Roman";
 }
 
+#result {
+    width: 220px;
+    height: 40px;
+    border: 1px black solid;
+    border-radius: 10px 10px 0px 0px;
+    font-weight: bold;
+    text-align: center;
+    font-family: "Times New Roman";
+}
+
+#result p {
+    font-size: 26px;
+    color: green;
+}
+
 #user-answer.stick {
     margin-top: 0 !important;
     position: fixed;
