@@ -15,101 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpSession;
 import model.Question;
-import model.Users;
+import model.Dethi;
 
 /**
  *
  * @author NTL
  */
 public class QuestionDAO {
-    public void TaoDe(String[] noidung, int level, int numQuestion) {
-        Connection connection = DBConnect.getConnecttion();
-        
-        int socauDe, socauTB, socauTBK, socauKho;
-        
-        switch (level) {
-            case 0:
-                socauDe = (int) (0.5*numQuestion);
-                socauTB = (int) (0.3*numQuestion);
-                socauTBK = (int) (0.1*numQuestion);
-                socauKho = (int) (0.1*numQuestion);
-                break;
-            case 1:
-                socauDe = (int) (0.3*numQuestion);
-                socauTB = (int) (0.4*numQuestion);
-                socauTBK = (int) (0.2*numQuestion);
-                socauKho = (int) (0.1*numQuestion);
-                break;
-            default:
-                socauDe = (int) (0.2*numQuestion);
-                socauTB = (int) (0.3*numQuestion);
-                socauTBK = (int) (0.3*numQuestion);
-                socauKho = (int) (0.2*numQuestion);   
-                break;
-        }     
-
-	try {
-            // excute multiple queries (sql1 and sql2)
-            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String sql1 = "TRUNCATE table_dethi";
-            String sql2 = "INSERT INTO table_dethi(`id`,`noidung`,`dapanA`,`dapanB`,`dapanC`,`dapanD`,`dapan`,`dangtoan`,`dangbt`,`dokho`,`dophancach`,`malop`,`hinh`) " +
-                        "SELECT * FROM (" +
-                        "(SELECT * FROM table_" + noidung[0] + " WHERE dokho=0 ORDER BY RAND() LIMIT " + socauDe + ") " +
-                        "UNION ALL " +
-                        "(SELECT * FROM table_" + noidung[0] + " WHERE dokho=1 ORDER BY RAND() LIMIT " + socauTB + ") " +
-                        "UNION ALL " +
-                        "(SELECT * FROM table_" + noidung[0] + " WHERE dokho=2 ORDER BY RAND() LIMIT " + socauTBK + ") " +
-                        "UNION ALL " +
-                        "(SELECT * FROM table_" + noidung[0] + " WHERE dokho=3 ORDER BY RAND() LIMIT " + socauKho + ") " +
-                        ") AS foo;";   
-            connection.setAutoCommit(false);
-            statement.addBatch(sql1);
-            statement.addBatch(sql2);
-            statement.executeBatch();
-            connection.commit();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-	}
-    }
-    
-    public List GetDeThi() {
-        Connection connection = DBConnect.getConnecttion();
-  
-	List exam = new ArrayList();
-
-	try {
-            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);            
-            ResultSet rs = statement.executeQuery("SELECT * FROM table_dethi ORDER BY dokho ASC");
-            
-            while (rs.next()) {
-                Question question = new Question();
-                
-                question.setId(rs.getString("id"));
-                question.setNoidung(rs.getString("noidung"));
-                question.setDapanA(rs.getString("dapanA"));
-                question.setDapanB(rs.getString("dapanB"));
-                question.setDapanC(rs.getString("dapanC"));
-                question.setDapanD(rs.getString("dapanD"));
-                question.setDapan(rs.getString("dapan"));
-                question.setDangtoan(rs.getString("dangtoan"));
-                question.setDangbt(rs.getString("dangbt"));
-                question.setDokho(rs.getInt("dokho"));
-                question.setDophancach(rs.getInt("dophancach"));
-                question.setMalop(rs.getInt("malop"));
-                question.setHinh(rs.getInt("hinh"));
-                exam.add(question);
-            }
-            connection.close();
-            return exam;
-	} catch (SQLException e) {
-            e.printStackTrace();
-	}
-	return null;
-    }
-    
     public boolean InsertQuestion(Question q) {
         Connection connection= DBConnect.getConnecttion();
         String sql = "INSERT INTO table_" + q.getDangtoan() + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";

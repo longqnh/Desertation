@@ -4,6 +4,7 @@
     Author     : NTL
 --%>
 
+<%@page import="dao.DethiDAO"%>
 <%@page import="model.Question"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.QuestionDAO"%>
@@ -64,8 +65,13 @@
                 <% } %>
 
                 <%
-                    QuestionDAO questionDAO = new QuestionDAO();
-                    List exam = questionDAO.GetDeThi();                
+//                    QuestionDAO questionDAO = new QuestionDAO();
+//                    List exam = questionDAO.GetDeThi();               
+
+                    DethiDAO dethiDAO = new DethiDAO();
+                    String made = dethiDAO.GetMade(users.getUsername());
+                    List exam = dethiDAO.GetDeThi(made);
+                    
                     List UserAnswer = (List) session.getAttribute("UserAnswer");
                     float Diem = (float) session.getAttribute("DiemThi");
                 %>     

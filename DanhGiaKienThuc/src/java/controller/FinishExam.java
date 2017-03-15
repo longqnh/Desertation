@@ -6,13 +6,18 @@
 package controller;
 
 import connect.DBConnect;
+import dao.DethiDAO;
+import dao.QuanLyDeThiDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +25,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.QuanLyDeThi;
 import model.Question;
+import model.Users;
 
 /**
  *
@@ -79,19 +86,28 @@ public class FinishExam extends HttpServlet {
             IDlist = (List) session.getAttribute("ID_List");
         }
         
+        Users users = null;
+        if (session.getAttribute("user")!=null) {
+            users = (Users) session.getAttribute("user");
+        }
+        
+        DethiDAO dethiDAO = new DethiDAO();
+        String made = dethiDAO.GetMade(users.getUsername());
+                            
         int socaudung = 0;
+        String sql;
+        PreparedStatement ps; 
         
         Connection con = DBConnect.getConnecttion();        
 
         for (int i=0; i<IDlist.size(); i++) {
             String temp = IDlist.get(i).toString();
-            String sql = "SELECT dapan FROM table_dethi WHERE id='" + temp + "'";
+            sql = "SELECT dapan FROM table_dethi WHERE (made='" + made + "') AND (id='" + temp + "')";
         
-            PreparedStatement ps;
             try {
                 ps = (PreparedStatement) con.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
+                while (rs.next()) {
                     String correct = rs.getString("dapan");
                     String user_select = request.getParameter(temp);
                     user_answer.add(user_select);
@@ -111,8 +127,32 @@ public class FinishExam extends HttpServlet {
                 e.printStackTrace();
             }
         }
-                            
+        
         float score = socaudung*((float)10/IDlist.size());
+        
+        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+        Date dateobj = new Date();
+        String ngaythi = df.format(dateobj);
+
+        sql = "SELECT * FROM table_quanlydethi WHERE made='" + made + "'";
+
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int socau = rs.getInt("socau");
+                String noidung = rs.getString("noidung");
+                int thoigian = rs.getInt("thoigian");
+                int mucdo = rs.getInt("mucdo");
+                QuanLyDeThi deThi = new QuanLyDeThi(made, socau, noidung, thoigian, mucdo, score, ngaythi, users.getUsername());
+
+                QuanLyDeThiDAO qldtdao = new QuanLyDeThiDAO();
+                qldtdao.CompleteInfo(deThi);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+            
         session.setAttribute("DiemThi", score);
         session.setAttribute("UserAnswer", user_answer);
         response.sendRedirect("Thi/FinishExam.jsp");

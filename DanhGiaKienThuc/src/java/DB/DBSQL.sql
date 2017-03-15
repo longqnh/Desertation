@@ -120,6 +120,7 @@ CREATE TABLE `danhgiakienthuc`.`table_dethi` (
   `dophancach` INT NULL,
   `malop` INT NULL,
   `hinh` INT NULL,
+  `made` INT(5) ZEROFILL NOT NULL,
   PRIMARY KEY (`id`));
   
 CREATE TABLE `danhgiakienthuc`.`table_dokho` (
@@ -179,8 +180,9 @@ CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
   `socau` INT NULL,
   `noidung` VARCHAR(45) NULL,
   `thoigian` INT NULL,
+  `mucdo` INT NULL,
   `diem` FLOAT NULL,
-  `ngaythi` DATETIME NULL,
+  `ngaythi` VARCHAR(45) NULL,
   `username` VARCHAR(25) NULL,
   PRIMARY KEY (`made`));
 
@@ -225,13 +227,14 @@ ALTER TABLE `danhgiakienthuc`.`table_dethi`
 	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokho`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);	
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`),
+        ADD FOREIGN KEY (`made`) REFERENCES `danhgiakienthuc`.`table_quanlydethi`(`made`);	
 
 ALTER TABLE `danhgiakienthuc`.`table_phanloaidangtoan` ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);	
 
 ALTER TABLE `danhgiakienthuc`.`table_phanloaibt` ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`);		
 
-ALTER TABLE `danhgiakienthuc`.`table_quanlydethi` ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`);
+ALTER TABLE `danhgiakienthuc`.`table_quanlydethi` ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`) ON DELETE CASCADE;
 
 /* Insert Data */
 INSERT INTO `danhgiakienthuc`.`table_hamso` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('HS001','Đường cong trong hình bên là đồ thị của một hàm số trong bốn hàm số được liệt kê ở bốn phương án A, B, C, D dưới đây. Hỏi hàm số đó là hàm số nào ? ','$y=-x^2+x-1$','$y=-x^3+3x-1$','$y=-x^4-x^2+1$','$y=-x^3-3x+1$','D','hamso','nhanbiet','0','NULL','12','1');
