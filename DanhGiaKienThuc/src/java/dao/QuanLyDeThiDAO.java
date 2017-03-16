@@ -10,9 +10,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.QuanLyDeThi;
+import model.Users;
 
 /**
  *
@@ -33,5 +36,80 @@ public class QuanLyDeThiDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public List<QuanLyDeThi> getAllDethi(Users user, String made_search, int startPageIndex, int recordsPerPage) {
+        Connection connection = DBConnect.getConnecttion();
+        List<QuanLyDeThi> list = new ArrayList();
+        
+        String sql;
+        
+        if (user.getRole().equals("admin")) {
+            sql = "SELECT * FROM table_quanlydethi WHERE made LIKE '%" + made_search + "' LIMIT " + startPageIndex + "," + recordsPerPage;            
+        } else {
+            sql = "SELECT * FROM table_quanlydethi WHERE username='" + user.getUsername() + "' LIMIT " + startPageIndex + "," + recordsPerPage;            
+        }
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String made = rs.getString("made");
+                int socau = rs.getInt("socau");                
+                String noidung = rs.getString("noidung");
+                int thoigian = rs.getInt("thoigian");
+                int mucdo = rs.getInt("mucdo");
+                float diem = rs.getFloat("diem");
+                String ngaythi = rs.getString("ngaythi");
+                String username = rs.getString("username");
+                
+                QuanLyDeThi deThi = new QuanLyDeThi(made, socau, noidung, thoigian, mucdo, diem, ngaythi, username);
+                list.add(deThi);
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return list;        
+    }
+
+    public int getDethiCount(Users user) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql;
+        
+        if (user.getRole().equals("admin")) {
+            sql = "SELECT COUNT(*) AS COUNT FROM table_quanlydethi";
+        } else {
+            sql = "SELECT COUNT(*) AS COUNT FROM table_quanlydethi WHERE username='" + user.getUsername() + "'";
+        }
+        
+	int count=0;
+	try 
+	{
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();	
+            while (rs.next()) 
+            {
+                count=rs.getInt("COUNT");
+            }
+	} 
+	catch (SQLException e) 
+	{
+            System.err.println(e.getMessage());
+	}
+	return count;        
+    }
+
+    public boolean DeleteDethi(String made) {
+        Connection con = DBConnect.getConnecttion();
+        
+        String sql = "DELETE FROM table_quanlydethi WHERE made='" + made + "'";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(sql);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;        
     }
 }

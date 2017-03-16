@@ -108,7 +108,7 @@ public class DethiDAO {
 
 	try {
             Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);            
-            ResultSet rs = statement.executeQuery("SELECT * FROM table_dethi WHERE made='" + made + "' ORDER BY dokho ASC");
+            ResultSet rs = statement.executeQuery("SELECT * FROM table_dethi WHERE made='" + made + "'");
             
             while (rs.next()) {
                 Dethi question = new Dethi();

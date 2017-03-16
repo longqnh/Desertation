@@ -40,6 +40,10 @@
         <servlet-name>JsonServlet</servlet-name>
         <servlet-class>controller.JsonServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DethiCRUD</servlet-name>
+        <servlet-class>controller.DethiCRUD</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckEmailServlet</servlet-name>
         <url-pattern>/CheckEmailServlet</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>JsonServlet</servlet-name>
         <url-pattern>/JsonServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DethiCRUD</servlet-name>
+        <url-pattern>/DethiCRUD</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

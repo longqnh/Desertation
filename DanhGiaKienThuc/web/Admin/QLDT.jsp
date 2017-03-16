@@ -1,6 +1,6 @@
 <%-- 
-    Document   : QuanLyHocTap
-    Created on : Feb 9, 2017, 9:26:57 PM
+    Document   : QLDT
+    Created on : Mar 16, 2017, 10:57:04 PM
     Author     : NTL
 --%>
 
@@ -10,8 +10,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>QUẢN LÝ HỌC TẬP</title>
-        <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>           
+        <title>QUẢN LÝ CÁC BÀI THI</title>
+        <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>   
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">
@@ -33,8 +33,13 @@
                     pageSize: 10, //Set page size (default: 10)
                     sorting: true, //Enable sorting
                     defaultSorting: 'made ASC',
+                    selecting: true, //Enable selecting
+                    multiselect: true, //Allow multiple selecting
+                    selectingCheckboxes: true, //Show checkboxes on first column
+                    selectOnRowClick: false, //Click row on check box
                     actions: {
-                        listAction: '${pageContext.request.contextPath}/DethiCRUD?action=list'
+                        listAction: '${pageContext.request.contextPath}/DethiCRUD?action=list',
+                        deleteAction: '${pageContext.request.contextPath}/DethiCRUD?action=delete'
                     },
                     fields: {
                         made: {
@@ -55,7 +60,7 @@
                             type: 'text'
                         },
                         mucdo: {
-                            title: 'Độ khó',
+                            title: 'Level',
                             type: 'text'
                         },
                         diem: {
@@ -64,6 +69,10 @@
                         },
                         ngaythi: {
                             title: 'Ngày thi',
+                            type: 'text'
+                        },
+                        username: {
+                            title: 'Thí sinh',
                             type: 'text'
                         }
                     }
@@ -79,17 +88,13 @@
                 //Load all records when page is first shown
                 $('#LoadRecordsButton').click();
             });
-        </script>  
+        </script>        
     </head>
     <body>
-        <%--<jsp:include page="../WebInterface/header.jsp"></jsp:include>--%>
-               
         <%
             Users users = null;
             if (session.getAttribute("user")!=null) {
                 users = (Users) session.getAttribute("user");
-            } else {
-                response.sendRedirect("../login.jsp");
             }
         %>
         
@@ -169,6 +174,15 @@
                 <li><a href="<%=request.getContextPath()%>/tutorial.jsp">Hướng dẫn</a></li>
                 <li><a href="<%=request.getContextPath()%>/information.jsp">Giới thiệu</a></li>
                 <li><a href="<%=request.getContextPath()%>/contact.jsp">Liên hệ - góp ý</a></li>
+                <li><a href="#"><%=users.getUsername()%></a>
+                    <ul class="submenu">
+                        <li><a href="<%=request.getContextPath()%>/Member/User.jsp"> Thông tin tài khoản </a></li>    
+                        <li><a href="<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp"> Quản lý học tập </a></li>   
+                        <li><a href="<%=request.getContextPath()%>/Admin/QLTK.jsp">Quản lý các tài khoản</a></li>
+                        <li><a href="<%=request.getContextPath()%>/Admin/QLKD.jsp">Quản lý kho đề</a></li>
+                        <li><a href="<%=request.getContextPath()%>/Admin/QLDT.jsp">Quản lý các bài thi</a></li>
+                    </ul>
+                </li>
             </ul>
             
             <script type="text/javascript">
@@ -179,53 +193,19 @@
         </div>   
             
         <div class="container">
-            <div id="main-left">
-                <div id="main-left-top">
-                        <h2 style="text-align: center; text-transform: uppercase; margin-top: 5px; font-family:'Roboto';">Tìm kiếm</h2>
-                        <div id="search">
-                            <form>
-                                <input type="text" placeholder="Search this site..." id="textsearch"/>
-                                <input type="submit" id="search-button" value=""/>
-                            </form>
-                        </div>                            
-                </div>
+            <h2 style="text-align: center; font-weight: bold; color: rgb(6,114,28); font-family: Arial, sans-serif;">QUẢN LÝ CÁC BÀI THI</h2>
 
-                <div id="main-left-bottom">
-                    <ul>
-                        <li><a href="../Member/User.jsp"> Thông tin tài khoản </a></li>
-                        <%
-                            if (users.getUsername().equals("admin")) { %>
-                                <li><a href="../Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>                        
-                                <li><a href="QLTK.jsp"> Quản lý các tài khoản</a></li>
-                                <li><a href="QLKD.jsp"> Quản lý kho đề</a></li>
-                                <li><a href="QLDT.jsp">Quản lý các bài thi</a></li>                                
-                        <%  }
-                            else {
-                        %>
-                            <li><a href="QuanLyHocTap.jsp"> Quản lý học tập</a></li>
-                        <% } %>
-                    </ul>
-                </div>
-                
-                <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
-            </div>
+            <div class="filtering">
+                <form>
+                    Mã đề: <input type="text" name="made" id="made" />
+                    <button type="submit" id="LoadRecordsButton">Load records</button>
+                </form>
+            </div>                    
             
-            <div id="main-right">
-                <h2>Quản lý học tập</h2>
-                
-                <div class="filtering">
-                    <form>
-                        <input type="text" name="made" id="made" hidden=""/>
-                    </form>
-                </div>             
-                <div id="TableContainer"></div>
-            </div>
-
-            <script src="../js/DisplayContent.js" type="text/javascript"></script>
+            <div id="TableContainer"></div>
         </div>
-        
-        <script src="../js/autoscroll.js" type="text/javascript"></script>
-        
+                
+        <script type="text/javascript" src="../js/autoscroll.js"></script>
         <jsp:include page="../WebInterface/footer.jsp"></jsp:include>        
     </body>
 </html>

@@ -203,8 +203,10 @@
                         <li><a href="../Member/User.jsp"> Thông tin tài khoản </a></li>
                         <%
                             if (users.getUsername().equals("admin")) { %>
+                                <li><a href="<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>                        
                                 <li><a href="QLTK.jsp"> Quản lý các tài khoản</a></li>
                                 <li><a href="QLKD.jsp"> Quản lý kho đề</a></li>
+                                <li><a href="QLDT.jsp">Quản lý các bài thi</a></li>                                
                         <%  }
                             else {
                         %>
@@ -236,7 +238,6 @@
 <!--                <div style="margin: 20px auto;">
                     <div id="TableContainer"></div>
                 </div>-->
-            </div>
         </div>
             
         <script type="text/javascript" src="../js/autoscroll.js"></script>

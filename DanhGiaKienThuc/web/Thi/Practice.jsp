@@ -27,6 +27,17 @@
     
     <body>
         <jsp:include page="../WebInterface/header.jsp"></jsp:include>
+
+        <%
+            Users users = null;
+            if (session.getAttribute("user")!=null) {
+                users = (Users) session.getAttribute("user");
+            }
+            
+            if (users==null) {
+                response.sendRedirect(request.getContextPath() + "/login.jsp");
+            }
+        %>
         
         <div class="container">
             <div id="main-left">

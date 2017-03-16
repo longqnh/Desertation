@@ -120,8 +120,7 @@ CREATE TABLE `danhgiakienthuc`.`table_dethi` (
   `dophancach` INT NULL,
   `malop` INT NULL,
   `hinh` INT NULL,
-  `made` INT(5) ZEROFILL NOT NULL,
-  PRIMARY KEY (`id`));
+  `made` INT(5) ZEROFILL NOT NULL);
   
 CREATE TABLE `danhgiakienthuc`.`table_dokho` (
   `dokho` INT NOT NULL,
@@ -228,7 +227,7 @@ ALTER TABLE `danhgiakienthuc`.`table_dethi`
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
 	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`),
-        ADD FOREIGN KEY (`made`) REFERENCES `danhgiakienthuc`.`table_quanlydethi`(`made`);	
+        ADD FOREIGN KEY (`made`) REFERENCES `danhgiakienthuc`.`table_quanlydethi`(`made`) ON DELETE CASCADE;	
 
 ALTER TABLE `danhgiakienthuc`.`table_phanloaidangtoan` ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);	
 

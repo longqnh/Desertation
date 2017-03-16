@@ -130,7 +130,7 @@ public class FinishExam extends HttpServlet {
         
         float score = socaudung*((float)10/IDlist.size());
         
-        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date dateobj = new Date();
         String ngaythi = df.format(dateobj);
 

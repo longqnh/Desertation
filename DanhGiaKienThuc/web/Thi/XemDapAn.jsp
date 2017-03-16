@@ -162,7 +162,7 @@
         </script>
         
         <div id="main">
-            <h2>ĐÁP ÁN</h2>
+            <h2>ĐÁP ÁN - Mã đề: <%=made%> </h2>
 
             <%    
                 for (int i = 0; i < exam.size(); i++) {

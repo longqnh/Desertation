@@ -135,7 +135,7 @@
         
         <div id="main">
             <form id="doExam" name="doExam" action="../FinishExam" method="POST">
-                <h2>ĐỀ LUYỆN TẬP</h2>
+                <h2>ĐỀ LUYỆN TẬP - Mã đề: <%=made%> </h2>
               
                 <input type="hidden" id="examtime" value="<%=time%>">
                 <script src="../js/TimeCounterJS.js" type="text/javascript"></script>

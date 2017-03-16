@@ -50,12 +50,14 @@
                         </li>
                         <%
                             if (users.getRole().equals("admin")) { %>
+                                <li><a href="QuanLyHocTap.jsp"> Quản lý học tập</a></li>
                                 <li><a href="../Admin/QLTK.jsp"> Quản lý các tài khoản</a></li>
                                 <li><a href="../Admin/QLKD.jsp"> Quản lý kho đề</a></li>
+                                <li><a href="../Admin/QLDT.jsp"> Quản lý các bài thi</a></li>
                         <%  }
                             else {
                         %>
-                            <li><a href="QuanLyHocTap.jsp"> Quản lý học tập</a></li>
+                                <li><a href="QuanLyHocTap.jsp"> Quản lý học tập</a></li>
                         <% } %>
                     </ul>
                 </div>
