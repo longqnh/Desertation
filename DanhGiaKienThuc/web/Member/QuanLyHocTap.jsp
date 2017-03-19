@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>QUẢN LÝ HỌC TẬP</title>
-        <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>           
+        <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>   
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">
@@ -40,14 +40,17 @@
                         made: {
                             title: 'Mã đề',
                             key: true,
-                            list: true
+                            list: true,
+                            display: function(data) {
+                                return '<a target="_blank" href="<%=request.getContextPath()%>/Thi/FinishExam.jsp?made=' + data.record.made + '">' + data.record.made + '</a>';
+                            }
                         },
                         socau: {
                             title: 'Số câu',
                             type: 'text'
                         },
                         noidung: {
-                            title: 'Nội dung',
+                            title: 'Kiến thức',
                             type: 'text'
                         },
                         thoigian: {
@@ -72,24 +75,20 @@
                 $('#LoadRecordsButton').click(function (e) {
                     e.preventDefault();
                     $('#TableContainer').jtable('load', {
-                        made: $('#made').val()
+                        name: $('#made').val()
                     });
                 });
 
                 //Load all records when page is first shown
                 $('#LoadRecordsButton').click();
             });
-        </script>  
+        </script>
     </head>
     <body>
-        <%--<jsp:include page="../WebInterface/header.jsp"></jsp:include>--%>
-               
         <%
             Users users = null;
             if (session.getAttribute("user")!=null) {
                 users = (Users) session.getAttribute("user");
-            } else {
-                response.sendRedirect("../login.jsp");
             }
         %>
         
@@ -192,18 +191,15 @@
 
                 <div id="main-left-bottom">
                     <ul>
-                        <li><a href="../Member/User.jsp"> Thông tin tài khoản </a></li>
+                        <li><a href="<%=request.getContextPath()%>/Member/User.jsp"> Thông tin tài khoản </a></li>
+                        <li><a href="<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>   
                         <%
                             if (users.getUsername().equals("admin")) { %>
-                                <li><a href="../Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>                        
-                                <li><a href="QLTK.jsp"> Quản lý các tài khoản</a></li>
-                                <li><a href="QLKD.jsp"> Quản lý kho đề</a></li>
-                                <li><a href="QLDT.jsp">Quản lý các bài thi</a></li>                                
-                        <%  }
-                            else {
-                        %>
-                            <li><a href="QuanLyHocTap.jsp"> Quản lý học tập</a></li>
-                        <% } %>
+                                <li><a href="<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>                        
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLTK.jsp"> Quản lý các tài khoản</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLKD.jsp"> Quản lý kho đề</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLDT.jsp">Quản lý các bài thi</a></li>                                
+                        <%  } %>
                     </ul>
                 </div>
                 
@@ -211,21 +207,21 @@
             </div>
             
             <div id="main-right">
-                <h2>Quản lý học tập</h2>
-                
+                <h2>QUẢN LÝ HỌC TẬP</h2>
+
                 <div class="filtering">
                     <form>
                         <input type="text" name="made" id="made" hidden=""/>
+                        <button type="submit" id="LoadRecordsButton" hidden=""></button>
                     </form>
-                </div>             
+                </div>
+
                 <div id="TableContainer"></div>
             </div>
-
-            <script src="../js/DisplayContent.js" type="text/javascript"></script>
         </div>
+            
+        <script type="text/javascript" src="../js/autoscroll.js"></script>
         
-        <script src="../js/autoscroll.js" type="text/javascript"></script>
-        
-        <jsp:include page="../WebInterface/footer.jsp"></jsp:include>        
+        <jsp:include page="../WebInterface/footer.jsp"></jsp:include>
     </body>
 </html>

@@ -136,4 +136,26 @@ public class DethiDAO {
 	}
 	return null;
     }
+    
+    public List GetUserchoice(String made) {
+        List<String> list = new ArrayList<>();
+        
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT userchoice FROM table_dethi WHERE made='" + made + "'";
+        
+        PreparedStatement ps;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String choice = rs.getString("userchoice");
+                list.add(choice);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DethiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        
+        return list;
+    }    
 }

@@ -8,6 +8,7 @@ package controller;
 import connect.DBConnect;
 import dao.DethiDAO;
 import dao.QuanLyDeThiDAO;
+import dao.ThongkeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.QuanLyDeThi;
 import model.Question;
+import model.Thongke;
 import model.Users;
 
 /**
@@ -34,37 +36,9 @@ import model.Users;
  * @author NTL
  */
 public class FinishExam extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException,IOException{
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-//        processRequest(request, response);
-    }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -91,8 +65,13 @@ public class FinishExam extends HttpServlet {
             users = (Users) session.getAttribute("user");
         }
         
-        DethiDAO dethiDAO = new DethiDAO();
-        String made = dethiDAO.GetMade(users.getUsername());
+        String made = null;
+        if (session.getAttribute("made")!=null) {
+            made = (String) session.getAttribute("made");
+        }
+        
+//        DethiDAO dethiDAO = new DethiDAO();
+//        String made = dethiDAO.GetMade(users.getUsername());
                             
         int socaudung = 0;
         String sql;
@@ -101,15 +80,16 @@ public class FinishExam extends HttpServlet {
         Connection con = DBConnect.getConnecttion();        
 
         for (int i=0; i<IDlist.size(); i++) {
-            String temp = IDlist.get(i).toString();
-            sql = "SELECT dapan FROM table_dethi WHERE (made='" + made + "') AND (id='" + temp + "')";
+            String id = IDlist.get(i).toString();
+            String user_select = request.getParameter(id);
+            
+            sql = "SELECT dapan FROM table_dethi WHERE (made='" + made + "') AND (id='" + id + "')";
         
             try {
                 ps = (PreparedStatement) con.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     String correct = rs.getString("dapan");
-                    String user_select = request.getParameter(temp);
                     user_answer.add(user_select);
                     
                     if (user_select == null) {
@@ -123,6 +103,17 @@ public class FinishExam extends HttpServlet {
                         }
                     }
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            
+            sql =   "UPDATE table_dethi SET userchoice=? WHERE (id=? AND made=?)";
+            try {
+                ps = con.prepareCall(sql);
+                ps.setString(1, user_select);
+                ps.setString(2, id);
+                ps.setString(3, made);
+                ps.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -152,20 +143,7 @@ public class FinishExam extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-            
-        session.setAttribute("DiemThi", score);
-        session.setAttribute("UserAnswer", user_answer);
-        response.sendRedirect("Thi/FinishExam.jsp");
+        
+        response.sendRedirect("Thi/FinishExam.jsp?made=" + made);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

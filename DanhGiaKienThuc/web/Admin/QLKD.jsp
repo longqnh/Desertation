@@ -110,7 +110,7 @@
                             options: {'0': 'không có hình', '1': 'có hình'},
                             display: function(data) {
                                 if (data.record.hinh==1) {
-                                    return '<a href="../images/' + data.record.dangtoan + '/' + data.record.id +'.JPG">Link</a>';
+                                    return '<a target="_blank" href="../images/' + data.record.dangtoan + '/' + data.record.id +'.JPG">Link</a>';
                                 }
                             },
                             edit: true

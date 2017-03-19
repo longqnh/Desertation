@@ -41,25 +41,21 @@
                 </div>
 
                 <div id="main-left-bottom">
-                    <ul>
-                        <li><a href="User.jsp"> Thông tin tài khoản </a>
 <!--                            <ul class="submnu">
                                 <li><a href="#"> Sửa thông tin </a></li>
                                 <li><a href="#"> Đổi mật khẩu </a></li>
                             </ul>-->
-                        </li>
+                    <ul>
+                        <li><a href="<%=request.getContextPath()%>/Member/User.jsp"> Thông tin tài khoản </a></li>
+                        <li><a href="<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>   
                         <%
-                            if (users.getRole().equals("admin")) { %>
-                                <li><a href="QuanLyHocTap.jsp"> Quản lý học tập</a></li>
-                                <li><a href="../Admin/QLTK.jsp"> Quản lý các tài khoản</a></li>
-                                <li><a href="../Admin/QLKD.jsp"> Quản lý kho đề</a></li>
-                                <li><a href="../Admin/QLDT.jsp"> Quản lý các bài thi</a></li>
-                        <%  }
-                            else {
-                        %>
-                                <li><a href="QuanLyHocTap.jsp"> Quản lý học tập</a></li>
-                        <% } %>
-                    </ul>
+                            if (users.getUsername().equals("admin")) { %>
+                                <li><a href="<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>                        
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLTK.jsp"> Quản lý các tài khoản</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLKD.jsp"> Quản lý kho đề</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLDT.jsp">Quản lý các bài thi</a></li>                                
+                        <%  } %>
+                    </ul>                    
                 </div>
                 
                 <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>

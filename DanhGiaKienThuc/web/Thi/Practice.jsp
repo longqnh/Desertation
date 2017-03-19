@@ -4,6 +4,8 @@
     Author     : NTL
 --%>
 
+<%@page import="model.Dokhodethi"%>
+<%@page import="dao.DokhodethiDAO"%>
 <%@page import="model.Lop"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.LopDAO"%>
@@ -98,9 +100,15 @@
                         <label>Chọn độ khó: </label>
                         <select name="dokho" required>
                             <option value="" disabled selected>Độ khó</option>
-                            <option value="0">Dễ</option>
+                            <%
+                                DokhodethiDAO dokhodethiDAO = new DokhodethiDAO();
+                                List<Dokhodethi> dsLevel = dokhodethiDAO.GetAllDokho();
+                                for (Dokhodethi dokho:dsLevel) { %>
+                                    <option value="<%=dokho.getDokho()%>"> <%=dokho.getMucdo()%> </option>
+                            <%  } %>
+<!--                            <option value="0">Dễ</option>
                             <option value="1">Trung bình</option>
-                            <option value="2">Khó</option>
+                            <option value="2">Khó</option>-->
                         </select>
                     </div>
 

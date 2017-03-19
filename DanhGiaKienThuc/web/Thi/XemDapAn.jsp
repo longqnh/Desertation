@@ -4,6 +4,7 @@
     Author     : NTL
 --%>
 
+<%@page import="dao.QuanLyDeThiDAO"%>
 <%@page import="dao.DethiDAO"%>
 <%@page import="model.Question"%>
 <%@page import="java.util.List"%>
@@ -65,16 +66,17 @@
                 <% } %>
 
                 <%
-//                    QuestionDAO questionDAO = new QuestionDAO();
-//                    List exam = questionDAO.GetDeThi();               
-
                     DethiDAO dethiDAO = new DethiDAO();
-                    String made = dethiDAO.GetMade(users.getUsername());
+                    //String made = dethiDAO.GetMade(users.getUsername());
+                    String made = request.getParameter("madethi");
                     List exam = dethiDAO.GetDeThi(made);
                     
-                    List UserAnswer = (List) session.getAttribute("UserAnswer");
-                    float Diem = (float) session.getAttribute("DiemThi");
-                %>     
+                    QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();
+                    float Diem = qldeThiDAO.GetDiem(made);     
+                    List UserAnswer = dethiDAO.GetUserchoice(made);
+//                    List UserAnswer = (List) session.getAttribute("UserAnswer");
+//                    float Diem = (float) session.getAttribute("DiemThi");
+                %>
                 
                 <div id="sticky-anchor"></div>
                 <div id="user-answer">
@@ -162,7 +164,7 @@
         </script>
         
         <div id="main">
-            <h2>ĐÁP ÁN - Mã đề: <%=made%> </h2>
+            <h2>ĐÁP ÁN - Mã đề: <%=made%></h2>
 
             <%    
                 for (int i = 0; i < exam.size(); i++) {

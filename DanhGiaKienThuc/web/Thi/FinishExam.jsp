@@ -4,6 +4,11 @@
     Author     : NTL
 --%>
 
+<%@page import="dao.ThongkeDAO"%>
+<%@page import="dao.QuanLyDeThiDAO"%>
+<%@page import="model.Users"%>
+<%@page import="model.Thongke"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,6 +21,13 @@
     </head>
     <body>
         <jsp:include page="../WebInterface/header.jsp"></jsp:include>
+        
+        <%
+            Users users = null;
+            if (session.getAttribute("user")!=null) {
+                users = (Users) session.getAttribute("user");
+            }
+        %>
         
         <div class="container">
             <div id="main-left">
@@ -54,18 +66,32 @@
             </div>
 
             <div id="main-right">
-                <h2>Kết quả thi</h2>
-
                 <% 
-                    float Diem = (float) session.getAttribute("DiemThi"); 
+//                    float Diem = (float) session.getAttribute("DiemThi");
+                    String made = request.getParameter("made");
+                    QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();
+                    float Diem = qldeThiDAO.GetDiem(made);
+                    
+                    ThongkeDAO thongkeDAO = new ThongkeDAO();
+                    List<Thongke> list = thongkeDAO.thongketheodokho(made);
                 %>
+                
+                <h2>Kết quả thi - Mã đề: <%=made%></h2>
                 <h3>Bạn được <%=Diem%>/10 điểm</h3>
                 
-                <form action="XemDapAn.jsp" method="POST">
+                <%
+                    for (int i=0; i<list.size(); i++) { 
+                        Thongke tk = (Thongke) list.get(i); %>
+                        <p>Đúng <%=tk.getSocaudung()%>/<%=tk.getSocau()%> câu mức độ <%=tk.getMucdo()%> </p>
+                <%
+                    }
+                %>
+                <form target="_blank" action="XemDapAn.jsp" method="GET">
+                    <input type="text" name="madethi" value="<%=made%>" hidden="">
                     <input type="submit" id="btnXemDA" value="Xem đáp án">
                 </form>
             </div>
-        </div>            
+        </div>
         
         <script src="../js/autoscroll.js" type="text/javascript"></script>
             

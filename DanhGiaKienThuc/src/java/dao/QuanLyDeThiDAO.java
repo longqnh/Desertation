@@ -38,6 +38,27 @@ public class QuanLyDeThiDAO {
         }
     }
 
+    public float GetDiem(String made) {
+        float diem=0;
+        
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT diem FROM table_quanlydethi WHERE made='" + made + "'";
+        
+        PreparedStatement ps;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                diem =rs.getFloat("diem");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DethiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return diem;
+    }
+       
     public List<QuanLyDeThi> getAllDethi(Users user, String made_search, int startPageIndex, int recordsPerPage) {
         Connection connection = DBConnect.getConnecttion();
         List<QuanLyDeThi> list = new ArrayList();

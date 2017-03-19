@@ -120,16 +120,25 @@ CREATE TABLE `danhgiakienthuc`.`table_dethi` (
   `dophancach` INT NULL,
   `malop` INT NULL,
   `hinh` INT NULL,
-  `made` INT(5) ZEROFILL NOT NULL);
+  `made` INT(5) ZEROFILL NOT NULL
+  `userchoice` VARCHAR(45));
   
-CREATE TABLE `danhgiakienthuc`.`table_dokho` (
+CREATE TABLE `danhgiakienthuc`.`table_dokhoCH` (
   `dokho` INT NOT NULL,
   `mucdo` VARCHAR(45) NULL,
   PRIMARY KEY (`dokho`));
-INSERT INTO `danhgiakienthuc`.`table_dokho` (`dokho`, `mucdo`) VALUES ('0', 'nhận biết');
-INSERT INTO `danhgiakienthuc`.`table_dokho` (`dokho`, `mucdo`) VALUES ('1', 'thổng hiểu');
-INSERT INTO `danhgiakienthuc`.`table_dokho` (`dokho`, `mucdo`) VALUES ('2', 'vận dụng');
-INSERT INTO `danhgiakienthuc`.`table_dokho` (`dokho`, `mucdo`) VALUES ('3', 'vận dụng cao');
+INSERT INTO `danhgiakienthuc`.`table_dokhoCH` (`dokho`, `mucdo`) VALUES ('0', 'nhận biết');
+INSERT INTO `danhgiakienthuc`.`table_dokhoCH` (`dokho`, `mucdo`) VALUES ('1', 'thông hiểu');
+INSERT INTO `danhgiakienthuc`.`table_dokhoCH` (`dokho`, `mucdo`) VALUES ('2', 'vận dụng');
+INSERT INTO `danhgiakienthuc`.`table_dokhoCH` (`dokho`, `mucdo`) VALUES ('3', 'vận dụng cao');
+
+CREATE TABLE `danhgiakienthuc`.`table_dokhoDE` (
+  `dokho` INT NOT NULL,
+  `mucdo` VARCHAR(45) NULL,
+  PRIMARY KEY (`dokho`));
+INSERT INTO `danhgiakienthuc`.`table_dokhoDE` (`dokho`, `mucdo`) VALUES ('0', 'Dễ');
+INSERT INTO `danhgiakienthuc`.`table_dokhoDE` (`dokho`, `mucdo`) VALUES ('1', 'Trung bình');
+INSERT INTO `danhgiakienthuc`.`table_dokhoDE` (`dokho`, `mucdo`) VALUES ('2', 'Khó');
 
 CREATE TABLE `danhgiakienthuc`.`table_lop` (
   `malop` INT NOT NULL,
@@ -187,43 +196,43 @@ CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
 
 /* CREATE FOREIGN KEY */
 ALTER TABLE `danhgiakienthuc`.`table_hamso`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokho`(`dokho`),
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
 	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
 
 ALTER TABLE `danhgiakienthuc`.`table_loga`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokho`(`dokho`),
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
 	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
 
 ALTER TABLE `danhgiakienthuc`.`table_tichphan`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokho`(`dokho`),
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
 	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
 
 ALTER TABLE `danhgiakienthuc`.`table_sophuc`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokho`(`dokho`),
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
 	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
 
 ALTER TABLE `danhgiakienthuc`.`table_hhkg`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokho`(`dokho`),
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
 	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
 
 ALTER TABLE `danhgiakienthuc`.`table_oxyz`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokho`(`dokho`),
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
 	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
 
 ALTER TABLE `danhgiakienthuc`.`table_dethi`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokho`(`dokho`),
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
 	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`),
@@ -233,7 +242,22 @@ ALTER TABLE `danhgiakienthuc`.`table_phanloaidangtoan` ADD FOREIGN KEY (`malop`)
 
 ALTER TABLE `danhgiakienthuc`.`table_phanloaibt` ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`);		
 
-ALTER TABLE `danhgiakienthuc`.`table_quanlydethi` ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`) ON DELETE CASCADE;
+ALTER TABLE `danhgiakienthuc`.`table_quanlydethi` 
+        ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`) ON DELETE CASCADE,
+        ADD FOREIGN KEY (`mucdo`) REFERENCES `danhgiakienthuc`.`table_dokhoDE`(`dokho`);
+
+/* Stored Procedure */
+DELIMITER $$
+DROP PROCEDURE IF EXISTS Thongke $$
+CREATE PROCEDURE Thongke(IN madethi VARCHAR(5))
+BEGIN
+    select distinct dt.dangtoan, dk.mucdo,
+	(select COUNT(*) from table_dethi as dt where made=madethi and dt.dokho=dk.dokho) as socau,
+	(select COUNT(*) from table_dethi as dt where made=madethi and userchoice=dapan and dt.dokho=dk.dokho) as socaudung,
+    IF (dk.dokho=0, dopc_de, IF(dk.dokho=1, dopc_tb, IF(dk.dokho=2, dopc_tbk, dopc_kho))) AS dopc
+    from table_dokhoCH as dk, table_dethi as dt, table_phanloaidangtoan as pl
+    where made=madethi and dt.dangtoan=pl.dangtoan;
+END; $$
 
 /* Insert Data */
 INSERT INTO `danhgiakienthuc`.`table_hamso` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('HS001','Đường cong trong hình bên là đồ thị của một hàm số trong bốn hàm số được liệt kê ở bốn phương án A, B, C, D dưới đây. Hỏi hàm số đó là hàm số nào ? ','$y=-x^2+x-1$','$y=-x^3+3x-1$','$y=-x^4-x^2+1$','$y=-x^3-3x+1$','D','hamso','nhanbiet','0','NULL','12','1');
