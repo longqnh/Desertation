@@ -42,7 +42,11 @@
                             key: true,
                             list: true,
                             display: function(data) {
-                                return '<a target="_blank" href="<%=request.getContextPath()%>/Thi/FinishExam.jsp?made=' + data.record.made + '">' + data.record.made + '</a>';
+                                if (data.record.ngaythi != null) {
+                                    return '<a target="_blank" href="<%=request.getContextPath()%>/Thi/FinishExam.jsp?made=' + data.record.made + '">' + data.record.made + '</a>';
+                                } else {
+                                    return data.record.made;
+                                }
                             }
                         },
                         socau: {
@@ -59,7 +63,18 @@
                         },
                         mucdo: {
                             title: 'Độ khó',
-                            type: 'text'
+                            type: 'text',
+                            display: function(data) {
+                                if (data.record.mucdo == 0) {
+                                    return 'Dễ';
+                                } else {
+                                    if (data.record.mucdo == 1) {
+                                        return 'Trung bình';
+                                    } else {
+                                        return 'Khó';
+                                    }
+                                }
+                            }                            
                         },
                         diem: {
                             title: 'Điểm',

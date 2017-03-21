@@ -147,7 +147,7 @@
                         Question q = (Question) exam.get(i); %>
 
                         <div id="Q<%=q.getId()%>" onclick="Answered('<%=q.getId()%>')">
-                            <p><b>Câu <%=i+1%>: </b> <%=q.getNoidung()%></p>
+                            <p><b>Câu <%=i+1%> (<%=q.getId()%>):</b> <%=q.getNoidung()%></p>
                             <%
                                 if (q.getHinh()==1) { %>
                                     <img src="../images/<%=q.getDangtoan()%>/<%=q.getId()%>.JPG">

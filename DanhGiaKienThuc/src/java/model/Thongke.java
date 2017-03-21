@@ -10,19 +10,53 @@ package model;
  * @author NTL
  */
 public class Thongke {
-    private String dangtoan, mucdo;
+    private String madangtoan, dangtoan, mucdo;
     private int socau, socaudung;
     private float dopc;
 
     public Thongke() {
     }
 
-    public Thongke(String dangtoan, String mucdo, int socau, int socaudung, float dopc) {
+    public Thongke(String madangtoan, String dangtoan, String mucdo, int socau, int socaudung, float dopc) {
+        this.madangtoan = madangtoan;
         this.dangtoan = dangtoan;
         this.mucdo = mucdo;
         this.socau = socau;
         this.socaudung = socaudung;
         this.dopc = dopc;
+    }
+
+    public Thongke(String dangtoan, int socau) {
+        this.dangtoan = dangtoan;
+        this.socau = socau;
+    }
+
+    public Thongke(String dangtoan, int socau, int socaudung) {
+        this.dangtoan = dangtoan;
+        this.socau = socau;
+        this.socaudung = socaudung;
+    }
+
+    public Thongke(String madangtoan, String dangtoan, int socau) {
+        this.madangtoan = madangtoan;
+        this.dangtoan = dangtoan;
+        this.socau = socau;
+    }
+
+    public Thongke(String madangtoan, String dangtoan, String mucdo, int socau, int socaudung) {
+        this.madangtoan = madangtoan;
+        this.dangtoan = dangtoan;
+        this.mucdo = mucdo;
+        this.socau = socau;
+        this.socaudung = socaudung;
+    }
+
+    public String getMadangtoan() {
+        return madangtoan;
+    }
+
+    public void setMadangtoan(String madangtoan) {
+        this.madangtoan = madangtoan;
     }
 
     public String getDangtoan() {

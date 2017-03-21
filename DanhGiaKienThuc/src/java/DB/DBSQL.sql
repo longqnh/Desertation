@@ -204,7 +204,7 @@ INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtT
 CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
   `made` INT(5) ZEROFILL NOT NULL AUTO_INCREMENT,
   `socau` INT NULL,
-  `noidung` VARCHAR(45) NULL,
+  `noidung` VARCHAR(100) NULL,
   `thoigian` INT NULL,
   `mucdo` INT NULL,
   `diem` FLOAT NULL,

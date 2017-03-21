@@ -73,19 +73,39 @@
                     float Diem = qldeThiDAO.GetDiem(made);
                     
                     ThongkeDAO thongkeDAO = new ThongkeDAO();
+                    List<Thongke> thongkeND = thongkeDAO.thongketheonoidung(made);
                     List<Thongke> list = thongkeDAO.thongketheodokho(made);
                 %>
                 
                 <h2>Kết quả thi - Mã đề: <%=made%></h2>
                 <h3>Bạn được <%=Diem%>/10 điểm</h3>
                 
-                <%
-                    for (int i=0; i<list.size(); i++) { 
+                <%--
+                    for (int i=0; i<list.size(); i++) {
                         Thongke tk = (Thongke) list.get(i); %>
                         <p>Đúng <%=tk.getSocaudung()%>/<%=tk.getSocau()%> câu mức độ <%=tk.getMucdo()%> </p>
                 <%
                     }
+                --%>
+                
+                <%
+                    for (int i=0; i < thongkeND.size(); i++) {
+                        Thongke nD = (Thongke) thongkeND.get(i); 
+                        List<Thongke> thongkeBT = thongkeDAO.thongkedangbt(made, nD.getMadangtoan()); %>
+                        <p>Đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu <%=nD.getDangtoan()%> gồm:</p>
+                        <ul class="thongkebt">
+                    <%
+                        for (int j = 0; j < thongkeBT.size(); j++) { 
+                            Thongke BT = (Thongke) thongkeBT.get(j); %>
+                            <li>Đúng <%=BT.getSocaudung()%>/<%=BT.getSocau()%> câu dạng <%=BT.getDangtoan()%></li>
+                <%
+                        }
                 %>
+                        </ul>
+                <%
+                    }
+                %>
+                
                 <form target="_blank" action="XemDapAn.jsp" method="GET">
                     <input type="text" name="madethi" value="<%=made%>" hidden="">
                     <input type="submit" id="btnXemDA" value="Xem đáp án">
