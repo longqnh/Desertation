@@ -43,6 +43,13 @@ public class Thongke {
         this.socau = socau;
     }
 
+    public Thongke(String madangtoan, String dangtoan, int socau, int socaudung) {
+        this.madangtoan = madangtoan;
+        this.dangtoan = dangtoan;
+        this.socau = socau;
+        this.socaudung = socaudung;
+    }
+
     public Thongke(String madangtoan, String dangtoan, String mucdo, int socau, int socaudung) {
         this.madangtoan = madangtoan;
         this.dangtoan = dangtoan;

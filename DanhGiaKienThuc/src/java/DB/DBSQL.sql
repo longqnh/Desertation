@@ -266,15 +266,30 @@ ALTER TABLE `danhgiakienthuc`.`table_quanlydethi`
 
 /* Stored Procedure */
 DELIMITER $$
-DROP PROCEDURE IF EXISTS Thongke $$
-CREATE PROCEDURE Thongke(IN madethi VARCHAR(5))
+DROP PROCEDURE IF EXISTS thongkenoidung $$
+CREATE PROCEDURE thongkenoidung(IN madethi VARCHAR(5))
 BEGIN
-    select distinct dt.dangtoan, dk.mucdo,
-	(select COUNT(*) from table_dethi as dt where made=madethi and dt.dokho=dk.dokho) as socau,
-	(select COUNT(*) from table_dethi as dt where made=madethi and userchoice=dapan and dt.dokho=dk.dokho) as socaudung,
-    IF (dk.dokho=0, dopc_de, IF(dk.dokho=1, dopc_tb, IF(dk.dokho=2, dopc_tbk, dopc_kho))) AS dopc
-    from table_dokhoCH as dk, table_dethi as dt, table_phanloaidangtoan as pl
-    where made=madethi and dt.dangtoan=pl.dangtoan;
+	select dt.dangtoan as madangtoan, pl.dangtoanTV as dangtoan, 
+		(select COUNT(*) from table_dethi as dt2
+		where made=madethi and dt2.dangtoan=dt.dangtoan)as socau,
+		COUNT(*) as socaudung from table_dethi as dt, table_phanloaidangtoan as pl
+	where made=madethi and userchoice=dapan and dt.dangtoan=pl.dangtoan
+	group by dangtoan;
+END; $$
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS thongkedangbt $$
+CREATE PROCEDURE thongkedangbt(
+    IN madethi VARCHAR(5),
+    IN dangtoan VARCHAR(45)
+)
+BEGIN
+select dt.dangbt as mabt, pl.dangbtTV as dangbt, 
+	(select COUNT(*) from table_dethi as dt2
+    where made=madethi and dt2.dangbt=dt.dangbt)as socau,
+	COUNT(*) as socaudung from table_dethi as dt, table_phanloaibt as pl
+where made=madethi and userchoice=dapan and dt.dangtoan=dangtoan and dt.dangbt=pl.dangbt
+group by dangbt;
 END; $$
 
 /* Insert Data */

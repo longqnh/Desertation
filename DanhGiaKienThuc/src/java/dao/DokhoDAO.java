@@ -12,17 +12,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Dokhodethi;
+import model.Dokho;
 
 /**
  *
  * @author NTL
  */
-public class DokhodethiDAO {
+public class DokhoDAO {
     public List GetAllDokho() {
         Connection connection = DBConnect.getConnecttion();
         
-        List<Dokhodethi> dsLevel = new ArrayList();
+        List<Dokho> dsLevel = new ArrayList();
         String sql = "SELECT * FROM table_dokhode";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -31,12 +31,12 @@ public class DokhodethiDAO {
                 int dokho = rs.getInt("dokho");
                 String mucdo = rs.getString("mucdo");
                 
-                Dokhodethi dkdt = new Dokhodethi(dokho, mucdo);
+                Dokho dkdt = new Dokho(dokho, mucdo);
                 dsLevel.add(dkdt);
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        return dsLevel;        
+        return dsLevel;  
     }
 }

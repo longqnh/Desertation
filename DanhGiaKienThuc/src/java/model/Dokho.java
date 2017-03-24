@@ -9,14 +9,14 @@ package model;
  *
  * @author NTL
  */
-public class Dokhodethi {
+public class Dokho {
     private int dokho;
     private String mucdo;
 
-    public Dokhodethi() {
+    public Dokho() {
     }
 
-    public Dokhodethi(int dokho, String mucdo) {
+    public Dokho(int dokho, String mucdo) {
         this.dokho = dokho;
         this.mucdo = mucdo;
     }
@@ -35,5 +35,5 @@ public class Dokhodethi {
 
     public void setMucdo(String mucdo) {
         this.mucdo = mucdo;
-    }
+    }    
 }

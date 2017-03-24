@@ -73,8 +73,8 @@
                     float Diem = qldeThiDAO.GetDiem(made);
                     
                     ThongkeDAO thongkeDAO = new ThongkeDAO();
-                    List<Thongke> thongkeND = thongkeDAO.thongketheonoidung(made);
-                    List<Thongke> list = thongkeDAO.thongketheodokho(made);
+                    List<Thongke> thongkeND = thongkeDAO.thongkenoidung(made);
+                    List<Thongke> list = thongkeDAO.thongkedokho(made);
                 %>
                 
                 <h2>Kết quả thi - Mã đề: <%=made%></h2>

@@ -21,7 +21,7 @@ import model.Thongke;
  * @author NTL
  */
 public class ThongkeDAO {
-    public List thongketheonoidung (String made) {
+    public List thongkenoidung (String made) {
         List<Thongke> list = new ArrayList<>();
         Connection connection = DBConnect.getConnecttion();
         String sql = "CALL thongkenoidung('" + made + "')";
@@ -34,8 +34,9 @@ public class ThongkeDAO {
                 String madangtoan = rs.getString("madangtoan");
                 String dangtoan = rs.getString("dangtoan");
                 int socau = rs.getInt("socau");
+                int socaudung = rs.getInt("socaudung");
                 
-                Thongke tknd = new Thongke(madangtoan, dangtoan, socau);
+                Thongke tknd = new Thongke(madangtoan, dangtoan, socau, socaudung);
                 list.add(tknd);
             }
         } catch (SQLException ex) {
@@ -66,7 +67,7 @@ public class ThongkeDAO {
         return list; 
     }
     
-    public List thongketheodokho(String made) {
+    public List thongkedokho(String made) {
         List<Thongke> list = new ArrayList<>();
         
         Connection connection = DBConnect.getConnecttion();
