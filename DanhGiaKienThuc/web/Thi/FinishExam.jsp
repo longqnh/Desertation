@@ -4,6 +4,7 @@
     Author     : NTL
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="dao.ThongkeDAO"%>
 <%@page import="dao.QuanLyDeThiDAO"%>
 <%@page import="model.Users"%>
@@ -72,15 +73,17 @@
                     QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();
                     float Diem = qldeThiDAO.GetDiem(made);
                     
+                    List<Thongke> noidungYeu = new ArrayList<Thongke>();
                     ThongkeDAO thongkeDAO = new ThongkeDAO();
                     List<Thongke> thongkeND = thongkeDAO.thongkenoidung(made);
                 %>
                 
                 <h2>Kết quả thi - Mã đề: <%=made%></h2>
-                <h3>Bạn được <%=Diem%>/10 điểm</h3>
+                <h3 id="result">Bạn đã hoàn thành bài thi với điểm số <%=Diem%>/10</h3>
                 
+                <ol type="1">
                 <div id="thongke">
-                    <div id="dokho">Theo mức độ</div>
+                    <li id="dokho">Theo mức độ</li>
                 <%
                     for (int i=0; i < thongkeND.size(); i++) {
                         Thongke nD = (Thongke) thongkeND.get(i); 
@@ -98,7 +101,7 @@
                 <%
                     }
                 %>
-                    <div id="noidung">Theo nội dung</div>
+                    <li id="noidung">Theo nội dung</li>
                 <%
                     for (int i=0; i < thongkeND.size(); i++) {
                         Thongke nD = (Thongke) thongkeND.get(i); 
@@ -107,7 +110,11 @@
                             <p>Đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu <%=nD.getDangtoan()%> gồm:</p>
                     <%
                         for (int j = 0; j < thongkeBT.size(); j++) { 
-                            Thongke nd = (Thongke) thongkeBT.get(j); %>
+                            Thongke nd = (Thongke) thongkeBT.get(j); 
+                            if (nd.getSocaudung() <= nd.getSocau()/2) {
+                                noidungYeu.add(nd);
+                            }
+                    %>
                             <li><%=nd.getSocaudung()%>/<%=nd.getSocau()%> dạng <%=nd.getDangtoan()%></li>
                 <%
                         }
@@ -119,8 +126,20 @@
                 </div>
                 
                 <div id="nhanxet">
-
+                    <%
+                        if (noidungYeu.isEmpty()) { %>
+                            <p>Kiến thức của bạn khá tốt, hãy tiếp tục phát huy</p>
+                    <%  } else { %>
+                            <p>Bạn còn yếu các nội dung sau:</p>
+                            <ul class="noidungyeu">
+                    <%      for (int i = 0; i < noidungYeu.size(); i++) { 
+                                Thongke ndY = noidungYeu.get(i); %>
+                                <li><%=ndY.getDangtoan()%></li>
+                    <%      }  %>
+                            </ul>
+                    <%  }  %>
                 </div>
+                </ol>
                 
                 <form class="_btn" target="_blank" action="XemDapAn.jsp" method="GET">
                     <input type="button" class="btnXemDA" id="showTK" value="Thống kê">

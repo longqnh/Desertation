@@ -192,10 +192,26 @@ body {
     margin-left: -25px;
 }
 
+.content_dokho li, .content_noidung li{
+    color: black;
+}
+
 ._btn {
     display: inline-block;
 }
 
 #dokho, #noidung {
     cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+h3 {
+    margin-top: 10px;
+    color: red;
+}
+
+.noidungyeu {
+    list-style-type: disc;
+    margin-left: 50px; 
 }
