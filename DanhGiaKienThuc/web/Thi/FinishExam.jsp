@@ -15,6 +15,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>KẾT QUẢ THI</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>   
         <link rel="stylesheet" href="../css/HeaderStyle.css">
         <link rel="stylesheet" href="../css/FooterStyle.css">
         <link rel="stylesheet" href="../css/OtherStyle.css">
@@ -67,37 +68,29 @@
 
             <div id="main-right">
                 <% 
-//                    float Diem = (float) session.getAttribute("DiemThi");
                     String made = request.getParameter("made");
                     QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();
                     float Diem = qldeThiDAO.GetDiem(made);
                     
                     ThongkeDAO thongkeDAO = new ThongkeDAO();
                     List<Thongke> thongkeND = thongkeDAO.thongkenoidung(made);
-                    List<Thongke> list = thongkeDAO.thongkedokho(made);
                 %>
                 
                 <h2>Kết quả thi - Mã đề: <%=made%></h2>
                 <h3>Bạn được <%=Diem%>/10 điểm</h3>
                 
-                <%--
-                    for (int i=0; i<list.size(); i++) {
-                        Thongke tk = (Thongke) list.get(i); %>
-                        <p>Đúng <%=tk.getSocaudung()%>/<%=tk.getSocau()%> câu mức độ <%=tk.getMucdo()%> </p>
-                <%
-                    }
-                --%>
-                
+                <div id="thongke">
+                    <div id="dokho">Theo mức độ</div>
                 <%
                     for (int i=0; i < thongkeND.size(); i++) {
                         Thongke nD = (Thongke) thongkeND.get(i); 
-                        List<Thongke> thongkeBT = thongkeDAO.thongkedangbt(made, nD.getMadangtoan()); %>
-                        <p>Đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu <%=nD.getDangtoan()%> gồm:</p>
-                        <ul class="thongkebt">
+                        List<Thongke> thongkeDK = thongkeDAO.thongkedokho(made, nD.getMadangtoan()); %>
+                        <ul class="content_dokho">
+                            <p>Đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu <%=nD.getDangtoan()%> gồm:</p>
                     <%
-                        for (int j = 0; j < thongkeBT.size(); j++) { 
-                            Thongke BT = (Thongke) thongkeBT.get(j); %>
-                            <li>Đúng <%=BT.getSocaudung()%>/<%=BT.getSocau()%> câu dạng <%=BT.getDangtoan()%></li>
+                        for (int j = 0; j < thongkeDK.size(); j++) { 
+                            Thongke DK = (Thongke) thongkeDK.get(j); %>
+                            <li><%=DK.getSocaudung()%>/<%=DK.getSocau()%> câu mức độ <%=DK.getMucdo()%></li>
                 <%
                         }
                 %>
@@ -105,11 +98,60 @@
                 <%
                     }
                 %>
+                    <div id="noidung">Theo nội dung</div>
+                <%
+                    for (int i=0; i < thongkeND.size(); i++) {
+                        Thongke nD = (Thongke) thongkeND.get(i); 
+                        List<Thongke> thongkeBT = thongkeDAO.thongkedangbt(made, nD.getMadangtoan()); %>
+                        <ul class="content_noidung">
+                            <p>Đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu <%=nD.getDangtoan()%> gồm:</p>
+                    <%
+                        for (int j = 0; j < thongkeBT.size(); j++) { 
+                            Thongke nd = (Thongke) thongkeBT.get(j); %>
+                            <li><%=nd.getSocaudung()%>/<%=nd.getSocau()%> dạng <%=nd.getDangtoan()%></li>
+                <%
+                        }
+                %>
+                        </ul>
+                <%
+                    }
+                %>                    
+                </div>
                 
-                <form target="_blank" action="XemDapAn.jsp" method="GET">
-                    <input type="text" name="madethi" value="<%=made%>" hidden="">
-                    <input type="submit" id="btnXemDA" value="Xem đáp án">
+                <div id="nhanxet">
+
+                </div>
+                
+                <form class="_btn" target="_blank" action="XemDapAn.jsp" method="GET">
+                    <input type="button" class="btnXemDA" id="showTK" value="Thống kê">
+                    <input type="button" class="btnXemDA" id="showNX" value="Nhận xét">
+                    <input type="text" name="made" value="<%=made%>" hidden="">
+                    <input type="submit" class="btnXemDA" value="Xem đáp án">
                 </form>
+                    
+                <script type="text/javascript">
+                    $(function() {
+                        $("#showTK").click(function() {
+                            $("#nhanxet").hide();
+                            $("#thongke").slideToggle();
+                        });
+                        
+                        $("#showNX").click(function() {
+                            $("#thongke").hide();
+                            $("#nhanxet").slideToggle(); 
+                        });
+                        
+                        $("#dokho").click(function() {
+                            $(".content_noidung").hide();
+                            $(".content_dokho").slideToggle();
+                        });
+                        
+                        $("#noidung").click(function() {
+                            $(".content_dokho").hide();
+                            $(".content_noidung").slideToggle();
+                        });
+                    });
+                </script>
             </div>
         </div>
         

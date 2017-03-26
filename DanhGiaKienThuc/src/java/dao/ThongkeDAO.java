@@ -67,11 +67,11 @@ public class ThongkeDAO {
         return list; 
     }
     
-    public List thongkedokho(String made) {
+    public List thongkedokho(String made, String noidung) {
         List<Thongke> list = new ArrayList<>();
         
         Connection connection = DBConnect.getConnecttion();
-        String sql = "CALL Thongke('" + made + "')";
+        String sql = "CALL thongkedokho('" + made + "','" + noidung + "')";
         PreparedStatement ps;
         
         try {
@@ -79,8 +79,8 @@ public class ThongkeDAO {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                String madangtoan = rs.getString("madangtoan");
-                String dangtoan = rs.getString("dangtoan");
+                String madangtoan = rs.getString("dangtoan");
+                String dangtoan = rs.getString("dangtoanTV");
                 String mucdo = rs.getString("mucdo");
                 int socau = rs.getInt("socau");
                 int socaudung = rs.getInt("socaudung");

@@ -269,27 +269,48 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS thongkenoidung $$
 CREATE PROCEDURE thongkenoidung(IN madethi VARCHAR(5))
 BEGIN
-	select dt.dangtoan as madangtoan, pl.dangtoanTV as dangtoan, 
-		(select COUNT(*) from table_dethi as dt2
-		where made=madethi and dt2.dangtoan=dt.dangtoan)as socau,
-		COUNT(*) as socaudung from table_dethi as dt, table_phanloaidangtoan as pl
-	where made=madethi and userchoice=dapan and dt.dangtoan=pl.dangtoan
-	group by dangtoan;
+select dt.dangtoan as madangtoan, pl.dangtoanTV as dangtoan, 
+	(select COUNT(*) from table_dethi as dt2
+	where made=madethi and dt2.dangtoan=dt.dangtoan)as socau,
+	(select COUNT(*) from table_dethi as dt3
+    where made=madethi and dt3.dangtoan=dt.dangtoan and dt3.dapan=dt3.userchoice) as socaudung 
+from table_dethi as dt, table_phanloaidangtoan as pl
+where made=madethi and userchoice=dapan and dt.dangtoan=pl.dangtoan
+group by dangtoan;
 END; $$
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS thongkedangbt $$
 CREATE PROCEDURE thongkedangbt(
-    IN madethi VARCHAR(5),
+	IN madethi VARCHAR(5),
     IN dangtoan VARCHAR(45)
 )
 BEGIN
 select dt.dangbt as mabt, pl.dangbtTV as dangbt, 
 	(select COUNT(*) from table_dethi as dt2
     where made=madethi and dt2.dangbt=dt.dangbt)as socau,
-	COUNT(*) as socaudung from table_dethi as dt, table_phanloaibt as pl
-where made=madethi and userchoice=dapan and dt.dangtoan=dangtoan and dt.dangbt=pl.dangbt
+	(select COUNT(*) from table_dethi as dt3
+    where made=madethi and dt3.dangbt=dt.dangbt and dt3.dapan=dt3.userchoice)as socaudung 
+from table_dethi as dt, table_phanloaibt as pl
+where made=madethi and dt.dangtoan=dangtoan and dt.dangbt=pl.dangbt
 group by dangbt;
+END; $$
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS thongkedokho $$
+CREATE PROCEDURE thongkedokho(
+    IN madethi VARCHAR(5),
+    IN dangtoan VARCHAR(45)
+)
+BEGIN
+select distinct dt.dangtoan, pl.dangtoanTV ,dk.mucdo,
+	(select COUNT(*) from table_dethi as dt2 
+    where made=madethi and dt2.dokho=dk.dokho and dt2.dangtoan=dt.dangtoan) as socau,
+	(select COUNT(*) from table_dethi as dt3 
+    where made=madethi and userchoice=dapan and dt3.dokho=dk.dokho and dt3.dangtoan=dt.dangtoan) as socaudung,
+	IF (dk.dokho=0, dopc_de, IF(dk.dokho=1, dopc_tb, IF(dk.dokho=2, dopc_tbk, dopc_kho))) AS dopc
+from table_dokhoCH as dk, table_dethi as dt, table_phanloaidangtoan as pl
+where made=madethi and dt.dangtoan=pl.dangtoan and dt.dangtoan=dangtoan;
 END; $$
 
 /* Insert Data */

@@ -68,7 +68,7 @@
                 <%
                     DethiDAO dethiDAO = new DethiDAO();
                     //String made = dethiDAO.GetMade(users.getUsername());
-                    String made = request.getParameter("madethi");
+                    String made = request.getParameter("made");
                     List exam = dethiDAO.GetDeThi(made);
                     
                     QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();

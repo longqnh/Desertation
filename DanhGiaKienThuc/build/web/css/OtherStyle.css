@@ -163,7 +163,7 @@ body {
     color: red;
 }
 
-#btnXemDA {
+.btnXemDA {
     width: 100px;
     height: 30px;
     background: rgba(53, 21, 121, 1);
@@ -173,12 +173,29 @@ body {
     margin: 20px auto;
 }
 
-#btnXemDA:hover {
+.btnXemDA:hover {
     cursor: pointer;
     color: rgba(200, 7, 207, 1);
 }
 
-.thongkebt {
+#thongke, #nhanxet {
+    display: none;
+}
+
+.content_dokho, .content_noidung {
     list-style-type: disc;
     margin-left: 50px;
+    display: none;
+}
+
+.content_dokho p, .content_noidung p{
+    margin-left: -25px;
+}
+
+._btn {
+    display: inline-block;
+}
+
+#dokho, #noidung {
+    cursor: pointer;
 }
