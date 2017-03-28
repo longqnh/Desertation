@@ -84,7 +84,7 @@ public class ThongkeDAO {
                 String mucdo = rs.getString("mucdo");
                 int socau = rs.getInt("socau");
                 int socaudung = rs.getInt("socaudung");
-                float dopc = rs.getFloat("dopc");
+                int dopc = rs.getInt("dopc");
                 
                 Thongke thongke = new Thongke(madangtoan, dangtoan, mucdo, socau, socaudung, dopc);
                 list.add(thongke);
@@ -93,5 +93,9 @@ public class ThongkeDAO {
             Logger.getLogger(ThongkeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+    
+    public void DanhGia() {
+
     }
 }

@@ -73,7 +73,7 @@
                     QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();
                     float Diem = qldeThiDAO.GetDiem(made);
                     
-                    List<Thongke> noidungYeu = new ArrayList<Thongke>();
+                    List<Thongke> noidungYeu = new ArrayList<>();
                     ThongkeDAO thongkeDAO = new ThongkeDAO();
                     List<Thongke> thongkeND = thongkeDAO.thongkenoidung(made);
                 %>

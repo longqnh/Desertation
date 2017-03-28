@@ -12,12 +12,12 @@ package model;
 public class Thongke {
     private String madangtoan, dangtoan, mucdo;
     private int socau, socaudung;
-    private float dopc;
+    private int dopc;
 
     public Thongke() {
     }
 
-    public Thongke(String madangtoan, String dangtoan, String mucdo, int socau, int socaudung, float dopc) {
+    public Thongke(String madangtoan, String dangtoan, String mucdo, int socau, int socaudung, int dopc) {
         this.madangtoan = madangtoan;
         this.dangtoan = dangtoan;
         this.mucdo = mucdo;
@@ -102,7 +102,7 @@ public class Thongke {
         return dopc;
     }
 
-    public void setDopc(float dopc) {
+    public void setDopc(int dopc) {
         this.dopc = dopc;
     }
 }

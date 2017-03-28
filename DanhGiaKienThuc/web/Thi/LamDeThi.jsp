@@ -79,10 +79,6 @@
                 
                 int numQuestion = (time == 15 ? 10 : (time == 60 ? 40 : 50));
                 
-//                QuestionDAO questionDAO = new QuestionDAO();
-//                questionDAO.TaoDe(noidung, level, numQuestion);
-//                List exam = questionDAO.GetDeThi(); 
-                
                 DethiDAO dethiDAO = new DethiDAO();
                 dethiDAO.TaoDe(noidung, level, numQuestion, users.getUsername(), time);
                 String made = dethiDAO.GetMade(users.getUsername());
