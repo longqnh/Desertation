@@ -7,14 +7,14 @@
 $(document).ready(function () {
     $('.lythuyet').next('ol').slideToggle();
     $('.lythuyet').click(function(){   
-        $('.lythuyet').next('ol').slideUp();
+//        $('.lythuyet').next('ol').slideUp();
         $(this).next('ol').slideToggle(); 
         return false;
     });
     
     $('.content').next('p').slideToggle();
     $('.content').click(function(){ 
-        $('.content').next('p').slideUp();
+//        $('.content').next('p').slideUp();
         $(this).next('p').slideToggle(); 
         return false;
     });    

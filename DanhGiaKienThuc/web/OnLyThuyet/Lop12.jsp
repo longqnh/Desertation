@@ -70,8 +70,8 @@
                     if (session.getAttribute("user")!=null) {
                         users = (Users) session.getAttribute("user");
                         if (users.getRole().equals("admin")) { %>
-                            <input type="submit" value="Cập nhật" onclick="window.location.href='<%=request.getContextPath()%>/Admin/updateLT.jsp'">
-                <%      } 
+
+                        <%      } 
                     }   
                 %>                
             </div>

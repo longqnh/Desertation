@@ -107,12 +107,13 @@ public class FinishExam extends HttpServlet {
                 e.printStackTrace();
             }
             
-            sql =   "UPDATE table_dethi SET userchoice=? WHERE (id=? AND made=?)";
+            sql =   "UPDATE table_dethi SET userchoice=?, username=? WHERE (id=? AND made=?)";
             try {
                 ps = con.prepareCall(sql);
                 ps.setString(1, user_select);
-                ps.setString(2, id);
-                ps.setString(3, made);
+                ps.setString(2, users.getUsername());
+                ps.setString(3, id);
+                ps.setString(4, made);
                 ps.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();

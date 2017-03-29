@@ -94,8 +94,4 @@ public class ThongkeDAO {
         }
         return list;
     }
-    
-    public void DanhGia() {
-
-    }
 }

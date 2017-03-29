@@ -121,7 +121,8 @@ CREATE TABLE `danhgiakienthuc`.`table_dethi` (
   `malop` INT NULL,
   `hinh` INT NULL,
   `made` INT(5) ZEROFILL NOT NULL,
-  `userchoice` VARCHAR(45));
+  `userchoice` VARCHAR(45) NULL,
+  `username` VARCHAR(25) NULL);
   
 CREATE TABLE `danhgiakienthuc`.`table_dokhoCH` (
   `dokho` INT NOT NULL,
@@ -311,6 +312,20 @@ select distinct dt.dangtoan, pl.dangtoanTV ,dk.mucdo,
 	IF (dk.dokho=0, dopc_de, IF(dk.dokho=1, dopc_tb, IF(dk.dokho=2, dopc_tbk, dopc_kho))) AS dopc
 from table_dokhoCH as dk, table_dethi as dt, table_phanloaidangtoan as pl
 where made=madethi and dt.dangtoan=pl.dangtoan and dt.dangtoan=dangtoan;
+END; $$
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS thongkekienthuc $$
+CREATE PROCEDURE thongkekienthuc(IN thisinh VARCHAR(25))
+BEGIN
+select dt.dangtoan as madangtoan, pl.dangtoanTV as dangtoan, 
+	(select COUNT(*) from table_dethi as dt2
+	where username=thisinh and dt2.dangtoan=dt.dangtoan)as socau,
+	(select COUNT(*) from table_dethi as dt3
+    where username=thisinh and dt3.dangtoan=dt.dangtoan and dt3.dapan=dt3.userchoice) as socaudung 
+from table_dethi as dt, table_phanloaidangtoan as pl
+where username=thisinh and userchoice=dapan and dt.dangtoan=pl.dangtoan
+group by dangtoan;
 END; $$
 
 /* Insert Data */
