@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,15 +21,16 @@ import java.util.logging.Logger;
  * @author NTL
  */
 public class DanhgiaDAO {
-    public void DanhGiaNangLuc(String made) {
+    public HashMap DanhGiaNangLuc(String made) {
         Connection connection = DBConnect.getConnecttion();       
         String sql = "CALL thongkenoidung('" + made + "')";
         PreparedStatement ps;
         
         List<String> noidung = new ArrayList<>();
-        double nangluc = 0;
-        int tongsocau = 0;
-                
+        double nangluc;
+        int tongsocau;
+        HashMap<String, Double> NangLuc = new HashMap<>();
+        
         try {
             ps = connection.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
@@ -42,6 +44,8 @@ public class DanhgiaDAO {
         }
         
         for (String nd : noidung) {
+            nangluc = 0;
+            tongsocau = 0;
             try {
                 ps = connection.prepareCall("CALL thongkedokho('" + made + "','" + nd + "')");
                 ResultSet rs = ps.executeQuery();
@@ -57,8 +61,46 @@ public class DanhgiaDAO {
             } catch (SQLException ex) {
                 Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
+            nangluc/=tongsocau;
+            NangLuc.put(nd, nangluc);
+        }        
+        return NangLuc;
+    }
+    
+    public HashMap UocLuong(String username, HashMap<String, Double> nangluc) {
+        Connection connection = DBConnect.getConnecttion();
+        
+        HashMap<String, Double> map = new HashMap<>();        
+        double kyvong, phuongsai;
+        int solanthi=0;
+        
+        String sql = "SELECT * FROM table_nangluc WHERE username='" + username + "'";
+        PreparedStatement ps;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                double hamso = (rs.getDouble("hamso") + nangluc.get("hamso")/solanthi)*(solanthi/solanthi+1);
+                double loga = rs.getDouble("loga");
+                double tichphan = rs.getDouble("tichphan");
+                double sophuc = rs.getDouble("sophuc");
+                double hhkg = rs.getDouble("hhkg");
+                double oxyz = rs.getDouble("oxyz");
+                
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        nangluc/=tongsocau;
+        map.put("max",1.2);
+        map.put("min", 1.4);
+        return map;
+    }
+    
+    public static void main(String[] args) {
+        HashMap map = new DanhgiaDAO().DanhGiaNangLuc("00002");
     }
 }

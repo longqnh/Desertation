@@ -4,6 +4,7 @@
     Author     : NTL
 --%>
 
+<%@page import="dao.DanhgiaDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.ThongkeDAO"%>
 <%@page import="dao.QuanLyDeThiDAO"%>
@@ -72,6 +73,9 @@
                     String made = request.getParameter("made");
                     QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();
                     float Diem = qldeThiDAO.GetDiem(made);
+                    
+                    DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+                    danhgiaDAO.DanhGiaNangLuc(made);
                     
                     List<Thongke> noidungYeu = new ArrayList<>();
                     ThongkeDAO thongkeDAO = new ThongkeDAO();

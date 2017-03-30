@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -59,7 +60,7 @@ public class UsersDao {
         return false;
     }
     
-    public boolean InsertUser (Users user) {
+    public void InsertUser (Users user) {
         Connection connection = DBConnect.getConnecttion();
         String sql = "INSERT INTO table_user VALUES(?,?,?,?,?)";
         try {
@@ -70,12 +71,24 @@ public class UsersDao {
             ps.setString(4, user.getEmail());
             ps.setString(5, user.getRole());
             ps.executeUpdate();
-            return true;
         } catch (SQLException ex) {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return false;
+        sql = "INSERT INTO table_nangluc VALUES(?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.setString(1, user.getUsername());
+            ps.setDouble(2, 0);
+            ps.setDouble(3, 0);
+            ps.setDouble(4, 0);
+            ps.setDouble(5, 0);
+            ps.setDouble(6, 0);
+            ps.setDouble(7, 0);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public Users login(String username, String password) {
@@ -103,6 +116,7 @@ public class UsersDao {
     
     public void deleteUser(String username) {
         Connection connection = DBConnect.getConnecttion();
+
         String sql = "DELETE FROM table_user WHERE username='" + username + "'";
         try {
             PreparedStatement ps = connection.prepareCall(sql);
@@ -111,6 +125,20 @@ public class UsersDao {
         } catch (SQLException ex) {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        try {
+//            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+//            String delUser = "DELETE FROM table_user WHERE username='" + username + "'";
+//            String delNL = "DELETE FROM table_nangluc WHERE username='" + username + "'";
+//            
+//            connection.setAutoCommit(false);
+//            statement.addBatch(delUser);
+//            statement.addBatch(delNL);
+//            statement.executeBatch();
+//            connection.commit();
+//            connection.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//	}
     }
 
     public void updateUser(Users user) {

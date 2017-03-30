@@ -213,6 +213,16 @@ CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
   `username` VARCHAR(25) NULL,
   PRIMARY KEY (`made`));
 
+CREATE TABLE `danhgiakienthuc`.`table_nangluc` (
+  `username` VARCHAR(25) NOT NULL,
+  `hamso` DOUBLE NULL,
+  `loga` DOUBLE NULL,
+  `tichphan` DOUBLE NULL,
+  `sophuc` DOUBLE NULL,
+  `hhkg` DOUBLE NULL,
+  `oxyz` DOUBLE NULL,
+  PRIMARY KEY (`username`));
+
 /* CREATE FOREIGN KEY */
 ALTER TABLE `danhgiakienthuc`.`table_hamso`
 	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
@@ -265,6 +275,9 @@ ALTER TABLE `danhgiakienthuc`.`table_quanlydethi`
         ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`) ON DELETE CASCADE,
         ADD FOREIGN KEY (`mucdo`) REFERENCES `danhgiakienthuc`.`table_dokhoDE`(`dokho`);
 
+ALTER TABLE `danhgiakienthuc`.`table_nangluc` 
+        ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`) ON DELETE CASCADE;
+
 /* Stored Procedure */
 DELIMITER $$
 DROP PROCEDURE IF EXISTS thongkenoidung $$
@@ -314,18 +327,38 @@ from table_dokhoCH as dk, table_dethi as dt, table_phanloaidangtoan as pl
 where made=madethi and dt.dangtoan=pl.dangtoan and dt.dangtoan=dangtoan;
 END; $$
 
+-- DELIMITER $$
+-- DROP PROCEDURE IF EXISTS thongkekienthuc $$
+-- CREATE PROCEDURE thongkekienthuc(IN thisinh VARCHAR(25))
+-- BEGIN
+-- select dt.dangtoan as madangtoan, pl.dangtoanTV as dangtoan, 
+-- 	(select COUNT(*) from table_dethi as dt2
+-- 	where username=thisinh and dt2.dangtoan=dt.dangtoan)as socau,
+-- 	(select COUNT(*) from table_dethi as dt3
+--     where username=thisinh and dt3.dangtoan=dt.dangtoan and dt3.dapan=dt3.userchoice) as socaudung 
+-- from table_dethi as dt, table_phanloaidangtoan as pl
+-- where username=thisinh and userchoice=dapan and dt.dangtoan=pl.dangtoan
+-- group by dangtoan;
+-- END; $$
+
 DELIMITER $$
 DROP PROCEDURE IF EXISTS thongkekienthuc $$
-CREATE PROCEDURE thongkekienthuc(IN thisinh VARCHAR(25))
+CREATE PROCEDURE thongkekienthuc
+(
+    IN thisinh VARCHAR(25),
+    IN noidung VARCHAR(45)
+)
 BEGIN
-select dt.dangtoan as madangtoan, pl.dangtoanTV as dangtoan, 
+select * from
+(select dt.dangtoan as madangtoan, pl.dangtoanTV as dangtoan, 
 	(select COUNT(*) from table_dethi as dt2
 	where username=thisinh and dt2.dangtoan=dt.dangtoan)as socau,
 	(select COUNT(*) from table_dethi as dt3
     where username=thisinh and dt3.dangtoan=dt.dangtoan and dt3.dapan=dt3.userchoice) as socaudung 
 from table_dethi as dt, table_phanloaidangtoan as pl
 where username=thisinh and userchoice=dapan and dt.dangtoan=pl.dangtoan
-group by dangtoan;
+group by dangtoan) as foo
+where madangtoan=noidung;
 END; $$
 
 /* Insert Data */
