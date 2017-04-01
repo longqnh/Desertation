@@ -6,9 +6,10 @@ CREATE TABLE `danhgiakienthuc`.`table_user` (
   `password` VARCHAR(45) NULL,
   `name` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
+  `lop` INT NULL,
   `role` VARCHAR(45) NULL,
   PRIMARY KEY (`username`));
-INSERT INTO `danhgiakienthuc`.`table_user` (`username`, `password`, `name`, `email`, `role`) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'abc@xyz.com', 'admin');
+INSERT INTO `danhgiakienthuc`.`table_user` (`username`, `password`, `name`, `email`, `lop` ,`role`) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'abc@xyz.com', '12' ,'admin');
 
 CREATE TABLE `danhgiakienthuc`.`table_hamso` (
   `id` VARCHAR(45) NOT NULL,
@@ -213,7 +214,17 @@ CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
   `username` VARCHAR(25) NULL,
   PRIMARY KEY (`made`));
 
-CREATE TABLE `danhgiakienthuc`.`table_nangluc` (
+CREATE TABLE `danhgiakienthuc`.`table_kyvong12` (
+  `username` VARCHAR(25) NOT NULL,
+  `hamso` DOUBLE NULL,
+  `loga` DOUBLE NULL,
+  `tichphan` DOUBLE NULL,
+  `sophuc` DOUBLE NULL,
+  `hhkg` DOUBLE NULL,
+  `oxyz` DOUBLE NULL,
+  PRIMARY KEY (`username`));
+
+CREATE TABLE `danhgiakienthuc`.`table_phuongsai12` (
   `username` VARCHAR(25) NOT NULL,
   `hamso` DOUBLE NULL,
   `loga` DOUBLE NULL,
@@ -224,6 +235,8 @@ CREATE TABLE `danhgiakienthuc`.`table_nangluc` (
   PRIMARY KEY (`username`));
 
 /* CREATE FOREIGN KEY */
+ALTER TABLE `danhgiakienthuc`.`table_user` ADD FOREIGN KEY (`lop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);	
+
 ALTER TABLE `danhgiakienthuc`.`table_hamso`
 	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
@@ -275,7 +288,10 @@ ALTER TABLE `danhgiakienthuc`.`table_quanlydethi`
         ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`) ON DELETE CASCADE,
         ADD FOREIGN KEY (`mucdo`) REFERENCES `danhgiakienthuc`.`table_dokhoDE`(`dokho`);
 
-ALTER TABLE `danhgiakienthuc`.`table_nangluc` 
+ALTER TABLE `danhgiakienthuc`.`table_kyvong12` 
+        ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`) ON DELETE CASCADE;
+
+ALTER TABLE `danhgiakienthuc`.`table_phuongsai12` 
         ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`) ON DELETE CASCADE;
 
 /* Stored Procedure */

@@ -4,6 +4,9 @@
     Author     : NTL
 --%>
 
+<%@page import="model.Lop"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.LopDAO"%>
 <%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -79,6 +82,23 @@
                         <div class="edit-field">
                             <label>Địa chỉ Email: </label>
                             <input type="text" name="email" id="email" value="<%=users.getEmail()%>">
+                        </div>
+
+                        <div class="edit-field">
+                            <label>Lớp: </label>
+                            <select name="lop" id="lop" required>
+                                <option value="" disabled selected>Lớp</option>
+                                <%  LopDAO lopDAO = new LopDAO(); 
+                                    List<Lop> dsLop = lopDAO.GetAllLop(); 
+                                    for (Lop lop: dsLop) { 
+                                        if (lop.getMalop()==users.getLop()) { %>
+                                            <option value="<%=lop.getMalop()%>" selected=""> <%=lop.getTenlop()%> </option>                                 
+                                <%      } else { %>
+                                            <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>
+                                <%      }
+                                    }   
+                                %>
+                            </select>     
                         </div>
                         
                         <input type="password" name="currentpass" id="currentpass" value="<%=users.getPassword()%>" hidden="">

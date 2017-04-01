@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Users;
 
 /**
  *
@@ -73,30 +74,104 @@ public class DanhgiaDAO {
         return nangluc;
     }
     
-    public HashMap UocLuong(String username, String noidung, int solanthi, double nangluc) {
+    public HashMap UocLuong(Users user, String noidung) {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM table_nangluc WHERE username='" + username + "'";
+        
+        String table_kyvong="", table_phuongsai="";
+        double kyvong=0, phuongsai=0;       
+        
+        switch (user.getLop()) {
+            case 12:
+                table_kyvong = "table_kyvong12";
+                table_phuongsai = "table_phuongsai12";
+                break;
+            case 11:
+                table_kyvong = "table_kyvong11";       
+                table_phuongsai = "table_phuongsai12";
+                break;
+            case 10:
+                table_kyvong = "table_kyvong10";                
+                table_phuongsai = "table_phuongsai12";
+                break;
+        }
+        
+        String sql = "SELECT * FROM " + table_kyvong + "WHERE username='" + user.getUsername() + "'";
         PreparedStatement ps;
 
-        HashMap<String, Double> map = new HashMap<>();        
+        HashMap<String, Double> khoanguocluong = new HashMap<>();        
                 
         try {
             ps = connection.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                double kyvong = (rs.getDouble(noidung) + nangluc/solanthi-1)*(solanthi-1/solanthi);
+                kyvong = rs.getDouble(noidung);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        map.put("max", 1.2);
-        map.put("min", 1.4);
-        return map;
+        sql = "SELECT * FROM " + table_phuongsai + "WHERE username='" + user.getUsername() + "'";
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                phuongsai = rs.getDouble(noidung);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        khoanguocluong.put("max", kyvong + phuongsai);
+        khoanguocluong.put("min", kyvong - phuongsai);
+        return khoanguocluong;
+    }
+    
+    public void updateKyVong(Users user, String noidung, int solanthi, double nangluc) {
+        Connection connection = DBConnect.getConnecttion();
+        
+        String table_kyvong="";
+        double kyvong = 0;
+        
+        switch (user.getLop()) {
+            case 12:
+                table_kyvong = "table_kyvong12";
+                break;
+            case 11:
+                table_kyvong = "table_kyvong11"; 
+                break;
+            case 10:
+                table_kyvong = "table_kyvong10";
+                break;
+        }
+        
+        String sql = "SELECT * FROM " + table_kyvong + "WHERE username='" + user.getUsername() + "'";
+        PreparedStatement ps;      
+
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                kyvong = (rs.getDouble(noidung) + nangluc/solanthi-1)*(solanthi-1/solanthi);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        sql = "UPDATE " + table_kyvong + " SET " + noidung + "='" + kyvong + "' WHERE username='" + user.getUsername() + "'";
+        try {
+            ps = connection.prepareCall(sql);
+            ps.execute(sql);
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+        }        
     }
     
     public static void main(String[] args) {
+//        System.out.println(new DanhgiaDAO().GetSolanthi("longqnh", "Hàm số"));        
         new DanhgiaDAO().DanhGiaNangLuc("00003", "hamso");
     }
 }

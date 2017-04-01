@@ -71,6 +71,12 @@
                             type: 'text',
                             edit: true
                         },
+                        lop: {
+                            title: 'Lớp',
+                            type: 'select',
+                            options: {'10': 'Lớp 10', '11': 'Lớp 11', '12': 'Lớp 12'},
+                            edit: true                            
+                        },
                         role: {
                             title: 'Chức danh',
                             type: 'select',

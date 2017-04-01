@@ -62,22 +62,38 @@ public class UsersDao {
     
     public void InsertUser (Users user) {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "INSERT INTO table_user VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO table_user VALUES(?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareCall(sql);
             ps.setString(1, user.getUsername());
             ps.setString(2, MD5.encryption(user.getPassword()));
             ps.setString(3, user.getName());
             ps.setString(4, user.getEmail());
-            ps.setString(5, user.getRole());
+            ps.setInt(5, user.getLop());
+            ps.setString(6, user.getRole());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        sql = "INSERT INTO table_nangluc VALUES(?,?,?,?,?,?,?)";
+        String sql_kyvong="", sql_phuongsai="";
+        switch (user.getLop()) {
+            case 12:
+                sql_kyvong = "INSERT INTO table_kyvong12 VALUES(?,?,?,?,?,?,?)";
+                sql_phuongsai = "INSERT INTO table_phuongsai12 VALUES(?,?,?,?,?,?,?)";                
+                break;
+            case 11:
+                sql_kyvong = "INSERT INTO table_kyvong11 VALUES(?,?,?,?,?,?,?)";
+                sql_phuongsai = "INSERT INTO table_phuongsai11 VALUES(?,?,?,?,?,?,?)";                                
+                break;
+            case 10:
+                sql_kyvong = "INSERT INTO table_kyvong10 VALUES(?,?,?,?,?,?,?)";
+                sql_phuongsai = "INSERT INTO table_phuongsai10 VALUES(?,?,?,?,?,?,?)";                                
+                break;
+        }
+
         try {
-            PreparedStatement ps = connection.prepareCall(sql);
+            PreparedStatement ps = connection.prepareCall(sql_kyvong);
             ps.setString(1, user.getUsername());
             ps.setDouble(2, 0);
             ps.setDouble(3, 0);
@@ -88,7 +104,21 @@ public class UsersDao {
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }        
+        
+        try {
+            PreparedStatement ps = connection.prepareCall(sql_phuongsai);
+            ps.setString(1, user.getUsername());
+            ps.setDouble(2, 0);
+            ps.setDouble(3, 0);
+            ps.setDouble(4, 0);
+            ps.setDouble(5, 0);
+            ps.setDouble(6, 0);
+            ps.setDouble(7, 0);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+        }             
     }
     
     public Users login(String username, String password) {
@@ -104,6 +134,7 @@ public class UsersDao {
                 u.setPassword(rs.getString("password"));
                 u.setName(rs.getString("name"));
                 u.setEmail(rs.getString("email"));
+                u.setLop(rs.getInt("lop"));
                 u.setRole(rs.getString("role"));
                 con.close();
                 return u;
@@ -125,26 +156,12 @@ public class UsersDao {
         } catch (SQLException ex) {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        try {
-//            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-//            String delUser = "DELETE FROM table_user WHERE username='" + username + "'";
-//            String delNL = "DELETE FROM table_nangluc WHERE username='" + username + "'";
-//            
-//            connection.setAutoCommit(false);
-//            statement.addBatch(delUser);
-//            statement.addBatch(delNL);
-//            statement.executeBatch();
-//            connection.commit();
-//            connection.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//	}
     }
 
     public void updateUser(Users user) {
         Connection connection = DBConnect.getConnecttion();
         String sql = "UPDATE table_user SET name='" + user.getName() + "', email='" + user.getEmail() +  
-                "', password='" + user.getPassword() + "', role='" + user.getRole() + "' WHERE username='" + user.getUsername() + "'";
+                "', password='" + MD5.encryption(user.getPassword()) + "', lop='" + user.getLop() + "', role='" + user.getRole() + "' WHERE username='" + user.getUsername() + "'";
         try {
             PreparedStatement ps = connection.prepareCall(sql);
             ps.execute(sql);
@@ -168,9 +185,10 @@ public class UsersDao {
                 String password = rs.getString("password");
                 String name = rs.getString("name");
                 String email = rs.getString("email");
+                int lop = rs.getInt("lop");
                 String role = rs.getString("role");
                 
-                Users u = new Users(username, password, name, email, role);
+                Users u = new Users(username, password, name, email, role, lop);
                 list.add(u);
             }
         } catch (SQLException e) {
@@ -194,9 +212,10 @@ public class UsersDao {
                 String password = rs.getString("password");
                 String name = rs.getString("name");
                 String email = rs.getString("email");
+                int lop = rs.getInt("lop");
                 String role = rs.getString("role");
                 
-                Users u = new Users(username, password, name, email, role);
+                Users u = new Users(username, password, name, email, role, lop);
                 list.add(u);
             }
         } catch (SQLException e) {

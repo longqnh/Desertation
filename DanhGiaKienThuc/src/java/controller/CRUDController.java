@@ -110,6 +110,11 @@ public class CRUDController extends HttpServlet {
                         user.setEmail(email);
                     }
 
+                    if (request.getParameter("lop") != null) {
+                        int lop = Integer.parseInt(request.getParameter("lop"));
+                        user.setLop(lop);
+                    }
+                    
                     if (request.getParameter("role") != null) {
                         String role = request.getParameter("role");
                         user.setRole(role);

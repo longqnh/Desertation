@@ -164,3 +164,17 @@ input:focus ~ .highlight {
     }
 }
 
+select {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 3px 0px 3px 3px;
+    border: 1px solid #DDDDDD;
+    width: 300px;
+}
+
+#lop {
+    margin: 40px 0px 0px 0px;
+}

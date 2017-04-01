@@ -15,16 +15,18 @@ public class Users {
     private String name;
     private String email;
     private String role;
-
+    private int lop;
+    
     public Users() {
     }
 
-    public Users(String username, String password, String name, String email, String role) {
+    public Users(String username, String password, String name, String email, String role, int lop) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
         this.role = role;
+        this.lop = lop;
     }
 
     public String getUsername() {
@@ -65,5 +67,13 @@ public class Users {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getLop() {
+        return lop;
+    }
+
+    public void setLop(int lop) {
+        this.lop = lop;
     }
 }

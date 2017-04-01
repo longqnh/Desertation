@@ -4,6 +4,9 @@
     Author     : NTL
 --%>
 
+<%@page import="model.Lop"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.LopDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -44,6 +47,18 @@
                     <span id="confirm_password-result"></span>
                 </div>
                 <script type="text/javascript" src="js/CheckPass.js"></script>
+                
+                <div class="group">
+                    <label>Hiện đang là học sinh lớp: </label>
+                    <select name="lop" id="lop" required>
+                        <option value="" disabled selected>Lớp</option>
+                        <%  LopDAO lopDAO = new LopDAO(); 
+                            List<Lop> dsLop = lopDAO.GetAllLop(); 
+                            for (Lop lop: dsLop) { %>
+                                <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>                                  
+                        <%  } %>
+                    </select>                  
+                </div>
                 
                 <div class="group">      
                     <input type="text" required name="name" id="name">

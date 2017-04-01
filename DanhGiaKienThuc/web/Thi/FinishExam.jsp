@@ -75,7 +75,6 @@
                     float Diem = qldeThiDAO.GetDiem(made);
                     
                     DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
-                    danhgiaDAO.DanhGiaNangLuc(made);
                     
                     List<Thongke> noidungYeu = new ArrayList<>();
                     ThongkeDAO thongkeDAO = new ThongkeDAO();

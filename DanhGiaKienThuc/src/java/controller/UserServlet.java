@@ -57,9 +57,11 @@ public class UserServlet extends HttpServlet {
         switch (command) {
             case "insert":
                 users.setUsername(request.getParameter("username"));
-                users.setPassword(MD5.encryption(request.getParameter("password")));
+                users.setPassword(request.getParameter("password"));
                 users.setName(request.getParameter("name"));
                 users.setEmail(request.getParameter("email"));
+                users.setLop(Integer.parseInt(request.getParameter("lop")));
+                users.setRole("user");
                 
                 usersDao.InsertUser(users);
 
@@ -102,6 +104,7 @@ public class UserServlet extends HttpServlet {
                 }
                 users.setName(request.getParameter("name"));
                 users.setEmail(request.getParameter("email"));
+                users.setLop(Integer.parseInt(request.getParameter("lop")));
                 
                 usersDao.updateUser(users);
                 
