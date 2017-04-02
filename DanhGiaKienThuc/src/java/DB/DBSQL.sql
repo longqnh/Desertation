@@ -226,12 +226,12 @@ CREATE TABLE `danhgiakienthuc`.`table_kyvong12` (
 
 CREATE TABLE `danhgiakienthuc`.`table_phuongsai12` (
   `username` VARCHAR(25) NOT NULL,
-  `hamso` DOUBLE NULL,
-  `loga` DOUBLE NULL,
-  `tichphan` DOUBLE NULL,
-  `sophuc` DOUBLE NULL,
-  `hhkg` DOUBLE NULL,
-  `oxyz` DOUBLE NULL,
+  `hamso` LONGTEXT NULL,
+  `loga` LONGTEXT NULL,
+  `tichphan` LONGTEXT NULL,
+  `sophuc` LONGTEXT NULL,
+  `hhkg` LONGTEXT NULL,
+  `oxyz` LONGTEXT NULL,
   PRIMARY KEY (`username`));
 
 /* CREATE FOREIGN KEY */

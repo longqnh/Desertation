@@ -22,6 +22,10 @@ import model.Users;
  * @author NTL
  */
 public class DanhgiaDAO {
+    public static double round(double d) {
+        return Math.round(d * 100.0)/100.0;
+    }
+    
     public int GetSolanthi(String username, String noidung) {
         Connection connection = DBConnect.getConnecttion();
         String sql = "SELECT * FROM table_quanlydethi WHERE username='" + username + "'";
@@ -87,15 +91,15 @@ public class DanhgiaDAO {
                 break;
             case 11:
                 table_kyvong = "table_kyvong11";       
-                table_phuongsai = "table_phuongsai12";
+                table_phuongsai = "table_phuongsai11";
                 break;
             case 10:
                 table_kyvong = "table_kyvong10";                
-                table_phuongsai = "table_phuongsai12";
+                table_phuongsai = "table_phuongsai10";
                 break;
         }
         
-        String sql = "SELECT * FROM " + table_kyvong + "WHERE username='" + user.getUsername() + "'";
+        String sql = "SELECT * FROM " + table_kyvong + " WHERE username='" + user.getUsername() + "'";
         PreparedStatement ps;
 
         HashMap<String, Double> khoanguocluong = new HashMap<>();        
@@ -111,13 +115,24 @@ public class DanhgiaDAO {
             Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        sql = "SELECT * FROM " + table_phuongsai + "WHERE username='" + user.getUsername() + "'";
+        sql = "SELECT * FROM " + table_phuongsai + " WHERE username='" + user.getUsername() + "'";
         try {
             ps = connection.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                phuongsai = rs.getDouble(noidung);
+                String str = rs.getString(noidung);
+                String []sp = str.split(" ");
+                List<Double> arr = new ArrayList<>();
+                for (String s : sp) {
+                    arr.add(round(Double.parseDouble(s)));
+                }
+                
+                for (int i = 0; i < arr.size(); i++) {
+                    phuongsai += ((arr.get(i) - kyvong)*(arr.get(i) - kyvong));                    
+                }
+                phuongsai/=arr.size();
+                phuongsai=round(Math.sqrt(phuongsai));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,6 +141,46 @@ public class DanhgiaDAO {
         khoanguocluong.put("max", kyvong + phuongsai);
         khoanguocluong.put("min", kyvong - phuongsai);
         return khoanguocluong;
+    }
+    
+    public void updatePhuongSai (Users user, String noidung, double ability) {
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        String table_phuongsai = "";
+        
+        switch (user.getLop()) {
+            case 12:
+                table_phuongsai = "table_phuongsai12";
+                break;
+            case 11:
+                table_phuongsai = "table_phuongsai11";
+                break;
+            case 10:
+                table_phuongsai = "table_phuongsai10";
+                break;
+        }        
+
+        String nangluc = "";
+        String sql = "SELECT * FROM " + table_phuongsai + " WHERE username='" + user.getUsername() + "'";
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                nangluc = rs.getString(noidung) + " " + Double.toString(round(ability));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }      
+        
+        sql = "UPDATE " + table_phuongsai + " SET " + noidung + "='" + nangluc + "' WHERE username='" + user.getUsername() + "'";
+        try {
+            ps = connection.prepareCall(sql);
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }             
     }
     
     public void updateKyVong(Users user, String noidung, int solanthi, double nangluc) {
@@ -171,7 +226,13 @@ public class DanhgiaDAO {
     }
     
     public static void main(String[] args) {
-//        System.out.println(new DanhgiaDAO().GetSolanthi("longqnh", "Hàm số"));        
-        new DanhgiaDAO().DanhGiaNangLuc("00003", "hamso");
+//        System.out.println(new DanhgiaDAO().GetSolanthi("longqnh", "Hàm số"));
+//        String noidung = "hamso";
+//        Users user = new Users("longqnh", null, null, null, null, 12);
+//        int solanthi = new DanhgiaDAO().GetSolanthi(user.getUsername(), "Hàm số");
+//        double nangluc = new DanhgiaDAO().DanhGiaNangLuc("00003", noidung);
+//        new DanhgiaDAO().updateKyVong(user, noidung, solanthi, nangluc);
+//        new DanhgiaDAO().updatePhuongSai(user, noidung, nangluc);
+//        new DanhgiaDAO().UocLuong(user, noidung, solanthi);
     }
 }

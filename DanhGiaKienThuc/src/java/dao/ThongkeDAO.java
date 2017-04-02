@@ -94,4 +94,31 @@ public class ThongkeDAO {
         }
         return list;
     }
+    
+    public Thongke thongkekienthuc(String username, String noidung) {        
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "CALL thongkekienthuc('" + username + "','" + noidung + "')";
+        PreparedStatement ps;
+        
+        Thongke thongke = new Thongke();
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                String dangtoan = rs.getString("dangtoan");
+                int socau = rs.getInt("socau");
+                int socaudung = rs.getInt("socaudung");
+                
+                thongke.setDangtoan(dangtoan);
+                thongke.setSocau(socau);
+                thongke.setSocaudung(socaudung);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongkeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return thongke;
+    }    
 }

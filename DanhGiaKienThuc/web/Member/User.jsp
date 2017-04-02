@@ -51,7 +51,7 @@
                     <ul>
                         <li><a href="<%=request.getContextPath()%>/Member/User.jsp"> Thông tin tài khoản </a></li>
                         <li><a href="<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>
-                        <li><a href="<%=request.getContextPath()%>/Member/DanhGia.jsp"> Đánh giá kiến thức</a></li>
+                        <li><a href="<%=request.getContextPath()%>/thongke"> Đánh giá kiến thức</a></li>
                         <%
                             if (users.getUsername().equals("admin")) { %>                     
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLTK.jsp"> Quản lý các tài khoản</a></li>
@@ -67,7 +67,7 @@
             <div id="main-right">
                 <h2>Thông tin tài khoản</h2>
                 
-                <form action="../UserServlet" method="POST">
+                <form action="${pageContext.request.contextPath}/UserServlet" method="POST">
                     <div class="edit-info">
                         <div class="edit-field">
                             <label>Tên tài khoản: </label>
