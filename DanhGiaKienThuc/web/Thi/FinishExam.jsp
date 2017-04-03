@@ -73,9 +73,7 @@
                     String made = request.getParameter("made");
                     QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();
                     float Diem = qldeThiDAO.GetDiem(made);
-                    
-                    DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
-                    
+                                       
                     List<Thongke> noidungYeu = new ArrayList<>();
                     ThongkeDAO thongkeDAO = new ThongkeDAO();
                     List<Thongke> thongkeND = thongkeDAO.thongkenoidung(made);

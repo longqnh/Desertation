@@ -95,12 +95,12 @@ public class UsersDao {
         try {
             PreparedStatement ps = connection.prepareCall(sql_kyvong);
             ps.setString(1, user.getUsername());
-            ps.setDouble(2, 0);
-            ps.setDouble(3, 0);
-            ps.setDouble(4, 0);
-            ps.setDouble(5, 0);
-            ps.setDouble(6, 0);
-            ps.setDouble(7, 0);
+            ps.setDouble(2, 1);
+            ps.setDouble(3, 1);
+            ps.setDouble(4, 1);
+            ps.setDouble(5, 1);
+            ps.setDouble(6, 1);
+            ps.setDouble(7, 1);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,12 +109,12 @@ public class UsersDao {
         try {
             PreparedStatement ps = connection.prepareCall(sql_phuongsai);
             ps.setString(1, user.getUsername());
-            ps.setDouble(2, 0);
-            ps.setDouble(3, 0);
-            ps.setDouble(4, 0);
-            ps.setDouble(5, 0);
-            ps.setDouble(6, 0);
-            ps.setDouble(7, 0);
+            ps.setString(2, "0");
+            ps.setString(3, "0");
+            ps.setString(4, "0");
+            ps.setString(5, "0");
+            ps.setString(6, "0");
+            ps.setString(7, "0");
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);

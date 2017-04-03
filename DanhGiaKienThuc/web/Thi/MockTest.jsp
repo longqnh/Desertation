@@ -22,15 +22,15 @@
             if (users==null) {
                 response.sendRedirect(request.getContextPath() + "/login.jsp");
             } else { %>        
-                <jsp:forward page="LamDeThi.jsp">
-                    <jsp:param name="kienthuc" value="hamso"></jsp:param>
-                    <jsp:param name="kienthuc" value="loga"></jsp:param>
-                    <jsp:param name="kienthuc" value="tichphan"></jsp:param>
-                    <jsp:param name="kienthuc" value="sophuc"></jsp:param>
-                    <jsp:param name="kienthuc" value="hhkg"></jsp:param>
-                    <jsp:param name="kienthuc" value="oxyz"></jsp:param>
-                    <jsp:param name="dokho" value="1"></jsp:param>
-                    <jsp:param name="time" value="90"></jsp:param>
+                <jsp:forward page="/LamDeThi">
+                    <jsp:param name="kienthuc" value="hamso"/>
+                    <jsp:param name="kienthuc" value="loga"/>
+                    <jsp:param name="kienthuc" value="tichphan"/>
+                    <jsp:param name="kienthuc" value="sophuc"/>
+                    <jsp:param name="kienthuc" value="hhkg"/>
+                    <jsp:param name="kienthuc" value="oxyz"/>
+                    <jsp:param name="dokho" value="1"/>
+                    <jsp:param name="time" value="90"/>
                 </jsp:forward>
             <%  }  %>
     </body>

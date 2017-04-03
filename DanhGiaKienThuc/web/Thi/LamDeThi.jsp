@@ -21,7 +21,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>LÀM ĐỀ THI</title>
-        <link rel="stylesheet" href="../css/DoExamStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/DoExamStyle.css" type="text/css">
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">
@@ -55,10 +55,10 @@
                         <li id="user-info"><a href="#" style="text-transform: none; text-align: center;"><%=users.getUsername()%></a>
                             <ul class="sub-top-right">
                                 <%
-                                    String page_redirect= "../Member/User.jsp?username=" + users.getUsername();
+                                    String page_redirect= request.getContextPath() + "/Member/User.jsp?username=" + users.getUsername();
                                 %>
                                 <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
-                                <form action="../UserServlet"method="POST">
+                                <form action="${pageContext.request.contextPath}/UserServlet"method="POST">
                                     <input id="btnlogout" type="submit" value="Thoát">
                                     <input type="hidden" value="logout" name="command">
                                 </form>
@@ -69,20 +69,11 @@
             </div>
 
             <div id="top-left">
-                <a href="../index.jsp">website đánh giá kiến thức toán thpt</a>
+                <a href="${pageContext.request.contextPath}/index.jsp">website đánh giá kiến thức toán thpt</a>
             </div>
 
             <%
-                String[] noidung = request.getParameterValues("kienthuc");
-                int level = Integer.parseInt(request.getParameter("dokho"));
-                int time = Integer.parseInt(request.getParameter("time")); 
-                
-                int numQuestion = (time == 15 ? 10 : (time == 60 ? 40 : 50));
-                
-                DethiDAO dethiDAO = new DethiDAO();
-                dethiDAO.TaoDe(noidung, level, numQuestion, users.getUsername(), time);
-                String made = dethiDAO.GetMade(users.getUsername());
-                List exam = dethiDAO.GetDeThi(made);
+                List exam = (List) request.getAttribute("exam");
             %>
                     
                 <div id="sticky-anchor"></div>
@@ -104,7 +95,7 @@
                         }
                     </script>
                     
-                    <script type="text/javascript" src="../js/SelectQuestion.js"></script>
+                    <script type="text/javascript" src="${pageContext.request.contextPath}/js/SelectQuestion.js"></script>
                     
                     <button id="btnSubmit" onclick="SubmitExam()"> Nộp bài </button>
                 </div>
@@ -130,11 +121,11 @@
         </div>
         
         <div id="main">
-            <form id="doExam" name="doExam" action="../FinishExam" method="POST">
-                <h2>ĐỀ LUYỆN TẬP - Mã đề: <%=made%> </h2>
+            <form id="doExam" name="doExam" action="${pageContext.request.contextPath}/FinishExam" method="POST">
+                <h2>ĐỀ LUYỆN TẬP - Mã đề: ${sessionScope.made} </h2>
                 
-                <input type="hidden" id="examtime" value="<%=time%>">
-                <script src="../js/TimeCounterJS.js" type="text/javascript"></script>
+                <input type="hidden" id="examtime" value="${requestScope.time}">
+                <script src="${pageContext.request.contextPath}/js/TimeCounterJS.js" type="text/javascript"></script>
 
                 <%    
                     List IDlist = new ArrayList(); // save id of every question
@@ -146,7 +137,7 @@
                             <p><b>Câu <%=i+1%> (<%=q.getId()%>):</b> <%=q.getNoidung()%></p>
                             <%
                                 if (q.getHinh()==1) { %>
-                                    <img src="../images/<%=q.getDangtoan()%>/<%=q.getId()%>.JPG">
+                                    <img src="${pageContext.request.contextPath}/images/<%=q.getDangtoan()%>/<%=q.getId()%>.JPG">
                             <% } %>
                             <p><b>A. </b><input type="radio" name="<%=q.getId()%>" value="A"> <%=q.getDapanA()%></p>
                             <p><b>B. </b><input type="radio" name="<%=q.getId()%>" value="B"> <%=q.getDapanB()%></p>
@@ -157,7 +148,6 @@
                         IDlist.add(q.getId()); 
                     }
                         session.setAttribute("ID_List", IDlist);
-                        session.setAttribute("made", made);
                     %>
                     
                     <script type="text/javascript">

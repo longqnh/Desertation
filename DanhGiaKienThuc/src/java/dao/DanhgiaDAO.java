@@ -75,7 +75,7 @@ public class DanhgiaDAO {
         }
         nangluc/=tongsocau;  
     
-        return nangluc;
+        return round(nangluc);
     }
     
     public HashMap UocLuong(Users user, String noidung) {
@@ -201,7 +201,7 @@ public class DanhgiaDAO {
                 break;
         }
         
-        String sql = "SELECT * FROM " + table_kyvong + "WHERE username='" + user.getUsername() + "'";
+        String sql = "SELECT * FROM " + table_kyvong + " WHERE username='" + user.getUsername() + "'";
         PreparedStatement ps;      
 
         try {

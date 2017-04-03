@@ -82,7 +82,7 @@
             <div id="main-right">
                 <h2>Thông tin đề thi</h2>
                 
-                <form id="createExam" name="createExam" action="LamDeThi.jsp" method="POST">
+                <form id="createExam" name="createExam" action="${pageContext.request.contextPath}/LamDeThi" method="POST">
 <!--                    <div class="search-field">
                         <label>Chọn lớp: </label>
                         <select name="lop" id="lop" required onchange="Ajax()">

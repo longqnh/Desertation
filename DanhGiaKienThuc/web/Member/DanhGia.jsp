@@ -80,8 +80,8 @@
                         // Create the data table.    
                         var data = google.visualization.arrayToDataTable([
                             ['', ''],
-                            ['Số câu đúng', ${requestScope.socaudung}],
-                            ['Số câu sai', ${requestScope.socausai}]
+                            ['Số câu sai', ${requestScope.socausai}],
+                            ['Số câu đúng', ${requestScope.socaudung}]
                         ]);
                         // Set chart options
                         var options = {
@@ -90,7 +90,8 @@
                             pieSliceText: 'label',
                             tooltip: {showColorCode: true},
                             'width': 700,
-                            'height': 400
+                            'height': 400,
+                            colors: ['red', 'blue']
                         };
 
                         // Instantiate and draw our chart, passing in some options.
@@ -101,7 +102,7 @@
         
                 <div id="Chart"></div>
                 
-                <span id="loinhanxet">${requestScope.Message}</span>
+                <span id="loinhanxet">${requestScope.Message}</span><br>
                 
                 <form class="_btn" action="${pageContext.request.contextPath}/thongke" method="GET">
                     <button type="submit" class="btnXemDA" name="kienthuc" value="hamso">Hàm số</button>

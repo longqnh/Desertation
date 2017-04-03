@@ -372,7 +372,7 @@ select * from
 	(select COUNT(*) from table_dethi as dt3
     where username=thisinh and dt3.dangtoan=dt.dangtoan and dt3.dapan=dt3.userchoice) as socaudung 
 from table_dethi as dt, table_phanloaidangtoan as pl
-where username=thisinh and userchoice=dapan and dt.dangtoan=pl.dangtoan
+where username=thisinh and dt.dangtoan=pl.dangtoan
 group by dangtoan) as foo
 where madangtoan=noidung;
 END; $$

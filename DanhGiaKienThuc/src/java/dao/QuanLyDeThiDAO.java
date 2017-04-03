@@ -133,4 +133,24 @@ public class QuanLyDeThiDAO {
         }
         return false;        
     }
+    
+    public static String GetNoidungTV(String noidung) {
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        String sql = "SELECT * FROM table_phanloaidangtoan WHERE dangtoan='" + noidung + "'";
+        String res = null;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                res = rs.getString("dangtoanTV");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyDeThiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return res;
+    }
 }
