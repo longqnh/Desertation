@@ -111,7 +111,8 @@ public class UserServlet extends HttpServlet {
                 session.setAttribute("user", users);
                 session.setAttribute("SuccMessage", "Cập nhật thành công");
                 
-                response.sendRedirect("Member/User.jsp");
+                url = "/Member/User.jsp";
+//                response.sendRedirect("Member/User.jsp");
                 return;
 //                break;
         }

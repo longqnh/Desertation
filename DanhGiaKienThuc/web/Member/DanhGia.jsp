@@ -65,6 +65,23 @@
             <div id="main-right">
                 <h2>Đánh giá kiến thức</h2>
                 
+<!--                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('.btnXemDA').click(function () {
+                           var noidung = $(this).attr('value');
+//                           alert(noidung);
+                           $.ajax({
+                                type: 'GET',
+                                data: {noidung: noidung},
+                                url: '{pageContext.request.contextPath}/thongke',
+                                success: function (result) {
+                                    $('#loinhanxet').html(result);
+                                }
+                           });
+                        });
+                    });
+                </script>-->
+
                 <script type="text/javascript">
                     // Load the Visualization API and the piechart package.
                     google.load('visualization', '1', {'packages': ['columnchart']});

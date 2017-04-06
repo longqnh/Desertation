@@ -272,5 +272,52 @@ public class DethiDAO {
         }        
         
         return list;
-    }    
+    }
+    
+    public float ChamDiem (String made, String thisinh, List IDList, List UserAnswer) {
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        String sql;
+        
+        int socau = IDList.size();
+        int socaudung = 0;
+        
+        for (int i=0; i<socau; i++) {
+            String id = IDList.get(i).toString();
+            String user_select = UserAnswer.get(i).toString();
+            
+            sql = "SELECT * FROM table_dethi WHERE (made='" + made + "') AND (id='" + id + "')";
+        
+            try {
+                ps = connection.prepareCall(sql);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    String correct = rs.getString("dapan");
+                    if (user_select == null) {
+                    } else {
+                        if (correct.equals(user_select)) {
+                            socaudung++;
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            
+            sql =   "UPDATE table_dethi SET userchoice=?, username=? WHERE (id=? AND made=?)";
+            try {
+                ps = connection.prepareCall(sql);
+                ps.setString(1, user_select);
+                ps.setString(2, thisinh);
+                ps.setString(3, id);
+                ps.setString(4, made);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }            
+        }
+        
+        float score = socaudung*((float)10/socau);
+        return score;
+    }
 }

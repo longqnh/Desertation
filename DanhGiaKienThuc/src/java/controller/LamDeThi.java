@@ -50,15 +50,15 @@ public class LamDeThi extends HttpServlet {
         //
         
         // update kv, ps
-        for (String nd: noidung) {
-            String lanthicuoi = dethiDAO.GetMade(users.getUsername(), nd);
-            int solanthi = danhgiaDAO.GetSolanthi(users.getUsername(), QuanLyDeThiDAO.GetNoidungTV(nd));
-            if (lanthicuoi!=null && solanthi > 0) {
-                double nangluc = danhgiaDAO.DanhGiaNangLuc(lanthicuoi, nd);
-                danhgiaDAO.updateKyVong(users, nd, solanthi, nangluc);
-                danhgiaDAO.updatePhuongSai(users, nd, nangluc);                    
-            }
-        }
+//        for (String nd: noidung) {
+//            String lanthicuoi = dethiDAO.GetMade(users.getUsername(), nd);
+//            int solanthi = danhgiaDAO.GetSolanthi(users.getUsername(), QuanLyDeThiDAO.GetNoidungTV(nd));
+//            if (lanthicuoi!=null && solanthi > 0) {
+//                double nangluc = danhgiaDAO.DanhGiaNangLuc(lanthicuoi, nd);
+//                danhgiaDAO.updateKyVong(users, nd, solanthi, nangluc);
+//                danhgiaDAO.updatePhuongSai(users, nd, nangluc);                    
+//            }
+//        }
         //
         
         // tao de

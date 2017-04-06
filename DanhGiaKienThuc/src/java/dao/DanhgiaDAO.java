@@ -22,7 +22,7 @@ import model.Users;
  * @author NTL
  */
 public class DanhgiaDAO {
-    public static double round(double d) {
+    private static double round(double d) {
         return Math.round(d * 100.0)/100.0;
     }
     

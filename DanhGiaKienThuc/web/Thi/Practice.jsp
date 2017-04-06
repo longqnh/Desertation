@@ -106,9 +106,6 @@
                                 for (Dokho dokho:dsLevel) { %>
                                     <option value="<%=dokho.getDokho()%>"> <%=dokho.getMucdo()%> </option>
                             <%  } %>
-<!--                            <option value="0">Dễ</option>
-                            <option value="1">Trung bình</option>
-                            <option value="2">Khó</option>-->
                         </select>
                     </div>
 
@@ -122,7 +119,6 @@
                         </select>
                     </div>
                         
-                        <!--<label>Chọn các kiến thức có trong đề thi: </label>-->
                     <div style="margin: 10px 0px 0px 115px" id="demo">
                         <select id="pre-selected-options" multiple="multiple" name="kienthuc" required>
                             <option value="hamso">Hàm số</option>

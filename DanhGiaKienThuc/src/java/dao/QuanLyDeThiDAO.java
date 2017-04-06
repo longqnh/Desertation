@@ -10,7 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +25,7 @@ import model.Users;
  * @author NTL
  */
 public class QuanLyDeThiDAO {
-    public void CompleteInfo(QuanLyDeThi thi) {
+    private void CompleteInfo(QuanLyDeThi thi) {
         Connection connection = DBConnect.getConnecttion();
 
         String sql = "UPDATE table_quanlydethi SET diem=?, ngaythi=? WHERE made=" + thi.getMade();
@@ -132,6 +135,34 @@ public class QuanLyDeThiDAO {
             ex.printStackTrace();
         }
         return false;        
+    }
+    
+    public void updateInfo(String made, String thisinh, float diem) {
+        Connection con = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date dateobj = new Date();
+        String ngaythi = df.format(dateobj);
+
+        String sql = "SELECT * FROM table_quanlydethi WHERE made='" + made + "'";
+
+        try {
+            ps = con.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int socau = rs.getInt("socau");
+                String noidung = rs.getString("noidung");
+                int thoigian = rs.getInt("thoigian");
+                int mucdo = rs.getInt("mucdo");
+                QuanLyDeThi deThi = new QuanLyDeThi(made, socau, noidung, thoigian, mucdo, diem, ngaythi, thisinh);
+
+                QuanLyDeThiDAO qldtdao = new QuanLyDeThiDAO();
+                qldtdao.CompleteInfo(deThi);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }        
     }
     
     public static String GetNoidungTV(String noidung) {

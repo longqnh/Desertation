@@ -81,7 +81,7 @@
                             type: 'text'
                         },
                         ngaythi: {
-                            title: 'Ngày thi',
+                            title: 'Thời gian hoàn thành',
                             type: 'text'
                         }
                     }

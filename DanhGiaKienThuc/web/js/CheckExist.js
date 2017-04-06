@@ -16,7 +16,7 @@ $(document).ready(function () {
     });
 
     function check_username_ajax(username) {
-        $("#user-result").html('<img src="img/ajax-loader.gif" />');
+        $("#user-result").html('<img src="images/ajax-loader.gif" />');
         $.post('CheckUsernameServlet', {'username': username}, function (data) {
             $("#user-result").html(data);
         });
@@ -35,7 +35,7 @@ $(document).ready(function () {
     });
 
     function check_email_ajax(email) {
-        $("#email-result").html('<img src="img/ajax-loader.gif" />');
+        $("#email-result").html('<img src="images/ajax-loader.gif" />');
         $.post('CheckEmailServlet', {'email': email}, function (data) {
             $("#email-result").html(data);
         });

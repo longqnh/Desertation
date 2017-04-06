@@ -5,30 +5,17 @@
  */
 package controller;
 
-import connect.DBConnect;
+import dao.DanhgiaDAO;
 import dao.DethiDAO;
 import dao.QuanLyDeThiDAO;
-import dao.ThongkeDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.QuanLyDeThi;
-import model.Question;
-import model.Thongke;
 import model.Users;
 
 /**
@@ -70,81 +57,26 @@ public class FinishExam extends HttpServlet {
             made = (String) session.getAttribute("made");
         }
         
-//        DethiDAO dethiDAO = new DethiDAO();
-//        String made = dethiDAO.GetMade(users.getUsername());
-                            
-        int socaudung = 0;
-        String sql;
-        PreparedStatement ps; 
+        DethiDAO dethiDAO = new DethiDAO();
+        QuanLyDeThiDAO qldtdao = new QuanLyDeThiDAO();
+        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
         
-        Connection con = DBConnect.getConnecttion();        
-
+        // lay bai lam cua thi sinh
         for (int i=0; i<IDlist.size(); i++) {
             String id = IDlist.get(i).toString();
             String user_select = request.getParameter(id);
-            
-            sql = "SELECT dapan FROM table_dethi WHERE (made='" + made + "') AND (id='" + id + "')";
-        
-            try {
-                ps = (PreparedStatement) con.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    String correct = rs.getString("dapan");
-                    user_answer.add(user_select);
-                    
-                    if (user_select == null) {
-                        //out.println("chua lam");
-                    } else {
-                        if (correct.equals(user_select)) {
-                            //out.println("correct");
-                            socaudung++;
-                        } else {
-                            //out.println("wrong");
-                        }
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            
-            sql =   "UPDATE table_dethi SET userchoice=?, username=? WHERE (id=? AND made=?)";
-            try {
-                ps = con.prepareCall(sql);
-                ps.setString(1, user_select);
-                ps.setString(2, users.getUsername());
-                ps.setString(3, id);
-                ps.setString(4, made);
-                ps.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            user_answer.add(user_select);
         }
-        
-        float score = socaudung*((float)10/IDlist.size());
-        
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date dateobj = new Date();
-        String ngaythi = df.format(dateobj);
 
-        sql = "SELECT * FROM table_quanlydethi WHERE made='" + made + "'";
+        float score = dethiDAO.ChamDiem(made, users.getUsername(), IDlist, user_answer);
+        qldtdao.updateInfo(made, users.getUsername(), score);
 
-        try {
-            ps = (PreparedStatement) con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                int socau = rs.getInt("socau");
-                String noidung = rs.getString("noidung");
-                int thoigian = rs.getInt("thoigian");
-                int mucdo = rs.getInt("mucdo");
-                QuanLyDeThi deThi = new QuanLyDeThi(made, socau, noidung, thoigian, mucdo, score, ngaythi, users.getUsername());
-
-                QuanLyDeThiDAO qldtdao = new QuanLyDeThiDAO();
-                qldtdao.CompleteInfo(deThi);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        
+        // danh gia nl tung noi dung
+        //update kv, ps tung noi dung
+//        double nangluc = danhgiaDAO.DanhGiaNangLuc(made, kienthuc);
+//        danhgiaDAO.updateKyVong(users, kienthuc, solanthi, nangluc);
+//        danhgiaDAO.updatePhuongSai(users, kienthuc, nangluc);                    
+            
         response.sendRedirect("Thi/FinishExam.jsp?made=" + made);
     }
 }

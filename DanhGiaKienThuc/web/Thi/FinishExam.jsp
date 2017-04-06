@@ -131,7 +131,7 @@
                         if (noidungYeu.isEmpty()) { %>
                             <p>Kiến thức của bạn khá tốt, hãy tiếp tục phát huy</p>
                     <%  } else { %>
-                            <p>Bạn còn yếu các nội dung sau:</p>
+                            <p>Các kiến thức làm sai nhiều:</p>
                             <ul class="noidungyeu">
                     <%      for (int i = 0; i < noidungYeu.size(); i++) { 
                                 Thongke ndY = noidungYeu.get(i); %>
