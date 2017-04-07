@@ -18,7 +18,17 @@
     </head>
     <body>
         <jsp:include page="../WebInterface/header.jsp"></jsp:include>
-        
+
+        <%
+            Users users = null;
+            boolean canEdit = false;
+            if (session.getAttribute("user")!=null) {
+                users = (Users) session.getAttribute("user");
+                if (users.getRole().equals("admin")) {
+                    canEdit = true;
+                }
+            }
+        %>        
         <div id="clr"></div>
         <div class="container">
             <div id="main-left">
@@ -50,48 +60,51 @@
             </div>
             
             <form id="main-right" action="" method="GET">
-                <%
-                    Users users = null;                    
-                    if (session.getAttribute("user")!=null) {
-                        users = (Users) session.getAttribute("user");
-                        if (users.getRole().equals("admin")) { 
-                %>
                 <h2>Ôn tập lý thuyết toán 12</h2>
                 <ol type="I">
                     <li>
                         <a href="" class="content"> Hàm số </a>
                         <p>Hàm số</p>
-                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="hamso">Cập nhật</button>                        
+                        <% if (canEdit==true) { %>
+                            <button id="btnUpdateLT" type="submit" name="kienthuc" value="hamso">Cập nhật</button>                        
+                        <% } %>
                     </li>
                     <li>
                         <a href="" class="content"> Lũy thừa - mũ - logarith </a>
                         <p>LT Lũy thừa - mũ - logarith</p>
-                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="loga">Cập nhật</button>                                                
+                        <% if (canEdit==true) { %>
+                            <button id="btnUpdateLT" type="submit" name="kienthuc" value="loga">Cập nhật</button>                                                
+                        <% } %>                        
                     </li>
                     <li>
                         <a href="" class="content"> Tích phân </a>
                         <p>Tích phân</p>
-                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="tichphan">Cập nhật</button>                                                
+                        <% if (canEdit==true) { %>
+                            <button id="btnUpdateLT" type="submit" name="kienthuc" value="tichphan">Cập nhật</button>                                                
+                        <% } %>                        
                     </li>
                     <li>
                         <a href="" class="content"> Số phức </a>
                         <p>Số phức</p>
-                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="sophuc">Cập nhật</button>                                                
+                        <% if (canEdit==true) { %>
+                            <button id="btnUpdateLT" type="submit" name="kienthuc" value="sophuc">Cập nhật</button>                                                
+                        <% } %>                        
                     </li>
                     <li>
                         <a href="" class="content"> Hình học không gian </a>
                         <p>Hình học không gian</p>
-                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="hhkg">Cập nhật</button>                                                
+                        <% if (canEdit==true) { %>
+                            <button id="btnUpdateLT" type="submit" name="kienthuc" value="hhkg">Cập nhật</button>                                                
+                        <% } %>                        
                     </li>
                     <li>
                         <a href="" class="content"> Giải tích không gian Oxyz </a>
                         <p>Giải tích không gian Oxyz</p>
-                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="oxyz">Cập nhật</button>                                                
+                        <% if (canEdit==true) { %>
+                            <button id="btnUpdateLT" type="submit" name="kienthuc" value="oxyz">Cập nhật</button>                                                
+                        <% } %>                        
                     </li>
-                </ol>
-                <%      } 
-                    }   
-                %>                
+                </ol>             
             </form>
  
             <script src="${pageContext.request.contextPath}/js/DisplayContent.js" type="text/javascript"></script>
