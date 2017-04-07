@@ -234,8 +234,18 @@ CREATE TABLE `danhgiakienthuc`.`table_phuongsai12` (
   `oxyz` LONGTEXT NULL,
   PRIMARY KEY (`username`));
 
+CREATE TABLE `danhgiakienthuc`.`table_lythuyet` (
+  `kienthuc` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `lop` INT NULL,
+  PRIMARY KEY (`kienthuc`));
+
 /* CREATE FOREIGN KEY */
 ALTER TABLE `danhgiakienthuc`.`table_user` ADD FOREIGN KEY (`lop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);	
+
+ALTER TABLE `danhgiakienthuc`.`table_lythuyet`
+	ADD FOREIGN KEY (`kienthuc`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`lop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
 
 ALTER TABLE `danhgiakienthuc`.`table_hamso`
 	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),

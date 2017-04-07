@@ -128,7 +128,7 @@ public class DethiDAO {
                 SetSocauTheoNoiDung(nd, 0.3, 0.4, 0.2, 0.1);
                 break;
             default:
-                SetSocauTheoNoiDung(nd, 0.2, 0.3, 0.3, 0.1);
+                SetSocauTheoNoiDung(nd, 0.2, 0.3, 0.3, 0.2);
                 break;
         }     
 

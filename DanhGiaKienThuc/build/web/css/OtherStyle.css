@@ -215,3 +215,18 @@ body {
     list-style-type: disc;
     margin-left: 50px; 
 }
+
+#btnUpdateLT {
+    width: 100px;
+    height: 30px;
+    background: rgba(53, 21, 121, 1);
+    color: rgb(255,255,255);
+    border: none;
+    font-size: 16px;
+    margin: 20px auto;
+}
+
+#btnUpdateLT:hover {
+    cursor: pointer;
+    color: rgba(200, 7, 207, 1);
+}

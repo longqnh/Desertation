@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="../css/OtherStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">        
         <title>ÔN TẬP LÝ THUYẾT</title>
@@ -44,7 +44,7 @@
                     </ul>
                 </div>
                 
-                <script src="../js/DisplaySubmenu.js" type="text/javascript"></script>
+                <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
             
             <div id="main-right">
@@ -65,10 +65,10 @@
                 </ol>
             </div>
 
-            <script src="../js/DisplayContent.js" type="text/javascript"></script>
+            <script src="${pageContext.request.contextPath}/js/DisplayContent.js" type="text/javascript"></script>
         </div>
         
-        <script src="../js/autoscroll.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/autoscroll.js" type="text/javascript"></script>
  
         <jsp:include page="../WebInterface/footer.jsp"></jsp:include>
     </body>

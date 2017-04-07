@@ -78,6 +78,19 @@ public class DanhgiaDAO {
         return round(nangluc);
     }
     
+    public void DanhGiaNangLuc(String made, String[] noidung, Users thisinh) {
+        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+        
+        for (String nd: noidung) {
+            int solanthi = danhgiaDAO.GetSolanthi(thisinh.getUsername(), QuanLyDeThiDAO.GetNoidungTV(nd));
+            if (solanthi > 0) {
+                double nangluc = danhgiaDAO.DanhGiaNangLuc(made, nd);
+                danhgiaDAO.updateKyVong(thisinh, nd, solanthi, nangluc);
+                danhgiaDAO.updatePhuongSai(thisinh, nd, nangluc);                    
+            }
+        }       
+    }
+    
     public HashMap UocLuong(Users user, String noidung) {
         Connection connection = DBConnect.getConnecttion();
         

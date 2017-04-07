@@ -4,13 +4,14 @@
     Author     : NTL
 --%>
 
+<%@page import="dao.LythuyetDAO"%>
 <%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="../css/OtherStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">     
         <title>ÔN TẬP LÝ THUYẾT</title>
@@ -45,41 +46,58 @@
                     </ul>
                 </div>
                 
-                <script src="../js/DisplaySubmenu.js" type="text/javascript"></script>
+                <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
             
-            <div id="main-right">
+            <form id="main-right" action="" method="GET">
+                <%
+                    Users users = null;                    
+                    if (session.getAttribute("user")!=null) {
+                        users = (Users) session.getAttribute("user");
+                        if (users.getRole().equals("admin")) { 
+                %>
                 <h2>Ôn tập lý thuyết toán 12</h2>
                 <ol type="I">
                     <li>
                         <a href="" class="content"> Hàm số </a>
-                        <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                        <p>Hàm số</p>
+                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="hamso">Cập nhật</button>                        
                     </li>
                     <li>
-                        <a href="" class="content"> Lũy thừa - mũ - logarit </a>
-                        <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                        <a href="" class="content"> Lũy thừa - mũ - logarith </a>
+                        <p>LT Lũy thừa - mũ - logarith</p>
+                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="loga">Cập nhật</button>                                                
                     </li>
-                    <li><a href="" class="content"> Tích phân </a></li>
-                    <li><a href="" class="content"> Số phức </a></li>
-                    <li><a href="" class="content"> Hình học không gian </a></li>
-                    <li><a href="" class="content"> Giải tích không gian Oxyz </a></li>
+                    <li>
+                        <a href="" class="content"> Tích phân </a>
+                        <p>Tích phân</p>
+                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="tichphan">Cập nhật</button>                                                
+                    </li>
+                    <li>
+                        <a href="" class="content"> Số phức </a>
+                        <p>Số phức</p>
+                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="sophuc">Cập nhật</button>                                                
+                    </li>
+                    <li>
+                        <a href="" class="content"> Hình học không gian </a>
+                        <p>Hình học không gian</p>
+                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="hhkg">Cập nhật</button>                                                
+                    </li>
+                    <li>
+                        <a href="" class="content"> Giải tích không gian Oxyz </a>
+                        <p>Giải tích không gian Oxyz</p>
+                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="oxyz">Cập nhật</button>                                                
+                    </li>
                 </ol>
-                
-                <%
-                    Users users = null;
-                    if (session.getAttribute("user")!=null) {
-                        users = (Users) session.getAttribute("user");
-                        if (users.getRole().equals("admin")) { %>
-
-                        <%      } 
+                <%      } 
                     }   
                 %>                
-            </div>
+            </form>
  
-            <script src="../js/DisplayContent.js" type="text/javascript"></script>
+            <script src="${pageContext.request.contextPath}/js/DisplayContent.js" type="text/javascript"></script>
         </div>
         
-        <script src="../js/autoscroll.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/autoscroll.js" type="text/javascript"></script>
  
         <jsp:include page="../WebInterface/footer.jsp"></jsp:include>
     </body>
