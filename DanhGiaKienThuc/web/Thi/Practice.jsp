@@ -18,11 +18,11 @@
         <title>LUYỆN TẬP</title>
         <!--<link rel="stylesheet" href="../css/DoExamStyle.css" type="text/css">-->
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>    
-        <link rel="stylesheet" href="../css/HeaderStyle.css" type="text/css">
-        <link rel="stylesheet" href="../css/FooterStyle.css" type="text/css">
-        <link rel="stylesheet" href="../css/OtherStyle.css" type="text/css">
-        <link rel="stylesheet" href="../css/MemberStyle.css" type="text/css">
-        <link rel="stylesheet" href="../css/multi-select.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/MemberStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/multi-select.css" type="text/css">
         <!--<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>-->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>   
     </head>
@@ -83,18 +83,18 @@
                 <h2>Thông tin đề thi</h2>
                 
                 <form id="createExam" name="createExam" action="${pageContext.request.contextPath}/LamDeThi" method="POST">
-<!--                    <div class="search-field">
+                    <div class="search-field">
                         <label>Chọn lớp: </label>
-                        <select name="lop" id="lop" required onchange="Ajax()">
-                            <option value="" disabled selected>Lớp</option>-->
-                            <%--
+                        <select name="lop" id="lop" required>
+                            <option value="" disabled selected>Lớp</option>
+                            <%
                                 LopDAO lopDAO = new LopDAO(); 
                                 List<Lop> dsLop = lopDAO.GetAllLop(); 
                                 for (Lop lop: dsLop) { %>
                                     <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>                                  
-                            <%  } --%>
-<!--                        </select>
-                    </div>-->
+                            <%  } %>
+                        </select>
+                    </div>
                     
                     <div class="search-field">
                         <label>Chọn độ khó: </label>
@@ -119,24 +119,40 @@
                         </select>
                     </div>
                         
-                    <div style="margin: 10px 0px 0px 115px" id="demo">
-                        <select id="pre-selected-options" multiple="multiple" name="kienthuc" required>
-                            <option value="hamso">Hàm số</option>
+                    <div style="margin: 10px 0px 0px 115px">
+                        <select id="kienthuc" multiple="multiple" name="kienthuc" required>
+<!--                            <option value="hamso">Hàm số</option>
                             <option value="loga">Lũy thừa - Mũ - Logarit</option>
                             <option value="tichphan">Nguyên hàm - Tích phân</option>
                             <option value="sophuc">Số phức</option>
                             <option value="hhkg">Hình học không gian</option>
-                            <option value="oxyz">Oxyz</option>
+                            <option value="oxyz">Oxyz</option>-->
                         </select>
                         
-                        <script type="text/javascript" src="../js/jquery.multi-select.js"></script>
+                        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.multi-select.js"></script>
                         <script type="text/javascript">
-//                            $('#pre-selected-options').multiSelect();
-                            $('#pre-selected-options').multiSelect({
+                            $('#kienthuc').multiSelect({
                                 selectableHeader: "<div class='custom-header' style='font-weight: bold;'>Kiến thức:</div>",
                                 selectionHeader: "<div class='custom-header' style='font-weight: bold;'>Kiến thức đã chọn:</div>"
                             });
-                        </script>
+                            
+                            $('#lop').change (
+                                function() {
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "${pageContext.request.contextPath}/DangtoanServlet",
+                                        data: {lop: $(this).val() },
+                                        success: function(data){
+                                            $('#kienthuc').multiSelect('addOption', { value: 42, text: 'test 42'}); 
+                                            $('#kienthuc').multiSelect('addOption', { value: 43, text: 'test 43'});
+                                            //$("#kienthuc").append(data);
+                                            //$("#kienthuc").html(data);
+                                            //alert(data);
+                                        }
+                                    });                                     
+                                }
+                            );                    
+                        </script>                        
                     </div>
 
                     <script type="text/javascript">
@@ -151,7 +167,7 @@
             </div>
         </div>
         
-        <script src="../js/autoscroll.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/autoscroll.js" type="text/javascript"></script>
             
         <jsp:include page="../WebInterface/footer.jsp"></jsp:include>        
     </body>

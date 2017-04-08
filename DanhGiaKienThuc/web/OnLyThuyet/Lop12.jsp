@@ -28,6 +28,7 @@
                     canEdit = true;
                 }
             }
+            LythuyetDAO lythuyetDAO = new LythuyetDAO();
         %>        
         <div id="clr"></div>
         <div class="container">
@@ -64,7 +65,7 @@
                 <ol type="I">
                     <li>
                         <a href="" class="content"> Hàm số </a>
-                        <p>Hàm số</p>
+                        <p><%=lythuyetDAO.getContent("hamso")%></p>
                         <% if (canEdit==true) { %>
                             <button id="btnUpdateLT" type="submit" name="kienthuc" value="hamso">Cập nhật</button>                        
                         <% } %>

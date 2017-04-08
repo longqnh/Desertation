@@ -59,15 +59,23 @@
 
                 <form id="capnhatLT" action="" method="POST">
                     <textarea name="content">
-
+                        ${requestScope.content}
                     </textarea>
                     <input id="btnUpdateLT" type="submit" value="Lưu">
+                    <input type="text" hidden="" name="kienthuc" value="${requestScope.kienthuc}">
                 </form>
                 
                 <script>
                     CKEDITOR.replace("content", {height: '500px'});
                     CKEDITOR.config.entities_latin = false;
                 </script>
+                
+                <script type="text/javascript">
+                    function getContent() {
+                        var data = CKEDITOR.instances.content.getData();
+                        
+                    }
+                </script>                
             </div>         
         </div>
             

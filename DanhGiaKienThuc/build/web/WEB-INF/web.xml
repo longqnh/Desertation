@@ -52,6 +52,10 @@
         <servlet-name>LamDeThi</servlet-name>
         <servlet-class>controller.LamDeThi</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DangtoanServlet</servlet-name>
+        <servlet-class>controller.DangtoanServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckEmailServlet</servlet-name>
         <url-pattern>/CheckEmailServlet</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>LamDeThi</servlet-name>
         <url-pattern>/LamDeThi</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DangtoanServlet</servlet-name>
+        <url-pattern>/DangtoanServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
