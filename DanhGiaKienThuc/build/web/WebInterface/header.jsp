@@ -85,7 +85,8 @@
                 <li><a href="<%=request.getContextPath()%>/index.jsp" <!--class="selected"-->Trang chủ</a></li>
                 <li><a href="#">Làm đề thi</a>
                     <ul class="submenu">
-                        <li><a href="<%=request.getContextPath()%>/Thi/MockTest.jsp" onclick="return confirm('Bạn đã sẵn sàng làm bài chưa?');">Thi thử</a></li>
+                        <!--<li><a href="<%=request.getContextPath()%>/Thi/MockTest.jsp" onclick="return confirm('Bạn đã sẵn sàng làm bài chưa?');">Thi thử</a></li>-->
+                        <li><a href="<%=request.getContextPath()%>/Thi/MockTest.jsp">Thi thử</a></li>
                         <li><a href="<%=request.getContextPath()%>/Thi/Practice.jsp">Luyện tập</a></li>
                     </ul>
                 </li>

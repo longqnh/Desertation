@@ -5,6 +5,7 @@
  */
 package controller;
 
+import com.google.gson.Gson;
 import dao.DangtoanDAO;
 import dao.DanhgiaDAO;
 import java.io.IOException;
@@ -35,15 +36,24 @@ public class DangtoanServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html; charset=UTF-8");
-        PrintWriter out = response.getWriter();
+//        response.setContentType("text/html; charset=UTF-8");
+//        PrintWriter out = response.getWriter();
+//        Gson gson = new Gson();
         
         int lop = Integer.parseInt(request.getParameter("lop"));
         List<Dangtoan> dangtoan = dangtoanDAO.getDangtoanTheoLop(lop);
-
-        for (Dangtoan dt : dangtoan) {
-            out.println("<option value='" + dt.getDangtoan() + "'> " + dt.getDangtoanTV() + " </option>");
-        }   
+        
+        String json = new Gson().toJson(dangtoan);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+        
+//        out.print(gson.toJson(dangtoan));
+//        out.flush();
+//        out.close();
+//        for (Dangtoan dt : dangtoan) {
+//            out.println("<option value='" + dt.getDangtoan() + "'> " + dt.getDangtoanTV() + " </option>");
+//        }   
     }
 
     /**

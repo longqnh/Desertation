@@ -89,12 +89,40 @@ class NoiDung{
 }
 
 public class DethiDAO {
-    public void SetSocauTheoNoiDung (NoiDung[] nd, double nb, double th, double vd, double vdc) {
+    private void SetSocauTheoNoiDung (NoiDung[] nd, double nb, double th, double vd, double vdc) {
         for (int i = 0; i < nd.length; i++) {
             nd[i].setSoCauNB( (int) Math.round(nd[i].getSoCau()*nb) );
             nd[i].setSoCauTH( (int) Math.round(nd[i].getSoCau()*th) );
             nd[i].setSoCauVD( (int) Math.round(nd[i].getSoCau()*vd) );
-            nd[i].setSocauVDC( (int) Math.round(nd[i].getSoCau()*vdc) );            
+            nd[i].setSocauVDC( (int) Math.round(nd[i].getSoCau()*vdc) );
+            Check(nd[i]);
+        }
+    }
+    
+    private void Check(NoiDung nd) {
+        int tong = nd.getSoCauNB()+nd.getSoCauTH()+nd.getSoCauVD()+nd.getSocauVDC();
+        int socau = nd.getSoCau();
+        
+        while (tong > socau) {
+            int max = nd.getSoCauNB();
+            
+            if (max <= nd.getSoCauTH()) {
+                max = nd.getSoCauTH();
+                nd.setSoCauTH(max-1);
+            } else {
+                if (max <= nd.getSoCauVD()) {
+                    max = nd.getSoCauVD();
+                    nd.setSoCauVD(max-1);
+                } else {
+                    if (max <= nd.getSocauVDC()) {
+                        max = nd.getSocauVDC();
+                        nd.setSocauVDC(max-1);
+                    } else {
+                        nd.setSoCauNB(max-1);
+                    }
+                }
+            }
+            tong = nd.getSoCauNB()+nd.getSoCauTH()+nd.getSoCauVD()+nd.getSocauVDC();
         }
     }
     

@@ -13,15 +13,17 @@ public class Dangtoan {
     private String dangtoan;
     private int malop;
     private String dangtoanTV;
+    private int hocky;
     private double dopc_de, dopc_tb, dopc_tbk, dopc_kho;
 
     public Dangtoan() {
     }
 
-    public Dangtoan(String dangtoan, int malop, String dangtoanTV, double dopc_de, double dopc_tb, double dopc_tbk, double dopc_kho) {
+    public Dangtoan(String dangtoan, int malop, String dangtoanTV, int hocky, double dopc_de, double dopc_tb, double dopc_tbk, double dopc_kho) {
         this.dangtoan = dangtoan;
         this.malop = malop;
         this.dangtoanTV = dangtoanTV;
+        this.hocky = hocky;
         this.dopc_de = dopc_de;
         this.dopc_tb = dopc_tb;
         this.dopc_tbk = dopc_tbk;
@@ -55,6 +57,14 @@ public class Dangtoan {
 
     public void setDangtoanTV(String dangtoanTV) {
         this.dangtoanTV = dangtoanTV;
+    }
+
+    public int getHocky() {
+        return hocky;
+    }
+
+    public void setHocky(int hocky) {
+        this.hocky = hocky;
     }
 
     public double getDopc_de() {

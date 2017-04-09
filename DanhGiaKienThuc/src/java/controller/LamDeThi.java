@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.DangtoanDAO;
 import dao.DanhgiaDAO;
 import dao.DethiDAO;
 import dao.QuanLyDeThiDAO;
@@ -39,14 +40,47 @@ public class LamDeThi extends HttpServlet {
         if (session.getAttribute("user")!=null) {
             users = (Users) session.getAttribute("user");
         }
+        
         DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
         DethiDAO dethiDAO = new DethiDAO();
+        DangtoanDAO dangtoanDAO = new DangtoanDAO();
         
-        // thong tin de thi
-        String[] noidung = request.getParameterValues("kienthuc");
-        int level = Integer.parseInt(request.getParameter("dokho"));
-        int time = Integer.parseInt(request.getParameter("time")); 
-        int numQuestion = (time == 15 ? 10 : (time == 60 ? 40 : 50));
+        String[] noidung;
+        int level, time, numQuestion;
+        
+        if (request.getParameter("dethi")==null) { // mode practice
+            noidung = request.getParameterValues("kienthuc");
+            level = Integer.parseInt(request.getParameter("dokho"));
+            time = Integer.parseInt(request.getParameter("time")); 
+            numQuestion = (time == 15 ? 10 : (time == 60 ? 40 : 50));
+        } else { // mode mock test
+            String dethi = request.getParameter("dethi");
+            int lop = Integer.parseInt(request.getParameter("lop"));
+            level = Integer.parseInt(request.getParameter("dokho"));
+
+            switch (dethi) {
+                case "hk1":
+                    time = 60; 
+                    numQuestion = 40;
+                    noidung = dangtoanDAO.getDangtoanTheoHocky(lop,1);                    
+                    break;
+                case "hk2":
+                    time = 60; 
+                    numQuestion = 40;
+                    noidung = dangtoanDAO.getDangtoanTheoHocky(lop,2);                    
+                    break;
+                case "canam":
+                    time = 60; 
+                    numQuestion = 40;
+                    noidung = dangtoanDAO.getAllDangtoanLop(lop);                    
+                    break;
+                default:
+                    time = 90; 
+                    numQuestion = 50;
+                    noidung = dangtoanDAO.getAllDangtoanLop(lop);                    
+                    break;
+            }
+        }
         //
         
         // update kv, ps

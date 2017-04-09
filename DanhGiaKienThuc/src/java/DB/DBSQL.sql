@@ -154,30 +154,31 @@ CREATE TABLE `danhgiakienthuc`.`table_phanloaidangtoan` (
   `dangtoan` VARCHAR(45) NOT NULL,
   `malop` INT NOT NULL,
   `dangtoanTV` VARCHAR(45) NULL,
+  `hocky` INT NULL,
   `dopc_de` FLOAT NULL,
   `dopc_tb` FLOAT NULL,
   `dopc_tbk` FLOAT NULL,
   `dopc_kho` FLOAT NULL);
-INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('hamso', '12', 'Hàm số', '1', '2', '3', '4');
+INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('hamso', '12', 'Hàm số 12', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('loga', '12', 'Lũy thừa - Mũ - Logarith', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('tichphan', '12', 'Tích phân', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('sophuc', '12', 'Số phức', '1', '2', '3', '4');
-INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('hhkg', '12', 'Hình học không gian', '1', '2', '3', '4');
+INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('hhkg', '12', 'Hình học không gian 12', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('oxyz', '12', 'OXYZ', '1', '2', '3', '4');
-INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('luonggiac', '11', 'Lượng giác', '1', '2', '3', '4');
+INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('luonggiac', '11', 'Lượng giác 11', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('tohop', '11', 'Tổ hợp xác suất', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('dayso', '11', 'Dãy số', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('gioihan', '11', 'Giới hạn - Đạo hàm', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('phepdoihinh', '11', 'Phép dời hình', '1', '2', '3', '4');
-INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('hhkg', '11', 'Hình học không gian', '1', '2', '3', '4');
+INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('hhkg', '11', 'Hình học không gian 11', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('menhde', '10', 'Mệnh đề - Tập hợp', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('phuongtrinh', '10', 'Phương trình đại số', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('hept', '10', 'Hệ phương trình đại số', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('batpt', '10', 'Bất phương trình đại số', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('bdt', '10', 'Bất đẳng thức', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('oxy', '10', 'Hình học giải tích phẳng', '1', '2', '3', '4');
-INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('luonggiac', '10', 'Lượng giác', '1', '2', '3', '4');
-INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('hamso', '10', 'Hàm số', '1', '2', '3', '4');
+INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('luonggiac', '10', 'Lượng giác 10', '1', '2', '3', '4');
+INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('hamso', '10', 'Hàm số 10', '1', '2', '3', '4');
 INSERT INTO `danhgiakienthuc`.`table_phanloaidangtoan` (`dangtoan`, `malop`, `dangtoanTV`, `dopc_de`, `dopc_tb`, `dopc_tbk`, `dopc_kho`) VALUES ('thongke', '10', 'Thống kê', '1', '2', '3', '4');
 
 CREATE TABLE `danhgiakienthuc`.`table_phanloaibt` (

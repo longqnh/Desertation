@@ -45,4 +45,59 @@ public class DangtoanDAO {
         
         return list;
     }
+
+    public String[] getAllDangtoanLop(int lop) {
+        List<String> list = new ArrayList<>();
+        
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        String sql = "SELECT * FROM table_phanloaidangtoan WHERE malop=" + lop;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                String dangtoan = rs.getString("dangtoan");
+                
+                list.add(dangtoan);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DangtoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String[] array = list.toArray(new String[list.size()]);
+        return array;
+    }
+    
+    public String[] getDangtoanTheoHocky(int lop, int hocky) {
+        List<String> list = new ArrayList<>();
+        
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        String sql = "SELECT * FROM table_phanloaidangtoan WHERE malop=" + lop + " AND hocky=" + hocky;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                String dangtoan = rs.getString("dangtoan");
+                
+                list.add(dangtoan);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DangtoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String[] array = list.toArray(new String[list.size()]);
+        return array;        
+    }
+    
+//    public static void main(String[] args) {
+//        String arr[] = new DangtoanDAO().getDangtoanTheoHocky(12, 2);
+//        for (String s: arr) {
+//            System.out.println(s);
+//        }
+//    }
 }

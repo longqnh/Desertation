@@ -143,11 +143,9 @@
                                         url: "${pageContext.request.contextPath}/DangtoanServlet",
                                         data: {lop: $(this).val() },
                                         success: function(data){
-                                            $('#kienthuc').multiSelect('addOption', { value: 42, text: 'test 42'}); 
-                                            $('#kienthuc').multiSelect('addOption', { value: 43, text: 'test 43'});
-                                            //$("#kienthuc").append(data);
-                                            //$("#kienthuc").html(data);
-                                            //alert(data);
+                                            for(var i = 0; i < data.length; i++) {
+                                                $('#kienthuc').multiSelect('addOption', { value: data[i].dangtoan, text: data[i].dangtoanTV}); 
+                                            }
                                         }
                                     });                                     
                                 }
