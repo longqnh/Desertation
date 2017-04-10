@@ -98,25 +98,26 @@ public class UserServlet extends HttpServlet {
                 break;
             case "update":
                 users.setUsername(request.getParameter("username"));
-                if (request.getParameter("password") != null) {
-                    users.setPassword(request.getParameter("password"));
-                } else {
-                    users.setPassword(request.getParameter("currentpass"));
-                }
                 users.setName(request.getParameter("name"));
                 users.setEmail(request.getParameter("email"));
                 users.setLop(Integer.parseInt(request.getParameter("lop")));
                 users.setRole("user");
                 
-                usersDao.updateUser(users);
-                
+                if (request.getParameter("password").equals("")) {
+//                    users.setPassword(request.getParameter("currentpass"));
+                    usersDao.updateUser(users);
+                } else {
+                    users.setPassword(request.getParameter("password"));
+                    usersDao.changePassword(users);
+                }
+                                
                 session.setAttribute("user", users);
                 session.setAttribute("SuccMessage", "Cập nhật thành công");
                 
-//                url = "/Member/User.jsp";
-                response.sendRedirect("Member/User.jsp");
-                return;
-//                break;
+//                response.sendRedirect("Member/User.jsp");
+//                return;
+                url = "/Member/User.jsp";                
+                break;
         }
         RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
         rd.forward(request, response);

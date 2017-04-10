@@ -231,7 +231,7 @@
                             <option value="admin" selected="selected">Admin</option>
                             <option value="user">User</option>
                         </select>-->
-                        <button type="submit" id="LoadRecordsButton">Load records</button>
+                        <button type="submit" id="LoadRecordsButton">Search</button>
                     </form>
                 </div>                    
 

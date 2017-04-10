@@ -198,7 +198,7 @@
             <div class="filtering">
                 <form>
                     Mã đề: <input type="text" name="made" id="made" />
-                    <button type="submit" id="LoadRecordsButton">Load records</button>
+                    <button type="submit" id="LoadRecordsButton">Search</button>
                 </form>
             </div>                    
             

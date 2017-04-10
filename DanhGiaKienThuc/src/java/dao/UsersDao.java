@@ -161,6 +161,19 @@ public class UsersDao {
     public void updateUser(Users user) {
         Connection connection = DBConnect.getConnecttion();
         String sql = "UPDATE table_user SET name='" + user.getName() + "', email='" + user.getEmail() +  
+                "', lop='" + user.getLop() + "', role='" + user.getRole() + "' WHERE username='" + user.getUsername() + "'";
+        try {
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.execute(sql);
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void changePassword(Users user) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "UPDATE table_user SET name='" + user.getName() + "', email='" + user.getEmail() +  
                 "', password='" + MD5.encryption(user.getPassword()) + "', lop='" + user.getLop() + "', role='" + user.getRole() + "' WHERE username='" + user.getUsername() + "'";
         try {
             PreparedStatement ps = connection.prepareCall(sql);

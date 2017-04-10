@@ -57,12 +57,13 @@
             <div id="main-right">
                 <h2>QUẢN LÝ THƯ VIỆN LÝ THUYẾT</h2>
 
-                <form id="capnhatLT" action="" method="POST">
+                <form id="capnhatLT" action="${pageContext.request.contextPath}/EditLyThuyet" method="POST">
                     <textarea name="content">
                         ${requestScope.content}
                     </textarea>
-                    <input id="btnUpdateLT" type="submit" value="Lưu">
+                    <input id="btnUpdateLT" type="button" value="Lưu">
                     <input type="text" hidden="" name="kienthuc" value="${requestScope.kienthuc}">
+                    <input type="text" hidden="" id="contentEdited" name="contentEdited">
                 </form>
                 
                 <script>
@@ -71,11 +72,12 @@
                 </script>
                 
                 <script type="text/javascript">
-                    function getContent() {
+                    $("#btnUpdateLT").click(function () {
                         var data = CKEDITOR.instances.content.getData();
-                        
-                    }
-                </script>                
+                        $("#contentEdited").val(data);
+                        $("#capnhatLT").submit();
+                    });
+                </script>
             </div>         
         </div>
             

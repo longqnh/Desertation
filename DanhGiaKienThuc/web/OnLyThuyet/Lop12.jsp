@@ -60,12 +60,12 @@
                 <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
             
-            <form id="main-right" action="" method="GET">
+            <form id="main-right" action="${pageContext.request.contextPath}/EditLyThuyet" method="GET">
                 <h2>Ôn tập lý thuyết toán 12</h2>
                 <ol type="I">
                     <li>
                         <a href="" class="content"> Hàm số </a>
-                        <p><%=lythuyetDAO.getContent("hamso")%></p>
+                        <%=lythuyetDAO.getContent("hamso")%>
                         <% if (canEdit==true) { %>
                             <button id="btnUpdateLT" type="submit" name="kienthuc" value="hamso">Cập nhật</button>                        
                         <% } %>

@@ -5,25 +5,21 @@
  */
 package controller;
 
-import com.google.gson.Gson;
-import dao.DangtoanDAO;
-import dao.DanhgiaDAO;
+import dao.LythuyetDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Dangtoan;
 
 /**
  *
  * @author NTL
  */
-public class DangtoanServlet extends HttpServlet {
-    DangtoanDAO dangtoanDAO = new DangtoanDAO();
+public class EditLyThuyet extends HttpServlet {
+    LythuyetDAO lythuyetDAO = new LythuyetDAO();
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -36,24 +32,15 @@ public class DangtoanServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        response.setContentType("text/html; charset=UTF-8");
-//        PrintWriter out = response.getWriter();
-//        Gson gson = new Gson();
         
-        int lop = Integer.parseInt(request.getParameter("lop"));
-        List<Dangtoan> dangtoan = dangtoanDAO.getDangtoanTheoLop(lop);
+        String noidung = request.getParameter("kienthuc");
+        String content = lythuyetDAO.getContent(noidung);
         
-        String json = new Gson().toJson(dangtoan);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        request.setAttribute("content", content);
+        request.setAttribute("kienthuc", noidung);
         
-//        out.print(gson.toJson(dangtoan));
-//        out.flush();
-//        out.close();
-//        for (Dangtoan dt : dangtoan) {
-//            out.println("<option value='" + dt.getDangtoan() + "'> " + dt.getDangtoanTV() + " </option>");
-//        }   
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/QLLT.jsp");
+        rd.forward(request, response);
     }
 
     /**
@@ -67,16 +54,16 @@ public class DangtoanServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        response.setContentType("text/html; charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");        
-        PrintWriter out = response.getWriter();   
         
-        int lop = Integer.parseInt(request.getParameter("lop"));
-        List<Dangtoan> dangtoan = dangtoanDAO.getDangtoanTheoLop(lop);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         
-        for (Dangtoan dt : dangtoan) {
-            out.println("<option value='" + dt.getDangtoan() + "'> " + dt.getDangtoanTV() + " </option>");
-        }
+        String content = request.getParameter("contentEdited");
+        String kienthuc = request.getParameter("kienthuc");
+        
+        lythuyetDAO.updateContent(kienthuc, content);
+        
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/OnLyThuyet/Lop12.jsp");
+        rd.forward(request, response);        
     }
 }

@@ -4,6 +4,9 @@
     Author     : NTL
 --%>
 
+<%@page import="model.Lop"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.LopDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="connect.DBConnect"%>
@@ -241,16 +244,42 @@
             <div class="filtering">
                 <form>
                     ID: <input type="text" name="name" id="name" />
+                    Lớp:
+                    <select name="lop" id="lop" required>
+                        <option value="" disabled selected>Lớp</option>
+                        <%
+                            LopDAO lopDAO = new LopDAO(); 
+                            List<Lop> dsLop = lopDAO.GetAllLop(); 
+                            for (Lop lop: dsLop) { %>
+                                <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>                                  
+                        <%  } %>
+                    </select>
                     Kiến thức: 
                     <select id="kienthuc" name="kienthuc">
-                        <option value="hamso" selected="selected">Hàm số</option>
+<!--                        <option value="hamso" selected="selected">Hàm số</option>
                         <option value="loga">Lũy thừa - Mũ - Logarit</option>
                         <option value="tichphan">Nguyên hàm - Tích phân</option>
                         <option value="sophuc">Số phức</option>
                         <option value="hhkg">Hình học không gian</option>
-                        <option value="oxyz">Oxyz</option>
+                        <option value="oxyz">Oxyz</option>-->
                     </select>
-                    <button type="submit" id="LoadRecordsButton">Load records</button>
+                    
+                    <script type="text/javascript">
+                        $('#lop').change (
+                            function() {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "${pageContext.request.contextPath}/DangtoanServlet",
+                                    data: {lop: $(this).val() },
+                                    success: function(data){
+                                        $("#kienthuc").html(data);
+                                    }
+                                });
+                            }
+                        );                         
+                    </script>
+                    
+                    <button type="submit" id="LoadRecordsButton">Search</button>
                 </form>
             </div>                    
             

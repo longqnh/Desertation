@@ -46,7 +46,8 @@ public class LythuyetDAO {
         
         try {
             ps = connection.prepareCall(sql);
-            ps.executeQuery();
+            ps.execute(sql);
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(LythuyetDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

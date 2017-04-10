@@ -125,7 +125,11 @@ public class CRUDController extends HttpServlet {
                         dao.InsertUser(user);
                     } else if (action.equals("update")) {
                         // Update existing record
-                        dao.updateUser(user);
+                        if (request.getParameter("password").equals(user.getPassword())) {
+                            dao.updateUser(user);
+                        } else {
+                            dao.changePassword(user);
+                        }
                     }
 
                     // Return in the format required by jTable plugin
