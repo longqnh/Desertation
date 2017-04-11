@@ -11,6 +11,201 @@ CREATE TABLE `danhgiakienthuc`.`table_user` (
   PRIMARY KEY (`username`));
 INSERT INTO `danhgiakienthuc`.`table_user` (`username`, `password`, `name`, `email`, `lop` ,`role`) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'abc@xyz.com', '12' ,'admin');
 
+/* LOP 10 */
+CREATE TABLE `danhgiakienthuc`.`table_menhde` (
+  `id` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `dapanA` LONGTEXT NULL,
+  `dapanB` LONGTEXT NULL,
+  `dapanC` LONGTEXT NULL,
+  `dapanD` LONGTEXT NULL,
+  `dapan` VARCHAR(45) NULL,
+  `dangtoan` VARCHAR(45) NULL,
+  `dangbt` VARCHAR(45) NULL,
+  `dokho` INT NULL,
+  `dophancach` INT NULL,
+  `malop` INT NULL,
+  `hinh` INT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `danhgiakienthuc`.`table_phuongtrinh` (
+  `id` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `dapanA` LONGTEXT NULL,
+  `dapanB` LONGTEXT NULL,
+  `dapanC` LONGTEXT NULL,
+  `dapanD` LONGTEXT NULL,
+  `dapan` VARCHAR(45) NULL,
+  `dangtoan` VARCHAR(45) NULL,
+  `dangbt` VARCHAR(45) NULL,
+  `dokho` INT NULL,
+  `dophancach` INT NULL,
+  `malop` INT NULL,
+  `hinh` INT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `danhgiakienthuc`.`table_hept` (
+  `id` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `dapanA` LONGTEXT NULL,
+  `dapanB` LONGTEXT NULL,
+  `dapanC` LONGTEXT NULL,
+  `dapanD` LONGTEXT NULL,
+  `dapan` VARCHAR(45) NULL,
+  `dangtoan` VARCHAR(45) NULL,
+  `dangbt` VARCHAR(45) NULL,
+  `dokho` INT NULL,
+  `dophancach` INT NULL,
+  `malop` INT NULL,
+  `hinh` INT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `danhgiakienthuc`.`table_batpt` (
+  `id` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `dapanA` LONGTEXT NULL,
+  `dapanB` LONGTEXT NULL,
+  `dapanC` LONGTEXT NULL,
+  `dapanD` LONGTEXT NULL,
+  `dapan` VARCHAR(45) NULL,
+  `dangtoan` VARCHAR(45) NULL,
+  `dangbt` VARCHAR(45) NULL,
+  `dokho` INT NULL,
+  `dophancach` INT NULL,
+  `malop` INT NULL,
+  `hinh` INT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `danhgiakienthuc`.`table_bdt` (
+  `id` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `dapanA` LONGTEXT NULL,
+  `dapanB` LONGTEXT NULL,
+  `dapanC` LONGTEXT NULL,
+  `dapanD` LONGTEXT NULL,
+  `dapan` VARCHAR(45) NULL,
+  `dangtoan` VARCHAR(45) NULL,
+  `dangbt` VARCHAR(45) NULL,
+  `dokho` INT NULL,
+  `dophancach` INT NULL,
+  `malop` INT NULL,
+  `hinh` INT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `danhgiakienthuc`.`table_thongke` (
+  `id` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `dapanA` LONGTEXT NULL,
+  `dapanB` LONGTEXT NULL,
+  `dapanC` LONGTEXT NULL,
+  `dapanD` LONGTEXT NULL,
+  `dapan` VARCHAR(45) NULL,
+  `dangtoan` VARCHAR(45) NULL,
+  `dangbt` VARCHAR(45) NULL,
+  `dokho` INT NULL,
+  `dophancach` INT NULL,
+  `malop` INT NULL,
+  `hinh` INT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `danhgiakienthuc`.`table_oxy` (
+  `id` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `dapanA` LONGTEXT NULL,
+  `dapanB` LONGTEXT NULL,
+  `dapanC` LONGTEXT NULL,
+  `dapanD` LONGTEXT NULL,
+  `dapan` VARCHAR(45) NULL,
+  `dangtoan` VARCHAR(45) NULL,
+  `dangbt` VARCHAR(45) NULL,
+  `dokho` INT NULL,
+  `dophancach` INT NULL,
+  `malop` INT NULL,
+  `hinh` INT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `danhgiakienthuc`.`table_luonggiac` (
+  `id` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `dapanA` LONGTEXT NULL,
+  `dapanB` LONGTEXT NULL,
+  `dapanC` LONGTEXT NULL,
+  `dapanD` LONGTEXT NULL,
+  `dapan` VARCHAR(45) NULL,
+  `dangtoan` VARCHAR(45) NULL,
+  `dangbt` VARCHAR(45) NULL,
+  `dokho` INT NULL,
+  `dophancach` INT NULL,
+  `malop` INT NULL,
+  `hinh` INT NULL,
+  PRIMARY KEY (`id`));
+
+/* LOP 11 */
+CREATE TABLE `danhgiakienthuc`.`table_tohop` (
+  `id` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `dapanA` LONGTEXT NULL,
+  `dapanB` LONGTEXT NULL,
+  `dapanC` LONGTEXT NULL,
+  `dapanD` LONGTEXT NULL,
+  `dapan` VARCHAR(45) NULL,
+  `dangtoan` VARCHAR(45) NULL,
+  `dangbt` VARCHAR(45) NULL,
+  `dokho` INT NULL,
+  `dophancach` INT NULL,
+  `malop` INT NULL,
+  `hinh` INT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `danhgiakienthuc`.`table_dayso` (
+  `id` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `dapanA` LONGTEXT NULL,
+  `dapanB` LONGTEXT NULL,
+  `dapanC` LONGTEXT NULL,
+  `dapanD` LONGTEXT NULL,
+  `dapan` VARCHAR(45) NULL,
+  `dangtoan` VARCHAR(45) NULL,
+  `dangbt` VARCHAR(45) NULL,
+  `dokho` INT NULL,
+  `dophancach` INT NULL,
+  `malop` INT NULL,
+  `hinh` INT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `danhgiakienthuc`.`table_gioihan` (
+  `id` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `dapanA` LONGTEXT NULL,
+  `dapanB` LONGTEXT NULL,
+  `dapanC` LONGTEXT NULL,
+  `dapanD` LONGTEXT NULL,
+  `dapan` VARCHAR(45) NULL,
+  `dangtoan` VARCHAR(45) NULL,
+  `dangbt` VARCHAR(45) NULL,
+  `dokho` INT NULL,
+  `dophancach` INT NULL,
+  `malop` INT NULL,
+  `hinh` INT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `danhgiakienthuc`.`table_phepdoihinh` (
+  `id` VARCHAR(45) NOT NULL,
+  `noidung` LONGTEXT NULL,
+  `dapanA` LONGTEXT NULL,
+  `dapanB` LONGTEXT NULL,
+  `dapanC` LONGTEXT NULL,
+  `dapanD` LONGTEXT NULL,
+  `dapan` VARCHAR(45) NULL,
+  `dangtoan` VARCHAR(45) NULL,
+  `dangbt` VARCHAR(45) NULL,
+  `dokho` INT NULL,
+  `dophancach` INT NULL,
+  `malop` INT NULL,
+  `hinh` INT NULL,
+  PRIMARY KEY (`id`));
+
+/* LOP 12 */
 CREATE TABLE `danhgiakienthuc`.`table_hamso` (
   `id` VARCHAR(45) NOT NULL,
   `noidung` LONGTEXT NULL,
@@ -193,30 +388,39 @@ INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtT
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('tuonggiao', 'hamso', 'Tương giao');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('gtlnnn', 'hamso', 'GTLN - GTNN');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('tieptuyen', 'hamso', 'Tiếp tuyến của đồ thị');
+
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ptloga', 'loga', 'Phương trình logarith');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('hsmuloga', 'loga', 'Hàm số mũ - logarith');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('bptloga', 'loga', 'Bất phương trình logarith');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ptmu', 'loga', 'Phương trình mũ');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('thucte', 'loga', 'Bài toán thực tế');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('bptmu', 'loga', 'Bất phương trình mũ');
+
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('thetich','hhkg','Tính thể tích');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('dientich','hhkg','Tính diện tích');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('tinhkc','hhkg','Tính khoảng cách');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('hinhn','hhkg','Hình nón');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('hinhc','hhkg','Hình cầu');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('hinhch','hhkg','Hình chóp');
+
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('tinhtp','tichphan','Tính tích phân');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ungdungtp','tichphan','Ứng dụng tích phân');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('tinhdh','tichphan','Tính đạo hàm');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('tinhnh','tichphan','Tính nguyên hàm');
+
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('dangds','sophuc','Dạng đại số');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('danghh','sophuc','Dạng hình học');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('giaipt','sophuc','Giải phương trình phức');
+
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('toadokg','oxyz','Tọa độ không gian');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('phuongtrinhdt','oxyz','Phương trình đường thẳng');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('phuongtrinhmc','oxyz','Phương trình mặt cầu');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('phuongtrinhmp','oxyz','Phương trình mặt phẳng');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('vitritd','oxyz','Vị trí tương đối');
+
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('menhde','menhde','Mệnh đề');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('taphop','menhde','Tập hợp');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('lamtron','menhde','Làm tròn số');
 
 CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
   `made` INT(5) ZEROFILL NOT NULL AUTO_INCREMENT,
@@ -293,6 +497,78 @@ ALTER TABLE `danhgiakienthuc`.`table_hhkg`
 	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
 
 ALTER TABLE `danhgiakienthuc`.`table_oxyz`
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
+	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
+
+ALTER TABLE `danhgiakienthuc`.`table_menhde`
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
+	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
+
+ALTER TABLE `danhgiakienthuc`.`table_phuongtrinh`
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
+	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
+
+ALTER TABLE `danhgiakienthuc`.`table_hept`
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
+	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
+
+ALTER TABLE `danhgiakienthuc`.`table_batpt`
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
+	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
+
+ALTER TABLE `danhgiakienthuc`.`table_bdt`
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
+	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
+
+ALTER TABLE `danhgiakienthuc`.`table_thongke`
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
+	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
+
+ALTER TABLE `danhgiakienthuc`.`table_oxy`
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
+	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
+
+ALTER TABLE `danhgiakienthuc`.`table_luonggiac`
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
+	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
+
+ALTER TABLE `danhgiakienthuc`.`table_tohop`
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
+	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
+
+ALTER TABLE `danhgiakienthuc`.`table_dayso`
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
+	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
+
+ALTER TABLE `danhgiakienthuc`.`table_gioihan`
+	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
+	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
+	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
+	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
+
+ALTER TABLE `danhgiakienthuc`.`table_phepdoihinh`
 	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
@@ -1040,3 +1316,94 @@ INSERT INTO `danhgiakienthuc`.`table_oxyz` (`id`, `noidung`, `dapanA`, `dapanB`,
 INSERT INTO `danhgiakienthuc`.`table_oxyz` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('OXYZ089','Trong không gian $Oxyz$, cho bốn điểm $A(1;0;0)$, $B(0;1;0)$, $C(0;0;1)$ và $D(1;1;1)$.Trong mệnh đề sau, mệnh đề nào sai ?','Tam giác BCD là tam giác vuông','Tam giác ABD là tam giác đều','Bốn điểm A,B,C,D Tạo thành một tứ diện','$AB \\bot CD$','A','oxyz','toadokg','0','NULL','12','0');
 INSERT INTO `danhgiakienthuc`.`table_oxyz` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('OXYZ090','Phương trình mặt phẳng $(P)$ chứa trục $Oy$ và điểm $M(1;-1;1)$ là:','$x+z=0$','$x-z=0$','$x-y=0$','$x+y = 0$','B','oxyz','phuongtrinhmp','0','NULL','12','0');
 INSERT INTO `danhgiakienthuc`.`table_oxyz` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('OXYZ091','Cho A(1;1;3), B(-1;3;2), C(-1;2;3). Khoảng cách từ gốc tọa độ O tới mặt phẳng (ABC) bằng','$\\sqrt{3}$','3','$\\frac{\\sqrt{3}}{2}$','$\\frac{3}{2}$','B','oxyz','tinhkc','0','NULL','12','0');
+
+/* MENH DE TAP HOP */
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD001','Câu nào sau đây không phải là mệnh đề?','Mặt trời luôn mọc ở hướng Tây','Trời lạnh quá!','Paris là thủ đô nước Pháp','Mọi người trên trái đất đều là nữ','B','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD002','Cho mệnh đề $\\exists x \\in \\mathbb{Q}: x^2+4x=0$. Phủ định của mệnh đề này là:','$\\forall x \\in \\mathbb{Q}: x^2 + 4x \\ne 0$','$\\forall x \\in \\mathbb{R}: x^2 + 4x \\ne 0$','$\\forall x \\in \\mathbb{Q}: x^2 + 4x \\geq 0$','$\\exists x \\in \\mathbb{Q}: x^2 + 4x \\ne 0$','A','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD003','Cho tập hợp $A={x \\in \\mathbb{N} / x \\leq 5}$. Tập $A$ được với dưới dạng liệt kê là:','$A={0;1;2;4;5}$','$A={0;1;2;3;4;5}$','$A={1;2;3;4;5}$','$A={0;1;2;3;4}$','B','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD004','Cho tập hợp $A={x+1 / x \\in \\mathbb{N}, x \\leq 5}$. Tập $A$ được viết dưới dạng liệt kê là:','${1;2;3;4;5;6}$','${0;1;2;3;4;5;6}$','${0;1;2;3;4}$','${0;1;2;3;4;5}$','A','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD005','Cho tập hợp $A={a;b;c;d}$. Số tập con gồm hai phần tử của $A$ là','8','5','6','4','C','menhde','taphop','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD006','Cho tập hợp $A={0;1;2;3;4;5}$ và $B={-2;1;4;6}$. Khi đó $A \\ B$ là','${-2;0;1;2;3;4;5;6}$','${0;1;2;3;4}$','${1;4}$','${0;2;3;5}$','D','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD007','Cho tập hợp $A={0;1;2;3;4;5}$ và $B={-2;1;4;6}$. Khi đó $A \\cup B$ là','${0;2;3;5}$','${0;1;2;3;4}$','${1;4}$','${-2;0;1;2;3;4;5;6}$','D','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD008','Cho tập hợp $A={0;1;2;3;4;5}$ và $B={-2;1;4;6}$. Khi đó $A \\cap B$ là','${1;2;4;6}$','${1;2;4}$','${1;2;3;4}$','${1;3;4}$','B','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD009','Cho tập hợp $A$ gồm những số tự nhiên lẻ không lớn hơn 8 và tập hợp $B={x=\\mathbb{N}* / x\\leq4}$. Khi đó, tập $A \\cap B$ là:','${1;3}$','${1;2;3;4}$','${0;1;3;5}$','${0;1;2;3;4;5;7}$','A','menhde','taphop','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD010','Cho tập hợp $A={0;2;4;6;8}$ và $B={0;2;4}$. Khi đó $C_{A}B$:','${0;2;4;6}$','${0;2;4;8}$','${2;4}$','${6;8}$','D','menhde','taphop','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD011','Cho tập hợp $A=(-\\infty;3]$ và $B=(2;+\\infty)$. Khi đó tập $B \\cup A$ là:','$[2;+\\infty]$','$(-3;2]$','$\\mathbb{R}$','$\\varnothing$','C','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD012','Cho tập hợp $A=[-2;3]$, $B=(1;5]$. Khi đó, tập $A \\cup B$ là:','$[-2;5]$','$(1;3]$','$[-2;1]$','$(3;5]$','A','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD013','Cho tập hợp $A=(-\\infty;3]$ và $B=(3;+\\infty)$. Khi đó tập $B \\cap A$ là:','$\\mathbb{R}$','${3}$','$\\varnothing$','$[3;+\\infty)$','C','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD014','Cho tập hợp $A=[-2;3]$, $B=(1;5]$. Khi đó, tập $A \\ B$ là:','$(-2;1]$','$(-2;-1)$','$[-2;1)$','$[-2;1]$','A','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD015','Cho tập hợp $A=(2;+\\infty)$. Khi đó, tập $C_{\\mathbb{R}}A$ là:','$[2;+\\infty]$','$(2;+\\infty)$','$(-\\infty;2]$','$(-\\infty;-2]$','C','menhde','taphop','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD016','Kết quả làm tròn của số $\\pi$ đến hàng nghìn là','$3.142$','$3.150$','$3.141$','$3.140$','A','menhde','lamtron','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD017','Cho các mệnh đề <br> $X: "\\forall x \\in \\mathbb{R}, x^2-x+1>0"$ <br> $Y:"\\forall x \\in \\mathbb{R}, x^2-3>0"$ <br> $P:"\\exists x \\in \\mathbb{R}, x^2-x+2=0"$ <br> $Q:"\\exists x in \\mathbb{R}, 3-x<0"$.<br>Mệnh đề đúng là:','$Y, Q$','$P, Q$','$X, Q$','$X, P$','C','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD018','Cho $A:"\\forall x \\in \\mathbb{R}: x^2+1>0"$ thì phủ định của mệnh đề $A$ là mệnh đề:','$\\forall x \\in \\mathbb{R}: x^2+1 \\leq 0$','$\\exists x \\in \\mathbb{R}: x^2+1 \\ne 0$','$\\exists x \\in \\mathbb{R}: x^2+1<0$','$\\exists x \\in \\mathbb{R}: x^2+1 \\leq 0$','D','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD019','Xác định mệnh đề đúng','$\\exists x \\in \\mathbb{R}: x^2 \\leq 0$','$\\exists x \\in \\mathbb{R}: x^2+x+3 = 0$','$\\forall x \\in \\mathbb{R}: x^2 > x$','$\\forall x \\in \\mathbb{Z}, x>-x$','A','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD020','Phát biểu nào sau đây đúng','$x \\geq y \\Rightarrow x^2 \\geq y^2$','$(x+y)^2 \\geq x^2+y^2$','$x+y>0$ thì $x>0$ hoặc $y>0$','$x+y>0$ thì $xy>0$','C','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD021','Xác định mệnh đề đúng','$\\forall x \\in \\mathbb{R}, \\exists y \\in \\mathbb{R}: xy > 0$','$\\forall x \\in \\mathbb{N}: x \\geq -x$','$\\exists x \\in \\mathbb{N}, \\exists y \\in \\mathbb{N}: x$ chia hết cho $y$','$\\exists x \\in \\mathbb{N}: x^2+4x+3=0$','B','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD022','Cho các mệnh đề sau, mệnh đề nào có mệnh đề đúng','Nếu tứ giác $ABCD$ là hình thoi thì $AC \\bot BD$','Nếu 2 tam giác vuông bằng nhau thì 2 cạnh huyền bằng nhau','Nếu 2 dây cung của 1 đường tròn bằng nhau thì 2 cung chắn bằng nhau','Nếu số nguyên chi hết cho 6 thì chia hết cho 3','C','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD023','Cho các mệnh đề sau, mệnh đề nào có mệnh đề đảo  là mệnh đề đúng?','Nếu tứ giác $ABCD$ là hình thang cân thì 2 góc đối bù nhau.','Nếu $a=b$ thì $a.c=b.c$','Nếu $a>b$ thì $a^2>b^2$','Nếu số nguyên chi hết cho 6 thì chia hết cho 3 và 2','D','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD024','Cho các mệnh đề sau, mệnh đề nào là mệnh đề sai:','$\\exists x \\in \\mathbb{Q}: 4x^2-1=0$','$\\exists x \\in \\mathbb{R}: x>x^2$','$\\forall n \\in \\mathbb{N}: n^2+1$ không chia hết cho $3$','$\\forall n \\in \\mathbb{N}: n^2>n$','D','menhde','menhde','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD025','Cho các mệnh đề sau, mệnh đề nào sai:','Một tam giác vuông khi và chỉ khi nó có 1 góc bằng tổng 2 góc kia','Một tam giác đều khi và chỉ khi nó có 2 trung tuyến bằng nhau và 1 góc bằng 60 độ','Hai tam giác bằng nhau khi và chỉ khi chúng đồng dạng và có 1 cạnh bằng nhau','Một tứ giác là hình chữ nhật khi và chỉ khi chúng có 3 góc vuông','C','menhde','menhde','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD026','Cho các mệnh đề sau, mệnh đề nào có mệnh đề đảo đúng:','Nếu tứ giác $ABCD$ là hình thang cân thì 2 góc đối bù nhau.','Nếu $a=b$ thì $a.c=b.c$','Nếu $a>b$ thì $a^2>b^2$','Nếu số nguyên chi hết cho 10 thì chia hết cho 5 và 2','D','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD027','Mệnh đề nào sau đây có mệnh đề phủ định là mệnh đề đúng:','$\\exists x \\in \\mathbb{Q}: x^2=2$','$\\exists x \\in \\mathbb{R}: x^2-3x+1=0$','$\\forall n \\in \\mathbb{N}: 2n>n$','$\\forall x \\in \\mathbb{R}: x<x+1$','A','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD028','Cho tập hợp $A={a;{b;c};d}$ phát biểu nào sau đây sai:','$a \\in A$','${a;d} \\subset A$','${b;c} \\subset A$','${d} \\subset A$','C','menhde','taphop','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD029','Cho tập hợp $A={x \\in \\mathbb{N} / (x^3-9x)(2x^2-5x+2)=0}$, $A$ được viết theo kiểu liệt kê phần tử là:','${0;2;3;-3}$','${0;2;3}$','${0;\\frac{1}{2};2;3;-3}$','${2;3}$','B','menhde','taphop','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD030','Cho $A={x \\in \\mathbb{N} / (x^4-5x^2+4)(3x^2-10x+3)=0}$, $A$ được viết theo kiểu liệt kê là:','${1;3;4}$','${1;2;3}$','${1;-1;2;-2;\\frac{1}{3}}$','${1;-1;2;-2;3}$','B','menhde','taphop','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD031','Cho tập $A={x \\in \\mathbb{N} / 3x^2-10x+3=0$ hoặc $x^3 -8x^2+15x=0}$, $A$ được viết theo kiểu liệt kê là:','${3}$','${0;3}$','${0;\\frac{1}{3};3;5}$','${3;5}$','A','menhde','taphop','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD032','Cho $A$ là tập hợp. Chọn phương án đúng:','${\\varnothing \\subset A$','$\\varnothing \\in A$','$A \\cap \\varnothing = A$','$A \\cup \\varnothing = A$','D','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD033','Cho tập hợp sau $A=(-1;5]; B=(2;7)$. Tập hợp $A\\B$ bằng:','$(-1;2]$','$(2;5]$','$(-1;7)$','$(-1;2)$','A','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD034','Cho $A={a;b;c;d;e}$, số tập con của $A$ là:','10','12','32','16','C','menhde','taphop','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD035','Tập hợp nào sau đây là tập hợp rỗng:','${x \\in \\mathbb{Z} / |x|<1}$','${x \\in \\mathbb{Q} / x^2-4x+2=0}$','${x \\in \\mathbb{R} / 6x^2-7x+1=0}$','${x \\in \\mathbb{R} / x^2-4x+3=0}$','B','menhde','taphop','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD036','Trong các tập hợp sau, tập nào có đúng 1 tập con:','$\\varnothing$','${x}$','${\\varnothing}$','${\\varnothing;1}$','A','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD037','Cho hai tập hợp $X={n \\in \\mathbb{N} / n$ là bội số của 4 và 6 $}$ và $Y={n \\in \\mathbb{N} / n$ là bội số của 12 $}$. Các mệnh đề sau, mệnh đề nào sai:','$X \\subset Y$','$Y \\subset X$','$X=Y$','$\\exists n : n \\in X$ và $n \\notin Y$','C','menhde','taphop','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD038','Cho bốn tập hợp: <br> H = tập hợp các hình bình hành <br> V = tập hợp các hình vuông <br> N = tập hợp các hình chữ nhật <br> T = tập hợp các hình thoi <br>Mệnh đề nào sai:','$V \\subset T$','$V \\subset N$','$H \\subset T$','$N \\subset H$','C','menhde','taphop','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD039','Cho $A \\ne \\varnothing$. Tìm câu đúng:','$A \\ \\varnothing = \\varnothing$','$\\varnothing \\ A = A$','$\\varnothing \\ \\varnothing = A$','$A\\A=\\varnothing$','D','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD040','Khi sử dụng máy tính bỏ túi với 10 chữ số thập phân ta được $\\sqrt{8}=2,828427125$. Giá trị gần đúng của $\\sqrt{8}$ chính xác đến hàng phần trăm là:','$2,80$','$2,81$','$2,82$','$2,83$','D','menhde','lamtron','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD041','Cho số gần đúng $a=2841275$ với độ chính xác $d=300$. Số quy tròn của $a$ là:','2 841 200','2 841 000','2 841 300','2 841 280','B','menhde','lamtron','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD042','Cho $\\overline{a}=3,1463 \\pm 0,001$. Số quy tròn của số gần đúng $a=3,1463$ là:','$3,1463$','$3,146$','$3,14$','$3,15$','D','menhde','lamtron','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD043','Cho $\\overline{a}=374529 \\pm 150$. Số quy tròn của số gần đúng $a=3,1463$ là:','374000','375000','3745000','374530','B','menhde','lamtron','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD044','Đo chiều dài $s$ của một quãng đường cho kết quả là $x=50km \\pm 0,2km$. Tiếp đó, đo chiều cao $h$ của một cây cho kết quả là $h=5m \\pm 0,1m$. Hỏi cách đó nào chính xác hơn?','Phép đó chiều dài quãng đường','Phép đo chiều cao của cây','Hai phép đo chính xác như nhau','Không thể kết luận','A','menhde','menhde','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD045','Cho tập hợp $A={x \\in \\mathbb{R} / (x^2-1)(x^2-4)=0}$ và tập hợp $B={x \\in \\mathbb{Z} / |x| \\leq 2}. Khi đó, tập $A \\cup B$ là:','${-2;-1;0;1;2}$','${-4;-2;-1;0;1;2;4}$','${\\pm1;\\pm2}$','${-2;0;2}$','A','menhde','taphop','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD046','Cho tập hợp $A=[-2;2], B=(1;5], C=[0;1)$. Khi đó, tập $(A\\B)\\capC$ là:','${0;1}$','$[0;1)$','$\\varnothing$','$[-2;5]$','B','menhde','taphop','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD047','Tất cả các tập hợp $X$ thỏa mãn ${a,b,c} \\subset X \\subset {a,b,c,d}$ là:','${a,b,c}; {a,b,c,d}$','${a,b,c}; {a,b,d}; {a,b,c,d}$','${a,b}; {a,b,c}; {a,b,d}; {a,b,c,d}$','${a,b,c}; {a,b,d}; {a,b,c,d}$','A','menhde','taphop','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD048','Cho hai tập hợp $A={1;2;3}$ và $B={0;1;3;5}$. Tất cả các tập $X$ thõa mãn $X \\subset A \\cap B$ là:','$\\varnothing; {1}; {3}; {1,3}; {1,3,5}$','${1}; {3}; {1,3}$','$\\varnothing; {1}; {3}$','$\\varnothing; {1}; {3}; {1,3}$','D','menhde','taphop','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD049','Cho $P=\\dfrac{\\sqrt{x+2}-\\sqrt[5]{x}}{x-1}$. Giá trị của $P$ (làm tròn đến 4 chữ số thập phân) khi $x=\\sqrt{2}$ là:','$1,8740$','$1,8734$','$1,87340$','$1,8733$','B','menhde','lamtron','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD050','Cho tập hợp $A=[m;m+2]$, $B=[-1;2]$. Điều kiện của $m$ để $A \\subset B$ là:','$m \\leq -1$ hoặc $m \\geq 0$','$-1 \\leq m \\leq 0$','$1 \\leq m \\leq 2$','$m<-1$ hoặc $m>2$','B','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD051','Cho tập hợp $A=(-\\infty;m-1]$, $B=[1;+\\infty)$. Tìm tất cả các giá trị của $m$ để $A \\cap B = \\varnothing$ là:','$m > -1$','$m \\geq -1$','$m \\leq 2$','$m<2$','D','menhde','taphop','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD052','Cho tập hợp $A=(0;+\\infty)$ và $B={x \\in \\mathbb{R} / mx^2-4x+m-3=0}$, $m$ là tham số. Tìm $m$ để $B$ có đúng hai tập con và $B \\subset A$?','$m \\ne 0$','$m=-1$','$m>0$','$m=4$','D','menhde','taphop','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD053','Tập hợp nào sau đây là tập hợp rỗng:','${\\varnothing}$','${x \\in \\mathbb{N} | (3x-2)(3x^2+4x+1)=0}$','${x \\in \\mathbb{Z} | (3x-2)(3x^2+4x+1)=0}$','${x \\in \\mathbb{Q} | (3x-2)(3x^2+4x+1)=0}$','B','menhde','taphop','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD054','Mệnh đề nào sau đây là đúng?','$\\forall x \\in \\mathbb{R}, x>-2 \\Rightarrow x^2>4$','$\\forall x \\in \\mathbb{R}, x^2>4 \\Rightarrow x>2$','$\\forall x \\in \\mathbb{R}, x>2 \\Rightarrow x^2>4$','$\\forall x \\in \\mathbb{R}, x^2>4 \\Rightarrow x>-2$','C','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD055','Mệnh đề nào sau đây là sai?','$\\forall x \\in \\mathbb{N}, x^2$ chia hết cho $3 \\Rightarrow x$ chia hết cho 3','$\\forall x \\in \\mathbb{N}, x$ chia hết cho $3 \\Rightarrow x^2$ chia hết cho 3','$\\forall x \\in \\mathbb{N}, x^2$ chia hết cho $6 \\Rightarrow x$ chia hết cho 6','$\\forall x \\in \\mathbb{N}, x^2$ chia hết cho $9 \\Rightarrow x$ chia hết cho 9','B','menhde','menhde','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD056','Cho $\\overline{a}=42575421 \\pm 150$. Số quy tròn của số $42575421$ là:','42575000','42575400','42576400','42576000','A','menhde','lamtron','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD057','Cho các số thức $a,b,c,d$ và $a<b<c<d$. Ta có:','$(a;c) \\cap (b;d) = (b;c)$','$(a;c) \\cap [b;d) = [b;c]$','$(a;c) \\cap (b;d) = [b;c]$','$(a;c) \\cup (b;d) = (b;c)$','A','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD058','Cho $A=(-\\infty;31]$, $B=[-10;20]$. Giao của 2 tập hợp là:','$(-10;20]$','$(-10;20)$','$[-10;20]$','Kết quả khác','C','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD059','Cho $A=(-\\infty;31]$, $B=[-10;20]$. Hợp của 2 tập hợp là:','$(-\\infty;31)$','$(-\\infty;20)$','$(-\\infty;31)$','Kết quả khác','A','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD060','Cho $A=(-\\infty;31]$, $B=[-10;20]$. Hợp của 2 tập hợp là:','$(-\\infty;-10)$','$(-\\infty;10]$','$(-\\infty;31)$','Kết quả khác','D','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD061','Cho $A=(-\\infty,12)$, $B=[10,31]$. Giao của 2 tập hợp là:','$(10;12]$','$(10;12)$','$[10;12)$','Kết quả khác','C','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD062','Cho $A=(-\\infty,12)$, $B=[10,31]$. Hợp của 2 tập hợp là:','$(-\\infty;31)$','$(-\\infty;10)$','$(-\\infty;31]$','Kết quả khác','A','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD063','Cho $A=(-\\infty,12)$, $B=[10,31]$. Hiệu của 2 tập hợp là:','$(-\\infty;10)$','$(-\\infty;10]$','$(-\\infty;31]$','Kết quả khác','A','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD064','Trong các mệnh đề sau, mệnh đề nào sai?','$\\exists x \\in \\mathbb{Q}: 2x+3=6$','$\\forall x \\in \\mathbb{R}: 5.x=x.5$','$\\exists x \\in \\mathbb{R}: x^2+x+2 \\leq 0$','$\\exists x \\in \\mathbb{Q}: x$ chia hết cho $5$','C','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD065','Phủ định của mệnh đề $"\\forall x \\in \\mathbb{R}: x^2+2>0"$ là:','$"\\forall x \\in \\mathbb{R}: x^2+2<0"$','$"\\forall x \\in \\mathbb{R}: x^2+2 \\leq 0"$','$"\\exists x \\in \\mathbb{R}: x^2+2 < 0"$','$"\\exists x \\in \\mathbb{R}: x^2+2 \\leq 0"$','D','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD066','Tập hợp các ước chung của 10 và 45 là:','{1;5}','{1;2;5}','(1;5)','{1;5;10}','A','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD067','Cho $A=[-2;3]$; $B=(1;4]$. Tập hợp $C_{A\\cupB}(A\\capB)$ là:','$[-2;1] \\cap (3;4]$','$[-2;1) \\cap (3;4]$','$\\varnothing$','$[-2;4]$','A','menhde','taphop','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD068','Cho số thực $a<0$. Điều kiện cần và đủ để $(-\\infty;9a) \\cap \\left(\\frac{4}{a};+\\infty \\right) \\ne \\varnothing$ là','$-\\frac{2}{3} < a < 0$','$-\\frac{2}{3} \\leq a < 0$','$-\\frac{3}{4} < a < 0$','$-\\frac{3}{4} \\leq a < 0$','A','menhde','taphop','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD069','Cho mệnh đề chứa biến $P(n): "n$ là số chính phương". Mệnh đề đúng là:','$P(5)$','$P(25)$','$P(10)$','$P(20)$','B','menhde','menhde','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD070','Cho các khoảng $A=(-2;2)$, $B=(-1;+\\infty)$ và $C=\\left(-\\infty;\\frac{1}{2}\\right)$. Khi đó $A \\cap B \\cap C$ bằng','$\\left{ x \\in \\mathbb{R}: -1 \\leq x \\leq \\frac{1}{2} \\right}$','$\\left{ x \\in \\mathbb{R}: -2 < x \\leq \\frac{1}{2} \\right}$','$\\left{ x \\in \\mathbb{R}: -1 < x \\leq \\frac{1}{2} \\right}$','$\\left{ x \\in \\mathbb{R}: -1 < x < \\frac{1}{2} \\right}$','D','menhde','taphop','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD071','Cho các nửa khoảng $A=(-\\infty;2)$, $B=[3;+\\infty)$ và $C=(0;4)$. Khi đó $(A \\cup B) \\cap C$ bằng','${x \\in \\mathbb{R}: 3 \\leq x \\leq 4}$','${x \\in \\mathbb{R}: x<-2; x>3}$','${x \\in \\mathbb{R}: 3 \\leq x < 4}$','${x \\in \\mathbb{R}: x < -2; x \\geq 3}$','C','menhde','taphop','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD072','Cho hai tập hợp $A={x \\in \\mathbb{R}: x+3<4+2x}$ và $B={x \\in \\mathbb{R}: 5x-3<4x-1}$. Tất cả các số tự nhiên thuộc cả 2 tập A và B là:','0 và 1','1','0','Không số nào','A','menhde','taphop','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD073','Cho đoạn $M=[-4;7]$ và $N=(-\\infty;-2) \\cup (3;+\\infty)$. Khi đó $M \\cap N$ bằng:','$[-4;-2) \\cup (3;7]$','$[-4;-2) \\cup (3;7)$','$(-\\infty;-2) \\cup (3;+\\infty)$','$(-\\infty;-2) \\cup [3;+\\infty)$','A','menhde','taphop','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD074','Cho $A={-1;0;1;2}$. Khi đó:','$A=[-1;3) \\cap \\mathbb{N}$','$A=[-1;3) \\cap mathbb{Z}$','$A=[-1;3) \\cap \\mathbb{N}*$','$A=[-1;3) \\cap \\mathbb{Q}$','B','menhde','taphop','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD075','Trong các số dưới đây, giá trị gần đúng của $\\sqrt{65}-\\sqrt{63}$ với sai số tuyệt đối bé nhất là:','0,12','0,13','0,14','0,15','B','menhde','lamtron','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD076','Chọn khẳng định sai trong các khẳng định sau:','$\\mathbb{Q} \\cap \\mathbb{R} = \\mathbb{Q}$','$\\mathbb{N}* \\cap \\mathbb{R} = \\mathbb{N}*$','$\\mathbb{Z} \\cup \\mathbb{Q} = \\mathbb{Q}$','$\\mathbb{N} \\cup \\mathbb{N}* = \\mathbb{Z}$','D','menhde','taphop','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD077','Cho $A={a,b,c}$, $B={b,c,d}$ và $C={b,c,e}$. Chọn khẳng định đúng:','$A \\cup (B \\cap C) = (A \\cup B) \\cap C$','$A \\cup (B \\cap C) = (A \\cup B) \\cap (A \\cup C)$','$(A \\cup B) \\cap C = (A \\cup B) \\cap (A \\cup C)$','$(A \\cup B) \\cap C = (A \\cup B) \\cap C$','B','menhde','taphop','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD078','Mệnh đề nào không chính xác:','$\\sqrt{15} \\leq 4$','$2.\\sqrt{15} > 2.4$','$\\sqrt{7} < 3 \\Leftrightarrow 7 < 9$','$\\pi < 3 \\Leftrightarrow \\pi^2 < 9$','B','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD079','Cho các mệnh đề sau: $P:"{5;0;-5}={-5;0;5}"$, $Q:"\\varnothing \\subset \\varnothing"$ và $R:"\\varnothing \\subset {\\varnothing}"$. Trong các mệnh đề trên, mệnh đề nào đúng:','Chỉ P đúng','Chỉ P và Q đúng','Chỉ Q và R đúng','Cả 3 đều đúng','D','menhde','menhde','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD080','Cho 2 đa thức $f(x)$ và $g(x)$. Xét các tập hợp $A={x \\in \\mathbb{R}: f(x)=0}$, $B={x \\in \\mathbb{R}: g(x)=0}$ và $C={x \\in \\mathbb{R}: f^2(x)+g^2(x)=0}$. Trong các mệnh đề sau, mệnh đề nào đúng:','$C=A \\cup B$','$C = A \\cap B$','$C = A \\ B$','$C = B \\ A$','B','menhde','menhde','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD081','Cho 2 đa thức $f(x)$ và $g(x)$. Xét các tập hợp $A={x \\in \\mathbb{R}: f(x)=0}$, $B={x \\in \\mathbb{R}: g(x)=0}$ và $C={x \\in \\mathbb{R}: f(x).g(x)=0}$. Trong các mệnh đề sau, mệnh đề nào đúng:','$C=A \\cup B$','$C = A \\cap B$','$C = A \\ B$','$C = B \\ A$','A','menhde','menhde','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD082','Mệnh đề nào sau đây sai:','$\\forall x \\in \\mathbb{N}: n \\leq 2n$','$\\forall x \\in \\mathbb{R}: x^2 > 0$','$\\exists n \\in \\mathbb{N}: n^2=n$','$\\exists x \\in \\mathbb{R}: x > x^2$','B','menhde','taphop','1','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD083','Cho $A={0;2;4;6}$. Có bao nhiêu tập con có 2 phần tử của tập A','4','6','7','8','B','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD084','Cho hai tập hợp $A={n \\in \\mathbb{N}: n$ là bội số của 4 và 6} và $B={n \\in \\mathbb{N}: n$ là bội số của 12}. Trong các mệnh đề sau, mệnh đề nào sai:','$A \\subset B$','$B \\subset A$','$A=B$','$\\exists n \\in \\mathbb{N}: n \\in A, n \\notin B$','D','menhde','taphop','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD085','Lớp 10A có 10 học sinh giỏi Toán, 15 học sinh giỏi Văn, 5 học sinh giỏi cả 2 môn Toán Văn và 2 học sinh không giỏi môn nào. Hỏi lớp 10A có bao nhiêu học sinh?','20','22','25','28','B','menhde','taphop','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD086','Cho tập hợp $C_{\\mathbb{R}}(A)=[-3;\\sqrt{8})$ và $C_{\\mathbb{R}}(B)=(-5;2) \\cup (\\sqrt{3};\\sqrt{11})$. Khi đó $C_{\\mathbb{R}}(A \\cap B)$ là:','$(-3;\\sqrt{3})$','$\\varnothing$','$(-5;\\sqrt{11})$','$(-3;2) \\cup (\\sqrt{3};\\sqrt{8})$','C','menhde','taphop','3','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD087','Biết A là mệnh đề đúng, B là mệnh đề sai, C là mệnh đề đúng. Mệnh đề nào sau đây sai:','$A => C$','$C => (A => \\overline{B})$','$(\\overline{B} =>C) => A$','$C => (A => B)$','D','menhde','menhde','0','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD088','Biết A là mệnh đề sai, B là mệnh đề đúng. Mệnh đề nào sau đây đúng:','$B=>A$','$B \\Leftrightarrow A$','$\\overline{A} \\Leftrightarrow \\overline{B}$','$B => \\overline{A}$','D','menhde','menhde','2','NULL','10','0');
+INSERT INTO `danhgiakienthuc`.`table_menhde` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('MD089','Mệnh đề nào sau đây đúng:','$\\forall n \\in \\mathbb{N}: n(n+1)$ là số chính phương','$\\forall n \\in \\mathbb{N}: n(n+1)$ là số lẻ','$\\forall n \\in \\mathbb{N}: n(n+1)(n+2)$ là số lẻ','$\\forall n \\in \\mathbb{N}: n(n+1)(n+2)$ là số chia hết cho 6','D','menhde','menhde','2','NULL','10','0');
