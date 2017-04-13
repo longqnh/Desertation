@@ -11,7 +11,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">        
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">
+            MathJax.Hub.Config({
+                extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+                jax: ["input/TeX", "output/HTML-CSS"],
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                    },
+                    "HTML-CSS": { availableFonts: ["TeX"] }
+            });
+        </script>
         <title>ÔN TẬP LÝ THUYẾT</title>
     </head>
     <body>
@@ -47,7 +59,7 @@
                 <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
             
-            <div id="main-right">
+            <form id="main-right" action="${pageContext.request.contextPath}/EditLyThuyet" method="GET" style="overflow: scroll;">
                 <h2>Ôn tập lý thuyết toán 11</h2>
                 <ol type="I">
                     <li>
@@ -62,7 +74,7 @@
                     <li><a href="" class="content"> Phép dời hình </a></li>
                     <li><a href="" class="content"> Hình học không gian </a></li>
                 </ol>
-            </div>
+            </form>
 
             <script src="${pageContext.request.contextPath}/js/DisplayContent.js" type="text/javascript"></script>
         </div>
