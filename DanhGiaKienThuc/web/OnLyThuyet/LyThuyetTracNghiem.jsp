@@ -4,6 +4,8 @@
     Author     : NTL
 --%>
 
+<%@page import="dao.LythuyetDAO"%>
+<%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,6 +30,18 @@
     </head>
     <body>
         <jsp:include page="../WebInterface/header.jsp"></jsp:include>
+
+        <%
+            Users users = null;
+            boolean canEdit = false;
+            if (session.getAttribute("user")!=null) {
+                users = (Users) session.getAttribute("user");
+                if (users.getRole().equals("admin")) {
+                    canEdit = true;
+                }
+            }
+            LythuyetDAO lythuyetDAO = new LythuyetDAO();
+        %>        
         
         <div id="clr"></div>
         <div class="container">
@@ -59,7 +73,7 @@
                 <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
             
-            <div id="main-right">
+            <form id="main-right" action="${pageContext.request.contextPath}/EditLyThuyet" method="GET" style="overflow: scroll;">
                 <h2>Lý thuyết trắc nghiệm</h2>
                 <ol type="I">
                     <li>
@@ -67,40 +81,68 @@
                         <ol>
                             <li>
                                 <a href="" class="content"> Trắc nghiệm đúng - sai: </a>
-                                <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                                <div>
+                                    <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                                </div>
                             </li>
                             <li>
                                 <a href="" class="content"> Trắc nghiệm đa đáp án: </a>
-                                <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                                <div>
+                                    <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                                </div>
                             </li> 
                             <li>
                                 <a href="" class="content"> Trắc nghiệm điền khuyết: </a>
-                                <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                                <div>
+                                    <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                                </div>
                             </li>
                             <li>
                                 <a href="" class="content"> Trắc nghiệm đối chiếu: </a>
-                                <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                                <div>
+                                    <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                                </div>
                             </li>                          
                         </ol>
                     </li>
                     <li>
                         <a href="" class="content"> Tính tinh cậy </a>
-                        <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                        <div>
+                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="tincay">Cập nhật</button>                                                
+                            <% } %>                              
+                        </div>
                     </li>
                     <li>
                         <a href="" class="content"> Tính giá trị </a>
-                        <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                        <div>
+                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="giatri">Cập nhật</button>                                                
+                            <% } %>                              
+                        </div>
                     </li>
                     <li>
                         <a href="" class="content"> Độ khó </a>
-                        <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                        <div>
+                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="dokho">Cập nhật</button>                                                
+                            <% } %>                              
+                        </div>
                     </li>
                     <li>
                         <a href="" class="content"> Độ phân cách </a>
-                        <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                        <div>
+                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="dopc">Cập nhật</button>                                                
+                            <% } %>                              
+                        </div>
                     </li>                    
                 </ol>
-            </div>
+            </form>
 
             <script src="${pageContext.request.contextPath}/js/DisplayContent.js" type="text/javascript"></script>
         </div>

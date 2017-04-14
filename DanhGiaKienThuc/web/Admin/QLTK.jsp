@@ -96,6 +96,12 @@
 
                 //Load all records when page is first shown
                 $('#LoadRecordsButton').click();
+                        
+                //Delete selected students                        
+                $('#DeleteAllButton').button().click(function () {
+                    var $selectedRows = $('#TableContainer').jtable('selectedRows');
+                    $('#TableContainer').jtable('deleteRows', $selectedRows);
+                });
             });
         </script>
     </head>
@@ -209,7 +215,7 @@
                         <li><a href="<%=request.getContextPath()%>/Member/User.jsp"> Thông tin tài khoản </a></li>
                         <li><a href="<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>   
                         <%
-                            if (users.getUsername().equals("admin")) { %>
+                            if (users.getRole().equals("admin")) { %>
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLTK.jsp"> Quản lý các tài khoản</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLKD.jsp"> Quản lý kho đề</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLDT.jsp">Quản lý các bài thi</a></li>                                
@@ -236,6 +242,7 @@
                 </div>                    
 
                 <div id="TableContainer"></div>
+                <button type="button" id="DeleteAllButton">Delete All Selected</button>
             </div>                
 <!--                <div style="margin: 20px auto;">
                     <div id="TableContainer"></div>

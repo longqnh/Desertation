@@ -12,10 +12,11 @@ $(document).ready(function () {
         return false;
     });
     
-    $('.content').next('p').slideToggle();
+    $('.content').nextAll('div').hide();
+//    $('.content').next('div').slideToggle();
     $('.content').click(function(){ 
-        $('.content').next('p').slideUp();
-        $(this).next('p').slideToggle(); 
+        $('.content').next('div').slideUp();
+        $(this).next('div').slideToggle(); 
         return false;
     });    
 });

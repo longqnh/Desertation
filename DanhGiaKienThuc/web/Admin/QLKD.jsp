@@ -133,6 +133,12 @@
                 //Load all records when page is first shown
                 $('#LoadRecordsButton').click();
 //                $('#TableContainer').jtable('load');
+
+                //Delete selected students                        
+                $('#DeleteAllButton').button().click(function () {
+                    var $selectedRows = $('#TableContainer').jtable('selectedRows');
+                    $('#TableContainer').jtable('deleteRows', $selectedRows);
+                });
             });
         </script>   
     </head>
@@ -284,6 +290,7 @@
             </div>                    
             
             <div id="TableContainer"></div>
+            <button type="button" id="DeleteAllButton">Delete All Selected</button>
         </div>
                 
         <script type="text/javascript" src="../js/autoscroll.js"></script>

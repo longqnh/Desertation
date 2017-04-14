@@ -4,6 +4,8 @@
     Author     : NTL
 --%>
 
+<%@page import="dao.LythuyetDAO"%>
+<%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,6 +30,18 @@
     </head>
     <body>
         <jsp:include page="../WebInterface/header.jsp"></jsp:include>
+
+        <%
+            Users users = null;
+            boolean canEdit = false;
+            if (session.getAttribute("user")!=null) {
+                users = (Users) session.getAttribute("user");
+                if (users.getRole().equals("admin")) {
+                    canEdit = true;
+                }
+            }
+            LythuyetDAO lythuyetDAO = new LythuyetDAO();
+        %>        
         
         <div id="clr"></div>
         <div class="container">
@@ -64,15 +78,49 @@
                 <ol type="I">
                     <li>
                         <a href="" class="content"> Lượng giác </a>
-                        <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                        <div>
+                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="luonggiac">Cập nhật</button>                                                
+                            <% } %>  
+                        </div>
                     </li>
                     <li>
                         <a href="" class="content"> Tổ hợp - Xác suất </a>
-                        <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                        <div>
+                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="tohop">Cập nhật</button>                                                
+                            <% } %>                              
+                        </div>
                     </li>
-                    <li><a href="" class="content"> Giới hạn - Đạo hàm </a></li>
-                    <li><a href="" class="content"> Phép dời hình </a></li>
-                    <li><a href="" class="content"> Hình học không gian </a></li>
+                    <li>
+                        <a href="" class="content"> Giới hạn - Đạo hàm </a>
+                        <div>
+                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="gioihan">Cập nhật</button>                                                
+                            <% } %>                              
+                        </div>
+                    </li>
+                    <li>
+                        <a href="" class="content"> Phép dời hình </a>
+                        <div>
+                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="phepdoihinh">Cập nhật</button>                                                
+                            <% } %>                              
+                        </div>                        
+                    </li>
+                    <li>
+                        <a href="" class="content"> Hình học không gian </a>
+                        <div>
+                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="hhkg">Cập nhật</button>                                                
+                            <% } %>                              
+                        </div>                        
+                    </li>
                 </ol>
             </form>
 

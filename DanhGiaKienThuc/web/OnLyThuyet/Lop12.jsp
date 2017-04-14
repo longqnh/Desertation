@@ -42,6 +42,7 @@
             }
             LythuyetDAO lythuyetDAO = new LythuyetDAO();
         %>        
+        
         <div id="clr"></div>
         <div class="container">
             <div id="main-left">
@@ -77,45 +78,57 @@
                 <ol type="I">
                     <li>
                         <a href="" class="content"> Hàm số </a>
-                        <%=lythuyetDAO.getContent("hamso")%>
-                        <% if (canEdit==true) { %>
-                            <button id="btnUpdateLT" type="submit" name="kienthuc" value="hamso">Cập nhật</button>                        
-                        <% } %>
+                        <div>
+                            <%=lythuyetDAO.getContent("hamso")%>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="hamso">Cập nhật</button>                        
+                            <% } %>
+                        </div>
                     </li>
                     <li>
                         <a href="" class="content"> Lũy thừa - mũ - logarith </a>
-                        <p>LT Lũy thừa - mũ - logarith</p>
-                        <% if (canEdit==true) { %>
-                            <button id="btnUpdateLT" type="submit" name="kienthuc" value="loga">Cập nhật</button>                                                
-                        <% } %>                        
+                        <div>
+                            <p>LT Lũy thừa - mũ - logarith</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="loga">Cập nhật</button>                                                
+                            <% } %>  
+                        </div>
                     </li>
                     <li>
                         <a href="" class="content"> Tích phân </a>
-                        <p>Tích phân</p>
-                        <% if (canEdit==true) { %>
-                            <button id="btnUpdateLT" type="submit" name="kienthuc" value="tichphan">Cập nhật</button>                                                
-                        <% } %>                        
+                        <div>
+                            <p>Tích phân</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="tichphan">Cập nhật</button>                                                
+                            <% } %>    
+                        </div>
                     </li>
                     <li>
                         <a href="" class="content"> Số phức </a>
-                        <p>Số phức</p>
-                        <% if (canEdit==true) { %>
-                            <button id="btnUpdateLT" type="submit" name="kienthuc" value="sophuc">Cập nhật</button>                                                
-                        <% } %>                        
+                        <div>
+                            <p>Số phức</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="sophuc">Cập nhật</button>                                                
+                            <% } %>                        
+                        </div>
                     </li>
                     <li>
                         <a href="" class="content"> Hình học không gian </a>
-                        <p>Hình học không gian</p>
-                        <% if (canEdit==true) { %>
-                            <button id="btnUpdateLT" type="submit" name="kienthuc" value="hhkg">Cập nhật</button>                                                
-                        <% } %>                        
+                        <div>
+                            <p>Hình học không gian</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="hhkg">Cập nhật</button>                                                
+                            <% } %>          
+                        </div>
                     </li>
                     <li>
                         <a href="" class="content"> Giải tích không gian Oxyz </a>
-                        <p>Giải tích không gian Oxyz</p>
-                        <% if (canEdit==true) { %>
-                            <button id="btnUpdateLT" type="submit" name="kienthuc" value="oxyz">Cập nhật</button>                                                
-                        <% } %>                        
+                        <div>
+                            <p>Giải tích không gian Oxyz</p>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="oxyz">Cập nhật</button>                                                
+                            <% } %>            
+                        </div>
                     </li>
                 </ol>
             </form>
