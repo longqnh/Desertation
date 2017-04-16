@@ -13,7 +13,9 @@ public class Thongke {
     private String madangtoan, dangtoan, mucdo;
     private int socau, socaudung;
     private int dopc;
-
+    private String made;
+    private double tyle;
+    
     public Thongke() {
     }
 
@@ -56,6 +58,14 @@ public class Thongke {
         this.mucdo = mucdo;
         this.socau = socau;
         this.socaudung = socaudung;
+    }
+
+    public Thongke(String madangtoan, int socau, int socaudung, String made, double tyle) {
+        this.madangtoan = madangtoan;
+        this.socau = socau;
+        this.socaudung = socaudung;
+        this.made = made;
+        this.tyle = tyle;
     }
 
     public String getMadangtoan() {
@@ -104,5 +114,21 @@ public class Thongke {
 
     public void setDopc(int dopc) {
         this.dopc = dopc;
+    }
+
+    public String getMade() {
+        return made;
+    }
+
+    public void setMade(String made) {
+        this.made = made;
+    }
+
+    public double getTyle() {
+        return tyle;
+    }
+
+    public void setTyle(double tyle) {
+        this.tyle = tyle;
     }
 }

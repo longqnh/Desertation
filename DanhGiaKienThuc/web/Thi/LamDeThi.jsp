@@ -137,7 +137,7 @@
                             <p><b>Câu <%=i+1%> (<%=q.getId()%>):</b> <%=q.getNoidung()%></p>
                             <%
                                 if (q.getHinh()==1) { %>
-                                    <img src="${pageContext.request.contextPath}/images/<%=q.getDangtoan()%>/<%=q.getId()%>.JPG">
+                                    <img src="${pageContext.request.contextPath}/images/NHCH/<%=q.getId()%>.JPG">
                             <% } %>
                             <p><b>A. </b><input type="radio" name="<%=q.getId()%>" value="A"> <%=q.getDapanA()%></p>
                             <p><b>B. </b><input type="radio" name="<%=q.getId()%>" value="B"> <%=q.getDapanB()%></p>

@@ -46,16 +46,17 @@ public class LamDeThi extends HttpServlet {
         DangtoanDAO dangtoanDAO = new DangtoanDAO();
         
         String[] noidung;
-        int level, time, numQuestion;
+        int lop, level, time, numQuestion;
         
         if (request.getParameter("dethi")==null) { // mode practice
             noidung = request.getParameterValues("kienthuc");
+            lop = Integer.parseInt(request.getParameter("lop"));            
             level = Integer.parseInt(request.getParameter("dokho"));
             time = Integer.parseInt(request.getParameter("time")); 
             numQuestion = (time == 15 ? 10 : (time == 60 ? 40 : 50));
         } else { // mode mock test
             String dethi = request.getParameter("dethi");
-            int lop = Integer.parseInt(request.getParameter("lop"));
+            lop = Integer.parseInt(request.getParameter("lop"));
             level = Integer.parseInt(request.getParameter("dokho"));
 
             switch (dethi) {
@@ -77,7 +78,7 @@ public class LamDeThi extends HttpServlet {
                 default:
                     time = 90; 
                     numQuestion = 50;
-                    noidung = dangtoanDAO.getAllDangtoanLop(lop);                    
+                    noidung = dangtoanDAO.getAllDangtoanLop(12);
                     break;
             }
         }
@@ -96,7 +97,7 @@ public class LamDeThi extends HttpServlet {
         //
         
         // tao de
-        dethiDAO.TaoDe(noidung, level, numQuestion, users.getUsername(), time);
+        dethiDAO.TaoDe(noidung, lop, level, numQuestion, users.getUsername(), time);
         String made = dethiDAO.GetMade(users.getUsername());
         List exam = dethiDAO.GetDeThi(made);
         

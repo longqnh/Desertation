@@ -95,30 +95,31 @@ public class ThongkeDAO {
         return list;
     }
     
-    public Thongke thongkekienthuc(String username, String noidung) {        
+    public List thongkekienthuc(String username, String noidung) {        
         Connection connection = DBConnect.getConnecttion();
         String sql = "CALL thongkekienthuc('" + username + "','" + noidung + "')";
         PreparedStatement ps;
         
-        Thongke thongke = new Thongke();
+        List<Thongke> list = new ArrayList<>();
         
         try {
             ps = connection.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                String dangtoan = rs.getString("dangtoan");
+                String made = rs.getString("made");
+                String madangtoan = rs.getString("dangtoan");
                 int socau = rs.getInt("socau");
                 int socaudung = rs.getInt("socaudung");
+                double tyle = DanhgiaDAO.round((double)socaudung/socau)*100;
                 
-                thongke.setDangtoan(dangtoan);
-                thongke.setSocau(socau);
-                thongke.setSocaudung(socaudung);
+                Thongke thongke = new Thongke(madangtoan, socau, socaudung, made, tyle);
+                list.add(thongke);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ThongkeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return thongke;
+        return list;
     }    
 }

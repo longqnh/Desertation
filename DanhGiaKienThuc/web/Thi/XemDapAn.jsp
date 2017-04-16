@@ -175,7 +175,7 @@
                         <p><b>Câu <%=i+1%> (<%=q.getId()%>) </b> <%=q.getNoidung()%></p>
                         <%
                             if (q.getHinh()==1) { %>
-                                <img src="../images/<%=q.getDangtoan()%>/<%=q.getId()%>.JPG">
+                                <img src="../images/NHCH/<%=q.getId()%>.JPG">
                         <%  } %>
                         <p id="<%=q.getId()%>A"><b>A. </b><input type="radio" disabled="" id="<%=q.getId()%>AA" name="<%=q.getId()%>" value="A"> <%=q.getDapanA()%></p>
                         <p id="<%=q.getId()%>B"><b>B. </b><input type="radio" disabled="" id="<%=q.getId()%>BB" name="<%=q.getId()%>" value="B"> <%=q.getDapanB()%></p>

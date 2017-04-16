@@ -4,6 +4,7 @@
     Author     : NTL
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="model.Lop"%>
 <%@page import="dao.LopDAO"%>
 <%@page import="model.Thongke"%>
@@ -26,7 +27,7 @@
         <script type="text/javascript">
             // Load the Visualization API and the piechart package.
 //            google.load('visualization', '1', {'packages': ['columnchart']});
-            google.charts.load('current', {'packages':['corechart']});
+            google.charts.load('current', {packages: ['corechart', 'line']});
         </script>
     </head>
     <body>
@@ -131,25 +132,28 @@
                     google.setOnLoadCallback(drawChart);  
                     function drawChart() {
                         // Create the data table.    
-                        var data = google.visualization.arrayToDataTable([
-                            ['', ''],
-                            ['Số câu sai', ${requestScope.socausai}],
-                            ['Số câu đúng', ${requestScope.socaudung}]
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Mã đề');
+                        data.addColumn('number', 'Tỉ lệ');
+
+                        data.addRows([
+                            <c:forEach var="data" items="${thongkedata}">['${data.made}',${data.tyle}],</c:forEach>
                         ]);
                         // Set chart options
                         var options = {
                             'title': '${requestScope.noidung}',
-                            is3D: true,
-                            pieSliceText: 'label',
-                            tooltip: {showColorCode: true},
-                            'width': 850,
-                            'height': 500,
-                            colors: ['red', 'blue']
+                            hAxis: {
+                              title: 'Mã đề'
+                            },
+                            vAxis: {
+                              title: 'Tỉ lệ'
+                            },
+                            height: 500
                         };
                         // Instantiate and draw our chart, passing in some options.
-                        var chart = new google.visualization.PieChart(document.getElementById('Chart'));
+                        var chart = new google.visualization.LineChart(document.getElementById('Chart'));
                         chart.draw(data, options);
-                    }                    
+                    }
                 </script>
               
                 <div id="Chart"></div>
