@@ -434,6 +434,29 @@ public class DethiDAO {
         return score;
     }
     
+    public static int GetSolanthi(String username, String noidung) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM table_quanlydethi WHERE username='" + username + "'";
+        PreparedStatement ps;
+        
+        int solanthi=0;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                String nd = rs.getString("noidung");
+                if (nd.contains(noidung)) {
+                    solanthi++;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                     
+        return solanthi;
+    }    
 //    public static void main(String[] args) {
 //        System.out.println(new DethiDAO().GetNoidung("tichphan"));
 //    }

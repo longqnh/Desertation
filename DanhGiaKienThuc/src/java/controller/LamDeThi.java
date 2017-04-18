@@ -6,11 +6,8 @@
 package controller;
 
 import dao.DangtoanDAO;
-import dao.DanhgiaDAO;
 import dao.DethiDAO;
-import dao.QuanLyDeThiDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,7 +38,6 @@ public class LamDeThi extends HttpServlet {
             users = (Users) session.getAttribute("user");
         }
         
-        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
         DethiDAO dethiDAO = new DethiDAO();
         DangtoanDAO dangtoanDAO = new DangtoanDAO();
         
@@ -82,18 +78,6 @@ public class LamDeThi extends HttpServlet {
                     break;
             }
         }
-        //
-        
-        // update kv, ps
-//        for (String nd: noidung) {
-//            String lanthicuoi = dethiDAO.GetMade(users.getUsername(), nd);
-//            int solanthi = danhgiaDAO.GetSolanthi(users.getUsername(), QuanLyDeThiDAO.GetNoidungTV(nd));
-//            if (lanthicuoi!=null && solanthi > 0) {
-//                double nangluc = danhgiaDAO.DanhGiaNangLuc(lanthicuoi, nd);
-//                danhgiaDAO.updateKyVong(users, nd, solanthi, nangluc);
-//                danhgiaDAO.updatePhuongSai(users, nd, nangluc);                    
-//            }
-//        }
         //
         
         // tao de

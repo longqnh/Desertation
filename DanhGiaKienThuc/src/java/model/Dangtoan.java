@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.List;
+
 /**
  *
  * @author NTL
@@ -16,6 +18,9 @@ public class Dangtoan {
     private int hocky;
     private double dopc_de, dopc_tb, dopc_tbk, dopc_kho;
 
+    private double kyvong;
+    private double phuongsai;
+    
     public Dangtoan() {
     }
 
@@ -30,6 +35,12 @@ public class Dangtoan {
         this.dopc_kho = dopc_kho;
     }
 
+    public Dangtoan(String dangtoan, double kyvong, double phuongsai) {
+        this.dangtoan = dangtoan;
+        this.kyvong = kyvong;
+        this.phuongsai = phuongsai;
+    }
+    
     public Dangtoan(String dangtoan, String dangtoanTV) {
         this.dangtoan = dangtoan;
         this.dangtoanTV = dangtoanTV;
@@ -97,5 +108,21 @@ public class Dangtoan {
 
     public void setDopc_kho(double dopc_kho) {
         this.dopc_kho = dopc_kho;
+    }
+
+    public double getKyvong() {
+        return kyvong;
+    }
+
+    public void setKyvong(double kyvong) {
+        this.kyvong = kyvong;
+    }
+
+    public double getPhuongsai() {
+        return phuongsai;
+    }
+
+    public void setPhuongsai(double phuongsai) {
+        this.phuongsai = phuongsai;
     }
 }

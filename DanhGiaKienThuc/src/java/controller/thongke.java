@@ -58,7 +58,6 @@ public class thongke extends HttpServlet {
         }
         
         // Thong ke + ve bieu do
-//        Thongke tk = thongkeDAO.thongkekienthuc(users.getUsername(), kienthuc);
         List<Thongke> list = thongkeDAO.thongkekienthuc(users.getUsername(), kienthuc);
         String noidung = QuanLyDeThiDAO.GetNoidungTV(kienthuc);
         
@@ -66,19 +65,14 @@ public class thongke extends HttpServlet {
         request.setAttribute("thongkedata", list);
         
         // Danh gia + goi y
-        int solanthi = danhgiaDAO.GetSolanthi(users.getUsername(), noidung);
+        int solanthi = DethiDAO.GetSolanthi(users.getUsername(), noidung);
         if (solanthi > 0) {
             // tinh nang luc lan thi gan nhat co noi dung do
             String made = dethiDAO.GetMade(users.getUsername(), noidung);
             double nangluc = danhgiaDAO.DanhGiaNangLuc(made, kienthuc);
-            // update kv, ps
-//            if (made!=null) {
-//                danhgiaDAO.updateKyVong(users, kienthuc, solanthi, nangluc);
-//                danhgiaDAO.updatePhuongSai(users, kienthuc, nangluc);                    
-//            }
             
             // uocluong khoang
-            HashMap<String, Double> khoang = danhgiaDAO.UocLuong(users, kienthuc);
+            HashMap<String, Double> khoang = danhgiaDAO.UocLuong(users.getUsername(), kienthuc);
             // ket luan => setAttribute("Message","ket luan")
             double max = khoang.get("max");
             double min = khoang.get("min");
@@ -102,10 +96,6 @@ public class thongke extends HttpServlet {
             }
         }
 
-//        String json = new Gson().toJson(danhgia);
-//        response.setContentType("application/json");
-//        response.setCharacterEncoding("UTF-8");
-//        response.getWriter().write(json);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/Member/DanhGia.jsp");
         rd.forward(request, response);
     }

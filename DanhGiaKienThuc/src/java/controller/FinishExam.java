@@ -58,8 +58,7 @@ public class FinishExam extends HttpServlet {
         }
         
         DethiDAO dethiDAO = new DethiDAO();
-        QuanLyDeThiDAO qldtdao = new QuanLyDeThiDAO();
-        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+        QuanLyDeThiDAO qldtdao = new QuanLyDeThiDAO();;
         
         // lay bai lam cua thi sinh
         for (int i=0; i<IDlist.size(); i++) {
@@ -70,13 +69,7 @@ public class FinishExam extends HttpServlet {
 
         float score = dethiDAO.ChamDiem(made, users.getUsername(), IDlist, user_answer);
         qldtdao.updateInfo(made, users.getUsername(), score);
-
-        // danh gia nl tung noi dung
-        //update kv, ps tung noi dung
-//        double nangluc = danhgiaDAO.DanhGiaNangLuc(made, kienthuc);
-//        danhgiaDAO.updateKyVong(users, kienthuc, solanthi, nangluc);
-//        danhgiaDAO.updatePhuongSai(users, kienthuc, nangluc);                    
-            
+        
         response.sendRedirect("Thi/FinishExam.jsp?made=" + made);
     }
 }

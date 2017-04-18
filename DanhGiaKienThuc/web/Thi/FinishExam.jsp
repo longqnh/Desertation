@@ -68,7 +68,7 @@
                 <script src="<%=request.getContextPath()%>/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
 
-            <div id="main-right">
+            <div id="main-right" style="overflow: scroll;">
                 <% 
                     String made = request.getParameter("made");
                     QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();

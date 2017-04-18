@@ -158,7 +158,7 @@
               
                 <div id="Chart"></div>
                 
-                <span id="loinhanxet">${requestScope.Message}</span><br>                                    
+                <span id="loinhanxet"><b>Nhận xét:</b> ${requestScope.Message}</span><br>                                    
             </div>
         </div>
         

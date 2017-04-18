@@ -60,6 +60,47 @@ public class UsersDao {
         return false;
     }
     
+    public void InsertKVPS (String username) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql_kyvong = "INSERT INTO table_kyvong VALUES(?,"; 
+        String sql_phuongsai = "INSERT INTO table_phuongsai VALUES(?,";
+
+        int num = new DangtoanDAO().countAllDangToan();
+        String temp = "";
+        for (int i = 0; i < num; i++) {
+            temp += "?";
+            if (i < num-1) {
+                temp+=",";
+            }
+        }
+        temp+=")";
+        
+        sql_kyvong+=temp;
+        sql_phuongsai+=temp;
+        
+        try {
+            PreparedStatement ps = connection.prepareCall(sql_kyvong);
+            ps.setString(1, username);
+            for (int i=2; i<=num+1; i++) {
+                ps.setDouble(i, 1);
+            }
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        
+        try {
+            PreparedStatement ps = connection.prepareCall(sql_phuongsai);
+            ps.setString(1, username);
+            for (int i=2; i<=num+1; i++) {
+                ps.setString(i, "0");
+            }
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+        }          
+    }
+    
     public void InsertUser (Users user) {
         Connection connection = DBConnect.getConnecttion();
         String sql = "INSERT INTO table_user VALUES(?,?,?,?,?,?)";
@@ -76,49 +117,7 @@ public class UsersDao {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String sql_kyvong="", sql_phuongsai="";
-        switch (user.getLop()) {
-            case 12:
-                sql_kyvong = "INSERT INTO table_kyvong12 VALUES(?,?,?,?,?,?,?)";
-                sql_phuongsai = "INSERT INTO table_phuongsai12 VALUES(?,?,?,?,?,?,?)";                
-                break;
-            case 11:
-                sql_kyvong = "INSERT INTO table_kyvong11 VALUES(?,?,?,?,?,?,?)";
-                sql_phuongsai = "INSERT INTO table_phuongsai11 VALUES(?,?,?,?,?,?,?)";                                
-                break;
-            case 10:
-                sql_kyvong = "INSERT INTO table_kyvong10 VALUES(?,?,?,?,?,?,?)";
-                sql_phuongsai = "INSERT INTO table_phuongsai10 VALUES(?,?,?,?,?,?,?)";                                
-                break;
-        }
-
-        try {
-            PreparedStatement ps = connection.prepareCall(sql_kyvong);
-            ps.setString(1, user.getUsername());
-            ps.setDouble(2, 1);
-            ps.setDouble(3, 1);
-            ps.setDouble(4, 1);
-            ps.setDouble(5, 1);
-            ps.setDouble(6, 1);
-            ps.setDouble(7, 1);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
-        }        
-        
-        try {
-            PreparedStatement ps = connection.prepareCall(sql_phuongsai);
-            ps.setString(1, user.getUsername());
-            ps.setString(2, "0");
-            ps.setString(3, "0");
-            ps.setString(4, "0");
-            ps.setString(5, "0");
-            ps.setString(6, "0");
-            ps.setString(7, "0");
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
-        }             
+        InsertKVPS(user.getUsername());
     }
     
     public Users login(String username, String password) {
@@ -256,5 +255,9 @@ public class UsersDao {
             System.err.println(e.getMessage());
 	}
 	return count;
-    }    
+    }
+    
+//    public static void main(String[] args) {
+//        new UsersDao().InsertKVPS("longqnh");
+//    }
 }
