@@ -134,7 +134,7 @@
                         // Create the data table.    
                         var data = new google.visualization.DataTable();
                         data.addColumn('string', 'Mã đề');
-                        data.addColumn('number', 'Tỉ lệ');
+                        data.addColumn('number', 'Tỉ lệ (%)');
 
                         data.addRows([
                             <c:forEach var="data" items="${thongkedata}">['${data.made}',${data.tyle}],</c:forEach>
@@ -146,7 +146,7 @@
                               title: 'Mã đề'
                             },
                             vAxis: {
-                              title: 'Tỉ lệ'
+                              title: 'Tỉ lệ (%)'
                             },
                             height: 500
                         };

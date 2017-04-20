@@ -305,7 +305,7 @@ public class DethiDAO {
         return made;
     }
     
-    public String GetMade(String username, String noidung) {
+    public String GetMade(String username, String noidung) { // noidung in Vnese
         String made = null;
         Connection connection = DBConnect.getConnecttion();
         String sql = "SELECT * FROM table_quanlydethi WHERE username='" + username + "' ORDER BY made DESC";
@@ -316,9 +316,9 @@ public class DethiDAO {
             ps = connection.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                made =rs.getString("made");
                 String nd = rs.getString("noidung");
                 if (nd.contains(noidung)) {
+                    made = rs.getString("made");
                     break;
                 }
             }
@@ -434,7 +434,7 @@ public class DethiDAO {
         return score;
     }
     
-    public static int GetSolanthi(String username, String noidung) {
+    public static int GetSolanthi(String username, String noidung) { // noidung in VNese
         Connection connection = DBConnect.getConnecttion();
         String sql = "SELECT * FROM table_quanlydethi WHERE username='" + username + "'";
         PreparedStatement ps;
@@ -457,7 +457,8 @@ public class DethiDAO {
                      
         return solanthi;
     }    
+    
 //    public static void main(String[] args) {
-//        System.out.println(new DethiDAO().GetNoidung("tichphan"));
+//        System.out.println(new DethiDAO().GetMade("longqnh", "hamso12"));
 //    }
 }

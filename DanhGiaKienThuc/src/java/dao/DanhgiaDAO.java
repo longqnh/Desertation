@@ -5,23 +5,15 @@
  */
 package dao;
 
-import com.google.gson.Gson;
 import connect.DBConnect;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Dangtoan;
-import model.Danhgia;
 import model.Users;
 
 /**
@@ -159,6 +151,90 @@ public class DanhgiaDAO {
         }        
     }
     
+    public void updateKyVong(Users user) {
+        Connection connection = DBConnect.getConnecttion();
+        
+        DethiDAO dethiDAO = new DethiDAO();
+        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+        
+        List<String> allDangtoan = new DangtoanDAO().getAllDangToan();
+        
+        for (String noidung : allDangtoan) {
+            int solanthi = DethiDAO.GetSolanthi(user.getUsername(), QuanLyDeThiDAO.GetNoidungTV(noidung));
+            String made = dethiDAO.GetMade(user.getUsername(), noidung);
+            
+            if (solanthi==0 || made==null) {
+                continue;
+            }
+            double nangluc = danhgiaDAO.DanhGiaNangLuc(made, noidung);
+            
+            double kyvong = 0;
+
+            String sql = "SELECT * FROM table_kyvong WHERE username='" + user.getUsername() + "'";
+            PreparedStatement ps;      
+
+            try {
+                ps = connection.prepareCall(sql);
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    kyvong = (rs.getDouble(noidung) + nangluc/solanthi-1)*(solanthi-1/solanthi);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            sql = "UPDATE table_kyvong SET " + noidung + "='" + kyvong + "' WHERE username='" + user.getUsername() + "'";
+            try {
+                ps = connection.prepareCall(sql);
+                ps.execute(sql);
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+            }        
+        }
+    }    
+    
+    public void updatePhuongSai (Users user) {
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+
+        DethiDAO dethiDAO = new DethiDAO();
+        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+        
+        List<String> allDangtoan = new DangtoanDAO().getAllDangToan();
+        
+        for (String noidung : allDangtoan) {  
+            String made = dethiDAO.GetMade(user.getUsername(), noidung);
+            if (made==null) {
+                continue;
+            }
+            
+            double ability = danhgiaDAO.DanhGiaNangLuc(made, noidung);
+            
+            String nangluc = "";
+            String sql = "SELECT * FROM table_phuongsai WHERE username='" + user.getUsername() + "'";
+            try {
+                ps = connection.prepareCall(sql);
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    nangluc = rs.getString(noidung) + " " + Double.toString(round(ability));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }      
+
+            sql = "UPDATE table_phuongsai SET " + noidung + "='" + nangluc + "' WHERE username='" + user.getUsername() + "'";
+            try {
+                ps = connection.prepareCall(sql);
+                ps.execute(sql);            
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }          
+        }
+    }    
 //    public static void main(String[] args) {
 //
 //    }

@@ -6,6 +6,7 @@
 package controller;
 
 import dao.DangtoanDAO;
+import dao.DanhgiaDAO;
 import dao.DethiDAO;
 import java.io.IOException;
 import java.util.List;
@@ -80,6 +81,11 @@ public class LamDeThi extends HttpServlet {
         }
         //
         
+        // 
+        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+        danhgiaDAO.updateKyVong(users);
+        danhgiaDAO.updatePhuongSai(users);
+        //
         // tao de
         dethiDAO.TaoDe(noidung, lop, level, numQuestion, users.getUsername(), time);
         String made = dethiDAO.GetMade(users.getUsername());
