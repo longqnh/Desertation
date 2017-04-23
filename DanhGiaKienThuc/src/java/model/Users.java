@@ -29,6 +29,10 @@ public class Users {
         this.lop = lop;
     }
 
+    public Users(String username) {
+        this.username = username;
+    }
+    
     public String getUsername() {
         return username;
     }

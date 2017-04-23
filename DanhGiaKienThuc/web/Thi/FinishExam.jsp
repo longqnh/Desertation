@@ -68,7 +68,7 @@
                 <script src="<%=request.getContextPath()%>/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
 
-            <div id="main-right" style="overflow: scroll;">
+            <div id="main-right">
                 <% 
                     String made = request.getParameter("made");
                     QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();
@@ -116,7 +116,7 @@
                                 noidungYeu.add(nd);
                             }
                     %>
-                            <li><%=nd.getSocaudung()%>/<%=nd.getSocau()%> dạng <%=nd.getDangtoan()%></li>
+                            <li><%=nd.getSocaudung()%>/<%=nd.getSocau()%> câu dạng <%=nd.getDangtoan()%></li>
                 <%
                         }
                 %>

@@ -73,7 +73,7 @@
                 <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
             
-            <form id="main-right" action="${pageContext.request.contextPath}/EditLyThuyet" method="GET" style="overflow: scroll;">
+            <form id="main-right" action="${pageContext.request.contextPath}/EditLyThuyet" method="GET">
                 <h2>Lý thuyết trắc nghiệm</h2>
                 <ol type="I">
                     <li>

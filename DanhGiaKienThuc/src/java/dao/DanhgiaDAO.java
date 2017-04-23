@@ -234,8 +234,10 @@ public class DanhgiaDAO {
                 Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
             }          
         }
-    }    
+    }   
+    
 //    public static void main(String[] args) {
-//
+//        new DanhgiaDAO().updateKyVong(new Users("longqnh"));
+//        new DanhgiaDAO().updatePhuongSai(new Users("longqnh"));
 //    }
 }
