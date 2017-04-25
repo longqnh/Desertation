@@ -7,6 +7,7 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dao.DangBaiTapDAO;
 import dao.QuestionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,7 +47,7 @@ public class QuestionCRUD extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
     }
 
     /**
@@ -64,11 +65,12 @@ public class QuestionCRUD extends HttpServlet {
         request.setCharacterEncoding("utf-8");
 
         String action = request.getParameter("action");
-        List<Question> List = new ArrayList<Question>();
+        List<Question> listCH = new ArrayList<Question>();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         response.setContentType("application/json");
         String kienthuc = request.getParameter("kienthuc");
         String searchID = request.getParameter("name");
+        String lop = request.getParameter("lop");
         
         if (action != null) {
             try {
@@ -76,13 +78,13 @@ public class QuestionCRUD extends HttpServlet {
                     int startPageIndex = Integer.parseInt(request.getParameter("jtStartIndex"));
                     int recordsPerPage = Integer.parseInt(request.getParameter("jtPageSize"));
                     
-                    List = qdao.getAllQuestions(kienthuc,searchID,startPageIndex, recordsPerPage);
-
+                    listCH = qdao.getAllQuestions(kienthuc,lop,searchID,startPageIndex, recordsPerPage);
+                    
                     // Get Total Record Count for Pagination
-                    int questionCount = qdao.getQuestionCount(kienthuc);
+                    int questionCount = qdao.getQuestionCount(kienthuc,lop);
                     // Return in the format required by jTable plugin
                     JSONROOT.put("Result", "OK");
-                    JSONROOT.put("Records", List);
+                    JSONROOT.put("Records", listCH);
                     JSONROOT.put("TotalRecordCount", questionCount);
                     
                     // Convert Java Object to Json
@@ -127,30 +129,7 @@ public class QuestionCRUD extends HttpServlet {
                         q.setDapan(dapan);
                     }
                     
-                    String temp = id.substring(0, 2);
-                    String dangtoan = null;
-                    
-                    switch (temp) {
-                        case "HS":
-                            dangtoan = "hamso";
-                            break;
-                        case "LO":
-                            dangtoan = "loga";
-                            break;
-                        case "TP":
-                            dangtoan = "tichphan";
-                            break;
-                        case "SP":
-                            dangtoan = "sophuc";
-                            break;
-                        case "HH":
-                            dangtoan = "hhkg";
-                            break;
-                        case "OX":
-                            dangtoan = "oxyz";
-                            break;
-                    }
-                    q.setDangtoan(dangtoan);
+                    q.setDangtoan(qdao.ReplaceNoidung(kienthuc));
 
                     if (request.getParameter("dangbt") != null) {
                         String dangbt = request.getParameter("dangbt");

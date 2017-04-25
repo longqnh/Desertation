@@ -91,7 +91,7 @@
                             edit: true
                         },     
                         dangbt: {
-                            title: 'Dạng bt',
+                            title: 'Dạng bài tập',
                             type: 'text',
                             edit: true
                         },
@@ -113,7 +113,7 @@
                             options: {'0': 'không có hình', '1': 'có hình'},
                             display: function(data) {
                                 if (data.record.hinh==1) {
-                                    return '<a target="_blank" href="../images/' + data.record.dangtoan + '/' + data.record.id +'.JPG">Link</a>';
+                                    return '<a target="_blank" href="../images/NHCH/' + data.record.id +'.JPG">Link</a>';
                                 }
                             },
                             edit: true
@@ -126,7 +126,8 @@
                     e.preventDefault();
                     $('#TableContainer').jtable('load', {
                         name: $('#name').val(),
-                        kienthuc: $('#kienthuc').val()
+                        kienthuc: $('#kienthuc').val(),
+                        lop: $('#lop').val()
                     });
                 });
 
@@ -261,14 +262,7 @@
                         <%  } %>
                     </select>
                     Kiến thức: 
-                    <select id="kienthuc" name="kienthuc">
-<!--                        <option value="hamso" selected="selected">Hàm số</option>
-                        <option value="loga">Lũy thừa - Mũ - Logarit</option>
-                        <option value="tichphan">Nguyên hàm - Tích phân</option>
-                        <option value="sophuc">Số phức</option>
-                        <option value="hhkg">Hình học không gian</option>
-                        <option value="oxyz">Oxyz</option>-->
-                    </select>
+                    <select id="kienthuc" name="kienthuc"></select>
                     
                     <script type="text/javascript">
                         $('#lop').change (

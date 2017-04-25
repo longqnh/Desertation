@@ -79,7 +79,7 @@
                     <li>
                         <a href="" class="content"> Mệnh đề - Tập hợp </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("menhde")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="menhde">Cập nhật</button>                                                
                             <% } %>                              
@@ -88,7 +88,7 @@
                     <li>
                         <a href="" class="content"> Phương trình - HPT - BPT - BĐT </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("phuongtrinh")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="pt">Cập nhật</button>                                                
                             <% } %>                              
@@ -97,7 +97,7 @@
                     <li>
                         <a href="" class="content"> Thống kê </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("thongke")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="thongke">Cập nhật</button>                                                
                             <% } %>                              
@@ -106,7 +106,7 @@
                     <li>
                         <a href="" class="content"> Vector </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("vector")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="vector">Cập nhật</button>                                                
                             <% } %>                              
@@ -115,7 +115,7 @@
                     <li>
                         <a href="" class="content"> Hình học giải tích phẳng </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("oxy")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="oxy">Cập nhật</button>                                                
                             <% } %>                              
@@ -124,7 +124,7 @@
                     <li>
                         <a href="" class="content"> Lượng giác </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("luonggiac10")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="luonggiac">Cập nhật</button>                                                
                             <% } %>                              

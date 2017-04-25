@@ -108,7 +108,7 @@
                     <li>
                         <a href="" class="content"> Tính tinh cậy </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("tinhtincay")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="tincay">Cập nhật</button>                                                
                             <% } %>                              
@@ -117,7 +117,7 @@
                     <li>
                         <a href="" class="content"> Tính giá trị </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("tinhgiatri")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="giatri">Cập nhật</button>                                                
                             <% } %>                              
@@ -126,7 +126,7 @@
                     <li>
                         <a href="" class="content"> Độ khó </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("dokho")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="dokho">Cập nhật</button>                                                
                             <% } %>                              
@@ -135,7 +135,7 @@
                     <li>
                         <a href="" class="content"> Độ phân cách </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("dophancach")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="dopc">Cập nhật</button>                                                
                             <% } %>                              

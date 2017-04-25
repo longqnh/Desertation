@@ -110,7 +110,7 @@ public class LopDAO {
 	return count;
     }
     
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
 //        List list = GetAllLop();
-    }
+//    }
 }

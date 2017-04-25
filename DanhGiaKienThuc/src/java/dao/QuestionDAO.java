@@ -111,11 +111,11 @@ public class QuestionDAO {
         return false;
     }
     
-    public List<Question> getAllQuestions(String nd, String search_id, int startPageIndex, int recordsPerPage) {
+    public List<Question> getAllQuestions(String nd, String lop, String search_id, int startPageIndex, int recordsPerPage) {
         Connection connection = DBConnect.getConnecttion();
         List<Question> list = new ArrayList();
         
-        String sql = "SELECT * FROM table_" + nd + " WHERE id LIKE '%" + search_id + "' LIMIT " + startPageIndex + "," + recordsPerPage;//"SELECT * FROM table_" + nd;
+        String sql = "SELECT * FROM table_" + ReplaceNoidung(nd) + " WHERE malop=" + lop + " AND id LIKE '%" + search_id + "' LIMIT " + startPageIndex + "," + recordsPerPage;//"SELECT * FROM table_" + nd;
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -144,9 +144,9 @@ public class QuestionDAO {
         return list;
     }
     
-    public int getQuestionCount(String nd) {
+    public int getQuestionCount(String nd, String lop) {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "SELECT COUNT(*) AS COUNT FROM table_" + nd;
+        String sql = "SELECT COUNT(*) AS COUNT FROM table_" + ReplaceNoidung(nd) + " WHERE malop=" + lop;
         
 	int count=0;
 	try 
@@ -164,4 +164,16 @@ public class QuestionDAO {
 	}
 	return count;
     }
+    
+    public String ReplaceNoidung(String noidung) {
+        if (!noidung.isEmpty()) {
+            String temp = noidung.substring(noidung.length()-2, noidung.length());
+
+            if (temp.equals("12") || temp.equals("11") || temp.equals("10")) {
+                noidung = noidung.substring(0,noidung.length()-2);
+            }
+        }
+        
+        return noidung;
+    }    
 }

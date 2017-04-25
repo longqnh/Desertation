@@ -79,7 +79,7 @@
                     <li>
                         <a href="" class="content"> Lượng giác </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("luonggiac11")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="luonggiac">Cập nhật</button>                                                
                             <% } %>  
@@ -88,7 +88,7 @@
                     <li>
                         <a href="" class="content"> Tổ hợp - Xác suất </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("tohop")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="tohop">Cập nhật</button>                                                
                             <% } %>                              
@@ -97,7 +97,7 @@
                     <li>
                         <a href="" class="content"> Giới hạn - Đạo hàm </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("gioihan")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="gioihan">Cập nhật</button>                                                
                             <% } %>                              
@@ -106,7 +106,7 @@
                     <li>
                         <a href="" class="content"> Phép dời hình </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("phepdoihinh")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="phepdoihinh">Cập nhật</button>                                                
                             <% } %>                              
@@ -115,7 +115,7 @@
                     <li>
                         <a href="" class="content"> Hình học không gian </a>
                         <div>
-                            <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                            <%=lythuyetDAO.getContent("hhkg11")%>
                             <% if (canEdit==true) { %>
                                 <button id="btnUpdateLT" type="submit" name="kienthuc" value="hhkg">Cập nhật</button>                                                
                             <% } %>                              

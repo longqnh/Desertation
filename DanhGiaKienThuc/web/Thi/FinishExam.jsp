@@ -18,9 +18,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>KẾT QUẢ THI</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>   
-        <link rel="stylesheet" href="../css/HeaderStyle.css">
-        <link rel="stylesheet" href="../css/FooterStyle.css">
-        <link rel="stylesheet" href="../css/OtherStyle.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css">
     </head>
     <body>
         <jsp:include page="../WebInterface/header.jsp"></jsp:include>
@@ -142,7 +142,7 @@
                 </div>
                 </ol>
                 
-                <form class="_btn" target="_blank" action="XemDapAn.jsp" method="GET">
+                <form class="_btn" target="_blank" action="${pageContext.request.contextPath}/Thi/XemDapAn.jsp" method="GET">
                     <input type="button" class="btnXemDA" id="showTK" value="Thống kê">
                     <input type="button" class="btnXemDA" id="showNX" value="Nhận xét">
                     <input type="text" name="made" value="<%=made%>" hidden="">
@@ -175,7 +175,7 @@
             </div>
         </div>
         
-        <script src="../js/autoscroll.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/autoscroll.js" type="text/javascript"></script>
             
         <jsp:include page="../WebInterface/footer.jsp"></jsp:include>
 
