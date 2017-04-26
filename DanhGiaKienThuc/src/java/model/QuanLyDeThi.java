@@ -14,7 +14,7 @@ public class QuanLyDeThi {
     private int socau;
     private String noidung;
     private int thoigian;
-    private int mucdo;
+    private String mucdo;
     private float diem;
     private String ngaythi;
     private String username;
@@ -22,7 +22,7 @@ public class QuanLyDeThi {
     public QuanLyDeThi() {
     }
 
-    public QuanLyDeThi(String made, int socau, String noidung, int thoigian, int mucdo, float diem, String ngaythi, String username) {
+    public QuanLyDeThi(String made, int socau, String noidung, int thoigian, String mucdo, float diem, String ngaythi, String username) {
         this.made = made;
         this.socau = socau;
         this.noidung = noidung;
@@ -65,11 +65,11 @@ public class QuanLyDeThi {
         this.thoigian = thoigian;
     }
 
-    public int getMucdo() {
+    public String getMucdo() {
         return mucdo;
     }
 
-    public void setMucdo(int mucdo) {
+    public void setMucdo(String mucdo) {
         this.mucdo = mucdo;
     }
 

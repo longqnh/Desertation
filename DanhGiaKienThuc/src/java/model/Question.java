@@ -37,6 +37,10 @@ public class Question {
         this.hinh = hinh;
     }
 
+    public Question(String id) {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }

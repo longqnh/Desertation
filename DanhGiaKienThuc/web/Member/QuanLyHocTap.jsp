@@ -63,18 +63,7 @@
                         },
                         mucdo: {
                             title: 'Độ khó',
-                            type: 'text',
-                            display: function(data) {
-                                if (data.record.mucdo == 0) {
-                                    return 'Dễ';
-                                } else {
-                                    if (data.record.mucdo == 1) {
-                                        return 'Trung bình';
-                                    } else {
-                                        return 'Khó';
-                                    }
-                                }
-                            }                            
+                            type: 'text'        
                         },
                         diem: {
                             title: 'Điểm',

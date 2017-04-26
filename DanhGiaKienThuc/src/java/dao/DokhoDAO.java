@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Dokho;
 
 /**
@@ -39,4 +41,29 @@ public class DokhoDAO {
         }
         return dsLevel;  
     }
+    
+    public String GetDoKhoTV (int dokho) {
+        Connection connection = DBConnect.getConnecttion();
+        
+        String sql = "SELECT * FROM table_dokhode WHERE dokho=" + dokho;
+        PreparedStatement ps;
+        String mucdo = null;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                mucdo = rs.getString("mucdo");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DangtoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        
+        return mucdo;        
+    }
+    
+//    public static void main(String[] args) {
+//        System.out.println(new DokhoDAO().GetDoKhoTV(2));
+//    }
 }

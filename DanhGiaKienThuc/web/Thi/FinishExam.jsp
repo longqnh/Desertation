@@ -46,22 +46,16 @@
                 
                 <div id="main-left-bottom">
                     <ul>
-                        <li><a href="<%=request.getContextPath()%>/index.jsp"> Trang chủ</a></li>                       
-                        <li><a> Làm đề thi </a>
-                            <ul class="submnu">
-                                <li><a href="<%=request.getContextPath()%>/Thi/MockTest.jsp"> Thi thử </a></li>
-                                <li><a href="<%=request.getContextPath()%>/Thi/Practice.jsp"> Luyện tập </a></li>
-                            </ul>
-                        </li>
-                        <li><a> Lý thuyết</a>
-                            <ul class="submnu">
-                                <li><a href="<%=request.getContextPath()%>/OnLyThuyet/Lop12.jsp"> Toán 12 </a></li>
-                                <li><a href="<%=request.getContextPath()%>/OnLyThuyet/LyThuyetTracNghiem.jsp"> Lý Thuyết Trắc Nghiệm </a></li>
-                            </ul>                            
-                        </li>
-                        <li><a href="<%=request.getContextPath()%>/tutorial.jsp"> Hướng dẫn</a></li>
-                        <li><a href="<%=request.getContextPath()%>/information.jsp"> Giới thiệu</a></li>
-                        <li><a href="<%=request.getContextPath()%>/contact.jsp"> Liên hệ - Góp ý</a></li>
+                        <li><a href="<%=request.getContextPath()%>/Member/User.jsp"> Thông tin tài khoản </a></li>
+                        <li><a href="<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>   
+                        <li><a href="<%=request.getContextPath()%>/Member/DanhGia.jsp"> Đánh giá kiến thức</a></li>                        
+                        <%
+                            if (users.getRole().equals("admin")) { %>
+                                <li><a href="<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>                        
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLTK.jsp"> Quản lý các tài khoản</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLKD.jsp"> Quản lý kho đề</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLDT.jsp">Quản lý các bài thi</a></li>                                
+                        <%  } %>
                     </ul>
                 </div>
                 

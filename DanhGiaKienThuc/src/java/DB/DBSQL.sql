@@ -12,119 +12,7 @@ CREATE TABLE `danhgiakienthuc`.`table_user` (
 INSERT INTO `danhgiakienthuc`.`table_user` (`username`, `password`, `name`, `email`, `lop` ,`role`) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'abc@xyz.com', '12' ,'admin');
 
 /* LOP 10 */
-CREATE TABLE `danhgiakienthuc`.`table_menhde` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_phuongtrinh` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_hept` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_batpt` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_bdt` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_thongke` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_oxy` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_luonggiac` (
+CREATE TABLE `danhgiakienthuc`.`NHCHTOAN10` (
   `id` VARCHAR(45) NOT NULL,
   `noidung` LONGTEXT NULL,
   `dapanA` LONGTEXT NULL,
@@ -141,55 +29,7 @@ CREATE TABLE `danhgiakienthuc`.`table_luonggiac` (
   PRIMARY KEY (`id`));
 
 /* LOP 11 */
-CREATE TABLE `danhgiakienthuc`.`table_tohop` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_dayso` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_gioihan` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_phepdoihinh` (
+CREATE TABLE `danhgiakienthuc`.`NHCHTOAN11` (
   `id` VARCHAR(45) NOT NULL,
   `noidung` LONGTEXT NULL,
   `dapanA` LONGTEXT NULL,
@@ -206,87 +46,7 @@ CREATE TABLE `danhgiakienthuc`.`table_phepdoihinh` (
   PRIMARY KEY (`id`));
 
 /* LOP 12 */
-CREATE TABLE `danhgiakienthuc`.`table_hamso` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_loga` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_tichphan` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_sophuc` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_hhkg` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `danhgiakienthuc`.`table_oxyz` (
+CREATE TABLE `danhgiakienthuc`.`NHCHTOAN12` (
   `id` VARCHAR(45) NOT NULL,
   `noidung` LONGTEXT NULL,
   `dapanA` LONGTEXT NULL,
@@ -438,12 +198,18 @@ INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtT
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('bienluanpt','phuongtrinh','Biện luận phương trình');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ptcan','phuongtrinh','Phương trình chứa căn');
 
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('toadomp', 'oxy', 'Phương pháp tọa độ trong mặt phẳng');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ptduongthang', 'oxy', 'Phương trình đường thẳng trong mặt phẳng');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ptduongtron', 'oxy', 'Phương trình đường tròn trong mặt phẳng');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('elip', 'oxy', 'Elip');
+
+
 CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
   `made` INT(5) ZEROFILL NOT NULL AUTO_INCREMENT,
   `socau` INT NULL,
   `noidung` VARCHAR(100) NULL,
   `thoigian` INT NULL,
-  `mucdo` INT NULL,
+  `mucdo` VARCHAR(45) NULL,
   `diem` FLOAT NULL,
   `ngaythi` VARCHAR(45) NULL,
   `username` VARCHAR(25) NULL,
@@ -512,109 +278,19 @@ ALTER TABLE `danhgiakienthuc`.`table_lythuyet`
 	ADD FOREIGN KEY (`kienthuc`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`lop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
 
-ALTER TABLE `danhgiakienthuc`.`table_hamso`
+ALTER TABLE `danhgiakienthuc`.`NHCHTOAN10`
 	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
 	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
 
-ALTER TABLE `danhgiakienthuc`.`table_loga`
+ALTER TABLE `danhgiakienthuc`.`NHCHTOAN11`
 	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
 	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
 
-ALTER TABLE `danhgiakienthuc`.`table_tichphan`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_sophuc`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_hhkg`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_oxyz`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_menhde`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_phuongtrinh`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_hept`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_batpt`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_bdt`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_thongke`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_oxy`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_luonggiac`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_tohop`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_dayso`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_gioihan`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`table_phepdoihinh`
+ALTER TABLE `danhgiakienthuc`.`NHCHTOAN12`
 	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
@@ -632,13 +308,12 @@ ALTER TABLE `danhgiakienthuc`.`table_phanloaidangtoan` ADD FOREIGN KEY (`malop`)
 ALTER TABLE `danhgiakienthuc`.`table_phanloaibt` ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`);		
 
 ALTER TABLE `danhgiakienthuc`.`table_quanlydethi` 
-        ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`) ON DELETE CASCADE,
-        ADD FOREIGN KEY (`mucdo`) REFERENCES `danhgiakienthuc`.`table_dokhoDE`(`dokho`);
-
-ALTER TABLE `danhgiakienthuc`.`table_kyvong12` 
         ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`) ON DELETE CASCADE;
 
-ALTER TABLE `danhgiakienthuc`.`table_phuongsai12` 
+ALTER TABLE `danhgiakienthuc`.`table_kyvong` 
+        ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`) ON DELETE CASCADE;
+
+ALTER TABLE `danhgiakienthuc`.`table_phuongsai` 
         ADD FOREIGN KEY (`username`) REFERENCES `danhgiakienthuc`.`table_user`(`username`) ON DELETE CASCADE;
 
 /* Stored Procedure */
@@ -689,40 +364,6 @@ select distinct dt.dangtoan, pl.dangtoanTV ,dk.mucdo,
 from table_dokhoCH as dk, table_dethi as dt, table_phanloaidangtoan as pl
 where made=madethi and dt.dangtoan=pl.dangtoan and dt.dangtoan=dangtoan;
 END; $$
-
--- DELIMITER $$
--- DROP PROCEDURE IF EXISTS thongkekienthuc $$
--- CREATE PROCEDURE thongkekienthuc(IN thisinh VARCHAR(25))
--- BEGIN
--- select dt.dangtoan as madangtoan, pl.dangtoanTV as dangtoan, 
--- 	(select COUNT(*) from table_dethi as dt2
--- 	where username=thisinh and dt2.dangtoan=dt.dangtoan)as socau,
--- 	(select COUNT(*) from table_dethi as dt3
---     where username=thisinh and dt3.dangtoan=dt.dangtoan and dt3.dapan=dt3.userchoice) as socaudung 
--- from table_dethi as dt, table_phanloaidangtoan as pl
--- where username=thisinh and userchoice=dapan and dt.dangtoan=pl.dangtoan
--- group by dangtoan;
--- END; $$
-
--- DELIMITER $$
--- DROP PROCEDURE IF EXISTS thongkekienthuc $$
--- CREATE PROCEDURE thongkekienthuc
--- (
---     IN thisinh VARCHAR(25),
---     IN noidung VARCHAR(45)
--- )
--- BEGIN
--- select * from
--- (select dt.dangtoan as madangtoan, pl.dangtoanTV as dangtoan, 
--- 	(select COUNT(*) from table_dethi as dt2
--- 	where username=thisinh and dt2.dangtoan=dt.dangtoan)as socau,
--- 	(select COUNT(*) from table_dethi as dt3
---     where username=thisinh and dt3.dangtoan=dt.dangtoan and dt3.dapan=dt3.userchoice) as socaudung 
--- from table_dethi as dt, table_phanloaidangtoan as pl
--- where username=thisinh and dt.dangtoan=pl.dangtoan
--- group by dangtoan) as foo
--- where madangtoan=noidung;
--- END; $$
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS thongkekienthuc $$

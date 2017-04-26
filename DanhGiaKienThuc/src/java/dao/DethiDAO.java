@@ -89,13 +89,22 @@ class NoiDung{
 }
 
 public class DethiDAO {
+    
+    DangtoanDAO dangtoanDAO;
+    DokhoDAO dokhoDAO;
+
+    public DethiDAO() {
+        dangtoanDAO = new DangtoanDAO();
+        dokhoDAO = new DokhoDAO();
+    }
+    
     private void SetSocauTheoNoiDung (NoiDung[] nd, double nb, double th, double vd, double vdc) {
-        for (int i = 0; i < nd.length; i++) {
-            nd[i].setSoCauNB( (int) Math.round(nd[i].getSoCau()*nb) );
-            nd[i].setSoCauTH( (int) Math.round(nd[i].getSoCau()*th) );
-            nd[i].setSoCauVD( (int) Math.round(nd[i].getSoCau()*vd) );
-            nd[i].setSocauVDC( (int) Math.round(nd[i].getSoCau()*vdc) );
-            Check(nd[i]);
+        for (NoiDung noidung : nd) {
+            noidung.setSoCauNB((int) Math.round(noidung.getSoCau() * nb));
+            noidung.setSoCauTH((int) Math.round(noidung.getSoCau() * th));
+            noidung.setSoCauVD((int) Math.round(noidung.getSoCau() * vd));
+            noidung.setSocauVDC((int) Math.round(noidung.getSoCau() * vdc));
+            Check(noidung);
         }
     }
     
@@ -126,15 +135,15 @@ public class DethiDAO {
         }
     }
     
-    private String ReplaceNoidung(String noidung) {
-        String temp = noidung.substring(noidung.length()-2, noidung.length());
-        
-        if (temp.equals("12") || temp.equals("11") || temp.equals("10")) {
-            noidung = noidung.substring(0,noidung.length()-2);
-        }
-        
-        return noidung;
-    }
+//    private String ReplaceNoidung(String noidung) {
+//        String temp = noidung.substring(noidung.length()-2, noidung.length());
+//        
+//        if (temp.equals("12") || temp.equals("11") || temp.equals("10")) {
+//            noidung = noidung.substring(0,noidung.length()-2);
+//        }
+//        
+//        return noidung;
+//    }
     
     public void TaoDe(String[] noidung, int level, int numQuestion, String username, int time) {
         Connection connection = DBConnect.getConnecttion();
@@ -177,20 +186,21 @@ public class DethiDAO {
             
             // update table_quanlydethi
             String update_qldethi = "INSERT INTO table_quanlydethi(`socau`,`noidung`,`thoigian`,`mucdo`,`username`) VALUES ('" +
-                                    numQuestion + "','" + cacNoiDung + "','" + time + "','" + level + "','" + username + "')";
+                                    numQuestion + "','" + cacNoiDung + "','" + time + "','" + dokhoDAO.GetDoKhoTV(level) + "','" + username + "')";
             
             // update table_dethi
             String update_dethi = "INSERT INTO table_dethi(`id`,`noidung`,`dapanA`,`dapanB`,`dapanC`,`dapanD`,`dapan`,`dangtoan`,`dangbt`,`dokho`,`dophancach`,`malop`,`hinh`,`made`) " +
                         "SELECT *, (SELECT made FROM table_quanlydethi WHERE username='" + username + "' ORDER BY made DESC LIMIT 1) FROM (";
             
             for (int i=0; i < nd.length; i++) {
-                update_dethi += "(SELECT * FROM table_" + nd[i].getNoidung() + " WHERE dokho=0 ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
+                int lop = dangtoanDAO.GetLop(nd[i].getNoidung());
+                update_dethi += "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=0 ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM table_" + nd[i].getNoidung() + " WHERE dokho=1 ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
+                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=1 ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM table_" + nd[i].getNoidung() + " WHERE dokho=2 ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
+                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=2 ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM table_" + nd[i].getNoidung() + " WHERE dokho=3 ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
+                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=3 ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
                 if (i < nd.length - 1) {
                     update_dethi += "UNION ALL ";
                 }
@@ -251,21 +261,20 @@ public class DethiDAO {
             
             // update table_quanlydethi
             String update_qldethi = "INSERT INTO table_quanlydethi(`socau`,`noidung`,`thoigian`,`mucdo`,`username`) VALUES ('" +
-                                    numQuestion + "','" + cacNoiDung + "','" + time + "','" + level + "','" + username + "')";
+                                    numQuestion + "','" + cacNoiDung + "','" + time + "','" + dokhoDAO.GetDoKhoTV(level) + "','" + username + "')";
             
             // update table_dethi
             String update_dethi = "INSERT INTO table_dethi(`id`,`noidung`,`dapanA`,`dapanB`,`dapanC`,`dapanD`,`dapan`,`dangtoan`,`dangbt`,`dokho`,`dophancach`,`malop`,`hinh`,`made`) " +
                         "SELECT *, (SELECT made FROM table_quanlydethi WHERE username='" + username + "' ORDER BY made DESC LIMIT 1) FROM (";
             
             for (int i=0; i < nd.length; i++) {
-                String dangtoan = ReplaceNoidung(nd[i].getNoidung());
-                update_dethi += "(SELECT * FROM table_" + dangtoan + " WHERE dokho=0 AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
+                update_dethi += "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=0 AND dangtoan='" + nd[i].getNoidung() + "' ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM table_" + dangtoan + " WHERE dokho=1 AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
+                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=1 AND dangtoan='" + nd[i].getNoidung() + "' ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM table_" + dangtoan + " WHERE dokho=2 AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
+                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=2 AND dangtoan='" + nd[i].getNoidung() + "' ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM table_" + dangtoan + " WHERE dokho=3 AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
+                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=3 AND dangtoan='" + nd[i].getNoidung() + "' ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
                 if (i < nd.length - 1) {
                     update_dethi += "UNION ALL ";
                 }

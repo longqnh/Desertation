@@ -10,22 +10,27 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Question;
-import model.Dethi;
 
 /**
  *
  * @author NTL
  */
 public class QuestionDAO {
+    DangtoanDAO dangtoanDAO;
+    
+    public QuestionDAO() {
+        dangtoanDAO = new DangtoanDAO();
+    }
+        
     public boolean InsertQuestion(Question q) {
         Connection connection= DBConnect.getConnecttion();
-        String sql = "INSERT INTO table_" + q.getDangtoan() + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+//        String sql = "INSERT INTO table_" + q.getDangtoan() + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO NHCHTOAN" + dangtoanDAO.GetLop(q.getDangtoan()) + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareCall(sql);
@@ -53,7 +58,8 @@ public class QuestionDAO {
     
     public boolean updateQuestion(Question q) throws SQLException {
         Connection con = DBConnect.getConnecttion();
-        String sql = "update table_" + q.getDangtoan() + " set noidung=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, dapan=? where id=?";
+//        String sql = "update table_" + q.getDangtoan() + " set noidung=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, dapan=? where id=?";
+        String sql = "update NHCHTOAN" + dangtoanDAO.GetLop(q.getDangtoan()) + " set noidung=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, dapan=? where id=?";
         PreparedStatement ps;
         
         try {
@@ -73,33 +79,12 @@ public class QuestionDAO {
         return false;
     }
 
-    public boolean DeleteQuestion(String maCH) {
+    public boolean DeleteQuestion(Question q) {
         Connection con = DBConnect.getConnecttion();
-        String temp = maCH.substring(0, 2);
-        String dangtoan = null;
-
-        switch (temp) {
-            case "HS":
-                dangtoan = "hamso";
-                break;
-            case "LO":
-                dangtoan = "loga";
-                break;
-            case "TP":
-                dangtoan = "tichphan";
-                break;
-            case "SP":
-                dangtoan = "sophuc";
-                break;
-            case "HH":
-                dangtoan = "hhkg";
-                break;
-            case "OX":
-                dangtoan = "oxyz";
-                break;
-        }
         
-        String sql = "delete from table_" + dangtoan + " where id='" + maCH + "'";
+//        String sql = "delete from table_" + dangtoan + " where id='" + maCH + "'";
+
+        String sql = "delete from NHCHTOAN" + dangtoanDAO.GetLop(q.getDangtoan()) + " where id='" + q.getId() + "'";
         PreparedStatement ps;
         try {
             ps = con.prepareCall(sql);
@@ -115,7 +100,9 @@ public class QuestionDAO {
         Connection connection = DBConnect.getConnecttion();
         List<Question> list = new ArrayList();
         
-        String sql = "SELECT * FROM table_" + ReplaceNoidung(nd) + " WHERE malop=" + lop + " AND id LIKE '%" + search_id + "' LIMIT " + startPageIndex + "," + recordsPerPage;//"SELECT * FROM table_" + nd;
+//        String sql = "SELECT * FROM table_" + ReplaceNoidung(nd) + " WHERE malop=" + lop + " AND id LIKE '%" + search_id + "' LIMIT " + startPageIndex + "," + recordsPerPage;//"SELECT * FROM table_" + nd;
+        String sql = "SELECT * FROM NHCHTOAN" + lop + " WHERE dangtoan='" + nd + "' AND id LIKE '%" + search_id + "' LIMIT " + startPageIndex + "," + recordsPerPage;
+
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -146,7 +133,8 @@ public class QuestionDAO {
     
     public int getQuestionCount(String nd, String lop) {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "SELECT COUNT(*) AS COUNT FROM table_" + ReplaceNoidung(nd) + " WHERE malop=" + lop;
+//        String sql = "SELECT COUNT(*) AS COUNT FROM table_" + ReplaceNoidung(nd) + " WHERE malop=" + lop;
+        String sql = "SELECT COUNT(*) AS COUNT FROM NHCHTOAN" + lop + " WHERE dangtoan='" + nd + "'";
         
 	int count=0;
 	try 
@@ -165,15 +153,15 @@ public class QuestionDAO {
 	return count;
     }
     
-    public String ReplaceNoidung(String noidung) {
-        if (!noidung.isEmpty()) {
-            String temp = noidung.substring(noidung.length()-2, noidung.length());
-
-            if (temp.equals("12") || temp.equals("11") || temp.equals("10")) {
-                noidung = noidung.substring(0,noidung.length()-2);
-            }
-        }
-        
-        return noidung;
-    }    
+//    public String ReplaceNoidung(String noidung) {
+//        if (!noidung.isEmpty()) {
+//            String temp = noidung.substring(noidung.length()-2, noidung.length());
+//
+//            if (temp.equals("12") || temp.equals("11") || temp.equals("10")) {
+//                noidung = noidung.substring(0,noidung.length()-2);
+//            }
+//        }
+//        
+//        return noidung;
+//    }    
 }

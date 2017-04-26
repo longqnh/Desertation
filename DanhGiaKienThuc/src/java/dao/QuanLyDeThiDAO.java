@@ -81,7 +81,7 @@ public class QuanLyDeThiDAO {
                 int socau = rs.getInt("socau");                
                 String noidung = rs.getString("noidung");
                 int thoigian = rs.getInt("thoigian");
-                int mucdo = rs.getInt("mucdo");
+                String mucdo = rs.getString("mucdo");
                 float diem = rs.getFloat("diem");
                 String ngaythi = rs.getString("ngaythi");
                 String username = rs.getString("username");
@@ -154,7 +154,7 @@ public class QuanLyDeThiDAO {
                 int socau = rs.getInt("socau");
                 String noidung = rs.getString("noidung");
                 int thoigian = rs.getInt("thoigian");
-                int mucdo = rs.getInt("mucdo");
+                String mucdo = rs.getString("mucdo");
                 QuanLyDeThi deThi = new QuanLyDeThi(made, socau, noidung, thoigian, mucdo, diem, ngaythi, thisinh);
 
                 QuanLyDeThiDAO qldtdao = new QuanLyDeThiDAO();

@@ -139,6 +139,27 @@ public class DangtoanDAO {
 	return count;
     }
     
+    public int GetLop (String dangtoan) {
+        Connection connection = DBConnect.getConnecttion();
+        
+        String sql = "SELECT * FROM table_phanloaidangtoan WHERE dangtoan='" + dangtoan + "'";
+        PreparedStatement ps;
+        int lop = 12;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                lop = rs.getInt("malop");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DangtoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        
+        return lop;
+    }
+    
     public double GetKyVong(String username, String dangtoan) {
         Connection connection = DBConnect.getConnecttion();
         

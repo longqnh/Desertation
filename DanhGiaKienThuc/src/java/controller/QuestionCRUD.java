@@ -129,7 +129,7 @@ public class QuestionCRUD extends HttpServlet {
                         q.setDapan(dapan);
                     }
                     
-                    q.setDangtoan(qdao.ReplaceNoidung(kienthuc));
+                    q.setDangtoan(kienthuc);
 
                     if (request.getParameter("dangbt") != null) {
                         String dangbt = request.getParameter("dangbt");
@@ -175,7 +175,7 @@ public class QuestionCRUD extends HttpServlet {
                     // Delete record
                     if (request.getParameter("id") != null) {
                         String id = request.getParameter("id");
-                        qdao.DeleteQuestion(id);
+                        qdao.DeleteQuestion(new Question(id));
 
                         // Return in the format required by jTable plugin
                         JSONROOT.put("Result", "OK");
