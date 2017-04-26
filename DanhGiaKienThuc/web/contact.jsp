@@ -27,35 +27,36 @@
             }
         %>
         
+        <p id="thankyou">${requestScope.Thankyou}</p>
         <div class="container">
             <h2>LIÊN HỆ - GÓP Ý</h2>
-            <form>
+            <form action="Contact" method="POST">
                 <div class="group">      
-                    <input type="text" value="<%=hoten%>" required>
+                    <input type="text" name="hoten" value="<%=hoten%>" required>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Họ tên</label>
                 </div>
                 <div class="group">      
-                    <input type="email" value="<%=email%>" required>
+                    <input type="email" name="email" value="<%=email%>" required>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Email</label>
                 </div>
                 <div class="group">      
-                    <input type="text">
+                    <input type="text" name="sdt">
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Số điện thoại</label>
                 </div>                
                 <div class="group">      
-                    <input type="text" required>
+                    <input type="text" name="subject" required>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Tiêu đề</label>
                 </div>                
                 <div class="group">
-                    <textarea required></textarea>
+                    <textarea name="content" required></textarea>
                     <span class="highlight"></span>
                     <span class="bar"></span>                    
                     <label>Nội dung</label>

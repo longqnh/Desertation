@@ -194,13 +194,14 @@ public class DethiDAO {
             
             for (int i=0; i < nd.length; i++) {
                 int lop = dangtoanDAO.GetLop(nd[i].getNoidung());
-                update_dethi += "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=0 ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
+                String dangtoan = nd[i].getNoidung();
+                update_dethi += "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=0 AND dangtoan='" + dangtoan + "' ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=1 ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
+                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=1 AND dangtoan='" + dangtoan + "' ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=2 ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
+                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=2 AND dangtoan='" + dangtoan + "' ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=3 ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
+                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=3 AND dangtoan='" + dangtoan + "' ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
                 if (i < nd.length - 1) {
                     update_dethi += "UNION ALL ";
                 }
@@ -220,80 +221,6 @@ public class DethiDAO {
 	}
     }
 
-    public void TaoDe(String[] noidung, int lop, int level, int numQuestion, String username, int time) {
-        Connection connection = DBConnect.getConnecttion();
-
-        int soNoiDung = noidung.length;
-        NoiDung nd[] = new NoiDung[soNoiDung];
-        int tongsocau = 0;
-        String cacNoiDung = "";
-        
-        for (int i=0; i < soNoiDung; i++) {
-            nd[i] = new NoiDung();
-        }
-        
-        for (int i=0; i < soNoiDung - 1; i++) {
-            nd[i].setNoidung(noidung[i]);
-            nd[i].setSoCau(numQuestion/soNoiDung);
-            cacNoiDung += QuanLyDeThiDAO.GetNoidungTV(nd[i].getNoidung()) + ", ";
-            tongsocau += nd[i].getSoCau();
-        }
-        nd[soNoiDung-1].setNoidung(noidung[soNoiDung-1]);
-        nd[soNoiDung-1].setSoCau(numQuestion - tongsocau);
-        cacNoiDung += QuanLyDeThiDAO.GetNoidungTV(nd[soNoiDung-1].getNoidung());
-        
-        switch (level) {
-            case 0:
-                SetSocauTheoNoiDung(nd, 0.5, 0.3, 0.1, 0.1);
-                break;
-            case 1:
-                SetSocauTheoNoiDung(nd, 0.3, 0.4, 0.2, 0.1);
-                break;
-            default:
-                SetSocauTheoNoiDung(nd, 0.2, 0.3, 0.3, 0.2);
-                break;
-        }     
-
-	try {
-            // excute multiple queries (sql1 and sql2)
-            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            //String sql1 = "TRUNCATE table_dethi";
-            
-            // update table_quanlydethi
-            String update_qldethi = "INSERT INTO table_quanlydethi(`socau`,`noidung`,`thoigian`,`mucdo`,`username`) VALUES ('" +
-                                    numQuestion + "','" + cacNoiDung + "','" + time + "','" + dokhoDAO.GetDoKhoTV(level) + "','" + username + "')";
-            
-            // update table_dethi
-            String update_dethi = "INSERT INTO table_dethi(`id`,`noidung`,`dapanA`,`dapanB`,`dapanC`,`dapanD`,`dapan`,`dangtoan`,`dangbt`,`dokho`,`dophancach`,`malop`,`hinh`,`made`) " +
-                        "SELECT *, (SELECT made FROM table_quanlydethi WHERE username='" + username + "' ORDER BY made DESC LIMIT 1) FROM (";
-            
-            for (int i=0; i < nd.length; i++) {
-                update_dethi += "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=0 AND dangtoan='" + nd[i].getNoidung() + "' ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
-                                "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=1 AND dangtoan='" + nd[i].getNoidung() + "' ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
-                                "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=2 AND dangtoan='" + nd[i].getNoidung() + "' ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
-                                "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=3 AND dangtoan='" + nd[i].getNoidung() + "' ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
-                if (i < nd.length - 1) {
-                    update_dethi += "UNION ALL ";
-                }
-            }
-            update_dethi += ") AS foo;";
-            
-            connection.setAutoCommit(false);
-            
-            // excute queries
-            statement.addBatch(update_qldethi);
-            statement.addBatch(update_dethi);
-            statement.executeBatch();
-            connection.commit();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-	}
-    }
-    
     public String GetMade(String username) {
         String made = null;
         Connection connection = DBConnect.getConnecttion();

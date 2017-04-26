@@ -46,7 +46,7 @@ public class SendMail {
         return true;
     }
     
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
 //        System.out.println(sendMail("ntlong0208@gmail.com", "DEMO", "thử nghiệm gửi mail jsp"));
-    }
+//    }
 }

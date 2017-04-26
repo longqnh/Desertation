@@ -87,7 +87,7 @@ public class LamDeThi extends HttpServlet {
         danhgiaDAO.updatePhuongSai(users);
         //
         // tao de
-        dethiDAO.TaoDe(noidung, lop, level, numQuestion, users.getUsername(), time);
+        dethiDAO.TaoDe(noidung, level, numQuestion, users.getUsername(), time);
         String made = dethiDAO.GetMade(users.getUsername());
         List exam = dethiDAO.GetDeThi(made);
         
