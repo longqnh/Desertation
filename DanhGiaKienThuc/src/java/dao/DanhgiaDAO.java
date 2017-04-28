@@ -74,7 +74,7 @@ public class DanhgiaDAO {
         DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
         
         for (String nd: noidung) {
-            int solanthi = DethiDAO.GetSolanthi(thisinh.getUsername(), QuanLyDeThiDAO.GetNoidungTV(nd));
+            int solanthi = QuanLyDeThiDAO.GetSolanthi(thisinh.getUsername(), DangtoanDAO.GetNoidungTV(nd));
             if (solanthi > 0) {
                 double nangluc = danhgiaDAO.DanhGiaNangLuc(made, nd);
                 danhgiaDAO.updateKyVong(thisinh, nd, solanthi, nangluc);
@@ -160,7 +160,7 @@ public class DanhgiaDAO {
         List<String> allDangtoan = new DangtoanDAO().getAllDangToan();
         
         for (String noidung : allDangtoan) {
-            int solanthi = DethiDAO.GetSolanthi(user.getUsername(), QuanLyDeThiDAO.GetNoidungTV(noidung));
+            int solanthi = QuanLyDeThiDAO.GetSolanthi(user.getUsername(), DangtoanDAO.GetNoidungTV(noidung));
             String made = dethiDAO.GetMade(user.getUsername(), noidung);
             
             if (solanthi==0 || made==null) {

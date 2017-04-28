@@ -16,10 +16,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>XEM ĐÁP ÁN</title>
-        <link rel="stylesheet" href="../css/DoExamStyle.css" type="text/css">
-        <link rel="stylesheet" href="../css/HeaderStyle.css" type="text/css">
-        <link rel="stylesheet" href="../css/FooterStyle.css" type="text/css">             
-        <link rel="stylesheet" href="../css/OtherStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/DoExamStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">             
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">
@@ -53,10 +53,10 @@
                         <li id="user-info"><a href="#" style="text-transform: none; text-align: center;"><%=users.getUsername()%></a>
                             <ul class="sub-top-right">
                                 <%
-                                    String page_redirect= "../Member/User.jsp?username=" + users.getUsername();
+                                    String page_redirect = request.getContextPath() + "/Member/User.jsp?username=" + users.getUsername();
                                 %>
                                 <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
-                                <form action="../UserServlet"method="POST">
+                                <form action="${pageContext.request.contextPath}/UserServlet"method="POST">
                                     <input id="btnlogout" type="submit" value="Thoát">
                                     <input type="hidden" value="logout" name="command">
                                 </form>
@@ -89,7 +89,7 @@
                             <% } %>
                     </div>
                     
-                    <script type="text/javascript" src="../js/SelectQuestion.js"></script>
+                    <script type="text/javascript" src="${pageContext.request.contextPath}/js/SelectQuestion.js"></script>
                     
                     <button id="btnSubmit" onclick="window.location.href='<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp'"> Home </button>
                 </div>
@@ -115,7 +115,7 @@
             </div>
 
             <div id="top-left">
-                <a href="../index.jsp">website đánh giá kiến thức toán thpt</a>
+                <a href="${pageContext.request.contextPath}/index.jsp">website đánh giá kiến thức toán thpt</a>
             </div>        
         </div>
         
@@ -175,7 +175,7 @@
                         <p><b>Câu <%=i+1%> (<%=q.getId()%>) </b> <%=q.getNoidung()%></p>
                         <%
                             if (q.getHinh()==1) { %>
-                                <img src="../images/NHCH/<%=q.getId()%>.JPG">
+                                <img src="${pageContext.request.contextPath}/images/NHCH/<%=q.getId()%>.JPG">
                         <%  } %>
                         <p id="<%=q.getId()%>A"><b>A. </b><input type="radio" disabled="" id="<%=q.getId()%>AA" name="<%=q.getId()%>" value="A"> <%=q.getDapanA()%></p>
                         <p id="<%=q.getId()%>B"><b>B. </b><input type="radio" disabled="" id="<%=q.getId()%>BB" name="<%=q.getId()%>" value="B"> <%=q.getDapanB()%></p>

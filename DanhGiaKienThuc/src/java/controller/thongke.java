@@ -6,6 +6,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import dao.DangtoanDAO;
 import dao.DanhgiaDAO;
 import dao.DethiDAO;
 import dao.QuanLyDeThiDAO;
@@ -59,13 +60,13 @@ public class thongke extends HttpServlet {
         
         // Thong ke + ve bieu do
         List<Thongke> list = thongkeDAO.thongkekienthuc(users.getUsername(), kienthuc);
-        String noidung = QuanLyDeThiDAO.GetNoidungTV(kienthuc);
+        String noidung = DangtoanDAO.GetNoidungTV(kienthuc);
         
         request.setAttribute("noidung", noidung);
         request.setAttribute("thongkedata", list);
         
         // Danh gia + goi y
-        int solanthi = DethiDAO.GetSolanthi(users.getUsername(), noidung);
+        int solanthi = QuanLyDeThiDAO.GetSolanthi(users.getUsername(), noidung);
         if (solanthi > 0) {
             // tinh nang luc lan thi gan nhat co noi dung do
             String made = dethiDAO.GetMade(users.getUsername(), noidung);

@@ -160,12 +160,12 @@ public class DethiDAO {
         for (int i=0; i < soNoiDung - 1; i++) {
             nd[i].setNoidung(noidung[i]);
             nd[i].setSoCau(numQuestion/soNoiDung);
-            cacNoiDung += QuanLyDeThiDAO.GetNoidungTV(nd[i].getNoidung()) + ", ";
+            cacNoiDung += DangtoanDAO.GetNoidungTV(nd[i].getNoidung()) + ", ";
             tongsocau += nd[i].getSoCau();
         }
         nd[soNoiDung-1].setNoidung(noidung[soNoiDung-1]);
         nd[soNoiDung-1].setSoCau(numQuestion - tongsocau);
-        cacNoiDung += QuanLyDeThiDAO.GetNoidungTV(nd[soNoiDung-1].getNoidung());
+        cacNoiDung += DangtoanDAO.GetNoidungTV(nd[soNoiDung-1].getNoidung());
         
         switch (level) {
             case 0:
@@ -333,7 +333,7 @@ public class DethiDAO {
         
         for (int i=0; i<socau; i++) {
             String id = IDList.get(i).toString();
-            String user_select = UserAnswer.get(i).toString();
+            String user_select = (String) UserAnswer.get(i);
             
             sql = "SELECT * FROM table_dethi WHERE (made='" + made + "') AND (id='" + id + "')";
         
@@ -363,36 +363,13 @@ public class DethiDAO {
                 ps.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
-            }            
+            }        
         }
         
         float score = socaudung*((float)10/socau);
         return score;
     }
     
-    public static int GetSolanthi(String username, String noidung) { // noidung in VNese
-        Connection connection = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM table_quanlydethi WHERE username='" + username + "'";
-        PreparedStatement ps;
-        
-        int solanthi=0;
-        
-        try {
-            ps = connection.prepareCall(sql);
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()) {
-                String nd = rs.getString("noidung");
-                if (nd.contains(noidung)) {
-                    solanthi++;
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                     
-        return solanthi;
-    }    
     
 //    public static void main(String[] args) {
 //        System.out.println(new DethiDAO().GetMade("longqnh", "hamso12"));

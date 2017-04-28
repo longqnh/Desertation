@@ -165,23 +165,48 @@ public class QuanLyDeThiDAO {
         }        
     }
     
-    public static String GetNoidungTV(String noidung) {
+    public static int GetSolanthi(String username, String noidung) { // noidung in VNese
         Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM table_quanlydethi WHERE username='" + username + "'";
         PreparedStatement ps;
-        String sql = "SELECT * FROM table_phanloaidangtoan WHERE dangtoan='" + noidung + "'";
-        String res = null;
+        
+        int solanthi=0;
         
         try {
             ps = connection.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                res = rs.getString("dangtoanTV");
+                String nd = rs.getString("noidung");
+                if (nd.contains(noidung)) {
+                    solanthi++;
+                }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(QuanLyDeThiDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+                     
+        return solanthi;
+    }        
+    
+    public int GetExamTime (String made) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM table_quanlydethi WHERE made='" + made + "'";
+        PreparedStatement ps;
         
-        return res;
+        int time=0;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                time = rs.getInt("thoigian");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return time;        
     }
 }

@@ -29,6 +29,17 @@ h2 {
     font-family: Arial, sans-serif;
 }
 
+#notice {
+    background-color: rgb(152,251,152);
+    font-weight: bold;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    width: 96%;
+    margin: auto;
+    margin-top: 20px;
+}
+
 /* form starting stylings ------------------------------- */
 .group { 
     position:relative; 

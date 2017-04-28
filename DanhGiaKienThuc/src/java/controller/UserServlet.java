@@ -66,8 +66,8 @@ public class UserServlet extends HttpServlet {
                 
                 usersDao.InsertUser(users);
 
-//                session.setAttribute("user", users);
-                url = "/RegSuccess.jsp";
+                request.setAttribute("notice", "Chúc mừng bạn đã đăng ký tài khoản thành công, hãy đăng nhập để tiếp tục sử dụng");
+                url = "/login.jsp";
                 break;
             case "login":
                 users = usersDao.login(request.getParameter("username"), MD5.encryption(request.getParameter("password")));

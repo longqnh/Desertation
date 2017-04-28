@@ -17,6 +17,7 @@
     <body>
         <jsp:include page="WebInterface/header.jsp"></jsp:include>
         
+        <p id="notice">${requestScope.notice}</p>
         <div class="container">
             <h2>ĐĂNG NHẬP</h2>
             <form action="UserServlet" method="POST">

@@ -109,26 +109,7 @@
                             });
                         }
                     );
-                
-//                    $('#btnEdit').click (
-//                        function() {
-//                            alert($('#kienthuc').find(":selected").val());
-//                            $.ajax({
-//                                type: "GET",
-//                                url: "{pageContext.request.contextPath}/thongke",
-//                                dataType: "JSON",
-//                                data: { kienthuc: $('#kienthuc').find(":selected").val() },
-//                                success: function(result){       
-//                                    console.log(result);
-//                                    console.log(result.noidung);
-//                                    
-////                                    google.setOnLoadCallback(drawChart);  
-//                                    
-//                                    $("#loinhanxet").html(result.Message);
-//                                }
-//                            });          
-//                    });
-                    
+
                     google.setOnLoadCallback(drawChart);  
                     function drawChart() {
                         // Create the data table.    

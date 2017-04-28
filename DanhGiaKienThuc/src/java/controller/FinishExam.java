@@ -59,7 +59,7 @@ public class FinishExam extends HttpServlet {
         }
         
         DethiDAO dethiDAO = new DethiDAO();
-        QuanLyDeThiDAO qldtdao = new QuanLyDeThiDAO();;
+        QuanLyDeThiDAO qldtdao = new QuanLyDeThiDAO();
         
         // lay bai lam cua thi sinh
         for (int i=0; i<IDlist.size(); i++) {
