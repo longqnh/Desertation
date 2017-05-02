@@ -226,16 +226,15 @@ public class DangtoanDAO {
             while (rs.next()) {
                 res = rs.getString("dangtoanTV");
             }
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(QuanLyDeThiDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return res;
     }    
+    
 //    public static void main(String[] args) {
-//        String arr[] = new DangtoanDAO().getDangtoanTheoHocky(12, 2);
-//        for (String s: arr) {
-//            System.out.println(s);
-//        }
+//        System.out.println(DangtoanDAO.GetNoidungTV("thongke"));
 //    }
 }

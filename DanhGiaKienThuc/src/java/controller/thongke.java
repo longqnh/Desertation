@@ -55,7 +55,7 @@ public class thongke extends HttpServlet {
         if (request.getParameter("kienthuc") != null) {
             kienthuc = request.getParameter("kienthuc");                                   
         } else {
-            kienthuc = "hamso";
+            kienthuc = "hamso12";
         }
         
         // Thong ke + ve bieu do
@@ -79,18 +79,18 @@ public class thongke extends HttpServlet {
             double min = khoang.get("min");
             double m = (max - min)/3;
             if (nangluc <= min) {
-                request.setAttribute("Message","Còn yếu, chưa nắm vững kiến thức");
+                request.setAttribute("Message","Bạn còn yếu phần kiến thức này, chưa nắm vững kiến thức cơ bản. Hãy xem lại những lý thuyết căn bản và làm nhiều bài tập hơn.");
             } else {
                 if (nangluc > min && nangluc <= min+m) {
-                    request.setAttribute("Message","Trung bình, kiến thức ở mức căn bản");
+                    request.setAttribute("Message","Kiến thức của bạn ở mức trung bình, nắm được kiến thức ở mức căn bản. Hãy luyện tập nhiều hơn để nâng cao trình độ");
                 } else {
                     if (min+m < nangluc && nangluc <= max-m) {
-                        request.setAttribute("Message","Khá, cần làm thêm nhiều bài tập");
+                        request.setAttribute("Message","Bạn có kiến thức ở mức độ khá. Hãy luyện tập thêm nhiều bài tập để cải thiện kiến thức");
                     } else {
                         if (max-m < nangluc && nangluc < max) {
-                            request.setAttribute("Message","Tốt, nắm chắc kiến thức");
+                            request.setAttribute("Message","Bạn có kiến thức tốt, nắm chắc lý thuyết phần kiến thức này. Hãy luyện tập thêm nhiều câu hỏi khó để đạt đến mức điểm tối đa.");
                         } else {
-                            request.setAttribute("Message","Giỏi, cần luyện tập câu khó để đạt điểm tối đa");
+                            request.setAttribute("Message","Bạn có kiến thức ở mức giỏi, hãy tiếp tục luyện tập để giữ vững phong độ và tiếp tục ôn luyện cho những phần kiến thức khác.");
                         }
                     }
                 }
