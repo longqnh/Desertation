@@ -117,7 +117,7 @@ public class DangtoanDAO {
         
         return list;        
     }
-    
+        
     public int countAllDangToan() {
         Connection connection = DBConnect.getConnecttion();
         String sql = "SELECT COUNT(*) AS COUNT FROM table_phanloaidangtoan";

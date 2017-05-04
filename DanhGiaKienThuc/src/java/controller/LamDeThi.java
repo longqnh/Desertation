@@ -82,13 +82,13 @@ public class LamDeThi extends HttpServlet {
         //
         
         // 
-        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
-        List<String> allDangtoan = dangtoanDAO.getAllDangToan();
+//        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+//        List<String> allDangtoan = dangtoanDAO.getAllDangToan();
         
-        for (String dangtoan : allDangtoan) {
-            danhgiaDAO.updateKyVong(users, dangtoan);
-            danhgiaDAO.updatePhuongSai(users, dangtoan);
-        }
+//        for (String dangtoan : allDangtoan) {
+//            danhgiaDAO.updateKyVong(users, dangtoan);
+//            danhgiaDAO.updatePhuongSai(users, dangtoan);
+//        }
         
         //
         // tao de

@@ -70,18 +70,48 @@ public class DanhgiaDAO {
         return round(nangluc);
     }
     
-    public void DanhGiaNangLuc(String made, String[] noidung, Users thisinh) {
-        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+    public double DanhGiaNangLuc(String made, String noidung, int solanthi) {
+        Connection connection = DBConnect.getConnecttion();       
+        PreparedStatement ps;
+        String sql = "CALL thongkedokho('" + made + "','" + noidung + "')";
         
-        for (String nd: noidung) {
-            int solanthi = QuanLyDeThiDAO.GetSolanthi(thisinh.getUsername(), DangtoanDAO.GetNoidungTV(nd));
-            if (solanthi > 0) {
-                double nangluc = danhgiaDAO.DanhGiaNangLuc(made, nd);
-                danhgiaDAO.updateKyVong(thisinh, nd, solanthi, nangluc);
-                danhgiaDAO.updatePhuongSai(thisinh, nd, nangluc);                    
+        double nangluc=0;
+        int tongsocau=0;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int socau = rs.getInt("socau");
+                int socaudung = rs.getInt("socaudung");
+                int dopc = rs.getInt("dopc");
+
+//                tongsocau += socau;
+                tongsocau += dopc;
+                nangluc += ((double) socaudung/socau) * dopc;
             }
-        }       
-    }
+        } catch (SQLException ex) {
+            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        nangluc/=tongsocau;  
+//        nangluc/=solanthi;
+        
+        return round(nangluc);
+    }    
+    
+//    public void DanhGiaNangLuc(String made, String[] noidung, Users thisinh) {
+//        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+//        
+//        for (String nd: noidung) {
+//            int solanthi = QuanLyDeThiDAO.GetSolanthi(thisinh.getUsername(), DangtoanDAO.GetNoidungTV(nd));
+//            if (solanthi > 0) {
+//                double nangluc = danhgiaDAO.DanhGiaNangLuc(made, nd);
+//                danhgiaDAO.updateKyVong(thisinh, nd, solanthi, nangluc);
+//                danhgiaDAO.updatePhuongSai(thisinh, nd, nangluc);                    
+//            }
+//        }       
+//    }
         
     public HashMap UocLuong(String username, String dangtoan) {
         DangtoanDAO dangtoanDAO = new DangtoanDAO();
@@ -90,69 +120,75 @@ public class DanhgiaDAO {
         double kyvong = dangtoanDAO.GetKyVong(username, dangtoan);
         double phuongsai = dangtoanDAO.GetPhuongSai(username, dangtoan);
         
-        int solanthi = QuanLyDeThiDAO.GetSolanthi(username, DangtoanDAO.GetNoidungTV(dangtoan)) - 1;
-        double epsilon = 1.96 * (phuongsai/Math.sqrt(solanthi));
+        int solanthi = QuanLyDeThiDAO.GetSolanthi(username, DangtoanDAO.GetNoidungTV(dangtoan));
+        double epsilon;
+        if (solanthi==1) {
+            kyvong = 0.5;
+            epsilon = 0.5;
+        } else {
+            epsilon = 1.96 * (phuongsai/Math.sqrt(solanthi));
+        }
         
         khoanguocluong.put("max", kyvong + epsilon);
         khoanguocluong.put("min", kyvong - epsilon);
         return khoanguocluong;
     }
     
-    public void updatePhuongSai (Users user, String noidung, double ability) {
-        Connection connection = DBConnect.getConnecttion();
-        PreparedStatement ps;
-
-        String nangluc = "";
-        String sql = "SELECT * FROM table_phuongsai WHERE username='" + user.getUsername() + "'";
-        try {
-            ps = connection.prepareCall(sql);
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()) {
-                nangluc = rs.getString(noidung) + " " + Double.toString(round(ability));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }      
-        
-        sql = "UPDATE table_phuongsai SET " + noidung + "='" + nangluc + "' WHERE username='" + user.getUsername() + "'";
-        try {
-            ps = connection.prepareCall(sql);
-            ps.execute(sql);            
-            connection.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }             
-    }
-    
-    public void updateKyVong(Users user, String noidung, int solanthi, double nangluc) {
-        Connection connection = DBConnect.getConnecttion();
-        
-        double kyvong = 0;
-        
-        String sql = "SELECT * FROM table_kyvong WHERE username='" + user.getUsername() + "'";
-        PreparedStatement ps;      
-
-        try {
-            ps = connection.prepareCall(sql);
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()) {
-                kyvong = (rs.getDouble(noidung) + nangluc/solanthi-1)*(solanthi-1/solanthi);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        sql = "UPDATE table_kyvong SET " + noidung + "='" + kyvong + "' WHERE username='" + user.getUsername() + "'";
-        try {
-            ps = connection.prepareCall(sql);
-            ps.execute(sql);
-            connection.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
-        }        
-    }
+//    public void updatePhuongSai (Users user, String noidung, double ability) {
+//        Connection connection = DBConnect.getConnecttion();
+//        PreparedStatement ps;
+//
+//        String nangluc = "";
+//        String sql = "SELECT * FROM table_phuongsai WHERE username='" + user.getUsername() + "'";
+//        try {
+//            ps = connection.prepareCall(sql);
+//            ResultSet rs = ps.executeQuery();
+//            
+//            while (rs.next()) {
+//                nangluc = rs.getString(noidung) + " " + Double.toString(round(ability));
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }      
+//        
+//        sql = "UPDATE table_phuongsai SET " + noidung + "='" + nangluc + "' WHERE username='" + user.getUsername() + "'";
+//        try {
+//            ps = connection.prepareCall(sql);
+//            ps.execute(sql);            
+//            connection.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }             
+//    }
+//    
+//    public void updateKyVong(Users user, String noidung, int solanthi, double nangluc) {
+//        Connection connection = DBConnect.getConnecttion();
+//        
+//        double kyvong = 0;
+//        
+//        String sql = "SELECT * FROM table_kyvong WHERE username='" + user.getUsername() + "'";
+//        PreparedStatement ps;      
+//
+//        try {
+//            ps = connection.prepareCall(sql);
+//            ResultSet rs = ps.executeQuery();
+//            
+//            while (rs.next()) {
+//                kyvong = (rs.getDouble(noidung) + nangluc/solanthi-1)*(solanthi-1/solanthi);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        sql = "UPDATE table_kyvong SET " + noidung + "='" + kyvong + "' WHERE username='" + user.getUsername() + "'";
+//        try {
+//            ps = connection.prepareCall(sql);
+//            ps.execute(sql);
+//            connection.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+//        }        
+//    }
     
     public void updateKyVong(Users user, String noidung) {
         Connection connection = DBConnect.getConnecttion();
@@ -220,7 +256,12 @@ public class DanhgiaDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                nangluc = rs.getString(noidung) + " " + Double.toString(round(ability));
+                String tmp = rs.getString(noidung);
+                if (tmp.equals("0")) {
+                    nangluc = Double.toString(round(ability));
+                } else {
+                    nangluc = rs.getString(noidung) + " " + Double.toString(round(ability));
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);

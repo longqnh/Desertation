@@ -370,7 +370,28 @@ public class DethiDAO {
         return score;
     }
     
-    
+    public List getAllDangToan(String made) {
+        List<String> list = new ArrayList<>();
+        
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        String sql = "SELECT DISTINCT dangtoan FROM table_dethi;";
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                String dangtoan = rs.getString("dangtoan");
+                
+                list.add(dangtoan);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DangtoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return list;        
+    }    
 //    public static void main(String[] args) {
 //        System.out.println(new DethiDAO().GetMade("longqnh", "hamso12"));
 //    }

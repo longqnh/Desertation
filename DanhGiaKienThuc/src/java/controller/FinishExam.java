@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.DangtoanDAO;
 import dao.DanhgiaDAO;
 import dao.DethiDAO;
 import dao.QuanLyDeThiDAO;
@@ -70,6 +71,14 @@ public class FinishExam extends HttpServlet {
 
         float score = dethiDAO.ChamDiem(made, users.getUsername(), IDlist, user_answer);
         qldtdao.updateInfo(made, users.getUsername(), score);
+        
+        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+        List<String> allDangtoan = dethiDAO.getAllDangToan(made);
+        
+        for (String dangtoan : allDangtoan) {
+            danhgiaDAO.updateKyVong(users, dangtoan);
+            danhgiaDAO.updatePhuongSai(users, dangtoan);
+        }        
         
 //        response.sendRedirect("Thi/FinishExam.jsp?made=" + made);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/Thi/FinishExam.jsp?made=" + made);

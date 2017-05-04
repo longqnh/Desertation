@@ -70,7 +70,7 @@ public class thongke extends HttpServlet {
         if (solanthi > 0) {
             // tinh nang luc lan thi gan nhat co noi dung do
             String made = dethiDAO.GetMade(users.getUsername(), noidung);
-            double nangluc = danhgiaDAO.DanhGiaNangLuc(made, kienthuc);
+            double nangluc = danhgiaDAO.DanhGiaNangLuc(made, kienthuc, solanthi);
             
             // uocluong khoang
             HashMap<String, Double> khoang = danhgiaDAO.UocLuong(users.getUsername(), kienthuc);

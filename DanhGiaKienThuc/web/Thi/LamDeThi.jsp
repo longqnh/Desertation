@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/DoExamStyle.css" type="text/css">
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">
+        <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js">
             MathJax.Hub.Config({
                 extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
                 jax: ["input/TeX", "output/HTML-CSS"],
