@@ -122,4 +122,14 @@ public class ThongkeDAO {
         
         return list;
     }    
+    
+    public int GetTiLeDeThi (List<Thongke> list, String made) {
+        for (Thongke thongke : list) {
+            if (thongke.getMade().equals(made)) {
+                return (int) Math.round(thongke.getTyle());
+            }
+        }
+        
+        return 0;
+    }
 }

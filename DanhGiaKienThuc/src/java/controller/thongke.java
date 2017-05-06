@@ -70,30 +70,56 @@ public class thongke extends HttpServlet {
         if (solanthi > 0) {
             // tinh nang luc lan thi gan nhat co noi dung do
             String made = dethiDAO.GetMade(users.getUsername(), noidung);
-            double nangluc = danhgiaDAO.DanhGiaNangLuc(made, kienthuc, solanthi);
+            double nangluc = danhgiaDAO.DanhGiaNangLuc(made, kienthuc);
+            int tyle = thongkeDAO.GetTiLeDeThi(list, made);
             
             // uocluong khoang
             HashMap<String, Double> khoang = danhgiaDAO.UocLuong(users.getUsername(), kienthuc);
             // ket luan => setAttribute("Message","ket luan")
             double max = khoang.get("max");
             double min = khoang.get("min");
-            double m = (max - min)/3;
+            double m = DanhgiaDAO.round((max - min)/3);
+            int ketluan;
             if (nangluc <= min) {
-                request.setAttribute("Message","Bạn còn yếu phần kiến thức này, chưa nắm vững kiến thức cơ bản. Hãy xem lại những lý thuyết căn bản và làm nhiều bài tập hơn.");
+                ketluan = 0;
             } else {
                 if (nangluc > min && nangluc <= min+m) {
-                    request.setAttribute("Message","Kiến thức của bạn ở mức trung bình, nắm được kiến thức ở mức căn bản. Hãy luyện tập nhiều hơn để nâng cao trình độ");
+                    ketluan = 1;
                 } else {
                     if (min+m < nangluc && nangluc <= max-m) {
-                        request.setAttribute("Message","Bạn có kiến thức ở mức độ khá. Hãy luyện tập thêm nhiều bài tập để cải thiện kiến thức");
+                        ketluan = 2;
                     } else {
                         if (max-m < nangluc && nangluc < max) {
-                            request.setAttribute("Message","Bạn có kiến thức tốt, nắm chắc lý thuyết phần kiến thức này. Hãy luyện tập thêm nhiều câu hỏi khó để đạt đến mức điểm tối đa.");
+                            ketluan = 3;
                         } else {
-                            request.setAttribute("Message","Bạn có kiến thức ở mức giỏi, hãy tiếp tục luyện tập để giữ vững phong độ và tiếp tục ôn luyện cho những phần kiến thức khác.");
+                            ketluan = 4;
                         }
                     }
                 }
+            }
+            
+            // kiem dinh gia thuyet
+            int kiemdinh = danhgiaDAO.KiemDinh(users.getUsername(), kienthuc, nangluc, solanthi, tyle);
+            if (kiemdinh == 1) {
+                ketluan -= 1;
+            }
+            
+            switch (ketluan) {
+                case 0:
+                    request.setAttribute("Message","Bạn còn yếu phần kiến thức này, chưa nắm vững kiến thức cơ bản. Hãy xem lại những lý thuyết căn bản và làm nhiều bài tập hơn.");
+                    break;
+                case 1:
+                    request.setAttribute("Message","Kiến thức của bạn ở mức trung bình, nắm được kiến thức ở mức căn bản. Hãy luyện tập nhiều hơn để nâng cao trình độ");                    
+                    break;
+                case 2:
+                    request.setAttribute("Message","Bạn có kiến thức ở mức độ tương đối. Hãy luyện tập thêm nhiều bài tập để cải thiện kiến thức");                    
+                    break;
+                case 3:
+                    request.setAttribute("Message","Bạn có kiến thức tốt, nắm chắc lý thuyết phần kiến thức này. Hãy luyện tập thêm nhiều câu hỏi khó để đạt đến mức điểm tối đa.");                    
+                    break;
+                case 4:
+                    request.setAttribute("Message","Bạn có kiến thức ở mức giỏi, hãy phát huy và tiếp tục ôn luyện cho những phần kiến thức khác.");                    
+                    break;
             }
         }
 
