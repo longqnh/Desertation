@@ -40,10 +40,6 @@
             if (session.getAttribute("user")!=null) {
                 users = (Users) session.getAttribute("user");
             }
-            
-//            if (users==null) {
-//                response.sendRedirect("login.jsp");
-//            }
         %>
         
         <div id="top">
@@ -67,15 +63,12 @@
 
                 <%
                     DethiDAO dethiDAO = new DethiDAO();
-                    //String made = dethiDAO.GetMade(users.getUsername());
                     String made = request.getParameter("made");
                     List exam = dethiDAO.GetDeThi(made);
                     
                     QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();
                     float Diem = qldeThiDAO.GetDiem(made);     
                     List UserAnswer = dethiDAO.GetUserchoice(made);
-//                    List UserAnswer = (List) session.getAttribute("UserAnswer");
-//                    float Diem = (float) session.getAttribute("DiemThi");
                 %>
                 
                 <div id="sticky-anchor"></div>

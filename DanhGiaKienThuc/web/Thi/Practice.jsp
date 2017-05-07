@@ -16,14 +16,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>LUYỆN TẬP</title>
-        <!--<link rel="stylesheet" href="../css/DoExamStyle.css" type="text/css">-->
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>    
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/MemberStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/multi-select.css" type="text/css">
-        <!--<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>-->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>   
     </head>
     
@@ -120,14 +118,7 @@
                     </div>
                         
                     <div style="margin: 10px 0px 0px 115px">
-                        <select id="kienthuc" multiple="multiple" name="kienthuc" required>
-<!--                            <option value="hamso">Hàm số</option>
-                            <option value="loga">Lũy thừa - Mũ - Logarit</option>
-                            <option value="tichphan">Nguyên hàm - Tích phân</option>
-                            <option value="sophuc">Số phức</option>
-                            <option value="hhkg">Hình học không gian</option>
-                            <option value="oxyz">Oxyz</option>-->
-                        </select>
+                        <select id="kienthuc" multiple="multiple" name="kienthuc" required></select>
                         
                         <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.multi-select.js"></script>
                         <script type="text/javascript">
@@ -143,7 +134,6 @@
                                         url: "${pageContext.request.contextPath}/DangtoanServlet",
                                         data: {lop: $(this).val() },
                                         success: function(data){
-//                                            $('#kienthuc').find("option").remove();
                                             for(var i = 0; i < data.length; i++) {
                                                 $('#kienthuc').multiSelect('addOption', { value: data[i].dangtoan, text: data[i].dangtoanTV}); 
                                             }

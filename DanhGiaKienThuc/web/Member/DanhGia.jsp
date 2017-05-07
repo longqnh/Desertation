@@ -25,8 +25,6 @@
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
-            // Load the Visualization API and the piechart package.
-//            google.load('visualization', '1', {'packages': ['columnchart']});
             google.charts.load('current', {packages: ['corechart', 'line']});
         </script>
     </head>

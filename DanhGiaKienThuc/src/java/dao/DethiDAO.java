@@ -135,16 +135,6 @@ public class DethiDAO {
         }
     }
     
-//    private String ReplaceNoidung(String noidung) {
-//        String temp = noidung.substring(noidung.length()-2, noidung.length());
-//        
-//        if (temp.equals("12") || temp.equals("11") || temp.equals("10")) {
-//            noidung = noidung.substring(0,noidung.length()-2);
-//        }
-//        
-//        return noidung;
-//    }
-    
     public void TaoDe(String[] noidung, int level, int numQuestion, String username, int time) {
         Connection connection = DBConnect.getConnecttion();
 

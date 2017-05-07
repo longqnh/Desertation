@@ -44,10 +44,6 @@
                 </div>
 
                 <div id="main-left-bottom">
-<!--                            <ul class="submnu">
-                                <li><a href="#"> Sửa thông tin </a></li>
-                                <li><a href="#"> Đổi mật khẩu </a></li>
-                            </ul>-->
                     <ul>
                         <li><a href="<%=request.getContextPath()%>/Member/User.jsp"> Thông tin tài khoản </a></li>
                         <li><a href="<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>

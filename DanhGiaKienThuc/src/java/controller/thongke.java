@@ -71,7 +71,7 @@ public class thongke extends HttpServlet {
             // tinh nang luc lan thi gan nhat co noi dung do
             String made = dethiDAO.GetMade(users.getUsername(), noidung);
             double nangluc = danhgiaDAO.DanhGiaNangLuc(made, kienthuc);
-            int tyle = thongkeDAO.GetTiLeDeThi(list, made);
+//            int tyle = thongkeDAO.GetTiLeDeThi(list, made);
             
             // uocluong khoang
             HashMap<String, Double> khoang = danhgiaDAO.UocLuong(users.getUsername(), kienthuc);
@@ -80,6 +80,9 @@ public class thongke extends HttpServlet {
             double min = khoang.get("min");
             double m = DanhgiaDAO.round((max - min)/3);
             int ketluan;
+            if (max==min) {
+                nangluc = max + min;
+            }
             if (nangluc <= min) {
                 ketluan = 0;
             } else {
@@ -99,7 +102,7 @@ public class thongke extends HttpServlet {
             }
             
             // kiem dinh gia thuyet
-            int kiemdinh = danhgiaDAO.KiemDinh(users.getUsername(), kienthuc, nangluc, solanthi, tyle);
+            int kiemdinh = danhgiaDAO.KiemDinh(users.getUsername(), kienthuc, nangluc, solanthi, 95);
             if (kiemdinh == 1) {
                 ketluan -= 1;
             }

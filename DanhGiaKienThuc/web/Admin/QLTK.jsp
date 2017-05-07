@@ -244,9 +244,6 @@
                 <div id="TableContainer"></div>
                 <button type="button" id="DeleteAllButton">Delete All Selected</button>
             </div>                
-<!--                <div style="margin: 20px auto;">
-                    <div id="TableContainer"></div>
-                </div>-->
         </div>
             
         <script type="text/javascript" src="../js/autoscroll.js"></script>

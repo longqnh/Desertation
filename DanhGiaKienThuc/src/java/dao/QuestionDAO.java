@@ -152,16 +152,4 @@ public class QuestionDAO {
 	}
 	return count;
     }
-    
-//    public String ReplaceNoidung(String noidung) {
-//        if (!noidung.isEmpty()) {
-//            String temp = noidung.substring(noidung.length()-2, noidung.length());
-//
-//            if (temp.equals("12") || temp.equals("11") || temp.equals("10")) {
-//                noidung = noidung.substring(0,noidung.length()-2);
-//            }
-//        }
-//        
-//        return noidung;
-//    }    
 }

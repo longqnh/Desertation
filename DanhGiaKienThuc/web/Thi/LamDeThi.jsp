@@ -42,10 +42,6 @@
             if (session.getAttribute("user")!=null) {
                 users = (Users) session.getAttribute("user");
             }
-            
-//            if (users==null) {
-//                response.sendRedirect("login.jsp");
-//            }
         %>
         
         <div id="top">
