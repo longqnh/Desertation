@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.QuanLyDeThi;
 import model.Users;
+import tools.DanhGiaKienThuc;
 
 /**
  *
@@ -183,7 +184,7 @@ public class QuanLyDeThiDAO {
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
         }
                      
         return solanthi;
@@ -204,7 +205,7 @@ public class QuanLyDeThiDAO {
                 time = rs.getInt("thoigian");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return time;        

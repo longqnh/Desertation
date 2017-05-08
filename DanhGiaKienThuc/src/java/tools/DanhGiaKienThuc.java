@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package tools;
 
 import connect.DBConnect;
+import dao.DangtoanDAO;
+import dao.DethiDAO;
+import dao.QuanLyDeThiDAO;
+import dao.UsersDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Users;
@@ -20,7 +23,7 @@ import model.Users;
  *
  * @author NTL
  */
-public class DanhgiaDAO {
+public class DanhGiaKienThuc {
     public static double round(double d) {
         return Math.round(d * 100.0)/100.0;
     }
@@ -107,7 +110,7 @@ public class DanhgiaDAO {
                 nangluc += ((double) socaudung/socau) * dopc;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
         }
         nangluc/=tongsocau;  
     
@@ -156,7 +159,7 @@ public class DanhgiaDAO {
         Connection connection = DBConnect.getConnecttion();
         
         DethiDAO dethiDAO = new DethiDAO();
-        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+        DanhGiaKienThuc danhgia = new DanhGiaKienThuc();
         
         int solanthi = QuanLyDeThiDAO.GetSolanthi(user.getUsername(), DangtoanDAO.GetNoidungTV(noidung));
         String made = dethiDAO.GetMade(user.getUsername(), DangtoanDAO.GetNoidungTV(noidung));
@@ -165,7 +168,7 @@ public class DanhgiaDAO {
             return;
         }
 
-        double nangluc = danhgiaDAO.DanhGiaNangLuc(made, noidung);
+        double nangluc = danhgia.DanhGiaNangLuc(made, noidung);
 
         double kyvong = 0;
 
@@ -186,7 +189,7 @@ public class DanhgiaDAO {
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
         }
         kyvong = round(kyvong);
         
@@ -205,14 +208,14 @@ public class DanhgiaDAO {
         PreparedStatement ps;
 
         DethiDAO dethiDAO = new DethiDAO();
-        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+        DanhGiaKienThuc danhgia = new DanhGiaKienThuc();
         
         String made = dethiDAO.GetMade(user.getUsername(), DangtoanDAO.GetNoidungTV(noidung));
         if (made==null) {
             return;
         }
             
-        double ability = danhgiaDAO.DanhGiaNangLuc(made, noidung);
+        double ability = danhgia.DanhGiaNangLuc(made, noidung);
 
         String nangluc = "";
         String sql = "SELECT * FROM table_phuongsai WHERE username='" + user.getUsername() + "'";
@@ -229,7 +232,7 @@ public class DanhgiaDAO {
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
         }      
 
         sql = "UPDATE table_phuongsai SET " + noidung + "='" + nangluc + "' WHERE username='" + user.getUsername() + "'";
@@ -238,11 +241,11 @@ public class DanhgiaDAO {
             ps.execute(sql);            
             connection.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DanhgiaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
         }          
     }   
     
 //    public static void main(String[] args) {
 //        System.out.println(new DanhgiaDAO().GetPPChuan(95));
-//    }
+//    }    
 }

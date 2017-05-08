@@ -4,7 +4,6 @@
     Author     : NTL
 --%>
 
-<%@page import="dao.DanhgiaDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.ThongkeDAO"%>
 <%@page import="dao.QuanLyDeThiDAO"%>

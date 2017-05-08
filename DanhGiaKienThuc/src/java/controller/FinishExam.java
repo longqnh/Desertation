@@ -5,8 +5,6 @@
  */
 package controller;
 
-import dao.DangtoanDAO;
-import dao.DanhgiaDAO;
 import dao.DethiDAO;
 import dao.QuanLyDeThiDAO;
 import java.io.IOException;
@@ -19,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Users;
+import tools.DanhGiaKienThuc;
 
 /**
  *
@@ -72,12 +71,12 @@ public class FinishExam extends HttpServlet {
         float score = dethiDAO.ChamDiem(made, users.getUsername(), IDlist, user_answer);
         qldtdao.updateInfo(made, users.getUsername(), score);
         
-        DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+        DanhGiaKienThuc danhgia = new DanhGiaKienThuc();
         List<String> allDangtoan = dethiDAO.getAllDangToan(made);
         
         for (String dangtoan : allDangtoan) {
-            danhgiaDAO.updateKyVong(users, dangtoan);
-            danhgiaDAO.updatePhuongSai(users, dangtoan);
+            danhgia.updateKyVong(users, dangtoan);
+            danhgia.updatePhuongSai(users, dangtoan);
         }        
         
 //        response.sendRedirect("Thi/FinishExam.jsp?made=" + made);

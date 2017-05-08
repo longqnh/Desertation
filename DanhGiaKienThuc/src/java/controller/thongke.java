@@ -7,7 +7,6 @@ package controller;
 
 import com.google.gson.Gson;
 import dao.DangtoanDAO;
-import dao.DanhgiaDAO;
 import dao.DethiDAO;
 import dao.QuanLyDeThiDAO;
 import dao.ThongkeDAO;
@@ -23,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Thongke;
 import model.Users;
+import tools.DanhGiaKienThuc;
 
 /**
  *
@@ -30,7 +30,7 @@ import model.Users;
  */
 public class thongke extends HttpServlet {
     ThongkeDAO thongkeDAO = new ThongkeDAO();
-    DanhgiaDAO danhgiaDAO = new DanhgiaDAO();
+    DanhGiaKienThuc danhgia = new DanhGiaKienThuc();
     DethiDAO dethiDAO = new DethiDAO();
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -70,15 +70,15 @@ public class thongke extends HttpServlet {
         if (solanthi > 0) {
             // tinh nang luc lan thi gan nhat co noi dung do
             String made = dethiDAO.GetMade(users.getUsername(), noidung);
-            double nangluc = danhgiaDAO.DanhGiaNangLuc(made, kienthuc);
+            double nangluc = danhgia.DanhGiaNangLuc(made, kienthuc);
 //            int tyle = thongkeDAO.GetTiLeDeThi(list, made);
             
             // uocluong khoang
-            HashMap<String, Double> khoang = danhgiaDAO.UocLuong(users.getUsername(), kienthuc);
+            HashMap<String, Double> khoang = danhgia.UocLuong(users.getUsername(), kienthuc);
             // ket luan => setAttribute("Message","ket luan")
             double max = khoang.get("max");
             double min = khoang.get("min");
-            double m = DanhgiaDAO.round((max - min)/3);
+            double m = DanhGiaKienThuc.round((max - min)/3);
             int ketluan;
             if (max==min) {
                 nangluc = max + min;
@@ -102,7 +102,7 @@ public class thongke extends HttpServlet {
             }
             
             // kiem dinh gia thuyet
-            int kiemdinh = danhgiaDAO.KiemDinh(users.getUsername(), kienthuc, nangluc, solanthi, 95);
+            int kiemdinh = danhgia.KiemDinh(users.getUsername(), kienthuc, nangluc, solanthi, 95);
             if (kiemdinh == 1) {
                 ketluan -= 1;
             }

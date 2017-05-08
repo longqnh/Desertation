@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Thongke;
+import tools.DanhGiaKienThuc;
 
 /**
  *
@@ -111,7 +112,7 @@ public class ThongkeDAO {
                 String madangtoan = rs.getString("dangtoan");
                 int socau = rs.getInt("socau");
                 int socaudung = rs.getInt("socaudung");
-                double tyle = DanhgiaDAO.round((double)socaudung/socau)*100;
+                double tyle = DanhGiaKienThuc.round((double)socaudung/socau)*100;
                 
                 Thongke thongke = new Thongke(madangtoan, socau, socaudung, made, tyle);
                 list.add(thongke);
