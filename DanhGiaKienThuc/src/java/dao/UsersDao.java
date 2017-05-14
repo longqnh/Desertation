@@ -60,46 +60,46 @@ public class UsersDao {
         return false;
     }
     
-    public void InsertKVPS (String username) {
-        Connection connection = DBConnect.getConnecttion();
-        String sql_kyvong = "INSERT INTO table_kyvong VALUES(?,"; 
-        String sql_phuongsai = "INSERT INTO table_phuongsai VALUES(?,";
-
-        int num = new DangtoanDAO().countAllDangToan();
-        String temp = "";
-        for (int i = 0; i < num; i++) {
-            temp += "?";
-            if (i < num-1) {
-                temp+=",";
-            }
-        }
-        temp+=")";
-        
-        sql_kyvong+=temp;
-        sql_phuongsai+=temp;
-        
-        try {
-            PreparedStatement ps = connection.prepareCall(sql_kyvong);
-            ps.setString(1, username);
-            for (int i=2; i<=num+1; i++) {
-                ps.setDouble(i, 1);
-            }
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
-        }        
-        
-        try {
-            PreparedStatement ps = connection.prepareCall(sql_phuongsai);
-            ps.setString(1, username);
-            for (int i=2; i<=num+1; i++) {
-                ps.setString(i, "0");
-            }
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
-        }          
-    }
+//    public void InsertKVPS (String username) {
+//        Connection connection = DBConnect.getConnecttion();
+//        String sql_kyvong = "INSERT INTO table_kyvong VALUES(?,"; 
+//        String sql_phuongsai = "INSERT INTO table_phuongsai VALUES(?,";
+//
+//        int num = new DangtoanDAO().countAllDangToan();
+//        String temp = "";
+//        for (int i = 0; i < num; i++) {
+//            temp += "?";
+//            if (i < num-1) {
+//                temp+=",";
+//            }
+//        }
+//        temp+=")";
+//        
+//        sql_kyvong+=temp;
+//        sql_phuongsai+=temp;
+//        
+//        try {
+//            PreparedStatement ps = connection.prepareCall(sql_kyvong);
+//            ps.setString(1, username);
+//            for (int i=2; i<=num+1; i++) {
+//                ps.setDouble(i, 1);
+//            }
+//            ps.executeUpdate();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+//        }        
+//        
+//        try {
+//            PreparedStatement ps = connection.prepareCall(sql_phuongsai);
+//            ps.setString(1, username);
+//            for (int i=2; i<=num+1; i++) {
+//                ps.setString(i, "0");
+//            }
+//            ps.executeUpdate();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+//        }          
+//    }
     
     public void InsertUser (Users user) {
         Connection connection = DBConnect.getConnecttion();
@@ -117,7 +117,7 @@ public class UsersDao {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        InsertKVPS(user.getUsername());
+//        InsertKVPS(user.getUsername());
     }
     
     public Users login(String username, String password) {

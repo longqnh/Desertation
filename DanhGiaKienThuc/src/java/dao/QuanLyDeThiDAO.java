@@ -123,6 +123,28 @@ public class QuanLyDeThiDAO {
 	return count;        
     }
 
+    public List GetAllMade (String thisinh) {
+        List<String> list = new ArrayList<>();
+        
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM table_quanlydethi WHERE username='" + thisinh + "'";
+        PreparedStatement ps;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                String made = rs.getString("made");
+                list.add(made);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
+        }      
+        
+        return list;
+    }
+    
     public boolean DeleteDethi(String made) {
         Connection con = DBConnect.getConnecttion();
         

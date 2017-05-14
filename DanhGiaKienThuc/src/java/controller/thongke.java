@@ -5,14 +5,11 @@
  */
 package controller;
 
-import com.google.gson.Gson;
 import dao.DangtoanDAO;
 import dao.DethiDAO;
 import dao.QuanLyDeThiDAO;
 import dao.ThongkeDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -68,31 +65,19 @@ public class thongke extends HttpServlet {
         // Danh gia + goi y
         int solanthi = QuanLyDeThiDAO.GetSolanthi(users.getUsername(), noidung);
         if (solanthi > 0) {
-            // tinh nang luc lan thi gan nhat co noi dung do
-            String made = dethiDAO.GetMade(users.getUsername(), noidung);
-            double nangluc = danhgia.DanhGiaNangLuc(made, kienthuc);
-//            int tyle = thongkeDAO.GetTiLeDeThi(list, made);
-            
-            // uocluong khoang
-            HashMap<String, Double> khoang = danhgia.UocLuong(users.getUsername(), kienthuc);
-            // ket luan => setAttribute("Message","ket luan")
-            double max = khoang.get("max");
-            double min = khoang.get("min");
-            double m = DanhGiaKienThuc.round((max - min)/3);
+            double nangluc = danhgia.DanhGiaNangLuc(users.getUsername(), kienthuc);
             int ketluan;
-            if (max==min) {
-                nangluc = max + min;
-            }
-            if (nangluc <= min) {
+
+            if (nangluc <= 0.3) {
                 ketluan = 0;
             } else {
-                if (nangluc > min && nangluc <= min+m) {
+                if (nangluc > 0.3 && nangluc <= 0.5) {
                     ketluan = 1;
                 } else {
-                    if (min+m < nangluc && nangluc <= max-m) {
+                    if (0.5 < nangluc && nangluc <= 0.7) {
                         ketluan = 2;
                     } else {
-                        if (max-m < nangluc && nangluc < max) {
+                        if (0.7 < nangluc && nangluc < 0.9) {
                             ketluan = 3;
                         } else {
                             ketluan = 4;
@@ -100,13 +85,7 @@ public class thongke extends HttpServlet {
                     }
                 }
             }
-            
-            // kiem dinh gia thuyet
-            int kiemdinh = danhgia.KiemDinh(users.getUsername(), kienthuc, nangluc, solanthi, 95);
-            if (kiemdinh == 1) {
-                ketluan -= 1;
-            }
-            
+                        
             switch (ketluan) {
                 case 0:
                     request.setAttribute("Message","Bạn còn yếu phần kiến thức này, chưa nắm vững kiến thức cơ bản. Hãy xem lại những lý thuyết căn bản và làm nhiều bài tập hơn.");

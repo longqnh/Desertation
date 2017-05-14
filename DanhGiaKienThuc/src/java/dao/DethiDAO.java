@@ -196,7 +196,7 @@ public class DethiDAO {
                     update_dethi += "UNION ALL ";
                 }
             }
-            update_dethi += ") AS foo;";
+            update_dethi += ") AS foo ORDER BY RAND()";
             
             connection.setAutoCommit(false);
             

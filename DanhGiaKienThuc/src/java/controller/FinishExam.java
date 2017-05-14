@@ -71,13 +71,13 @@ public class FinishExam extends HttpServlet {
         float score = dethiDAO.ChamDiem(made, users.getUsername(), IDlist, user_answer);
         qldtdao.updateInfo(made, users.getUsername(), score);
         
-        DanhGiaKienThuc danhgia = new DanhGiaKienThuc();
-        List<String> allDangtoan = dethiDAO.getAllDangToan(made);
-        
-        for (String dangtoan : allDangtoan) {
-            danhgia.updateKyVong(users, dangtoan);
-            danhgia.updatePhuongSai(users, dangtoan);
-        }        
+//        DanhGiaKienThuc danhgia = new DanhGiaKienThuc();
+//        List<String> allDangtoan = dethiDAO.getAllDangToan(made);
+//        
+//        for (String dangtoan : allDangtoan) {
+//            danhgia.updateKyVong(users, dangtoan);
+//            danhgia.updatePhuongSai(users, dangtoan);
+//        }        
         
 //        response.sendRedirect("Thi/FinishExam.jsp?made=" + made);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/Thi/FinishExam.jsp?made=" + made);
