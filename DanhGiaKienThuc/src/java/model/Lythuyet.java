@@ -12,15 +12,13 @@ package model;
 public class Lythuyet {
     private String kienthuc;
     private String noidung;
-    private int lop;
 
     public Lythuyet() {
     }
 
-    public Lythuyet(String kienthuc, String noidung, int lop) {
+    public Lythuyet(String kienthuc, String noidung) {
         this.kienthuc = kienthuc;
         this.noidung = noidung;
-        this.lop = lop;
     }
     
     public String getKienthuc() {
@@ -37,13 +35,5 @@ public class Lythuyet {
 
     public void setNoidung(String noidung) {
         this.noidung = noidung;
-    }
-
-    public int getLop() {
-        return lop;
-    }
-
-    public void setLop(int lop) {
-        this.lop = lop;
     }
 }

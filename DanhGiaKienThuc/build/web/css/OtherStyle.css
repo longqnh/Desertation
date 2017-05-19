@@ -231,3 +231,7 @@ body {
     cursor: pointer;
     color: rgba(200, 7, 207, 1);
 }
+
+ol li div {
+    color: black;
+}

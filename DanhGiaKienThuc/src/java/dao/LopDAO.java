@@ -111,6 +111,10 @@ public class LopDAO {
     }
     
 //    public static void main(String[] args) {
-//        List list = GetAllLop();
+//        LopDAO lopDAO = new LopDAO();
+//        List<Lop> dsLop = lopDAO.GetAllLop();
+//        for (Lop lop : dsLop) {
+//            System.out.println(lop.getMalop());
+//        }
 //    }
 }

@@ -82,25 +82,37 @@
                             <li>
                                 <a href="" class="content"> Trắc nghiệm đúng - sai: </a>
                                 <div>
-                                    <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                                    <%=lythuyetDAO.getContent("dungsai")%>
+                                    <% if (canEdit==true) { %>
+                                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="dungsai">Cập nhật</button>                                                
+                                    <% } %>   
                                 </div>
                             </li>
                             <li>
                                 <a href="" class="content"> Trắc nghiệm đa đáp án: </a>
                                 <div>
-                                    <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                                    <%=lythuyetDAO.getContent("dadapan")%>
+                                    <% if (canEdit==true) { %>
+                                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="dadapan">Cập nhật</button>                                                
+                                    <% } %>  
                                 </div>
                             </li> 
                             <li>
                                 <a href="" class="content"> Trắc nghiệm điền khuyết: </a>
                                 <div>
-                                    <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                                    <%=lythuyetDAO.getContent("dienkhuyet")%>
+                                    <% if (canEdit==true) { %>
+                                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="dienkhuyet">Cập nhật</button>                                                
+                                    <% } %>  
                                 </div>
                             </li>
                             <li>
                                 <a href="" class="content"> Trắc nghiệm đối chiếu: </a>
                                 <div>
-                                    <p>wlkeglmaglkweajtglkmaelknmlkafm</p>
+                                    <%=lythuyetDAO.getContent("doichieu")%>
+                                    <% if (canEdit==true) { %>
+                                        <button id="btnUpdateLT" type="submit" name="kienthuc" value="doichieu">Cập nhật</button>                                                
+                                    <% } %>  
                                 </div>
                             </li>                          
                         </ol>
@@ -110,7 +122,7 @@
                         <div>
                             <%=lythuyetDAO.getContent("tinhtincay")%>
                             <% if (canEdit==true) { %>
-                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="tincay">Cập nhật</button>                                                
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="tinhtincay">Cập nhật</button>                                                
                             <% } %>                              
                         </div>
                     </li>
@@ -119,7 +131,7 @@
                         <div>
                             <%=lythuyetDAO.getContent("tinhgiatri")%>
                             <% if (canEdit==true) { %>
-                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="giatri">Cập nhật</button>                                                
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="tinhgiatri">Cập nhật</button>                                                
                             <% } %>                              
                         </div>
                     </li>
@@ -137,7 +149,7 @@
                         <div>
                             <%=lythuyetDAO.getContent("dophancach")%>
                             <% if (canEdit==true) { %>
-                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="dopc">Cập nhật</button>                                                
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="dophancach">Cập nhật</button>                                                
                             <% } %>                              
                         </div>
                     </li>                    
