@@ -64,7 +64,7 @@
                 <%
                     DethiDAO dethiDAO = new DethiDAO();
                     String made = request.getParameter("made");
-                    List exam = dethiDAO.GetDeThi(made);
+                    List exam = dethiDAO.GetDeThi(made,1);
                     
                     QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();
                     float Diem = qldeThiDAO.GetDiem(made);     

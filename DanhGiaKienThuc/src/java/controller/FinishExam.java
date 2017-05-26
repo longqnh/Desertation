@@ -7,6 +7,7 @@ package controller;
 
 import dao.DethiDAO;
 import dao.QuanLyDeThiDAO;
+import dao.QuestionDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,13 +72,14 @@ public class FinishExam extends HttpServlet {
         float score = dethiDAO.ChamDiem(made, users.getUsername(), IDlist, user_answer);
         qldtdao.updateInfo(made, users.getUsername(), score);
         
-//        DanhGiaKienThuc danhgia = new DanhGiaKienThuc();
-//        List<String> allDangtoan = dethiDAO.getAllDangToan(made);
-//        
-//        for (String dangtoan : allDangtoan) {
-//            danhgia.updateKyVong(users, dangtoan);
-//            danhgia.updatePhuongSai(users, dangtoan);
-//        }        
+        List<String> allDangtoan = dethiDAO.getAllDangToan(made);
+        
+        for (String dangtoan : allDangtoan) {
+            List<String> listQuestions = dethiDAO.getAllQuestions(made, dangtoan);
+            for (String questionID : listQuestions) {
+                new QuestionDAO().updateDokho(dangtoan,questionID);
+            }
+        }        
         
 //        response.sendRedirect("Thi/FinishExam.jsp?made=" + made);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/Thi/FinishExam.jsp?made=" + made);

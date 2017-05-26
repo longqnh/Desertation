@@ -83,7 +83,7 @@ public class LamDeThi extends HttpServlet {
         // tao de
         dethiDAO.TaoDe(noidung, level, numQuestion, users.getUsername(), time);
         String made = dethiDAO.GetMade(users.getUsername());
-        List exam = dethiDAO.GetDeThi(made);
+        List exam = dethiDAO.GetDeThi(made,0);
         
         session.setAttribute("made", made);
         request.setAttribute("time", time);

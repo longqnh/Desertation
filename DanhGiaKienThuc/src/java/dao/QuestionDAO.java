@@ -152,4 +152,66 @@ public class QuestionDAO {
 	}
 	return count;
     }
+    
+    private void updateDokho(String id, int lop, int dokho) {
+        Connection connection = DBConnect.getConnecttion();        
+        String sql = "UPDATE NHCHTOAN" + lop + " SET dokho='" + dokho + "' WHERE id='" + id + "'";
+        PreparedStatement ps;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private int getDokho(int lamdung, int dalam) {
+        double dokho = (double) lamdung/dalam;
+        double dokhotb = (1+0.25)/2;
+        double temp = dokhotb/2;
+        int res;
+        
+        if (dokho <= temp) {
+            res = 0;
+        } else {
+            if (temp<dokho && dokho<=dokhotb) {
+                res = 1;
+            } else {
+                if (dokho>dokhotb && dokho>=dokhotb+temp) {
+                    res = 2;
+                } else {
+                    res = 3;
+                }
+            }
+        }
+        
+        return res;
+    }
+    
+    public void updateDokho(String dangtoan, String id) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "CALL thongkesoluong('" + dangtoan + "','" + id + "')";
+        PreparedStatement ps;
+        
+        int lop = dangtoanDAO.GetLop(dangtoan);
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                int dalam = rs.getInt("dalam");
+                int lamdung = rs.getInt("lamdung");
+                
+                if (dalam%10==0) {
+                    int dokho = getDokho(lamdung, dalam);
+                    updateDokho(id, lop, dokho);
+                }
+            }
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongkeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

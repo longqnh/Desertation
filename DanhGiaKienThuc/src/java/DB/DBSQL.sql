@@ -203,6 +203,9 @@ INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtT
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ptduongtron', 'oxy', 'Phương trình đường tròn trong mặt phẳng');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('elip', 'oxy', 'Elip');
 
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('bpt1an', 'batpt', 'Bất phương trình một ẩn');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('bienluanbpt', 'batpt', 'Biện luận bất phương trình');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('hebpt', 'batpt', 'Hệ bất phương trình');
 
 CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
   `made` INT(5) ZEROFILL NOT NULL AUTO_INCREMENT,
@@ -331,8 +334,7 @@ END; $$
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS thongkekienthuc $$
-CREATE PROCEDURE thongkekienthuc
-(
+CREATE PROCEDURE thongkekienthuc (
     IN thisinh VARCHAR(25),
     IN noidung VARCHAR(45)
 )

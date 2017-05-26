@@ -15,9 +15,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Dethi;
+import model.Question;
 
 /**
  *
@@ -255,11 +257,133 @@ public class DethiDAO {
         return made;
     }
     
-    public List GetDeThi(String made) {
+    private String updateLatex(String str) {
+        StringBuilder sb = new StringBuilder(str);
+        
+        int i = 0;
+        while (i < sb.length()) {
+            if (sb.charAt(i)=='\\') {
+                sb.insert(i, '\\');
+                i++;
+            }
+            i++;
+        }
+
+        return sb.toString();
+    }
+    
+    private void updateQuestion(Dethi question) {
+        Connection connection = DBConnect.getConnecttion();
+        
+        String sql = "UPDATE table_dethi SET dapanA='" + question.getDapanA()
+                    + "', dapanB='" + question.getDapanB() + "', dapanC='" + question.getDapanC()
+                    + "', dapanD='" + question.getDapanD() + "', dapan='" + question.getDapan()
+                    + "' WHERE (id='" + question.getId() + "') AND (made='" + question.getMade() + "')";
+        
+        PreparedStatement ps;
+        try {
+            ps = connection.prepareCall(sql);
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private int GetPosition(String dapan) {
+        switch (dapan) {
+            case "A":
+                return 0;
+            case "B":
+                return 1;
+            case "C":
+                return 2;
+            default:
+                return 3;
+        }
+    }
+    
+    private Dethi DaoCauTraLoi (Dethi question) {
+        Dethi q = question;
+
+        String[] dapan = {"A", "B", "C", "D"};
+        String[] thutu = {"A", "B", "C", "D"};
+        List<String> cauTL = new ArrayList<>();
+        cauTL.add(updateLatex(question.getDapanA()));
+        cauTL.add(updateLatex(question.getDapanB()));
+        cauTL.add(updateLatex(question.getDapanC()));
+        cauTL.add(updateLatex(question.getDapanD()));
+               
+        Random random = new Random();
+        for (int i=0; i < thutu.length; i++) {            
+            int j = random.nextInt(dapan.length);
+            String temp = thutu[i];
+            thutu[i] = thutu[j];
+            thutu[j] = temp;
+        }
+
+        q.setDapanA(cauTL.get(GetPosition(thutu[0])));
+        q.setDapanB(cauTL.get(GetPosition(thutu[1])));
+        q.setDapanC(cauTL.get(GetPosition(thutu[2])));
+        q.setDapanD(cauTL.get(GetPosition(thutu[3])));
+        
+        for (int i=0; i < thutu.length; i++) {            
+            if (thutu[i].equals(question.getDapan())) {
+                q.setDapan(dapan[i]);
+                break;
+            }
+        }
+        
+        return q;
+    }
+    
+    public void SetDeThi(String made) {
+        Connection connection = DBConnect.getConnecttion();
+  
+        Random random = new Random();
+        
+	try {
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);            
+            ResultSet rs = statement.executeQuery("SELECT * FROM table_dethi WHERE made='" + made + "'");
+            
+            while (rs.next()) {
+                Dethi question = new Dethi();
+                
+                question.setId(rs.getString("id"));
+                question.setNoidung(rs.getString("noidung"));
+                question.setDapanA(rs.getString("dapanA"));
+                question.setDapanB(rs.getString("dapanB"));
+                question.setDapanC(rs.getString("dapanC"));
+                question.setDapanD(rs.getString("dapanD"));
+                question.setDapan(rs.getString("dapan"));
+                question.setDangtoan(rs.getString("dangtoan"));
+                question.setDangbt(rs.getString("dangbt"));
+                question.setDokho(rs.getInt("dokho"));
+                question.setDophancach(rs.getInt("dophancach"));
+                question.setMalop(rs.getInt("malop"));
+                question.setHinh(rs.getInt("hinh"));
+                question.setMade(rs.getString("made"));
+                
+                int dao = random.nextInt(2);
+                if (dao==1) {
+                    question = DaoCauTraLoi(question);
+                    updateQuestion(question);
+                }
+            }
+            connection.close();
+	} catch (SQLException e) {
+            e.printStackTrace();
+	}   
+    }
+    
+    public List GetDeThi(String made, int mode) { // mode = 0: tao de, mode = 1: xem dapan
+        if (mode==0) {
+            SetDeThi(made);
+        }
         Connection connection = DBConnect.getConnecttion();
   
 	List exam = new ArrayList();
-
+        
 	try {
             Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);            
             ResultSet rs = statement.executeQuery("SELECT * FROM table_dethi WHERE made='" + made + "'");
@@ -325,37 +449,31 @@ public class DethiDAO {
             String id = IDList.get(i).toString();
             String user_select = (String) UserAnswer.get(i);
             
-            sql = "SELECT * FROM table_dethi WHERE (made='" + made + "') AND (id='" + id + "')";
-        
-            try {
-                ps = connection.prepareCall(sql);
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    String correct = rs.getString("dapan");
-                    if (user_select == null) {
-                    } else {
-                        if (correct.equals(user_select)) {
-                            socaudung++;
-                        }
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            
-            sql =   "UPDATE table_dethi SET userchoice=?, username=? WHERE (id=? AND made=?)";
+            sql = "UPDATE table_dethi SET userchoice=?, username=? WHERE (id=? AND made=?)";
             try {
                 ps = connection.prepareCall(sql);
                 ps.setString(1, user_select);
                 ps.setString(2, thisinh);
                 ps.setString(3, id);
                 ps.setString(4, made);
-                ps.executeUpdate();
+                ps.executeUpdate();                
             } catch (SQLException e) {
                 e.printStackTrace();
-            }        
+            }                
         }
         
+        sql = "SELECT COUNT(*) AS socaudung FROM table_dethi WHERE made='" + made + "' AND userchoice=dapan";
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                socaudung = rs.getInt("socaudung");
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+                
         float score = socaudung*((float)10/socau);
         return score;
     }
@@ -365,7 +483,7 @@ public class DethiDAO {
         
         Connection connection = DBConnect.getConnecttion();
         PreparedStatement ps;
-        String sql = "SELECT DISTINCT dangtoan FROM table_dethi;";
+        String sql = "SELECT DISTINCT dangtoan FROM table_dethi WHERE made='" + made + "'";
         
         try {
             ps = connection.prepareCall(sql);
@@ -381,8 +499,28 @@ public class DethiDAO {
         }
         
         return list;        
-    }    
-//    public static void main(String[] args) {
-//        System.out.println(new DethiDAO().GetMade("longqnh", "hamso12"));
-//    }
+    }
+    
+    public List getAllQuestions(String made, String dangtoan) {
+        List<String> list = new ArrayList<>();
+        
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        String sql = "SELECT id FROM table_dethi WHERE made='" + made + "' AND dangtoan='" + dangtoan + "'";
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                String id = rs.getString("id");
+                
+                list.add(id);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DangtoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return list;        
+    }
 }
