@@ -152,6 +152,42 @@ public class QuestionDAO {
 	}
 	return count;
     }
+
+    public String generateId(String dangtoan) {
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        
+        int lop = dangtoanDAO.GetLop(dangtoan);
+        String dangtoanId = dangtoanDAO.getDangtoanID(dangtoan);
+        
+        String sql = "SELECT * FROM NHCHTOAN" + lop + " WHERE id LIKE '" + dangtoanId + "%' ORDER BY id DESC LIMIT 1";
+        String id = null;
+        String res = new String();
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                id = rs.getString("id");
+            }
+            
+            String temp = id.substring(id.length()-3);
+            int num = Integer.parseInt(temp) + 1;
+            if (num < 100) {
+                temp = "0" + num;
+            } else {
+                temp = Integer.toString(num);
+            }
+            
+            res = dangtoanId + temp;
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyDeThiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        return res;
+    }
     
     private void updateDokho(String id, int lop, int dokho) {
         Connection connection = DBConnect.getConnecttion();        

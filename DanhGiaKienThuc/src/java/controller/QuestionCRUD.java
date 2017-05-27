@@ -91,13 +91,16 @@ public class QuestionCRUD extends HttpServlet {
                     String jsonArray = gson.toJson(JSONROOT);
 
                     response.getWriter().print(jsonArray);
-                } else if (action.equals("create") || action.equals("update")) {
-                    String id= null;
+                } else if (action.equals("create") || action.equals("update")) {                    
                     Question q = new Question();
-                    if (request.getParameter("id") != null) {
-                        id = request.getParameter("id");
-                        q.setId(id);
-                    }
+                    
+                    String id = qdao.generateId(kienthuc);
+                    q.setId(id);
+                    
+//                    if (request.getParameter("id") != null) {
+//                        id = request.getParameter("id");
+//                        q.setId(id);
+//                    }
 
                     if (request.getParameter("noidung") != null) {
                         String noidung = request.getParameter("noidung");

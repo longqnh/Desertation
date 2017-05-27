@@ -56,8 +56,8 @@
                             title: 'ID',
                             key: true,
                             list: true,
-                            edit: true,
-                            create: true
+                            edit: false,
+                            create: false
                         },
                         noidung: {
                             title: 'Nội dung',

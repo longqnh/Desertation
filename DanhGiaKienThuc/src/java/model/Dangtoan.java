@@ -13,19 +13,18 @@ import java.util.List;
  */
 public class Dangtoan {
     private String dangtoan;
+    private String madangtoan;
     private int malop;
     private String dangtoanTV;
     private int hocky;
     private double dopc_de, dopc_tb, dopc_tbk, dopc_kho;
-
-    private double kyvong;
-    private double phuongsai;
     
     public Dangtoan() {
     }
 
-    public Dangtoan(String dangtoan, int malop, String dangtoanTV, int hocky, double dopc_de, double dopc_tb, double dopc_tbk, double dopc_kho) {
+    public Dangtoan(String dangtoan, String madangtoan, int malop, String dangtoanTV, int hocky, double dopc_de, double dopc_tb, double dopc_tbk, double dopc_kho) {
         this.dangtoan = dangtoan;
+        this.madangtoan = madangtoan;
         this.malop = malop;
         this.dangtoanTV = dangtoanTV;
         this.hocky = hocky;
@@ -35,12 +34,6 @@ public class Dangtoan {
         this.dopc_kho = dopc_kho;
     }
 
-    public Dangtoan(String dangtoan, double kyvong, double phuongsai) {
-        this.dangtoan = dangtoan;
-        this.kyvong = kyvong;
-        this.phuongsai = phuongsai;
-    }
-    
     public Dangtoan(String dangtoan, String dangtoanTV) {
         this.dangtoan = dangtoan;
         this.dangtoanTV = dangtoanTV;
@@ -54,6 +47,14 @@ public class Dangtoan {
         this.dangtoan = dangtoan;
     }
 
+    public String getMadangtoan() {
+        return madangtoan;
+    }
+
+    public void setMadangtoan(String madangtoan) {
+        this.madangtoan = madangtoan;
+    }
+        
     public int getMalop() {
         return malop;
     }
@@ -108,21 +109,5 @@ public class Dangtoan {
 
     public void setDopc_kho(double dopc_kho) {
         this.dopc_kho = dopc_kho;
-    }
-
-    public double getKyvong() {
-        return kyvong;
-    }
-
-    public void setKyvong(double kyvong) {
-        this.kyvong = kyvong;
-    }
-
-    public double getPhuongsai() {
-        return phuongsai;
-    }
-
-    public void setPhuongsai(double phuongsai) {
-        this.phuongsai = phuongsai;
     }
 }

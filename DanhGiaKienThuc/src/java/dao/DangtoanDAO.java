@@ -235,6 +235,27 @@ public class DangtoanDAO {
         return res;
     }    
     
+    public String getDangtoanID(String dangtoan) {
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        String sql = "SELECT * FROM table_phanloaidangtoan WHERE dangtoan='" + dangtoan + "'";
+        String res = null;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                res = rs.getString("madangtoan");
+            }
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyDeThiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return res;        
+    }
+    
 //    public static void main(String[] args) {
 //        System.out.println(DangtoanDAO.GetNoidungTV("thongke"));
 //    }
