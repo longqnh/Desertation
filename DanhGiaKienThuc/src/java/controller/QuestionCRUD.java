@@ -8,12 +8,14 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dao.DangBaiTapDAO;
+import dao.DangtoanDAO;
 import dao.QuestionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +31,11 @@ public class QuestionCRUD extends HttpServlet {
     private HashMap<String, Object> JSONROOT = new HashMap<String, Object>();
     
     private QuestionDAO qdao;
+    private DangtoanDAO ddao;
 
     public QuestionCRUD() {
         qdao = new QuestionDAO();
+        ddao = new DangtoanDAO();
     }
     
     
@@ -96,12 +100,7 @@ public class QuestionCRUD extends HttpServlet {
                     
                     String id = qdao.generateId(kienthuc);
                     q.setId(id);
-                    
-//                    if (request.getParameter("id") != null) {
-//                        id = request.getParameter("id");
-//                        q.setId(id);
-//                    }
-
+                                        
                     if (request.getParameter("noidung") != null) {
                         String noidung = request.getParameter("noidung");
                         q.setNoidung(noidung);
@@ -149,11 +148,9 @@ public class QuestionCRUD extends HttpServlet {
                         q.setDophancach(Integer.parseInt(dophancach));
                     }
                     
-                    if (request.getParameter("malop") != null) {
-                        String malop = request.getParameter("malop");
-                        q.setMalop(Integer.parseInt(malop));
-                    }
-
+                    int malop = ddao.GetLop(kienthuc);
+                    q.setMalop(malop);
+                    
                     if (request.getParameter("hinh") != null) {
                         String hinh = request.getParameter("hinh");
                         q.setHinh(Integer.parseInt(hinh));
@@ -162,6 +159,9 @@ public class QuestionCRUD extends HttpServlet {
                     if (action.equals("create")) {
                         // Create new record
                         qdao.InsertQuestion(q);
+                        request.setAttribute("message", "Thêm câu hỏi thành công");
+                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/QLKD.jsp");
+                        rd.forward(request, response);                        
                     } else if (action.equals("update")) {
                         // Update existing record
                         qdao.updateQuestion(q);

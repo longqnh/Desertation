@@ -63,6 +63,27 @@ public class DokhoDAO {
         return mucdo;        
     }
     
+    public List GetAllDokhoCH() {
+        Connection connection = DBConnect.getConnecttion();
+        
+        List<Dokho> dsLevel = new ArrayList();
+        String sql = "SELECT * FROM table_dokhoch";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int dokho = rs.getInt("dokho");
+                String mucdo = rs.getString("mucdo");
+                
+                Dokho dkdt = new Dokho(dokho, mucdo);
+                dsLevel.add(dkdt);
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return dsLevel;  
+    }
+    
 //    public static void main(String[] args) {
 //        System.out.println(new DokhoDAO().GetDoKhoTV(2));
 //    }

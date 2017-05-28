@@ -335,7 +335,7 @@ END; $$
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS thongkekienthuc $$
-CREATE PROCEDURE thongkekienthuc (
+CREATE PROCEDURE thongkekienthuc(
     IN thisinh VARCHAR(25),
     IN noidung VARCHAR(45)
 )
@@ -346,4 +346,21 @@ SELECT 	made, dangtoan, COUNT(*) as socau,
 FROM table_dethi as dt
 WHERE dangtoan=noidung and username=thisinh
 GROUP BY made;
+END; $$
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS ThongKeSoLuong $$
+CREATE PROCEDURE ThongKeSoLuong(
+    IN dangtoan VARCHAR(45),
+    IN maCH VARCHAR(45)
+)
+BEGIN
+	SELECT * FROM
+		(SELECT 	id,
+				COUNT(id) as dalam, 
+				COUNT(dapan=userchoice) as lamdung 
+		FROM table_dethi as dt
+		where dt.dangtoan=dangtoan 
+		group by id) as temp
+	WHERE temp.id=maCH;
 END; $$

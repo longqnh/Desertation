@@ -47,7 +47,6 @@
                     selectOnRowClick: false, //Click row on check box
                     actions: {
                         listAction: '${pageContext.request.contextPath}/QuestionCRUD?action=list',
-                        createAction: '${pageContext.request.contextPath}/QuestionCRUD?action=create',
                         updateAction: '${pageContext.request.contextPath}/QuestionCRUD?action=update',
                         deleteAction: '${pageContext.request.contextPath}/QuestionCRUD?action=delete'
                     },
@@ -66,22 +65,22 @@
                         },
                         dapanA: {
                             title: 'Đáp án A',
-                            type: 'text',
+                            type: 'textarea',
                             edit: true
                         },
                         dapanB: {
                             title: 'Đáp án B',
-                            type: 'text',
+                            type: 'textarea',
                             edit: true
                         },
                         dapanC: {
                             title: 'Đáp án C',
-                            type: 'text',
+                            type: 'textarea',
                             edit: true
                         },
                         dapanD: {
                             title: 'Đáp án D',
-                            type: 'text',
+                            type: 'textarea',
                             edit: true
                         },
                         dapan: {
@@ -247,7 +246,7 @@
             
         <div class="container">
             <h2 style="text-align: center; font-weight: bold; color: rgb(6,114,28); font-family: Arial, sans-serif;">QUẢN TRỊ KHO ĐỀ THI</h2>
-
+            
             <div class="filtering">
                 <form>
                     ID: <input type="text" name="name" id="name" />
@@ -281,8 +280,15 @@
                     
                     <button type="submit" id="LoadRecordsButton">Search</button>
                 </form>
-            </div>                    
+                <h3 style="color: green;"> ${requestScope.message} </h3>
+            </div>
             
+            <div style="margin-bottom: 40px;">
+                <form target="_blank" action="${pageContext.request.contextPath}/Admin/AddQuestion.jsp">
+                    <input type="submit" id="btnThemCH" value="Thêm câu hỏi">           
+                </form>
+            </div>
+                
             <div id="TableContainer"></div>
             <button type="button" id="DeleteAllButton">Delete All Selected</button>
         </div>

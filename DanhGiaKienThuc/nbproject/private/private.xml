@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/controller/FinishExam.java</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Thi/XemDapAn.jsp</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/controller/LamDeThi.java</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/dao/DethiDAO.java</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Admin/QLKD.jsp</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/controller/QuestionCRUD.java</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/dao/DangtoanDAO.java</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/dao/DokhoDAO.java</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Member/User.jsp</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Admin/AddQuestion.jsp</file>
             <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/dao/QuestionDAO.java</file>
         </group>
     </open-files>

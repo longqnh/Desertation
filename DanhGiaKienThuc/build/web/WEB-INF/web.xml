@@ -64,6 +64,10 @@
         <servlet-name>Contact</servlet-name>
         <servlet-class>controller.Contact</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getDangBT</servlet-name>
+        <servlet-class>controller.getDangBT</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckEmailServlet</servlet-name>
         <url-pattern>/CheckEmailServlet</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>Contact</servlet-name>
         <url-pattern>/Contact</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getDangBT</servlet-name>
+        <url-pattern>/getDangBT</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

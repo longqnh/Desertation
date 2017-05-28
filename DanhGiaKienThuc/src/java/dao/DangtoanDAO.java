@@ -119,6 +119,31 @@ public class DangtoanDAO {
         return list;        
     }
         
+    public List getAll() {
+        List<Dangtoan> list = new ArrayList<>();
+        
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        String sql = "SELECT * FROM table_phanloaidangtoan";
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                String dangtoan = rs.getString("dangtoan");
+                String dangtoanTV = rs.getString("dangtoanTV");
+                
+                Dangtoan d = new Dangtoan(dangtoan, dangtoanTV);
+                list.add(d);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DangtoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return list;          
+    }
+    
     public int countAllDangToan() {
         Connection connection = DBConnect.getConnecttion();
         String sql = "SELECT COUNT(*) AS COUNT FROM table_phanloaidangtoan";
