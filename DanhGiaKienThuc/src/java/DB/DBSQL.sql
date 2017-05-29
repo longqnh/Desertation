@@ -11,42 +11,7 @@ CREATE TABLE `danhgiakienthuc`.`table_user` (
   PRIMARY KEY (`username`));
 INSERT INTO `danhgiakienthuc`.`table_user` (`username`, `password`, `name`, `email`, `lop` ,`role`) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'abc@xyz.com', '12' ,'admin');
 
-/* LOP 10 */
-CREATE TABLE `danhgiakienthuc`.`NHCHTOAN10` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-/* LOP 11 */
-CREATE TABLE `danhgiakienthuc`.`NHCHTOAN11` (
-  `id` VARCHAR(45) NOT NULL,
-  `noidung` LONGTEXT NULL,
-  `dapanA` LONGTEXT NULL,
-  `dapanB` LONGTEXT NULL,
-  `dapanC` LONGTEXT NULL,
-  `dapanD` LONGTEXT NULL,
-  `dapan` VARCHAR(45) NULL,
-  `dangtoan` VARCHAR(45) NULL,
-  `dangbt` VARCHAR(45) NULL,
-  `dokho` INT NULL,
-  `dophancach` INT NULL,
-  `malop` INT NULL,
-  `hinh` INT NULL,
-  PRIMARY KEY (`id`));
-
-/* LOP 12 */
-CREATE TABLE `danhgiakienthuc`.`NHCHTOAN12` (
+CREATE TABLE `danhgiakienthuc`.`NHCHTOAN` (
   `id` VARCHAR(45) NOT NULL,
   `noidung` LONGTEXT NULL,
   `dapanA` LONGTEXT NULL,
@@ -252,19 +217,7 @@ INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('
 /* CREATE FOREIGN KEY */
 ALTER TABLE `danhgiakienthuc`.`table_user` ADD FOREIGN KEY (`lop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);	
 
-ALTER TABLE `danhgiakienthuc`.`NHCHTOAN10`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`NHCHTOAN11`
-	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
-	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
-	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),
-	ADD FOREIGN KEY (`malop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);
-
-ALTER TABLE `danhgiakienthuc`.`NHCHTOAN12`
+ALTER TABLE `danhgiakienthuc`.`NHCHTOAN`
 	ADD FOREIGN KEY (`dokho`) REFERENCES `danhgiakienthuc`.`table_dokhoCH`(`dokho`),
 	ADD FOREIGN KEY (`dangtoan`) REFERENCES `danhgiakienthuc`.`table_phanloaidangtoan`(`dangtoan`),
 	ADD FOREIGN KEY (`dangbt`) REFERENCES `danhgiakienthuc`.`table_phanloaibt`(`dangbt`),

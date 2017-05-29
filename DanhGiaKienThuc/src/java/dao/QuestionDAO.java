@@ -20,17 +20,13 @@ import model.Question;
  *
  * @author NTL
  */
-public class QuestionDAO {
-    DangtoanDAO dangtoanDAO;
-    
+public class QuestionDAO {    
     public QuestionDAO() {
-        dangtoanDAO = new DangtoanDAO();
     }
         
     public boolean InsertQuestion(Question q) {
         Connection connection= DBConnect.getConnecttion();
-//        String sql = "INSERT INTO table_" + q.getDangtoan() + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        String sql = "INSERT INTO NHCHTOAN" + dangtoanDAO.GetLop(q.getDangtoan()) + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO NHCHTOAN VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareCall(sql);
@@ -58,8 +54,7 @@ public class QuestionDAO {
     
     public boolean updateQuestion(Question q) throws SQLException {
         Connection con = DBConnect.getConnecttion();
-//        String sql = "update table_" + q.getDangtoan() + " set noidung=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, dapan=? where id=?";
-        String sql = "update NHCHTOAN" + dangtoanDAO.GetLop(q.getDangtoan()) + " set noidung=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, dapan=? where id=?";
+        String sql = "update NHCHTOAN set noidung=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, dapan=? where id=?";
         PreparedStatement ps;
         
         try {
@@ -82,9 +77,7 @@ public class QuestionDAO {
     public boolean DeleteQuestion(Question q) {
         Connection con = DBConnect.getConnecttion();
         
-//        String sql = "delete from table_" + dangtoan + " where id='" + maCH + "'";
-
-        String sql = "delete from NHCHTOAN" + dangtoanDAO.GetLop(q.getDangtoan()) + " where id='" + q.getId() + "'";
+        String sql = "delete from NHCHTOAN where id='" + q.getId() + "'";
         PreparedStatement ps;
         try {
             ps = con.prepareCall(sql);
@@ -100,8 +93,7 @@ public class QuestionDAO {
         Connection connection = DBConnect.getConnecttion();
         List<Question> list = new ArrayList();
         
-//        String sql = "SELECT * FROM table_" + ReplaceNoidung(nd) + " WHERE malop=" + lop + " AND id LIKE '%" + search_id + "' LIMIT " + startPageIndex + "," + recordsPerPage;//"SELECT * FROM table_" + nd;
-        String sql = "SELECT * FROM NHCHTOAN" + lop + " WHERE dangtoan='" + nd + "' AND id LIKE '%" + search_id + "' LIMIT " + startPageIndex + "," + recordsPerPage;
+        String sql = "SELECT * FROM NHCHTOAN WHERE dangtoan='" + nd + "' AND malop=" + lop + " AND id LIKE '%" + search_id + "' LIMIT " + startPageIndex + "," + recordsPerPage;
 
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -133,8 +125,7 @@ public class QuestionDAO {
     
     public int getQuestionCount(String nd, String lop) {
         Connection connection = DBConnect.getConnecttion();
-//        String sql = "SELECT COUNT(*) AS COUNT FROM table_" + ReplaceNoidung(nd) + " WHERE malop=" + lop;
-        String sql = "SELECT COUNT(*) AS COUNT FROM NHCHTOAN" + lop + " WHERE dangtoan='" + nd + "'";
+        String sql = "SELECT COUNT(*) AS COUNT FROM NHCHTOAN WHERE dangtoan='" + nd + "' AND malop=" + lop;
         
 	int count=0;
 	try 
@@ -157,10 +148,9 @@ public class QuestionDAO {
         Connection connection = DBConnect.getConnecttion();
         PreparedStatement ps;
         
-        int lop = dangtoanDAO.GetLop(dangtoan);
-        String dangtoanId = dangtoanDAO.getDangtoanID(dangtoan);
+        String dangtoanId = new DangtoanDAO().getDangtoanID(dangtoan);
         
-        String sql = "SELECT * FROM NHCHTOAN" + lop + " WHERE id LIKE '" + dangtoanId + "%' ORDER BY id DESC LIMIT 1";
+        String sql = "SELECT * FROM NHCHTOAN WHERE id LIKE '" + dangtoanId + "%' ORDER BY id DESC LIMIT 1";
         String id = null;
         String res = new String();
         
@@ -189,9 +179,9 @@ public class QuestionDAO {
         return res;
     }
     
-    private void updateDokho(String id, int lop, int dokho) {
+    private void updateDokho(String id, int dokho) {
         Connection connection = DBConnect.getConnecttion();        
-        String sql = "UPDATE NHCHTOAN" + lop + " SET dokho='" + dokho + "' WHERE id='" + id + "'";
+        String sql = "UPDATE NHCHTOAN SET dokho='" + dokho + "' WHERE id='" + id + "'";
         PreparedStatement ps;
         
         try {
@@ -231,7 +221,6 @@ public class QuestionDAO {
         String sql = "CALL thongkesoluong('" + dangtoan + "','" + id + "')";
         PreparedStatement ps;
         
-        int lop = dangtoanDAO.GetLop(dangtoan);
         try {
             ps = connection.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
@@ -242,7 +231,7 @@ public class QuestionDAO {
                 
                 if (dalam%10==0) {
                     int dokho = getDokho(lamdung, dalam);
-                    updateDokho(id, lop, dokho);
+                    updateDokho(id, dokho);
                 }
             }
             connection.close();

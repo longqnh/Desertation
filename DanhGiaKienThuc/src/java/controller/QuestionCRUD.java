@@ -75,7 +75,7 @@ public class QuestionCRUD extends HttpServlet {
         String kienthuc = request.getParameter("kienthuc");
         String searchID = request.getParameter("name");
         String lop = request.getParameter("lop");
-        
+                
         if (action != null) {
             try {
                 if (action.equals("list")) {

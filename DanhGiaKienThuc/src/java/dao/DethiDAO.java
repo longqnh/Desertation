@@ -12,14 +12,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Dethi;
-import model.Question;
 
 /**
  *
@@ -187,13 +184,13 @@ public class DethiDAO {
             for (int i=0; i < nd.length; i++) {
                 int lop = dangtoanDAO.GetLop(nd[i].getNoidung());
                 String dangtoan = nd[i].getNoidung();
-                update_dethi += "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=0 AND dangtoan='" + dangtoan + "' ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
+                update_dethi += "(SELECT * FROM NHCHTOAN WHERE dokho=0 AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=1 AND dangtoan='" + dangtoan + "' ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
+                                "(SELECT * FROM NHCHTOAN WHERE dokho=1 AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=2 AND dangtoan='" + dangtoan + "' ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
+                                "(SELECT * FROM NHCHTOAN WHERE dokho=2 AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN" + lop + " WHERE dokho=3 AND dangtoan='" + dangtoan + "' ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
+                                "(SELECT * FROM NHCHTOAN WHERE dokho=3 AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
                 if (i < nd.length - 1) {
                     update_dethi += "UNION ALL ";
                 }

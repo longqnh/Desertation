@@ -165,7 +165,15 @@
                     String user_select = (String) UserAnswer.get(i); %>
                     
                     <div id="Q<%=q.getId()%>">
-                        <p><b>Câu <%=i+1%> (<%=q.getId()%>) </b> <%=q.getNoidung()%></p>
+                        <p>
+                            <b>Câu <%=i+1%> (<%=q.getId()%>)
+                            <%
+                                for (int j=0; j<q.getDokho(); j++) { %>
+                                    *
+                            <%  } %>
+                            </b>
+                            <%=q.getNoidung()%>
+                        </p>
                         <%
                             if (q.getHinh()==1) { %>
                                 <img src="${pageContext.request.contextPath}/images/NHCH/<%=q.getId()%>.JPG">
