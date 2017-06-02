@@ -4,11 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/controller/QuestionCRUD.java</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/DB/DBSQL.sql</file>
             <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Thi/XemDapAn.jsp</file>
             <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/dao/DethiDAO.java</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Member/DanhGia.jsp</file>
             <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/dao/QuestionDAO.java</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/DB/NHCH.sql</file>
         </group>
     </open-files>
 </project-private>

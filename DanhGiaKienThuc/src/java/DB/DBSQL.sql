@@ -184,6 +184,19 @@ INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtT
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('dactrung', 'thongke', 'Các đặc trưng về số liệu');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('bieudo', 'thongke', 'Biểu đồ');
 
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('cmbdt', 'bdt', 'Chứng minh bất đẳng thức');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ltbdt', 'bdt', 'Lý thuyết bất đẳng thức');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('cosi', 'bdt', 'Bất đẳng thức Cauchy');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('maxmin', 'bdt', 'Tìm giá trị lớn nhất - giá trị nhỏ nhất');
+
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ltlg', 'luonggiac11', 'Lý thuyết lượng giác');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('dtlg', 'luonggiac11', 'Đường tròn lượng giác');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ptlg', 'luonggiac11', 'Phương trình lượng giác');
+
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('xs', 'tohop', 'Xác suất');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('tohop', 'tohop', 'Tổ hợp - phép đếm');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('newton', 'tohop', 'Nhị thức Newton');
+
 CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
   `made` INT(5) ZEROFILL NOT NULL AUTO_INCREMENT,
   `socau` INT NULL,
