@@ -135,3 +135,12 @@ input {
     border-radius: 20px;    
 /*    border-radius: 20px;*/
 }
+
+#main-right h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgb(6,114,28);
+    font-family: Arial, sans-serif;
+    margin-top: 10px;
+}

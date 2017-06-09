@@ -197,6 +197,14 @@ INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtT
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('tohop', 'tohop', 'Tổ hợp - phép đếm');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('newton', 'tohop', 'Nhị thức Newton');
 
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('dayso', 'dayso', 'Dãy số');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('csc', 'dayso', 'Cấp số cộng');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('csn', 'dayso', 'Cấp số nhân');
+
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ghds', 'gioihan', 'Giới hạn dãy số');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ghhs', 'gioihan', 'Giới hạn hàm số');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('hlt', 'gioihan', 'Hàm số liên tục');
+
 CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
   `made` INT(5) ZEROFILL NOT NULL AUTO_INCREMENT,
   `socau` INT NULL,

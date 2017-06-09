@@ -52,7 +52,7 @@
                                     String page_redirect = request.getContextPath() + "/Member/User.jsp?username=" + users.getUsername();
                                 %>
                                 <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
-                                <form action="${pageContext.request.contextPath}/UserServlet"method="POST">
+                                <form action="${pageContext.request.contextPath}/UserServlet" method="POST">
                                     <input id="btnlogout" type="submit" value="Thoát">
                                     <input type="hidden" value="logout" name="command">
                                 </form>

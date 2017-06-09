@@ -14,7 +14,6 @@
     </head>
     <body>
         <jsp:include page="WebInterface/header.jsp"></jsp:include>
-        <jsp:include page="WebInterface/advertise.jsp"></jsp:include>
         <jsp:include page="WebInterface/main.jsp"></jsp:include>
         <jsp:include page="WebInterface/footer.jsp"></jsp:include>
     </body>

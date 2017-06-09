@@ -259,3 +259,11 @@ button:focus {
     cursor: pointer;
     color: rgba(200, 7, 207, 1);
 }
+
+#arrow-up {
+    background-image: url(../images/arrow_up.png);
+    position:absolute;
+    bottom: 10px;
+    left: 10px;
+    float: left;
+}

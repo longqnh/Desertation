@@ -54,7 +54,7 @@
             </div>
 
             <div id="main-right">
-
+                <h2>Trang chủ</h2>
             </div>
         </div>
     </body>
