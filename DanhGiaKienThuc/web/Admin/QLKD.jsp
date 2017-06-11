@@ -47,7 +47,6 @@
                     selectOnRowClick: false, //Click row on check box
                     actions: {
                         listAction: '${pageContext.request.contextPath}/QuestionCRUD?action=list',
-                        updateAction: '${pageContext.request.contextPath}/QuestionCRUD?action=update',
                         deleteAction: '${pageContext.request.contextPath}/QuestionCRUD?action=delete'
                     },
                     fields: {
@@ -56,7 +55,10 @@
                             key: true,
                             list: true,
                             edit: false,
-                            create: false
+                            create: false,
+                            display: function(data) {
+                                return '<a target="_blank" href="${pageContext.request.contextPath}/Admin/UpdateQuestion.jsp?id=' + data.record.id + '">' + data.record.id + '</a>';
+                            }
                         },
                         noidung: {
                             title: 'Nội dung',

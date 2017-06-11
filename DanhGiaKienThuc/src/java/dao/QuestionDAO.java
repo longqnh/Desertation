@@ -54,7 +54,7 @@ public class QuestionDAO {
     
     public boolean updateQuestion(Question q) throws SQLException {
         Connection con = DBConnect.getConnecttion();
-        String sql = "update NHCHTOAN set noidung=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, dapan=? where id=?";
+        String sql = "update NHCHTOAN set noidung=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, dapan=?, dangtoan=?, dangbt=?, dokho=?, malop=?, hinh=? where id=?";
         PreparedStatement ps;
         
         try {
@@ -65,7 +65,12 @@ public class QuestionDAO {
             ps.setString(4, q.getDapanC());
             ps.setString(5, q.getDapanD());
             ps.setString(6, q.getDapan());
-            ps.setString(7, q.getId());
+            ps.setString(7, q.getDangtoan());
+            ps.setString(8, q.getDangbt());
+            ps.setInt(9, q.getDokho());
+            ps.setInt(10, q.getMalop());
+            ps.setInt(11, q.getHinh());
+            ps.setString(12, q.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -144,6 +149,35 @@ public class QuestionDAO {
 	return count;
     }
 
+    public Question getQuestionById(String id) {
+        Connection connection = DBConnect.getConnecttion();
+        
+        String sql = "SELECT * FROM NHCHTOAN WHERE id='" + id + "'";
+        Question q = new Question(id);
+        
+        try {
+            PreparedStatement ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                q.setNoidung(rs.getString("noidung"));
+                q.setDapanA(rs.getString("dapanA"));
+                q.setDapanB(rs.getString("dapanB"));
+                q.setDapanC(rs.getString("dapanC"));
+                q.setDapanD(rs.getString("dapanD"));
+                q.setDapan(rs.getString("dapan"));
+                q.setDangtoan(rs.getString("dangtoan"));
+                q.setDangbt(rs.getString("dangbt"));
+                q.setDokho(rs.getInt("dokho"));
+                q.setDophancach(rs.getInt("dophancach"));
+                q.setMalop(rs.getInt("malop"));
+                q.setHinh(rs.getInt("hinh"));
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }     
+        return q;
+    }
+    
     public String generateId(String dangtoan) {
         Connection connection = DBConnect.getConnecttion();
         PreparedStatement ps;

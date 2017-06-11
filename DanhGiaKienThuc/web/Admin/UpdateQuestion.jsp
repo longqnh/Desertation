@@ -1,9 +1,13 @@
 <%-- 
-    Document   : AddQuestion
-    Created on : May 28, 2017, 3:20:10 PM
+    Document   : UpdateQuestion
+    Created on : Jun 11, 2017, 12:43:56 PM
     Author     : NTL
 --%>
 
+<%@page import="model.DangBaiTap"%>
+<%@page import="dao.DangBaiTapDAO"%>
+<%@page import="dao.QuestionDAO"%>
+<%@page import="model.Question"%>
 <%@page import="model.Dokho"%>
 <%@page import="dao.DokhoDAO"%>
 <%@page import="java.util.List"%>
@@ -15,19 +19,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>THÊM CÂU HỎI TRẮC NGHIỆM</title>
+        <title>CHỈNH SỬA CÂU HỎI TRẮC NGHIỆM</title>
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>   
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/MemberStyle.css" type="text/css">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>  
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <style>
             textarea {
                 font-size: 15px;
                 width: 600px;
             }
-        </style>        
+        </style>
     </head>
     <body>
         <%
@@ -151,42 +155,51 @@
             </div>
             
             <div id="main-right">
-                <h2>Thêm câu hỏi</h2>
-
-                <form action="${pageContext.request.contextPath}/QuestionCRUD?action=create" method="POST">
+                <h2>Chỉnh sửa câu hỏi</h2>
+                
+                <%
+                    String id = request.getParameter("id");
+                    Question q = new QuestionDAO().getQuestionById(id);
+                %>
+                
+                <form action="${pageContext.request.contextPath}/QuestionCRUD?action=update" method="POST">
                     <div class="edit-field">
                         <label>Nội dung: </label>
-                        <textarea name="noidung" required=""></textarea>                        
+                        <textarea name="noidung" required=""><%=q.getNoidung()%></textarea>     
                     </div>
 
                     <div class="edit-field">
                         <label>Đáp án A: </label>
-                        <textarea name="dapanA" required=""></textarea>                        
+                        <textarea name="dapanA" required=""><%=q.getDapanA()%></textarea>                        
                     </div>
 
                     <div class="edit-field">
                         <label>Đáp án B: </label>
-                        <textarea name="dapanB" required=""></textarea>                          
+                        <textarea name="dapanB" required=""><%=q.getDapanB()%></textarea>                          
                     </div>
 
                     <div class="edit-field">
                         <label>Đáp án C: </label>
-                        <textarea name="dapanC" required=""></textarea>  
+                        <textarea name="dapanC" required=""><%=q.getDapanC()%></textarea>  
                     </div>
 
                     <div class="edit-field">
                         <label>Đáp án D: </label>
-                        <textarea name="dapanD" required=""></textarea>                          
+                        <textarea name="dapanD" required=""><%=q.getDapanD()%></textarea>                          
                     </div>
-
+                    
                     <div class="edit-field">
                         <label>Đáp án: </label>
-                        <select name="dapan" required="">
-                            <option selected="">A</option>
+                        <select name="dapan" id="dapan" required="">
+                            <option>A</option>
                             <option>B</option>
                             <option>C</option>
                             <option>D</option>
                         </select>
+                        
+                        <script type="text/javascript">
+                            $("#dapan").val("<%=q.getDapan()%>");
+                        </script>
                     </div>
 
                     <div class="edit-field">
@@ -196,15 +209,30 @@
                         <%
                             DangtoanDAO dangtoanDAO = new DangtoanDAO();
                             List<Dangtoan> allDangtoan = dangtoanDAO.getAll();
-                            for (Dangtoan dt : allDangtoan) { %>
-                                <option value="<%=dt.getDangtoan()%>"> <%=dt.getDangtoanTV()%> </option>                                
-                        <%  } %>                            
+                            for (Dangtoan dt : allDangtoan) { 
+                                if (dt.getDangtoan().equals(q.getDangtoan())) { %>                                
+                                    <option value="<%=dt.getDangtoan()%>" selected=""> <%=dt.getDangtoanTV()%> </option>                                
+                            <%  } else { %>
+                                    <option value="<%=dt.getDangtoan()%>"> <%=dt.getDangtoanTV()%> </option>
+                            <%  } 
+                            }   %>                            
                         </select>                        
                     </div>
-
+                    
                     <div class="edit-field">
                         <label>Dạng bài tập</label>
-                        <select name="dangbt" id="dangbt" required=""></select>
+                        <select name="dangbt" id="dangbt" required="">
+                        <%
+                            DangBaiTapDAO baiTapDAO = new DangBaiTapDAO();
+                            List<DangBaiTap> allBaiTap = baiTapDAO.GetAllDangBaiTap(q.getDangtoan());
+                            for (DangBaiTap dt : allBaiTap) {
+                                if (dt.getDangbt().equals(q.getDangbt())) { %>                                
+                                    <option value="<%=dt.getDangbt()%>" selected=""> <%=dt.getDangbtTV()%> </option>                                
+                            <%  } else { %>
+                                    <option value="<%=dt.getDangbt()%>"> <%=dt.getDangbtTV()%> </option>
+                            <%  } 
+                            }   %>
+                        </select>
                     </div>
                         
                     <script type="text/javascript">
@@ -228,23 +256,34 @@
                         <%
                             DokhoDAO dokhoDAO = new DokhoDAO();
                             List<Dokho> allDokho = dokhoDAO.GetAllDokhoCH();
-                            for (Dokho dk : allDokho) { %>
-                                <option value="<%=dk.getDokho()%>"> <%=dk.getMucdo()%> </option>                                
-                        <%  } %>                            
+                            for (Dokho dk : allDokho) { 
+                                if (dk.getDokho()==q.getDokho()) { %>
+                                    <option value="<%=dk.getDokho()%>" selected=""> <%=dk.getMucdo()%> </option>                                
+                            <%  } else { %>                            
+                                    <option value="<%=dk.getDokho()%>"> <%=dk.getMucdo()%> </option>
+                            <%  }  
+                            }   %>
                         </select>    
                     </div>
 
                     <div class="edit-field">
                         <label>Hình: </label>
                         <select name="hinh" required="">
-                            <option value="0">Không có hình</option>
-                            <option value="1">Có hình</option>
+                            <%
+                                if (q.getHinh()==0) { %>
+                                    <option value="0" selected="">Không có hình</option>
+                                    <option value="1">Có hình</option>
+                            <%  } else { %>
+                                    <option value="0">Không có hình</option>
+                                    <option value="1" selected="">Có hình</option>
+                            <%  } %>
                         </select>
                     </div>
                     
-                    <input type="submit" id="btnThemCH" value="Thêm">
-                </form>                
-            </div>                
+                    <input type="text" name="id" value="<%=id%>" hidden="">
+                    <input type="submit" id="btnThemCH" value="Cập nhật">
+                </form>
+            </div>  
         </div>
             
         <script type="text/javascript" src="../js/autoscroll.js"></script>

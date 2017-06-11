@@ -97,10 +97,7 @@ public class QuestionCRUD extends HttpServlet {
                     response.getWriter().print(jsonArray);
                 } else if (action.equals("create") || action.equals("update")) {                    
                     Question q = new Question();
-                    
-                    String id = qdao.generateId(kienthuc);
-                    q.setId(id);
-                                        
+                                                           
                     if (request.getParameter("noidung") != null) {
                         String noidung = request.getParameter("noidung");
                         q.setNoidung(noidung);
@@ -158,13 +155,19 @@ public class QuestionCRUD extends HttpServlet {
                     
                     if (action.equals("create")) {
                         // Create new record
+                        String id = qdao.generateId(kienthuc);
+                        q.setId(id);
                         qdao.InsertQuestion(q);
                         request.setAttribute("message", "Thêm câu hỏi thành công");
                         RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/QLKD.jsp");
                         rd.forward(request, response);                        
                     } else if (action.equals("update")) {
                         // Update existing record
+                        q.setId(request.getParameter("id"));
                         qdao.updateQuestion(q);
+                        request.setAttribute("message", "Cập nhật câu hỏi thành công");
+                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/QLKD.jsp");
+                        rd.forward(request, response);
                     }
 
                     // Return in the format required by jTable plugin
