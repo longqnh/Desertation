@@ -162,16 +162,13 @@
             <%    
                 for (int i = 0; i < exam.size(); i++) {
                     Question q = (Question) exam.get(i); 
-                    String user_select = (String) UserAnswer.get(i); %>
+                    String user_select = (String) UserAnswer.get(i); 
+                    String mucdo = new QuestionDAO().getMucdo(q.getId());
+            %>
                     
                     <div id="Q<%=q.getId()%>">
                         <p>
-                            <b>Câu <%=i+1%> (<%=q.getId()%>)
-                            <%
-                                for (int j=0; j<q.getDokho(); j++) { %>
-                                    *
-                            <%  } %>
-                            </b>
+                            <b>Câu <%=i+1%> (<%=q.getId()%> - <%=mucdo%>)</b>
                             <%=q.getNoidung()%>
                         </p>
                         <%

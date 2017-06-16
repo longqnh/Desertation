@@ -123,7 +123,7 @@ public class QuanLyDeThiDAO {
 	return count;        
     }
 
-    public List GetAllMade (String thisinh) {
+    public List GetAllMade (String thisinh, String noidung) { //noidung in VNese
         List<String> list = new ArrayList<>();
         
         Connection connection = DBConnect.getConnecttion();
@@ -136,7 +136,10 @@ public class QuanLyDeThiDAO {
             
             while (rs.next()) {
                 String made = rs.getString("made");
-                list.add(made);
+                String cacnoidung = rs.getString("noidung");
+                if (cacnoidung.contains(noidung)) {
+                    list.add(made);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);

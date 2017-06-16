@@ -6,6 +6,7 @@
 package tools;
 
 import connect.DBConnect;
+import dao.DangtoanDAO;
 import dao.QuanLyDeThiDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -55,7 +56,7 @@ public class DanhGiaKienThuc {
     
     public double DanhGiaNangLuc(String username, String noidung) {
         QuanLyDeThiDAO qldtdao = new QuanLyDeThiDAO();
-        List<String> DeThi = qldtdao.GetAllMade(username);
+        List<String> DeThi = qldtdao.GetAllMade(username,DangtoanDAO.GetNoidungTV(noidung));
         
         int solanthi = DeThi.size();
         double nangluc = 0;

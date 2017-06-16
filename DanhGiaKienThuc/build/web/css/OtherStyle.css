@@ -250,3 +250,15 @@ ol li div {
     cursor: pointer;
     font-weight: bold;
 }
+
+.table-thongke, .table-thongke th, .table-thongke td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.table-thongke th, .table-thongke td {
+    padding: 15px;
+}

@@ -213,6 +213,29 @@ public class QuestionDAO {
         return res;
     }
     
+    public String getMucdo(String id) {
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+                
+        String sql = "SELECT mucdo FROM table_dokhoch WHERE dokho = (SELECT dokho FROM nhchtoan WHERE id='" + id + "')";
+        String res = new String();
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                res = rs.getString("mucdo");
+            }
+            
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyDeThiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return res;        
+    }
+    
     private void updateDokho(String id, int dokho) {
         Connection connection = DBConnect.getConnecttion();        
         String sql = "UPDATE NHCHTOAN SET dokho='" + dokho + "' WHERE id='" + id + "'";

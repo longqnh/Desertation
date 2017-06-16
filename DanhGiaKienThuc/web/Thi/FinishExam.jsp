@@ -68,6 +68,9 @@
                     float Diem = qldeThiDAO.GetDiem(made);
                                        
                     List<Thongke> noidungYeu = new ArrayList<>();
+                    int []socaudung = new int [5];
+                    int []socau = new int [5];
+                    
                     ThongkeDAO thongkeDAO = new ThongkeDAO();
                     List<Thongke> thongkeND = thongkeDAO.thongkenoidung(made);
                 %>
@@ -77,46 +80,72 @@
                 
                 <ol type="1">
                 <div id="thongke">
-                    <li id="dokho">Theo mức độ</li>
-                <%
-                    for (int i=0; i < thongkeND.size(); i++) {
-                        Thongke nD = (Thongke) thongkeND.get(i); 
-                        List<Thongke> thongkeDK = thongkeDAO.thongkedokho(made, nD.getMadangtoan()); %>
-                        <ul class="content_dokho">
-                            <p>Đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu <%=nD.getDangtoan()%> gồm:</p>
-                    <%
-                        for (int j = 0; j < thongkeDK.size(); j++) { 
-                            Thongke DK = (Thongke) thongkeDK.get(j); %>
-                            <li><%=DK.getSocaudung()%>/<%=DK.getSocau()%> câu mức độ <%=DK.getMucdo()%></li>
-                <%
-                        }
-                %>
-                        </ul>
-                <%
-                    }
-                %>
-                    <li id="noidung">Theo nội dung</li>
-                <%
-                    for (int i=0; i < thongkeND.size(); i++) {
-                        Thongke nD = (Thongke) thongkeND.get(i); 
-                        List<Thongke> thongkeBT = thongkeDAO.thongkedangbt(made, nD.getMadangtoan()); %>
-                        <ul class="content_noidung">
-                            <p>Đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu <%=nD.getDangtoan()%> gồm:</p>
-                    <%
-                        for (int j = 0; j < thongkeBT.size(); j++) { 
-                            Thongke nd = (Thongke) thongkeBT.get(j); 
-                            if (nd.getSocaudung() <= nd.getSocau()/2) {
-                                noidungYeu.add(nd);
-                            }
-                    %>
-                            <li><%=nd.getSocaudung()%>/<%=nd.getSocau()%> câu dạng <%=nd.getDangtoan()%></li>
-                <%
-                        }
-                %>
-                        </ul>
-                <%
-                    }
-                %>                    
+                    <li id="dokho">Theo dạng toán</li>
+                    <div id="thongke-dangtoan">
+                        <table style="width:96%" class="table-thongke">
+                            <tr>
+                                <th rowspan="2">Dạng toán</th>
+                                <th colspan="4">Số câu đúng</th>
+                                <th rowspan="2">Tổng số câu</th>    
+                            </tr>
+                            <tr>
+                                <td>Nhận biết</td>
+                                <td>Thông hiểu</td>
+                                <td>Vận dụng</td>
+                                <td>Vận dụng cao</td>
+                            </tr>
+                            <%
+                                for (Thongke nD : thongkeND) { 
+                                    List<Thongke> thongkeDK = thongkeDAO.thongkedokho(made, nD.getMadangtoan()); 
+                                    int i=0;    
+                            %>
+                                    <tr>
+                                        <td><%=nD.getDangtoan()%></td>
+                                        <% 
+                                            for (Thongke DK : thongkeDK) { 
+                                                socau[i]+=DK.getSocau();
+                                                socaudung[i++]+=DK.getSocaudung();
+                                        %>
+                                                <td><%=DK.getSocaudung()%>/<%=DK.getSocau()%></td>
+                                        <%  }         
+                                            socau[i]+=nD.getSocau();
+                                            socaudung[i++]+=nD.getSocaudung(); 
+                                        %>
+                                        <td><%=nD.getSocaudung()%>/<%=nD.getSocau()%></td>
+                                    </tr>
+                            <% } %>
+                            <tr>
+                                <td>Tổng</td>
+                                <%
+                                    for (int i=0; i<socau.length; i++) {
+                                %>
+                                    <td><%=socaudung[i]%>/<%=socau[i]%></td> 
+                                <%  } %>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <li id="noidung">Theo dạng bài tập</li>   
+                    <div id="thongke-dangbt">
+                        <table class="table-thongke">
+                            <tr>
+                                <th>Dạng bài tập</th>
+                                <th>Số câu đúng</th>
+                            </tr>
+                            <%
+                                for (Thongke nD : thongkeND) { 
+                                    List<Thongke> thongkeBT = thongkeDAO.thongkedangbt(made, nD.getMadangtoan()); 
+                                    for (Thongke BT : thongkeBT) { 
+                                        if (BT.getSocaudung() <= BT.getSocau()/2) {
+                                            noidungYeu.add(BT);
+                                        }   %>
+                                    <tr>
+                                        <td><%=BT.getDangtoan()%></td>
+                                        <td><%=BT.getSocaudung()%>/<%=BT.getSocau()%></td>
+                                    </tr>
+                            <% } } %>
+                        </table>                    
+                    </div>
                 </div>
                 
                 <div id="nhanxet">
@@ -144,6 +173,9 @@
                     
                 <script type="text/javascript">
                     $(function() {
+                        $("#thongke-dangbt").hide();
+                        $("#thongke-dangtoan").hide();
+                        
                         $("#showTK").click(function() {
                             $("#nhanxet").hide();
                             $("#thongke").slideToggle();
@@ -155,13 +187,13 @@
                         });
                         
                         $("#dokho").click(function() {
-                            $(".content_noidung").hide();
-                            $(".content_dokho").slideToggle();
+                            $("#thongke-dangbt").hide();
+                            $("#thongke-dangtoan").slideToggle();
                         });
                         
                         $("#noidung").click(function() {
-                            $(".content_dokho").hide();
-                            $(".content_noidung").slideToggle();
+                            $("#thongke-dangtoan").hide();
+                            $("#thongke-dangbt").slideToggle();
                         });
                     });
                 </script>
