@@ -62,24 +62,20 @@
 		<tr class="profile_odd">
 	    	<td align="center" colspan="2">  
     		<span class="title">
-        	<x:out select="$doc/rss/channel/title" /></span> </td> </tr>
-	     	<x:forEach var="story" begin="0" end ="5"
+        	
+	     	<x:forEach var="story" begin="0" end="3"
                 select="$doc/rss/channel/item" varStatus="status">
      		<tr>
      		<td colspan="2"> <hr/> </td>
 	     	</tr>
         	<tr class="profile_even">
 	          <td class="label">Topic</td>
-         	 <td> <x:out select="title" /> </td>	
+         	 <td><a href=select="link"/> <x:out select="title" /> </td>	
 	        </tr>
         	<tr class="profile_even">
-          	<td class="label">Published Date</td>
+          	<td class="label">Ngày Đăng</td>
           	<td> <x:out select="pubDate" /> </td>	
  	       </tr>
-        	<tr class="profile_even">
- 	         <td class="label">Category</td>
-        	  <td> <x:out select="category" /> </td>	
-	        </tr>
         	<tr class="" valign="top">
         	<td class="label">Description</td>
         	<td><x:out select="description" escapeXml="false"/></td>

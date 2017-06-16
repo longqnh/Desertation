@@ -3,7 +3,8 @@
     Created on : Jan 3, 2017, 8:18:54 PM
     Author     : NTL
 --%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -55,6 +56,32 @@
 
             <div id="main-right">
                 <h2>Trang chủ</h2>
+		<c:import var="xmlContent" url="http://vnexpress.net/rss/giao-duc.rss"/>
+		<x:parse var="doc" xml="${xmlContent}"/>
+    		<table class="content-table"" id="feed">    
+		<tr class="profile_odd">
+	    	<td align="center" colspan="2">  
+    		<span class="title">
+        	
+	     	<x:forEach var="story" begin="0" end="3"
+                select="$doc/rss/channel/item" varStatus="status">
+     		<tr>
+     		<td colspan="2"> <hr/> </td>
+	     	</tr>
+        	<tr class="profile_even">
+	          <td class="label">Topic</td>
+         	 <td><a href=select="link"/> <x:out select="title" /> </td>	
+	        </tr>
+        	<tr class="profile_even">
+          	<td class="label">Ngày Đăng</td>
+          	<td> <x:out select="pubDate" /> </td>	
+ 	       </tr>
+        	<tr class="" valign="top">
+        	<td class="label">Description</td>
+        	<td><x:out select="description" escapeXml="false"/></td>
+        	</tr>
+	      	  </x:forEach>
+		    </table>
             </div>
         </div>
     </body>
