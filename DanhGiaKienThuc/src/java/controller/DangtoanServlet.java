@@ -39,8 +39,9 @@ public class DangtoanServlet extends HttpServlet {
 //        PrintWriter out = response.getWriter();
 //        Gson gson = new Gson();
         
+        String monhoc = request.getParameter("monhoc");
         int lop = Integer.parseInt(request.getParameter("lop"));
-        List<Dangtoan> dangtoan = dangtoanDAO.getDangtoanTheoLop(lop);
+        List<Dangtoan> dangtoan = dangtoanDAO.getDangtoanTheoLop(monhoc,lop);
         
         String json = new Gson().toJson(dangtoan);
         response.setContentType("application/json");
@@ -70,9 +71,10 @@ public class DangtoanServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");        
         PrintWriter out = response.getWriter();   
-        
+
+        String monhoc = request.getParameter("monhoc");        
         int lop = Integer.parseInt(request.getParameter("lop"));
-        List<Dangtoan> dangtoan = dangtoanDAO.getDangtoanTheoLop(lop);
+        List<Dangtoan> dangtoan = dangtoanDAO.getDangtoanTheoLop(monhoc,lop);
         
         for (Dangtoan dt : dangtoan) {
             out.println("<option value='" + dt.getDangtoan() + "'> " + dt.getDangtoanTV() + " </option>");

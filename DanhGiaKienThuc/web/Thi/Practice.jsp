@@ -4,6 +4,8 @@
     Author     : NTL
 --%>
 
+<%@page import="model.MonHoc"%>
+<%@page import="dao.MonHocDAO"%>
 <%@page import="dao.DokhoDAO"%>
 <%@page import="model.Dokho"%>
 <%@page import="model.Lop"%>
@@ -82,6 +84,18 @@
                 
                 <form id="createExam" name="createExam" action="${pageContext.request.contextPath}/LamDeThi" method="POST">
                     <div class="search-field">
+                        <label>Chọn môn: </label>
+                        <select name="monhoc" id="monhoc" required>
+                            <%
+                                MonHocDAO monHocDAO = new MonHocDAO();
+                                List<MonHoc> dsMon = monHocDAO.GetAllMonHoc(); 
+                                for (MonHoc mon : dsMon) { %>
+                                    <option value="<%=mon.getMonhocID()%>"> <%=mon.getTenmonhoc()%> </option>                                  
+                            <%  } %>
+                        </select>
+                    </div>
+                        
+                    <div class="search-field">
                         <label>Chọn lớp: </label>
                         <select name="lop" id="lop" required>
                             <option value="" disabled selected>Lớp</option>
@@ -132,7 +146,10 @@
                                     $.ajax({
                                         type: "GET",
                                         url: "${pageContext.request.contextPath}/DangtoanServlet",
-                                        data: {lop: $(this).val() },
+                                        data: {
+                                            lop: $(this).val(), 
+                                            monhoc: $("#monhoc").val()
+                                        },
                                         success: function(data){
                                             $('#kienthuc').empty().multiSelect('refresh');
                                             for(var i = 0; i < data.length; i++) {

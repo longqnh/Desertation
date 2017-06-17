@@ -79,7 +79,8 @@ public class QuanLyDeThiDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String made = rs.getString("made");
-                int socau = rs.getInt("socau");                
+                int socau = rs.getInt("socau");        
+                String monhoc = rs.getString("monhoc");
                 String noidung = rs.getString("noidung");
                 int thoigian = rs.getInt("thoigian");
                 String mucdo = rs.getString("mucdo");
@@ -87,7 +88,7 @@ public class QuanLyDeThiDAO {
                 String ngaythi = rs.getString("ngaythi");
                 String username = rs.getString("username");
                 
-                QuanLyDeThi deThi = new QuanLyDeThi(made, socau, noidung, thoigian, mucdo, diem, ngaythi, username);
+                QuanLyDeThi deThi = new QuanLyDeThi(made, socau, monhoc, noidung, thoigian, mucdo, diem, ngaythi, username);
                 list.add(deThi);
             }
         } catch (SQLException e) {
@@ -178,10 +179,11 @@ public class QuanLyDeThiDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int socau = rs.getInt("socau");
+                String monhoc = rs.getString("monhoc");
                 String noidung = rs.getString("noidung");
                 int thoigian = rs.getInt("thoigian");
                 String mucdo = rs.getString("mucdo");
-                QuanLyDeThi deThi = new QuanLyDeThi(made, socau, noidung, thoigian, mucdo, diem, ngaythi, thisinh);
+                QuanLyDeThi deThi = new QuanLyDeThi(made, socau, monhoc, noidung, thoigian, mucdo, diem, ngaythi, made);
 
                 QuanLyDeThiDAO qldtdao = new QuanLyDeThiDAO();
                 qldtdao.CompleteInfo(deThi);

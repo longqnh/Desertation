@@ -645,3 +645,4 @@ INSERT INTO `danhgiakienthuc`.`NHCHTOAN` (`id`, `noidung`, `dapanA`, `dapanB`, `
 INSERT INTO `danhgiakienthuc`.`NHCHTOAN` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('OXYZ090','Phương trình mặt phẳng $(P)$ chứa trục $Oy$ và điểm $M(1;-1;1)$ là:','$x+z=0$','$x-z=0$','$x-y=0$','$x+y = 0$','B','oxyz','phuongtrinhmp','0',NULL,'12','0');
 INSERT INTO `danhgiakienthuc`.`NHCHTOAN` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('OXYZ091','Cho A(1;1;3), B(-1;3;2), C(-1;2;3). Khoảng cách từ gốc tọa độ O tới mặt phẳng (ABC) bằng','$\\sqrt{3}$','3','$\\frac{\\sqrt{3}}{2}$','$\\frac{3}{2}$','B','oxyz','tinhkc','0',NULL,'12','0');
 
+UPDATE `danhgiakienthuc`.`NHCHTOAN` SET monhoc='toan';

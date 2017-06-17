@@ -6,6 +6,7 @@
 package controller;
 
 import dao.DangBaiTapDAO;
+import dao.DangtoanDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.DangBaiTap;
+import model.Dangtoan;
 
 /**
  *
@@ -33,7 +35,18 @@ public class getDangBT extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
+        
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");        
+        PrintWriter out = response.getWriter();   
+        
+        String monhoc = request.getParameter("monhoc");
+        
+        DangtoanDAO dangtoanDAO = new DangtoanDAO();
+        List<Dangtoan> allDangtoan = dangtoanDAO.getAll();
+        for (Dangtoan dt : allDangtoan) {
+            out.println("<option value='" + dt.getDangtoan() + "'> " + dt.getDangtoanTV() + " </option>");
+        }        
     }
 
     /**

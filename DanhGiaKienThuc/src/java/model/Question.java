@@ -12,16 +12,17 @@ package model;
 public class Question {
     private String id;
     private String noidung, dapanA, dapanB, dapanC, dapanD, dapan;
-    private String dangtoan, dangbt;
+    private String monhoc, dangtoan, dangbt;
     private int dokho;
     private int dophancach;
     private int malop;
     private int hinh;
-
+    private int dao;
+    
     public Question() {
     }
 
-    public Question(String id, String noidung, String dapanA, String dapanB, String dapanC, String dapanD, String dapan, String dangtoan, String dangbt, int dokho, int dophancach, int malop, int hinh) {
+    public Question(String id, String noidung, String dapanA, String dapanB, String dapanC, String dapanD, String dapan, String monhoc, String dangtoan, String dangbt, int dokho, int dophancach, int malop, int hinh, int dao) {
         this.id = id;
         this.noidung = noidung;
         this.dapanA = dapanA;
@@ -29,12 +30,14 @@ public class Question {
         this.dapanC = dapanC;
         this.dapanD = dapanD;
         this.dapan = dapan;
+        this.monhoc = monhoc;
         this.dangtoan = dangtoan;
         this.dangbt = dangbt;
         this.dokho = dokho;
         this.dophancach = dophancach;
         this.malop = malop;
         this.hinh = hinh;
+        this.dao = dao;
     }
 
     public Question(String id) {
@@ -97,6 +100,14 @@ public class Question {
         this.dapan = dapan;
     }
 
+    public String getMonhoc() {
+        return monhoc;
+    }
+
+    public void setMonhoc(String monhoc) {
+        this.monhoc = monhoc;
+    }  
+    
     public String getDangtoan() {
         return dangtoan;
     }
@@ -144,4 +155,12 @@ public class Question {
     public void setHinh(int hinh) {
         this.hinh = hinh;
     }
+
+    public int getDao() {
+        return dao;
+    }
+
+    public void setDao(int dao) {
+        this.dao = dao;
+    }       
 }

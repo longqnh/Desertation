@@ -43,6 +43,8 @@ public class LamDeThi extends HttpServlet {
         
         String[] noidung;
         int lop, level, time, numQuestion;
+
+        String monhoc = request.getParameter("monhoc");
         
         if (request.getParameter("dethi")==null) { // mode practice
             noidung = request.getParameterValues("kienthuc");
@@ -59,29 +61,29 @@ public class LamDeThi extends HttpServlet {
                 case "hk1":
                     time = 60; 
                     numQuestion = 40;
-                    noidung = dangtoanDAO.getDangtoanTheoHocky(lop,1);                    
+                    noidung = dangtoanDAO.getDangtoanTheoHocky(monhoc,lop,1);                    
                     break;
                 case "hk2":
                     time = 60; 
                     numQuestion = 40;
-                    noidung = dangtoanDAO.getDangtoanTheoHocky(lop,2);                    
+                    noidung = dangtoanDAO.getDangtoanTheoHocky(monhoc,lop,2);                    
                     break;
                 case "canam":
                     time = 60; 
                     numQuestion = 40;
-                    noidung = dangtoanDAO.getAllDangtoanLop(lop);                    
+                    noidung = dangtoanDAO.getAllDangtoanLop(monhoc,lop);                    
                     break;
                 default:
                     time = 90; 
                     numQuestion = 50;
-                    noidung = dangtoanDAO.getAllDangtoanLop(12);
+                    noidung = dangtoanDAO.getAllDangtoanLop(monhoc,12);
                     break;
             }
         }
         //
 
         // tao de
-        dethiDAO.TaoDe(noidung, level, numQuestion, users.getUsername(), time);
+        dethiDAO.TaoDe(monhoc,noidung, level, numQuestion, users.getUsername(), time);
         String made = dethiDAO.GetMade(users.getUsername());
         List exam = dethiDAO.GetDeThi(made,0);
         

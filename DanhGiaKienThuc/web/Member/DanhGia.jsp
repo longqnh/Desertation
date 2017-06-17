@@ -4,6 +4,8 @@
     Author     : NTL
 --%>
 
+<%@page import="model.MonHoc"%>
+<%@page import="dao.MonHocDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="model.Lop"%>
 <%@page import="dao.LopDAO"%>
@@ -73,6 +75,18 @@
                 <h2>Đánh giá kiến thức</h2>
                 
                 <form id="frmDanhgia" action="${pageContext.request.contextPath}/thongke" method="GET">
+                    <div class="search-field">
+                        <label>Chọn môn: </label>
+                        <select name="monhoc" id="monhoc" required>
+                            <%
+                                MonHocDAO monHocDAO = new MonHocDAO();
+                                List<MonHoc> dsMon = monHocDAO.GetAllMonHoc(); 
+                                for (MonHoc mon : dsMon) { %>
+                                    <option value="<%=mon.getMonhocID()%>"> <%=mon.getTenmonhoc()%> </option>                                  
+                            <%  } %>
+                        </select>
+                    </div>
+                        
                     <div class="edit-field">
                         <label>Lớp: </label>
                         <select name="lop" id="lop" required>
@@ -100,7 +114,10 @@
                             $.ajax({
                                 type: "POST",
                                 url: "${pageContext.request.contextPath}/DangtoanServlet",
-                                data: {lop: $(this).val() },
+                                data: {
+                                    lop: $(this).val(), 
+                                    monhoc: $("#monhoc").val()
+                                },
                                 success: function(data){
                                     $("#kienthuc").html(data);
                                 }

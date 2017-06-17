@@ -1,35 +1,76 @@
 <%-- 
-    Document   : AddQuestion
-    Created on : May 28, 2017, 3:20:10 PM
+    Document   : QLMH
+    Created on : Jun 17, 2017, 10:12:32 AM
     Author     : NTL
 --%>
 
-<%@page import="model.MonHoc"%>
-<%@page import="dao.MonHocDAO"%>
-<%@page import="model.Dokho"%>
-<%@page import="dao.DokhoDAO"%>
-<%@page import="java.util.List"%>
-<%@page import="model.Dangtoan"%>
-<%@page import="dao.DangtoanDAO"%>
 <%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>THÊM CÂU HỎI TRẮC NGHIỆM</title>
+        <title>QUẢN TRỊ CÁC MÔN HỌC</title>
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>   
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/MemberStyle.css" type="text/css">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>  
-        <style>
-            textarea {
-                font-size: 15px;
-                width: 600px;
-            }
-        </style>        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        
+        <!-- Include one of jTable styles. -->
+        <link href="${pageContext.request.contextPath}/css/metro/blue/jtable.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/css/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
+        <!-- Include jTable script file. -->
+        <script src="${pageContext.request.contextPath}/js/jquery-1.8.2.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/jquery.jtable.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#TableContainer').jtable({
+                    title: 'Danh sách môn học',
+                    paging: true, //Enable paging
+                    pageSize: 10, //Set page size (default: 10)
+                    sorting: true, //Enable sorting
+                    defaultSorting: 'monhocID ASC',
+                    selecting: true, //Enable selecting
+                    multiselect: true, //Allow multiple selecting
+                    selectingCheckboxes: true, //Show checkboxes on first column
+                    selectOnRowClick: false, //Click row on check box
+                    actions: {
+                        listAction: '${pageContext.request.contextPath}/MonHocCRUD?action=list',
+                        createAction: '${pageContext.request.contextPath}/MonHocCRUD?action=create',
+                        updateAction: '${pageContext.request.contextPath}/MonHocCRUD?action=update',
+                        deleteAction: '${pageContext.request.contextPath}/MonHocCRUD?action=delete'
+                    },
+                    fields: {
+                        monhocID: {
+                            title: 'Mã môn',
+                            key: true,
+                            list: true,
+                            edit: true,
+                            create: true
+                        },
+                        tenmonhoc: {
+                            title: 'Tên môn',
+                            type: 'text',
+                            edit: true
+                        }
+                    }
+                });
+                
+                $('#TableContainer').jtable('load');
+
+                //Load all records when page is first shown
+                $('#LoadRecordsButton').click();
+                        
+                //Delete selected students                        
+                $('#DeleteAllButton').button().click(function () {
+                    var $selectedRows = $('#TableContainer').jtable('selectedRows');
+                    $('#TableContainer').jtable('deleteRows', $selectedRows);
+                });
+            });
+        </script>
     </head>
     <body>
         <%
@@ -50,7 +91,7 @@
                                         String page_redirect= request.getContextPath() + "/Member/User.jsp";
                                     %>
                                     <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
-                                    <form action="<%=request.getContextPath()%>/UserServlet"method="POST">
+                                    <form action="<%=request.getContextPath()%>/UserServlet" method="POST">
                                         <input id="btnlogout" type="submit" value="Thoát">
                                         <input type="hidden" value="logout" name="command">
                                     </form>
@@ -154,125 +195,15 @@
             </div>
             
             <div id="main-right">
-                <h2>Thêm câu hỏi</h2>
-
-                <form action="${pageContext.request.contextPath}/QuestionCRUD?action=create" method="POST">
-                    <div class="edit-field">
-                        <label>Nội dung: </label>
-                        <textarea name="noidung" required=""></textarea>                        
-                    </div>
-
-                    <div class="edit-field">
-                        <label>Đáp án A: </label>
-                        <textarea name="dapanA" required=""></textarea>                        
-                    </div>
-
-                    <div class="edit-field">
-                        <label>Đáp án B: </label>
-                        <textarea name="dapanB" required=""></textarea>                          
-                    </div>
-
-                    <div class="edit-field">
-                        <label>Đáp án C: </label>
-                        <textarea name="dapanC" required=""></textarea>  
-                    </div>
-
-                    <div class="edit-field">
-                        <label>Đáp án D: </label>
-                        <textarea name="dapanD" required=""></textarea>                          
-                    </div>
-
-                    <div class="edit-field">
-                        <label>Đáp án: </label>
-                        <select name="dapan" required="">
-                            <option selected="">A</option>
-                            <option>B</option>
-                            <option>C</option>
-                            <option>D</option>
-                        </select>
-                    </div>
-
-                    <div class="search-field">
-                        <label>Chọn môn: </label>
-                        <select name="monhoc" id="monhoc" required>
-                            <option value="" disabled selected>Môn học</option>
-                            <%
-                                MonHocDAO monHocDAO = new MonHocDAO();
-                                List<MonHoc> dsMon = monHocDAO.GetAllMonHoc(); 
-                                for (MonHoc mon : dsMon) { %>
-                                    <option value="<%=mon.getMonhocID()%>"> <%=mon.getTenmonhoc()%> </option>                                  
-                            <%  } %>
-                        </select>
-                    </div>
-                        
-                    <div class="edit-field">
-                        <label>Dạng toán</label>
-                        <select name="kienthuc" id="dangtoan" required=""></select>
-                        <script type="text/javascript">
-                            $('#monhoc').change (
-                                function() {
-                                    $.ajax({
-                                        type: "GET",
-                                        url: "${pageContext.request.contextPath}/getDangBT",
-                                        data: {
-                                            monhoc: $("#monhoc").val()
-                                        },
-                                        success: function(data){
-                                            $("#dangtoan").html(data);
-                                        }
-                                    });
-                                }
-                            );                         
-                        </script>                                            
-                    </div>
-
-                    <div class="edit-field">
-                        <label>Dạng bài tập</label>
-                        <select name="dangbt" id="dangbt" required=""></select>
-                    </div>
-                        
-                    <script type="text/javascript">
-                        $('#dangtoan').change (
-                            function() {
-                                $.ajax({
-                                    type: "POST",
-                                    url: "${pageContext.request.contextPath}/getDangBT",
-                                    data: {dangtoan: $(this).val() },
-                                    success: function(data){
-                                        $("#dangbt").html(data);
-                                    }
-                                });
-                            }
-                        );
-                    </script>
-                    
-                    <div class="edit-field">
-                        <label>Độ khó: </label>
-                        <select name="dokho" required="">
-                        <%
-                            DokhoDAO dokhoDAO = new DokhoDAO();
-                            List<Dokho> allDokho = dokhoDAO.GetAllDokhoCH();
-                            for (Dokho dk : allDokho) { %>
-                                <option value="<%=dk.getDokho()%>"> <%=dk.getMucdo()%> </option>                                
-                        <%  } %>                            
-                        </select>    
-                    </div>
-
-                    <div class="edit-field">
-                        <label>Hình: </label>
-                        <select name="hinh" required="">
-                            <option value="0">Không có hình</option>
-                            <option value="1">Có hình</option>
-                        </select>
-                    </div>
-                    
-                    <input type="submit" id="btnThemCH" value="Thêm">
-                </form>                
+                <h2>QUẢN TRỊ CÁC MÔN HỌC</h2>              
+                <div id="TableContainer"></div>
+                <button type="button" id="DeleteAllButton">Delete All Selected</button>
             </div>                
         </div>
             
         <script type="text/javascript" src="../js/autoscroll.js"></script>
         
-        <jsp:include page="../WebInterface/footer.jsp"></jsp:include>        
+        <jsp:include page="../WebInterface/footer.jsp"></jsp:include>
     </body>
 </html>
+

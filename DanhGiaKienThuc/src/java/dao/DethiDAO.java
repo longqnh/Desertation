@@ -91,10 +91,12 @@ public class DethiDAO {
     
     DangtoanDAO dangtoanDAO;
     DokhoDAO dokhoDAO;
-
+    MonHocDAO monHocDAO;
+    
     public DethiDAO() {
         dangtoanDAO = new DangtoanDAO();
         dokhoDAO = new DokhoDAO();
+        monHocDAO = new MonHocDAO();
     }
     
     private void SetSocauTheoNoiDung (NoiDung[] nd, double nb, double th, double vd, double vdc) {
@@ -134,7 +136,7 @@ public class DethiDAO {
         }
     }
     
-    public void TaoDe(String[] noidung, int level, int numQuestion, String username, int time) {
+    public void TaoDe(String monhoc, String[] noidung, int level, int numQuestion, String username, int time) {
         Connection connection = DBConnect.getConnecttion();
 
         int soNoiDung = noidung.length;
@@ -174,23 +176,23 @@ public class DethiDAO {
             //String sql1 = "TRUNCATE table_dethi";
             
             // update table_quanlydethi
-            String update_qldethi = "INSERT INTO table_quanlydethi(`socau`,`noidung`,`thoigian`,`mucdo`,`username`) VALUES ('" +
-                                    numQuestion + "','" + cacNoiDung + "','" + time + "','" + dokhoDAO.GetDoKhoTV(level) + "','" + username + "')";
+            String update_qldethi = "INSERT INTO table_quanlydethi(`monhoc`,`socau`,`noidung`,`thoigian`,`mucdo`,`username`) VALUES ('" +
+                                    monHocDAO.getTenMonHoc(monhoc) + "','" + numQuestion + "','" + cacNoiDung + "','" + time + "','" + dokhoDAO.GetDoKhoTV(level) + "','" + username + "')";
             
             // update table_dethi
-            String update_dethi = "INSERT INTO table_dethi(`id`,`noidung`,`dapanA`,`dapanB`,`dapanC`,`dapanD`,`dapan`,`dangtoan`,`dangbt`,`dokho`,`dophancach`,`malop`,`hinh`,`made`) " +
+            String update_dethi = "INSERT INTO table_dethi(`id`,`noidung`,`dapanA`,`dapanB`,`dapanC`,`dapanD`,`dapan`,`monhoc`,`dangtoan`,`dangbt`,`dokho`,`dophancach`,`malop`,`hinh`,`dao`,`made`) " +
                         "SELECT *, (SELECT made FROM table_quanlydethi WHERE username='" + username + "' ORDER BY made DESC LIMIT 1) FROM (";
             
             for (int i=0; i < nd.length; i++) {
                 int lop = dangtoanDAO.GetLop(nd[i].getNoidung());
                 String dangtoan = nd[i].getNoidung();
-                update_dethi += "(SELECT * FROM NHCHTOAN WHERE dokho=0 AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
+                update_dethi += "(SELECT * FROM NHCHTOAN WHERE dokho=0 AND monhoc='" + monhoc + "' AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN WHERE dokho=1 AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
+                                "(SELECT * FROM NHCHTOAN WHERE dokho=1 AND monhoc='" + monhoc + "' AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN WHERE dokho=2 AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
+                                "(SELECT * FROM NHCHTOAN WHERE dokho=2 AND monhoc='" + monhoc + "' AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN WHERE dokho=3 AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
+                                "(SELECT * FROM NHCHTOAN WHERE dokho=3 AND monhoc='" + monhoc + "' AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
                 if (i < nd.length - 1) {
                     update_dethi += "UNION ALL ";
                 }
@@ -353,6 +355,7 @@ public class DethiDAO {
                 question.setDapanC(rs.getString("dapanC"));
                 question.setDapanD(rs.getString("dapanD"));
                 question.setDapan(rs.getString("dapan"));
+                question.setMonhoc(rs.getString("monhoc"));
                 question.setDangtoan(rs.getString("dangtoan"));
                 question.setDangbt(rs.getString("dangbt"));
                 question.setDokho(rs.getInt("dokho"));
@@ -360,9 +363,10 @@ public class DethiDAO {
                 question.setMalop(rs.getInt("malop"));
                 question.setHinh(rs.getInt("hinh"));
                 question.setMade(rs.getString("made"));
+                question.setDao(rs.getInt("dao"));
                 
                 int dao = random.nextInt(2);
-                if (dao==1) {
+                if (dao==1 && question.getDao()==1) {
                     question = DaoCauTraLoi(question);
                     updateQuestion(question);
                 }

@@ -231,3 +231,6 @@ INSERT INTO `danhgiakienthuc`.`NHCHTOAN` (`id`, `noidung`, `dapanA`, `dapanB`, `
 INSERT INTO `danhgiakienthuc`.`NHCHTOAN` (`id`, `noidung`, `dapanA`, `dapanB`, `dapanC`, `dapanD`, `dapan`, `dangtoan`, `dangbt`, `dokho`, `dophancach`, `malop`, `hinh`) VALUES ('GH070','Cho hàm số $y = f(x) =x^4 +x^2 -2$ Khẳng định nào sai ?','Hàm số đã cho liên tục trên R','Phương trình có ít nhất một nghiệm trong khoảng (0,2)','Ta có $f(-2)(2)>0 $ nên phương trình vô nghiệm trong khoảng (-2;2)','Phương trình $x^4 +x^2 -2 =0 $ có tối đa 4 nghiệm trong R','C','gioihan','hlt','1',NULL,'11','0');
 
 /* HHKG */
+
+
+UPDATE `danhgiakienthuc`.`NHCHTOAN` SET monhoc='toan';

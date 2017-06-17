@@ -68,6 +68,10 @@
         <servlet-name>getDangBT</servlet-name>
         <servlet-class>controller.getDangBT</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MonHocCRUD</servlet-name>
+        <servlet-class>controller.MonHocCRUD</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckEmailServlet</servlet-name>
         <url-pattern>/CheckEmailServlet</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>getDangBT</servlet-name>
         <url-pattern>/getDangBT</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MonHocCRUD</servlet-name>
+        <url-pattern>/MonHocCRUD</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

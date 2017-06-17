@@ -4,6 +4,8 @@
     Author     : NTL
 --%>
 
+<%@page import="model.MonHoc"%>
+<%@page import="dao.MonHocDAO"%>
 <%@page import="model.Lop"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.LopDAO"%>
@@ -76,6 +78,18 @@
                 <h2>Thông tin đề thi</h2>
                 
                 <form id="createExam" name="createExam" action="${pageContext.request.contextPath}/LamDeThi" method="POST">
+                    <div class="search-field">
+                        <label>Chọn môn: </label>
+                        <select name="monhoc" id="monhoc" required>
+                            <%
+                                MonHocDAO monHocDAO = new MonHocDAO();
+                                List<MonHoc> dsMon = monHocDAO.GetAllMonHoc(); 
+                                for (MonHoc mon : dsMon) { %>
+                                    <option value="<%=mon.getMonhocID()%>"> <%=mon.getTenmonhoc()%> </option>                                  
+                            <%  } %>
+                        </select>
+                    </div>
+                        
                     <div class="search-field">
                         <label>Lớp đang học: </label>
                         <select name="lop" id="lop" required>

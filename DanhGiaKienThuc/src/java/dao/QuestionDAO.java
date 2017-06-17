@@ -26,7 +26,7 @@ public class QuestionDAO {
         
     public boolean InsertQuestion(Question q) {
         Connection connection= DBConnect.getConnecttion();
-        String sql = "INSERT INTO NHCHTOAN VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO NHCHTOAN VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareCall(sql);
@@ -37,12 +37,14 @@ public class QuestionDAO {
             ps.setString(5, q.getDapanC());
             ps.setString(6, q.getDapanD());
             ps.setString(7, q.getDapan());
-            ps.setString(8, q.getDangtoan());
-            ps.setString(9, q.getDangbt());
-            ps.setInt(10, q.getDokho());
-            ps.setInt(11, q.getDophancach());
-            ps.setInt(12, q.getMalop());
-            ps.setInt(13, q.getHinh());
+            ps.setString(8, q.getMonhoc());
+            ps.setString(9, q.getDangtoan());
+            ps.setString(10, q.getDangbt());
+            ps.setInt(11, q.getDokho());
+            ps.setInt(12, q.getDophancach());
+            ps.setInt(13, q.getMalop());
+            ps.setInt(14, q.getHinh());
+            ps.setInt(15, q.getDao());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -54,23 +56,24 @@ public class QuestionDAO {
     
     public boolean updateQuestion(Question q) throws SQLException {
         Connection con = DBConnect.getConnecttion();
-        String sql = "update NHCHTOAN set noidung=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, dapan=?, dangtoan=?, dangbt=?, dokho=?, malop=?, hinh=? where id=?";
+        String sql = "update NHCHTOAN set noidung=?, monhoc=?, dapanA=?, dapanB=?, dapanC=?, dapanD=?, dapan=?, dangtoan=?, dangbt=?, dokho=?, malop=?, hinh=? where id=?";
         PreparedStatement ps;
         
         try {
             ps = con.prepareCall(sql);
             ps.setString(1, q.getNoidung());
-            ps.setString(2, q.getDapanA());
-            ps.setString(3, q.getDapanB());
-            ps.setString(4, q.getDapanC());
-            ps.setString(5, q.getDapanD());
-            ps.setString(6, q.getDapan());
-            ps.setString(7, q.getDangtoan());
-            ps.setString(8, q.getDangbt());
-            ps.setInt(9, q.getDokho());
-            ps.setInt(10, q.getMalop());
-            ps.setInt(11, q.getHinh());
-            ps.setString(12, q.getId());
+            ps.setString(2, q.getMonhoc());
+            ps.setString(3, q.getDapanA());
+            ps.setString(4, q.getDapanB());
+            ps.setString(5, q.getDapanC());
+            ps.setString(6, q.getDapanD());
+            ps.setString(7, q.getDapan());
+            ps.setString(8, q.getDangtoan());
+            ps.setString(9, q.getDangbt());
+            ps.setInt(10, q.getDokho());
+            ps.setInt(11, q.getMalop());
+            ps.setInt(12, q.getHinh());
+            ps.setString(13, q.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -112,14 +115,16 @@ public class QuestionDAO {
                 String dapanC = rs.getString("dapanC");
                 String dapanD = rs.getString("dapanD");
                 String dapan = rs.getString("dapan");
+                String monhoc = rs.getString("monhoc");
                 String dangtoan = rs.getString("dangtoan");
                 String dangbt = rs.getString("dangbt");
                 int dokho = rs.getInt("dokho");
                 int dophancach = rs.getInt("dophancach");
                 int malop = rs.getInt("malop");
                 int hinh = rs.getInt("hinh");
+                int dao = rs.getInt("dao");
                 
-                Question q = new Question(id, noidung, dapanA, dapanB, dapanC, dapanD, dapan, dangtoan, dangbt, dokho, dophancach, malop, hinh);
+                Question q = new Question(id, noidung, dapanA, dapanB, dapanC, dapanD, dapan, monhoc, dangtoan, dangbt, dokho, dophancach, malop, hinh, dao);
                 list.add(q);
             }
         } catch (SQLException e) {
@@ -165,12 +170,14 @@ public class QuestionDAO {
                 q.setDapanC(rs.getString("dapanC"));
                 q.setDapanD(rs.getString("dapanD"));
                 q.setDapan(rs.getString("dapan"));
+                q.setMonhoc("monhoc");
                 q.setDangtoan(rs.getString("dangtoan"));
                 q.setDangbt(rs.getString("dangbt"));
                 q.setDokho(rs.getInt("dokho"));
                 q.setDophancach(rs.getInt("dophancach"));
                 q.setMalop(rs.getInt("malop"));
                 q.setHinh(rs.getInt("hinh"));
+                q.setDao(rs.getInt("dao"));
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

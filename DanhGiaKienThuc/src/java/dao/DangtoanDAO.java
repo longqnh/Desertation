@@ -23,12 +23,12 @@ import tools.DanhGiaKienThuc;
  * @author NTL
  */
 public class DangtoanDAO {
-    public List getDangtoanTheoLop(int lop) {
+    public List getDangtoanTheoLop(String monhoc, int lop) {
         List<Dangtoan> list = new ArrayList<>();
         
         Connection connection = DBConnect.getConnecttion();
         PreparedStatement ps;
-        String sql = "SELECT * FROM table_phanloaidangtoan WHERE malop=" + lop;
+        String sql = "SELECT * FROM table_phanloaidangtoan WHERE monhoc='" + monhoc + "' AND malop=" + lop;
         
         try {
             ps = connection.prepareCall(sql);
@@ -48,12 +48,12 @@ public class DangtoanDAO {
         return list;
     }
 
-    public String[] getAllDangtoanLop(int lop) {
+    public String[] getAllDangtoanLop(String monhoc, int lop) {
         List<String> list = new ArrayList<>();
         
         Connection connection = DBConnect.getConnecttion();
         PreparedStatement ps;
-        String sql = "SELECT * FROM table_phanloaidangtoan WHERE malop=" + lop;
+        String sql = "SELECT * FROM table_phanloaidangtoan WHERE monhoc='" + monhoc + "' AND malop=" + lop;
         
         try {
             ps = connection.prepareCall(sql);
@@ -72,12 +72,12 @@ public class DangtoanDAO {
         return array;
     }
     
-    public String[] getDangtoanTheoHocky(int lop, int hocky) {
+    public String[] getDangtoanTheoHocky(String monhoc, int lop, int hocky) {
         List<String> list = new ArrayList<>();
         
         Connection connection = DBConnect.getConnecttion();
         PreparedStatement ps;
-        String sql = "SELECT * FROM table_phanloaidangtoan WHERE malop=" + lop + " AND hocky=" + hocky;
+        String sql = "SELECT * FROM table_phanloaidangtoan WHERE monhoc='" + monhoc + "' AND malop=" + lop + " AND hocky=" + hocky;
         
         try {
             ps = connection.prepareCall(sql);
@@ -96,12 +96,12 @@ public class DangtoanDAO {
         return array;        
     }
     
-    public List getAllDangToan() {
+    public List getAllDangToan(String monhoc) {
         List<String> list = new ArrayList<>();
         
         Connection connection = DBConnect.getConnecttion();
         PreparedStatement ps;
-        String sql = "SELECT * FROM table_phanloaidangtoan";
+        String sql = "SELECT * FROM table_phanloaidangtoan WHERE monhoc='" + monhoc + "'";
         
         try {
             ps = connection.prepareCall(sql);
@@ -144,9 +144,9 @@ public class DangtoanDAO {
         return list;          
     }
     
-    public int countAllDangToan() {
+    public int countAllDangToan(String monhoc) {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "SELECT COUNT(*) AS COUNT FROM table_phanloaidangtoan";
+        String sql = "SELECT COUNT(*) AS COUNT FROM table_phanloaidangtoan WHERE monhoc='" + monhoc + "'";
         
 	int count=0;
 	try 
@@ -184,59 +184,6 @@ public class DangtoanDAO {
         }        
         
         return lop;
-    }
-    
-    public double GetKyVong(String username, String dangtoan) {
-        Connection connection = DBConnect.getConnecttion();
-        
-        String sql = "SELECT * FROM table_kyvong WHERE username='" + username + "'";
-        PreparedStatement ps;
-        double kyvong = 0;
-        
-        try {
-            ps = connection.prepareCall(sql);
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()) {
-                kyvong = rs.getDouble(dangtoan);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DangtoanDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return kyvong;
-    }
-    
-    public double GetPhuongSai(String username, String dangtoan) {
-        Connection connection = DBConnect.getConnecttion();
-        
-        String sql = "SELECT * FROM table_phuongsai WHERE username='" + username + "'";
-        PreparedStatement ps;
-        double phuongsai = 0;
-        
-        try {
-            ps = connection.prepareCall(sql);
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()) {
-                String str = rs.getString(dangtoan);
-                String []arr_phuongsai = str.split(" ");
-                List<Double> arr = new ArrayList<>();
-                for (String s : arr_phuongsai) {
-                    arr.add(round(Double.parseDouble(s)));
-                }
-                
-                double kyvong = GetKyVong(username, dangtoan);
-                for (int i = 0; i < arr.size(); i++) {
-                    phuongsai += ((arr.get(i) - kyvong)*(arr.get(i) - kyvong));                    
-                }
-                phuongsai/=arr.size();
-                phuongsai=round(Math.sqrt(phuongsai));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return phuongsai;
     }
     
     public static String GetNoidungTV(String noidung) {

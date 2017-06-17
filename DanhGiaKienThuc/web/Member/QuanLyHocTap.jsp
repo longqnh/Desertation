@@ -49,6 +49,10 @@
                                 }
                             }
                         },
+                        monhoc: {
+                            title: 'Môn',
+                            type: 'text'
+                        },
                         socau: {
                             title: 'Số câu',
                             type: 'text'

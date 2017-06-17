@@ -4,13 +4,11 @@
     Author     : NTL
 --%>
 
+<%@page import="model.MonHoc"%>
+<%@page import="dao.MonHocDAO"%>
 <%@page import="model.Lop"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.LopDAO"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="connect.DBConnect"%>
-<%@page import="java.sql.Connection"%>
 <%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -127,6 +125,7 @@
                     e.preventDefault();
                     $('#TableContainer').jtable('load', {
                         name: $('#name').val(),
+                        monhoc: $('#monhoc').val(),
                         kienthuc: $('#kienthuc').val(),
                         lop: $('#lop').val()
                     });
@@ -233,6 +232,7 @@
                         <li><a href="<%=request.getContextPath()%>/Member/User.jsp"> Thông tin tài khoản </a></li>
                         <li><a href="<%=request.getContextPath()%>/Member/QuanLyHocTap.jsp"> Quản lý học tập</a></li>                        
                         <li><a href="<%=request.getContextPath()%>/Admin/QLTK.jsp">Quản lý các tài khoản</a></li>
+                        <li><a href="<%=request.getContextPath()%>/Admin/QLMH.jsp"> Quản lý các môn học</a></li>                                                        
                         <li><a href="<%=request.getContextPath()%>/Admin/QLKD.jsp">Quản lý kho đề</a></li>
                         <li><a href="<%=request.getContextPath()%>/Admin/QLDT.jsp">Quản lý các bài thi</a></li>
                     </ul>
@@ -252,6 +252,15 @@
             <div class="filtering">
                 <form>
                     ID: <input type="text" name="name" id="name" />
+                    Môn:
+                    <select name="monhoc" id="monhoc" required>
+                        <%
+                            MonHocDAO monHocDAO = new MonHocDAO();
+                            List<MonHoc> dsMon = monHocDAO.GetAllMonHoc(); 
+                            for (MonHoc mon : dsMon) { %>
+                                <option value="<%=mon.getMonhocID()%>"> <%=mon.getTenmonhoc()%> </option>                                  
+                        <%  } %>
+                    </select>                    
                     Lớp:
                     <select name="lop" id="lop" required>
                         <option value="" disabled selected>Lớp</option>
@@ -261,7 +270,7 @@
                             for (Lop lop: dsLop) { %>
                                 <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>                                  
                         <%  } %>
-                    </select>
+                    </select>                    
                     Kiến thức: 
                     <select id="kienthuc" name="kienthuc"></select>
                     
@@ -271,7 +280,10 @@
                                 $.ajax({
                                     type: "POST",
                                     url: "${pageContext.request.contextPath}/DangtoanServlet",
-                                    data: {lop: $(this).val() },
+                                    data: {
+                                        lop: $(this).val(),
+                                        monhoc: $("#monhoc").val()
+                                    },
                                     success: function(data){
                                         $("#kienthuc").html(data);
                                     }

@@ -134,27 +134,27 @@ public class ThongkeDAO {
         return 0;
     }
     
-    public static void main(String[] args) {
-        ThongkeDAO thongkeDAO = new ThongkeDAO();
-        int socau[] = new int[5];
-        int socaudung[] = new int[5];
-        
-        List<Thongke> thongkeND = thongkeDAO.thongkenoidung("00022");
-        for (Thongke nD : thongkeND) {             
-//            System.out.println(nD.getDangtoan() + " - " + nD.getSocaudung() + "/" + nD.getSocau());
-            List<Thongke> thongkeDK = thongkeDAO.thongkedokho("00022", nD.getMadangtoan());
-            int i=0;
-            for (Thongke dK : thongkeDK) {
-                socau[i]+=dK.getSocau();
-                socaudung[i++]+=dK.getSocaudung();
-//                System.out.println(dK.getDangtoan() + ":" + dK.getMucdo() + " - " + dK.getSocaudung() + "/" + dK.getSocau());
-            }
-            socau[i]+=nD.getSocau();
-            socaudung[i++]+=nD.getSocaudung();            
-        }
-        
-        for (int i=0; i < socau.length; i++) {
-            System.out.println(socaudung[i]+"/"+socau[i]);
-        }
-    }
+//    public static void main(String[] args) {
+//        ThongkeDAO thongkeDAO = new ThongkeDAO();
+//        int socau[] = new int[5];
+//        int socaudung[] = new int[5];
+//        
+//        List<Thongke> thongkeND = thongkeDAO.thongkenoidung("00022");
+//        for (Thongke nD : thongkeND) {             
+////            System.out.println(nD.getDangtoan() + " - " + nD.getSocaudung() + "/" + nD.getSocau());
+//            List<Thongke> thongkeDK = thongkeDAO.thongkedokho("00022", nD.getMadangtoan());
+//            int i=0;
+//            for (Thongke dK : thongkeDK) {
+//                socau[i]+=dK.getSocau();
+//                socaudung[i++]+=dK.getSocaudung();
+////                System.out.println(dK.getDangtoan() + ":" + dK.getMucdo() + " - " + dK.getSocaudung() + "/" + dK.getSocau());
+//            }
+//            socau[i]+=nD.getSocau();
+//            socaudung[i++]+=nD.getSocaudung();            
+//        }
+//        
+//        for (int i=0; i < socau.length; i++) {
+//            System.out.println(socaudung[i]+"/"+socau[i]);
+//        }
+//    }
 }

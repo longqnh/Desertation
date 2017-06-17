@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package model;
-
-import java.util.List;
-
 /**
  *
  * @author NTL
@@ -14,6 +11,7 @@ import java.util.List;
 public class Dangtoan {
     private String dangtoan;
     private String madangtoan;
+    private String monhoc;
     private int malop;
     private String dangtoanTV;
     private int hocky;
@@ -22,9 +20,10 @@ public class Dangtoan {
     public Dangtoan() {
     }
 
-    public Dangtoan(String dangtoan, String madangtoan, int malop, String dangtoanTV, int hocky, double dopc_de, double dopc_tb, double dopc_tbk, double dopc_kho) {
+    public Dangtoan(String dangtoan, String madangtoan, String monhoc, int malop, String dangtoanTV, int hocky, double dopc_de, double dopc_tb, double dopc_tbk, double dopc_kho) {
         this.dangtoan = dangtoan;
         this.madangtoan = madangtoan;
+        this.monhoc = monhoc;
         this.malop = malop;
         this.dangtoanTV = dangtoanTV;
         this.hocky = hocky;
@@ -54,7 +53,15 @@ public class Dangtoan {
     public void setMadangtoan(String madangtoan) {
         this.madangtoan = madangtoan;
     }
-        
+
+    public String getMonhoc() {
+        return monhoc;
+    }
+
+    public void setMonhoc(String monhoc) {
+        this.monhoc = monhoc;
+    }
+
     public int getMalop() {
         return malop;
     }

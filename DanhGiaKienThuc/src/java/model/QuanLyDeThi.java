@@ -12,6 +12,7 @@ package model;
 public class QuanLyDeThi {
     private String made;
     private int socau;
+    private String monhoc;
     private String noidung;
     private int thoigian;
     private String mucdo;
@@ -22,9 +23,10 @@ public class QuanLyDeThi {
     public QuanLyDeThi() {
     }
 
-    public QuanLyDeThi(String made, int socau, String noidung, int thoigian, String mucdo, float diem, String ngaythi, String username) {
+    public QuanLyDeThi(String made, int socau, String monhoc, String noidung, int thoigian, String mucdo, float diem, String ngaythi, String username) {
         this.made = made;
         this.socau = socau;
+        this.monhoc = monhoc;
         this.noidung = noidung;
         this.thoigian = thoigian;
         this.mucdo = mucdo;
@@ -49,6 +51,14 @@ public class QuanLyDeThi {
         this.socau = socau;
     }
 
+    public String getMonhoc() {
+        return monhoc;
+    }
+
+    public void setMonhoc(String monhoc) {
+        this.monhoc = monhoc;
+    }
+ 
     public String getNoidung() {
         return noidung;
     }
