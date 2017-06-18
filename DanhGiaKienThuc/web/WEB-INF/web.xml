@@ -72,6 +72,10 @@
         <servlet-name>MonHocCRUD</servlet-name>
         <servlet-class>controller.MonHocCRUD</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getLop</servlet-name>
+        <servlet-class>controller.getLop</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckEmailServlet</servlet-name>
         <url-pattern>/CheckEmailServlet</url-pattern>
@@ -143,6 +147,10 @@
     <servlet-mapping>
         <servlet-name>MonHocCRUD</servlet-name>
         <url-pattern>/MonHocCRUD</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getLop</servlet-name>
+        <url-pattern>/getLop</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
