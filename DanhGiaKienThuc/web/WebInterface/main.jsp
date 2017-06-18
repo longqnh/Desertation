@@ -3,7 +3,9 @@
     Created on : Jan 3, 2017, 8:18:54 PM
     Author     : NTL
 --%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -54,7 +56,21 @@
             </div>
 
             <div id="main-right">
-                <h2>Trang chủ</h2>
+                <h2>Tin Tức Giáo Dục</h2>
+		<c:import var="xmlContent" url="http://vnexpress.net/rss/giao-duc.rss"/>
+		<x:parse var="doc" xml="${xmlContent}"/>
+    		<table class="content-table"" id="feed">    
+		<tr class="profile_odd">
+	    	<td align="center" colspan="2">  
+                    <span class="title"> </span>
+                <x:forEach var="story" begin="0"     
+                    select="$doc/rss/channel/item" varStatus="status">
+                    <tr class="profile_even"> 
+                        <td><a href="<x:out select="link"/>"> &#x261B; <x:out select="title"/></td>
+                </x:forEach>
+		</table>
+                <div id = "quickview">
+                </div>
             </div>
         </div>
     </body>
