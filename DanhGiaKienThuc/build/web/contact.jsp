@@ -11,7 +11,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>LIÊN HỆ - GÓP Ý</title>
-        <link rel="stylesheet" href="css/ContactStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/MemberStyle.css" type="text/css">
     </head>
     <body>
         <jsp:include page="WebInterface/header.jsp"></jsp:include>
@@ -26,45 +27,80 @@
                 email = users.getEmail();                
             }
         %>
-        
-        <p id="thankyou">${requestScope.Thankyou}</p>
-        <div class="container">
-            <h2>LIÊN HỆ - GÓP Ý</h2>
-            <form action="Contact" method="POST">
-                <div class="group">      
-                    <input type="text" name="hoten" value="<%=hoten%>" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Họ tên</label>
-                </div>
-                <div class="group">      
-                    <input type="email" name="email" value="<%=email%>" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Email</label>
-                </div>
-                <div class="group">      
-                    <input type="text" name="sdt">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Số điện thoại</label>
-                </div>                
-                <div class="group">      
-                    <input type="text" name="subject" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Tiêu đề</label>
-                </div>                
-                <div class="group">
-                    <textarea name="content" required></textarea>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>                    
-                    <label>Nội dung</label>
-                </div>
-                <input id="btnSend" type="submit" value="Gửi">            
-            </form>
-        </div>
 
+        <div id="clr"></div>
+        <div class="container">
+            <div id="main-left">
+                <div id="main-left-top">
+                        <h2 style="text-align: center; text-transform: uppercase; margin-top: 5px; font-family:'Roboto';">Tìm kiếm</h2>
+                        <div id="search">
+                            <form>
+                                <input type="text" placeholder="Search this site..." id="textsearch"/>
+                                <input type="submit" id="search-button" value=""/>
+                            </form>
+                        </div>                            
+                </div>
+                
+                <div id="main-left-bottom">
+                    <ul>
+                        <li><a href="index.jsp"> Trang chủ</a></li>                       
+                        <li><a> Làm đề thi </a>
+                            <ul class="submnu">
+                                <li><a href="Thi/MockTest.jsp"> Thi thử </a></li>
+                                <li><a href="Thi/Practice.jsp"> Luyện tập </a></li>
+                            </ul>
+                        </li>
+                        <li><a> Lý thuyết</a>
+                            <ul class="submnu">
+                                <li><a href="OnLyThuyet/Lop12.jsp"> Toán 12 </a></li>                               
+                                <li><a href="OnLyThuyet/Lop11.jsp"> Toán 11 </a></li>
+                                <li><a href="OnLyThuyet/Lop10.jsp"> Toán 10 </a></li>
+                                <li><a href="OnLyThuyet/LyThuyetTracNghiem.jsp"> Lý Thuyết Trắc Nghiệm </a></li>
+                            </ul>                            
+                        </li>
+                        <li><a href="tutorial.jsp"> Hướng dẫn</a></li>
+                        <li><a href="information.jsp"> Giới thiệu</a></li>
+                        <li><a href="contact.jsp"> Liên hệ - Góp ý</a></li>
+                    </ul>
+                </div>
+                
+                <script src="js/DisplaySubmenu.js" type="text/javascript"></script>
+            </div>
+
+            <div id="main-right">
+                <h2>Liên hệ - Góp ý</h2>
+                <p id="thankyou">${requestScope.Thankyou}</p>
+                <form action="${pageContext.request.contextPath}/Contact" method="POST">
+                    <div class="edit-field">
+                        <label>Họ tên</label>   
+                        <input type="text" name="hoten" value="<%=hoten%>" required>                   
+                    </div>
+
+                    <div class="edit-field">
+                        <label>Email</label>  
+                        <input type="email" name="email" value="<%=email%>" required>
+                    </div>
+
+                    <div class="edit-field">
+                        <label>Số điện thoại</label>                        
+                        <input type="text" name="sdt">
+                    </div>
+
+                    <div class="edit-field">
+                        <label>Tiêu đề</label>
+                        <input type="text" name="subject" required>
+                    </div>
+
+                    <div class="edit-field">
+                        <label>Nội dung</label>  
+                        <textarea rows="25" name="content" required></textarea>
+                    </div>
+                    
+                    <input id="btnSend" type="submit" value="Gửi">
+                </form>
+            </div>
+        </div>
+        
         <script type="text/javascript" src="js/autoscroll.js"></script>
         
         <jsp:include page="WebInterface/footer.jsp"></jsp:include>

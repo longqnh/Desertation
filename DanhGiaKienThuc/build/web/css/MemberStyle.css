@@ -13,7 +13,7 @@ and open the template in the editor.
     font-size: 18px;
 }
 
-input[type=text], input[type=password], textarea, select {
+input[type=text], input[type=password], input[type=email], textarea, select {
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
@@ -25,7 +25,7 @@ input[type=text], input[type=password], textarea, select {
     width: 250px;
 }
  
-input[type=text]:focus, input[type=password]:focus, textarea:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, textarea:focus {
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 50px;
@@ -43,7 +43,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
     text-align: right;
 }
 
-#btnEdit, #btnTaoDe {
+#btnEdit, #btnTaoDe, #btnSend {
     width: 85px;
     height: 30px;
     background: rgba(53, 21, 121, 1);
@@ -53,7 +53,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
     margin: 20px auto auto 425px;
 }
 
-#btnEdit:hover, #btnTaoDe:hover {
+#btnEdit:hover, #btnTaoDe:hover, #btnSend:hover {
     cursor: pointer;
     color: rgba(200, 7, 207, 1);
 }
