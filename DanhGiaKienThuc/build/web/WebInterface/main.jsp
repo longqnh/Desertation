@@ -57,6 +57,7 @@
 
             <div id="main-right">
                 <h2>Tin Tức Giáo Dục</h2>
+                
 		<c:import var="xmlContent" url="http://vnexpress.net/rss/giao-duc.rss"/>
 		<x:parse var="doc" xml="${xmlContent}"/>
     		<table class="content-table" id="feed">    

@@ -56,6 +56,40 @@
 
             <div id="main-right">
                 <h2>Thông tin giới thiệu</h2>
+                
+                <ol type="I">
+                    <li>
+                        <a href="" class="content"> Thông tin sản phẩm: </a>
+                        <div>
+                            <ul style="list-style-type:disc">
+                                <li> Sản phẩm là khóa luận tốt nghiệp cử nhân ngành học máy tính với đề tài 
+                                "Xây dựng hệ hỗ trợ đánh giá kiến thức Toán THPT bằng hình thức trắc nghiệm"
+                                </li>
+                                <li> Website là công cụ hỗ trợ các bạn học sinh cấp THPT ôn luyện kiến thức môn Toán. 
+                                Đặc biệt là các học sinh lớp 12 chuẩn bị cho kì thi THPT Quốc Gia
+                                </li>
+                                <li> Với ngân hàng câu hỏi trắc nghiệm phong phú và đa dạng, chúng tôi mong muốn đem đến 
+                                một giải pháp tối ưu trong việc ôn tập và hy vọng sản phẩm sẽ là công cụ hỗ trợ đắc lực cho 
+                                các bạn học sinh THPT.
+                                </li>
+                                <li> Chúng tôi luôn mong muốn được lắng nghe những ý kiến đóng góp từ bạn. Hãy gửi ý kiến của 
+                                    bạn cho chúng tôi <a target="_blank" href="contact.jsp">tại đây</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="" class="content"> Thông tin tác giả: </a>
+                        <div>                            
+                            <ul style="list-style-type:disc">                                
+                                <p>Nhóm tác giả: Gồm các thành viên đến từ trường Đại Học Công Nghệ Thông Tin - Đại Học Quốc Gia TPHCM</p>
+                                <li>Nguyễn Thành Long</li>
+                                <li>Nguyễn Lê Vĩnh Đức</li>
+                                <p>Giảng viên hướng dẫn: ThS Phạm Thi Vương</p>
+                            </ul>
+                        </div>
+                    </li>
+                </ol>
+                <script src="${pageContext.request.contextPath}/js/DisplayContent.js" type="text/javascript"></script>                
             </div>
         </div>
         

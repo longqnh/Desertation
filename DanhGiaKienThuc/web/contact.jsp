@@ -93,7 +93,7 @@
 
                     <div class="edit-field">
                         <label>Nội dung</label>  
-                        <textarea rows="25" name="content" required></textarea>
+                        <textarea rows="20" name="content" required></textarea>
                     </div>
                     
                     <input id="btnSend" type="submit" value="Gửi">
