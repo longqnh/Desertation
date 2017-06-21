@@ -23,33 +23,27 @@
         <div class="container">
             <h2>ĐĂNG KÝ THÀNH VIÊN</h2>
             <form action="UserServlet" method="POST">
-                <div class="group">      
+                <div class="edit-field">   
+                    <label>Tên tài khoản</label>                    
                     <input type="text" required name="username" id="username">
                     <span id="user-result"></span>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Tên tài khoản</label>
                 </div>
                 
-                <div class="group">      
+                <div class="edit-field">      
+                    <label>Mật khẩu</label>                    
                     <input type="password" required name="password" id="password">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Mật khẩu</label>
                     <span></span>
                 </div>
           
-                <div class="group">      
-                    <input type="password" required name="confirm_password" id="confirm_password">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
+                <div class="edit-field">     
                     <label>Xác nhận mật khẩu</label>
+                    <input type="password" required name="confirm_password" id="confirm_password">
                     <span id="confirm_password-result"></span>
                 </div>
                 <script type="text/javascript" src="js/CheckPass.js"></script>
                 
-                <div class="group">
-                    <label>Hiện đang là học sinh lớp: </label>
+                <div class="edit-field">
+                    <label>Đang là học sinh lớp </label>
                     <select name="lop" id="lop" required>
                         <option value="" disabled selected>Lớp</option>
                         <%  LopDAO lopDAO = new LopDAO(); 
@@ -60,19 +54,17 @@
                     </select>                  
                 </div>
                 
-                <div class="group">      
+                <div class="edit-field">      
+                    <label>Họ và tên</label>                    
                     <input type="text" required name="name" id="name">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Họ và tên</label>
                 </div>
-                <div class="group">      
+                    
+                <div class="edit-field">   
+                    <label>Địa chỉ email</label>                    
                     <input type="email" required name="email" id="email">
                     <span id="email-result"></span>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Địa chỉ email</label>
                 </div>                
+                    
                 <input id="btnDangKy" type="submit" value="Đăng ký">
                 <input type="hidden" value="insert" name="command">
                 <div  id="noti">

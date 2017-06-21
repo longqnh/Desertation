@@ -216,6 +216,10 @@ INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtT
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ghhs', 'gioihan', 'Giới hạn hàm số');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('hlt', 'gioihan', 'Hàm số liên tục');
 
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('tinhtien', 'phepdoihinh', 'Phép tịnh tiến');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('dxtruc', 'phepdoihinh', 'Phép đối xứng trục');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('vitu', 'phepdoihinh', 'Phép vị tự');
+
 CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
   `monhoc` VARCHAR(45) NULL,
   `made` INT(5) ZEROFILL NOT NULL AUTO_INCREMENT,

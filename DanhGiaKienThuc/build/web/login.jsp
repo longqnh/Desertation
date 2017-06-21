@@ -21,18 +21,16 @@
         <div class="container">
             <h2>ĐĂNG NHẬP</h2>
             <form action="UserServlet" method="POST">
-                <div class="group">      
+                <div class="edit-field">   
+                    <label>Tên tài khoản:</label>                    
                     <input type="text" required name="username" id="username">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Tên tài khoản</label>
                 </div>
-                <div class="group">      
+
+                <div class="edit-field">      
+                    <label>Mật khẩu:</label>                    
                     <input type="password" required name="password" id="password">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Mật khẩu</label>
                 </div>
+                
                 <h4 style="color: red;"> ${requestScope.errorMessage} </h4> <br>    
                 <input id="btnDangNhap" type="submit" value="Đăng nhập">
                 <input type="hidden" value="login" name="command">                

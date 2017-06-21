@@ -128,6 +128,11 @@ public class QuestionCRUD extends HttpServlet {
                         q.setDapan(dapan);
                     }
                     
+                    if (request.getParameter("monhoc") != null) {
+                        String monhoc = request.getParameter("monhoc");
+                        q.setMonhoc(monhoc);
+                    }
+                    
                     q.setDangtoan(kienthuc);
 
                     if (request.getParameter("dangbt") != null) {
@@ -152,6 +157,8 @@ public class QuestionCRUD extends HttpServlet {
                         String hinh = request.getParameter("hinh");
                         q.setHinh(Integer.parseInt(hinh));
                     }
+                    
+                    q.setDao(1);
                     
                     if (action.equals("create")) {
                         // Create new record
