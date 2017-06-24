@@ -81,7 +81,7 @@
                         <div>
                             <%=lythuyetDAO.getContent("hamso12")%>
                             <% if (canEdit==true) { %>
-                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="hamso">Cập nhật</button>                        
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="hamso12">Cập nhật</button>                        
                             <% } %>
                         </div>
                     </li>
