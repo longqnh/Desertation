@@ -225,6 +225,10 @@ INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtT
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ctlg', 'luonggiac11', 'Công thức lượng giác');
 INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('ptlg', 'luonggiac11', 'Phương trình lượng giác');
 
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('vttrongkq', 'hhkg11', 'Vector trong không gian');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('dtvuonggocdt', 'hhkg11', 'Đường thẳng trong không gian');
+INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtTV`) VALUES ('dtvuonggocmp', 'hhkg11', 'Đường thẳng trong mặt phẳng');
+
 CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
   `monhoc` VARCHAR(45) NULL,
   `made` INT(5) ZEROFILL NOT NULL AUTO_INCREMENT,

@@ -97,6 +97,10 @@ body {
     margin: auto;
     height: 300px;
     border: 1px solid black;
+    background-image: url(../images/banner.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #menu {

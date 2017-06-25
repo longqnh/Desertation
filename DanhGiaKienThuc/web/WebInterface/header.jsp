@@ -76,7 +76,7 @@
         
         <!-- Header -->
         <div id="banner">
-            <!-- add image -->
+            <!-- add image -->            
         </div>
 
         <!-- Menu -->
