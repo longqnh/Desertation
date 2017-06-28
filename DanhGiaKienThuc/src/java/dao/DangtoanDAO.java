@@ -144,6 +144,56 @@ public class DangtoanDAO {
         return list;          
     }
     
+    public List getAll(String monhoc, int startPageIndex, int recordsPerPage) {
+        List<Dangtoan> list = new ArrayList<>();
+        
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        String sql = "SELECT * FROM table_phanloaidangtoan WHERE monhoc='" + monhoc + "' LIMIT " + startPageIndex + "," + recordsPerPage;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Dangtoan dangtoan = new Dangtoan();
+                dangtoan.setDangtoan(rs.getString("dangtoan"));
+                dangtoan.setMadangtoan(rs.getString("madangtoan"));
+                dangtoan.setDangtoanTV(rs.getString("dangtoanTV"));
+                dangtoan.setMonhoc(monhoc);
+                dangtoan.setMalop(rs.getInt("malop"));
+                dangtoan.setHocky(rs.getInt("hocky"));
+                
+                list.add(dangtoan);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DangtoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return list;          
+    }    
+    
+    public int countAllDangToan(String monhoc, int lop) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT COUNT(*) AS COUNT FROM table_phanloaidangtoan WHERE monhoc='" + monhoc + "' AND lop=" + lop;
+        
+	int count=0;
+	try 
+	{
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();	
+            while (rs.next()) 
+            {
+                count=rs.getInt("COUNT");
+            }
+	} 
+	catch (SQLException e) 
+	{
+            System.err.println(e.getMessage());
+	}
+	return count;
+    }
+
     public int countAllDangToan(String monhoc) {
         Connection connection = DBConnect.getConnecttion();
         String sql = "SELECT COUNT(*) AS COUNT FROM table_phanloaidangtoan WHERE monhoc='" + monhoc + "'";
@@ -228,6 +278,90 @@ public class DangtoanDAO {
         return res;        
     }
     
+    public List getAllDangtoan (String monhoc, int lop) {
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        
+        String sql = "SELECT * FROM table_phanloaidangtoan WHERE monhoc='" + monhoc + "' AND malop=" + lop;
+        List<Dangtoan> list = new ArrayList<>();
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Dangtoan dangtoan = new Dangtoan();
+                dangtoan.setDangtoan(rs.getString("dangtoan"));
+                dangtoan.setMadangtoan(rs.getString("madangtoan"));
+                dangtoan.setDangtoanTV(rs.getString("dangtoanTV"));
+                dangtoan.setMonhoc(monhoc);
+                dangtoan.setMalop(lop);
+                dangtoan.setHocky(rs.getInt("hocky"));
+                
+                list.add(dangtoan);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DangtoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return list;
+    }
+    
+    public boolean InsertDangtoan(Dangtoan dangtoan) {
+        Connection connection= DBConnect.getConnecttion();
+        String sql = "INSERT INTO table_phanloaidangtoan(`dangtoan`,`madangtoan`,`malop`,`dangtoanTV`,`hocky`) VALUES(?,?,?,?,?)";
+        
+        try {
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.setString(1, dangtoan.getDangtoan());
+            ps.setString(2, dangtoan.getMadangtoan());
+            ps.setInt(3, dangtoan.getMalop());
+            ps.setString(4, dangtoan.getDangtoanTV());            
+            ps.setInt(5, dangtoan.getHocky());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    
+    public boolean updateDangtoan(Dangtoan dangtoan) throws SQLException {
+        Connection con = DBConnect.getConnecttion();
+        String sql = "update table_phanloaidangtoan set dangtoan=?, madangtoan=?, malop=?, dangtoanTV=?, hocky=? where dangtoan=?";
+        PreparedStatement ps;
+        
+        try {
+            ps = con.prepareCall(sql);
+            ps.setString(1, dangtoan.getDangtoan());
+            ps.setString(2, dangtoan.getMadangtoan());
+            ps.setInt(3, dangtoan.getMalop());
+            ps.setString(4, dangtoan.getDangtoanTV());            
+            ps.setInt(5, dangtoan.getHocky());
+            ps.setString(6, dangtoan.getDangtoan());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean DeleteDangtoan(Dangtoan dangtoan) {
+        Connection con = DBConnect.getConnecttion();
+        
+        String sql = "delete from table_phanloaidangtoan where dangtoan='" + dangtoan.getDangtoan() + "'";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(sql);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }    
 //    public static void main(String[] args) {
 //        System.out.println(DangtoanDAO.GetNoidungTV("thongke"));
 //    }

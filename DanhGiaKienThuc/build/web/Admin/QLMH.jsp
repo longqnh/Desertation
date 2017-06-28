@@ -187,6 +187,9 @@
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLMH.jsp"> Quản lý các môn học</a></li>                                                                
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLKD.jsp"> Quản lý kho đề</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLDT.jsp">Quản lý các bài thi</a></li>                                
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLLop.jsp">Quản lý lớp</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLDToan.jsp">Quản lý dạng toán</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLDBT.jsp">Quản lý dạng bài tập</a></li>                                 
                         <%  } %>
                     </ul>
                 </div>
@@ -194,8 +197,22 @@
                 <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
             
+            <style>
+                #main-right #TableContainer {
+                    width: 50%; 
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-top: 20px;
+                }
+                
+                #main-right #DeleteAllButton
+                {
+                    margin-left: 235px;
+                }
+            </style>
+            
             <div id="main-right">
-                <h2>QUẢN TRỊ CÁC MÔN HỌC</h2>              
+                <h2>QUẢN TRỊ CÁC MÔN HỌC</h2>           
                 <div id="TableContainer"></div>
                 <button type="button" id="DeleteAllButton">Delete All Selected</button>
             </div>                

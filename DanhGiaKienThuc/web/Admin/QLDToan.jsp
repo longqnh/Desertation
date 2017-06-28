@@ -1,16 +1,20 @@
 <%-- 
-    Document   : QLTK
-    Created on : Feb 20, 2017, 11:15:06 PM
+    Document   : QLDToan
+    Created on : Jun 26, 2017, 8:14:09 PM
     Author     : NTL
 --%>
-
+<%@page import="model.Lop"%>
+<%@page import="dao.LopDAO"%>
+<%@page import="model.MonHoc"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.MonHocDAO"%>
 <%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>QUẢN TRỊ CÁC TÀI KHOẢN</title>
+        <title>QUẢN LÝ DẠNG TOÁN</title>
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>   
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
@@ -28,64 +32,60 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#TableContainer').jtable({
-                    title: 'Danh sách tài khoản',
+                    title: 'Danh sách dạng toán',
                     paging: true, //Enable paging
                     pageSize: 10, //Set page size (default: 10)
                     sorting: true, //Enable sorting
-                    defaultSorting: 'username ASC',
+                    defaultSorting: 'dangtoan ASC',
                     selecting: true, //Enable selecting
                     multiselect: true, //Allow multiple selecting
                     selectingCheckboxes: true, //Show checkboxes on first column
                     selectOnRowClick: false, //Click row on check box
                     actions: {
-                        listAction: '${pageContext.request.contextPath}/CRUDController?action=list',
-                        createAction: '${pageContext.request.contextPath}/CRUDController?action=create',
-                        updateAction: '${pageContext.request.contextPath}/CRUDController?action=update',
-                        deleteAction: '${pageContext.request.contextPath}/CRUDController?action=delete'
+                        listAction: '${pageContext.request.contextPath}/DangToanCRUD?action=list',
+                        createAction: '${pageContext.request.contextPath}/DangToanCRUD?action=create',
+                        updateAction: '${pageContext.request.contextPath}/DangToanCRUD?action=update',
+                        deleteAction: '${pageContext.request.contextPath}/DangToanCRUD?action=delete'
                     },
                     fields: {
-                        username: {
-                            title: 'Username',
+                        dangtoan: {
+                            title: 'Mã dạng toán',
                             key: true,
                             list: true,
                             edit: true,
                             create: true
                         },
-                        password: {
-                            title: 'Password',
+                        dangtoanTV: {
+                            title: 'Tên dạng toán',
                             type: 'text',
                             edit: true
                         },
-                        name: {
-                            title: 'Họ tên',
+                        madangtoan: {
+                            title: 'Viết tắt',
                             type: 'text',
                             edit: true
                         },
-                        email: {
-                            title: 'Email',
-                            type: 'text',
-                            edit: true
-                        },
-                        lop: {
+                        malop: {
                             title: 'Lớp',
                             type: 'select',
                             options: {'10': 'Lớp 10', '11': 'Lớp 11', '12': 'Lớp 12'},
-                            edit: true                            
+                            edit: true
                         },
-                        role: {
-                            title: 'Chức danh',
+                        hocky: {
+                            title: 'Học kỳ',
                             type: 'select',
-                            options: {'admin': 'admin', 'user': 'user'},
+                            options: {'1': 'Học kỳ 1', '2': 'Học kỳ 2'},
                             edit: true
                         }
                     }
                 });
+                
                 //Re-load records when user click 'load records' button.
                 $('#LoadRecordsButton').click(function (e) {
                     e.preventDefault();
                     $('#TableContainer').jtable('load', {
-                        name: $('#name').val(),
-                        role: $('#role').val()
+                        monhoc: $('#monhoc').val(),
+                        lop: $('#lop').val()
                     });
                 });
 
@@ -119,7 +119,7 @@
                                         String page_redirect= request.getContextPath() + "/Member/User.jsp";
                                     %>
                                     <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
-                                    <form action="<%=request.getContextPath()%>/UserServlet"method="POST">
+                                    <form action="<%=request.getContextPath()%>/UserServlet" method="POST">
                                         <input id="btnlogout" type="submit" value="Thoát">
                                         <input type="hidden" value="logout" name="command">
                                     </form>
@@ -224,22 +224,36 @@
                 
                 <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
-            
+                        
             <div id="main-right">
-                <h2>QUẢN TRỊ CÁC TÀI KHOẢN</h2>
-
+                <h2>QUẢN LÝ CÁC DẠNG TOÁN</h2>     
+                
                 <div class="filtering">
                     <form>
-                        Username: <input type="text" name="name" id="name" />
-<!--                        Role: 
-                        <select id="role" name="role">
-                            <option value="admin" selected="selected">Admin</option>
-                            <option value="user">User</option>
-                        </select>-->
+                        Môn:
+                        <select name="monhoc" id="monhoc" required>
+                            <%
+                                MonHocDAO monHocDAO = new MonHocDAO();
+                                List<MonHoc> dsMon = monHocDAO.GetAllMonHoc(); 
+                                for (MonHoc mon : dsMon) { %>
+                                    <option value="<%=mon.getMonhocID()%>"> <%=mon.getTenmonhoc()%> </option>                                  
+                            <%  } %>
+                        </select>                    
+                        Lớp:
+                        <select name="lop" id="lop" required>
+                            <option value="" disabled selected>Lớp</option>
+                            <%
+                                LopDAO lopDAO = new LopDAO(); 
+                                List<Lop> dsLop = lopDAO.GetAllLop(); 
+                                for (Lop lop: dsLop) { %>
+                                    <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>                                  
+                            <%  } %>
+                        </select>                    
+
                         <button type="submit" id="LoadRecordsButton">Search</button>
                     </form>
-                </div>                    
-
+                </div>                                
+                
                 <div id="TableContainer"></div>
                 <button type="button" id="DeleteAllButton">Delete All Selected</button>
             </div>                

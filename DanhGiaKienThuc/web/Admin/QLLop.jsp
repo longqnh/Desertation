@@ -1,6 +1,6 @@
 <%-- 
-    Document   : QLTK
-    Created on : Feb 20, 2017, 11:15:06 PM
+    Document   : QLLop
+    Created on : Jun 26, 2017, 8:13:56 PM
     Author     : NTL
 --%>
 
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>QUẢN TRỊ CÁC TÀI KHOẢN</title>
+        <title>QUẢN LÝ KHỐI LỚP</title>
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>   
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
@@ -28,66 +28,38 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#TableContainer').jtable({
-                    title: 'Danh sách tài khoản',
+                    title: 'Danh sách khối lớp',
                     paging: true, //Enable paging
                     pageSize: 10, //Set page size (default: 10)
                     sorting: true, //Enable sorting
-                    defaultSorting: 'username ASC',
+                    defaultSorting: 'malop ASC',
                     selecting: true, //Enable selecting
                     multiselect: true, //Allow multiple selecting
                     selectingCheckboxes: true, //Show checkboxes on first column
                     selectOnRowClick: false, //Click row on check box
                     actions: {
-                        listAction: '${pageContext.request.contextPath}/CRUDController?action=list',
-                        createAction: '${pageContext.request.contextPath}/CRUDController?action=create',
-                        updateAction: '${pageContext.request.contextPath}/CRUDController?action=update',
-                        deleteAction: '${pageContext.request.contextPath}/CRUDController?action=delete'
+                        listAction: '${pageContext.request.contextPath}/LopCRUD?action=list',
+                        createAction: '${pageContext.request.contextPath}/LopCRUD?action=create',
+                        updateAction: '${pageContext.request.contextPath}/LopCRUD?action=update',
+                        deleteAction: '${pageContext.request.contextPath}/LopCRUD?action=delete'
                     },
                     fields: {
-                        username: {
-                            title: 'Username',
+                        malop: {
+                            title: 'Mã lớp',
                             key: true,
                             list: true,
                             edit: true,
                             create: true
                         },
-                        password: {
-                            title: 'Password',
+                        tenlop: {
+                            title: 'Tên lớp',
                             type: 'text',
-                            edit: true
-                        },
-                        name: {
-                            title: 'Họ tên',
-                            type: 'text',
-                            edit: true
-                        },
-                        email: {
-                            title: 'Email',
-                            type: 'text',
-                            edit: true
-                        },
-                        lop: {
-                            title: 'Lớp',
-                            type: 'select',
-                            options: {'10': 'Lớp 10', '11': 'Lớp 11', '12': 'Lớp 12'},
-                            edit: true                            
-                        },
-                        role: {
-                            title: 'Chức danh',
-                            type: 'select',
-                            options: {'admin': 'admin', 'user': 'user'},
                             edit: true
                         }
                     }
                 });
-                //Re-load records when user click 'load records' button.
-                $('#LoadRecordsButton').click(function (e) {
-                    e.preventDefault();
-                    $('#TableContainer').jtable('load', {
-                        name: $('#name').val(),
-                        role: $('#role').val()
-                    });
-                });
+                
+                $('#TableContainer').jtable('load');
 
                 //Load all records when page is first shown
                 $('#LoadRecordsButton').click();
@@ -119,7 +91,7 @@
                                         String page_redirect= request.getContextPath() + "/Member/User.jsp";
                                     %>
                                     <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
-                                    <form action="<%=request.getContextPath()%>/UserServlet"method="POST">
+                                    <form action="<%=request.getContextPath()%>/UserServlet" method="POST">
                                         <input id="btnlogout" type="submit" value="Thoát">
                                         <input type="hidden" value="logout" name="command">
                                     </form>
@@ -225,21 +197,22 @@
                 <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
             
+            <style>
+                #main-right #TableContainer {
+                    width: 50%; 
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-top: 20px;
+                }
+                
+                #main-right #DeleteAllButton
+                {
+                    margin-left: 235px;
+                }
+            </style>
+            
             <div id="main-right">
-                <h2>QUẢN TRỊ CÁC TÀI KHOẢN</h2>
-
-                <div class="filtering">
-                    <form>
-                        Username: <input type="text" name="name" id="name" />
-<!--                        Role: 
-                        <select id="role" name="role">
-                            <option value="admin" selected="selected">Admin</option>
-                            <option value="user">User</option>
-                        </select>-->
-                        <button type="submit" id="LoadRecordsButton">Search</button>
-                    </form>
-                </div>                    
-
+                <h2>QUẢN LÝ CÁC KHỐI LỚP</h2>                                      
                 <div id="TableContainer"></div>
                 <button type="button" id="DeleteAllButton">Delete All Selected</button>
             </div>                

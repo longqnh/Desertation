@@ -26,6 +26,10 @@ public class DangBaiTap {
         this.dangbtTV = dangbtTV;
     }
 
+    public DangBaiTap(String dangbt) {
+        this.dangbt = dangbt;
+    }
+
     public String getDangbt() {
         return dangbt;
     }

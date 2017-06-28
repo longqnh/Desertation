@@ -1,16 +1,20 @@
 <%-- 
-    Document   : QLTK
-    Created on : Feb 20, 2017, 11:15:06 PM
+    Document   : QLDBT
+    Created on : Jun 26, 2017, 8:14:25 PM
     Author     : NTL
 --%>
-
+<%@page import="model.Lop"%>
+<%@page import="dao.LopDAO"%>
+<%@page import="model.MonHoc"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.MonHocDAO"%>
 <%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>QUẢN TRỊ CÁC TÀI KHOẢN</title>
+        <title>QUẢN LÝ KHỐI LỚP</title>
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>   
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
@@ -28,64 +32,46 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#TableContainer').jtable({
-                    title: 'Danh sách tài khoản',
+                    title: 'Danh sách các dạng bài tập',
                     paging: true, //Enable paging
                     pageSize: 10, //Set page size (default: 10)
                     sorting: true, //Enable sorting
-                    defaultSorting: 'username ASC',
+                    defaultSorting: 'dangbt ASC',
                     selecting: true, //Enable selecting
                     multiselect: true, //Allow multiple selecting
                     selectingCheckboxes: true, //Show checkboxes on first column
                     selectOnRowClick: false, //Click row on check box
                     actions: {
-                        listAction: '${pageContext.request.contextPath}/CRUDController?action=list',
-                        createAction: '${pageContext.request.contextPath}/CRUDController?action=create',
-                        updateAction: '${pageContext.request.contextPath}/CRUDController?action=update',
-                        deleteAction: '${pageContext.request.contextPath}/CRUDController?action=delete'
+                        listAction: '${pageContext.request.contextPath}/DangBTCRUD?action=list',
+                        createAction: '${pageContext.request.contextPath}/DangBTCRUD?action=create',
+                        updateAction: '${pageContext.request.contextPath}/DangBTCRUD?action=update',
+                        deleteAction: '${pageContext.request.contextPath}/DangBTCRUD?action=delete'
                     },
                     fields: {
-                        username: {
-                            title: 'Username',
+                        dangbt: {
+                            title: 'Mã bài tập',
                             key: true,
                             list: true,
                             edit: true,
                             create: true
                         },
-                        password: {
-                            title: 'Password',
+                        dangbtTV: {
+                            title: 'Dạng bài tập',
                             type: 'text',
                             edit: true
                         },
-                        name: {
-                            title: 'Họ tên',
+                        dangtoan: {
+                            title: 'Dạng toán',
                             type: 'text',
-                            edit: true
-                        },
-                        email: {
-                            title: 'Email',
-                            type: 'text',
-                            edit: true
-                        },
-                        lop: {
-                            title: 'Lớp',
-                            type: 'select',
-                            options: {'10': 'Lớp 10', '11': 'Lớp 11', '12': 'Lớp 12'},
-                            edit: true                            
-                        },
-                        role: {
-                            title: 'Chức danh',
-                            type: 'select',
-                            options: {'admin': 'admin', 'user': 'user'},
                             edit: true
                         }
                     }
                 });
-                //Re-load records when user click 'load records' button.
+                
                 $('#LoadRecordsButton').click(function (e) {
                     e.preventDefault();
                     $('#TableContainer').jtable('load', {
-                        name: $('#name').val(),
-                        role: $('#role').val()
+                        kienthuc: $('#kienthuc').val()
                     });
                 });
 
@@ -119,7 +105,7 @@
                                         String page_redirect= request.getContextPath() + "/Member/User.jsp";
                                     %>
                                     <li><a href="<%=page_redirect%>">Quản lý tài khoản</a></li>
-                                    <form action="<%=request.getContextPath()%>/UserServlet"method="POST">
+                                    <form action="<%=request.getContextPath()%>/UserServlet" method="POST">
                                         <input id="btnlogout" type="submit" value="Thoát">
                                         <input type="hidden" value="logout" name="command">
                                     </form>
@@ -214,10 +200,10 @@
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLTK.jsp"> Quản lý các tài khoản</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLMH.jsp"> Quản lý các môn học</a></li>                                                                
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLKD.jsp"> Quản lý kho đề</a></li>
-                                <li><a href="<%=request.getContextPath()%>/Admin/QLDT.jsp">Quản lý các bài thi</a></li>                                
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLDT.jsp">Quản lý các bài thi</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLLop.jsp">Quản lý lớp</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLDToan.jsp">Quản lý dạng toán</a></li>
-                                <li><a href="<%=request.getContextPath()%>/Admin/QLDBT.jsp">Quản lý dạng bài tập</a></li>                                 
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLDBT.jsp">Quản lý dạng bài tập</a></li>                                
                         <%  } %>
                     </ul>
                 </div>
@@ -225,21 +211,69 @@
                 <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
             
+            <style>
+                #main-right #TableContainer {
+                    width: 50%; 
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-top: 20px;
+                }
+                
+                #main-right #DeleteAllButton
+                {
+                    margin-left: 235px;
+                }
+            </style>
+            
             <div id="main-right">
-                <h2>QUẢN TRỊ CÁC TÀI KHOẢN</h2>
-
+                <h2>QUẢN LÝ DẠNG BÀI TẬP</h2>  
+                
                 <div class="filtering">
                     <form>
-                        Username: <input type="text" name="name" id="name" />
-<!--                        Role: 
-                        <select id="role" name="role">
-                            <option value="admin" selected="selected">Admin</option>
-                            <option value="user">User</option>
-                        </select>-->
+                        Môn:
+                        <select name="monhoc" id="monhoc" required>
+                            <%
+                                MonHocDAO monHocDAO = new MonHocDAO();
+                                List<MonHoc> dsMon = monHocDAO.GetAllMonHoc(); 
+                                for (MonHoc mon : dsMon) { %>
+                                    <option value="<%=mon.getMonhocID()%>"> <%=mon.getTenmonhoc()%> </option>                                  
+                            <%  } %>
+                        </select>                    
+                        Lớp:
+                        <select name="lop" id="lop" required>
+                            <option value="" disabled selected>Lớp</option>
+                            <%
+                                LopDAO lopDAO = new LopDAO(); 
+                                List<Lop> dsLop = lopDAO.GetAllLop(); 
+                                for (Lop lop: dsLop) { %>
+                                    <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>                                  
+                            <%  } %>
+                        </select>                    
+                        Kiến thức: 
+                        <select id="kienthuc" name="kienthuc"></select>
+
+                        <script type="text/javascript">
+                            $('#lop').change (
+                                function() {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "${pageContext.request.contextPath}/DangtoanServlet",
+                                        data: {
+                                            lop: $(this).val(),
+                                            monhoc: $("#monhoc").val()
+                                        },
+                                        success: function(data){
+                                            $("#kienthuc").html(data);
+                                        }
+                                    });
+                                }
+                            );                         
+                        </script>
+
                         <button type="submit" id="LoadRecordsButton">Search</button>
                     </form>
-                </div>                    
-
+                </div>                                
+                                        
                 <div id="TableContainer"></div>
                 <button type="button" id="DeleteAllButton">Delete All Selected</button>
             </div>                

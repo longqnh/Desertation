@@ -76,6 +76,18 @@
         <servlet-name>getLop</servlet-name>
         <servlet-class>controller.getLop</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LopCRUD</servlet-name>
+        <servlet-class>controller.LopCRUD</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DangToanCRUD</servlet-name>
+        <servlet-class>controller.DangToanCRUD</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DangBTCRUD</servlet-name>
+        <servlet-class>controller.DangBTCRUD</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckEmailServlet</servlet-name>
         <url-pattern>/CheckEmailServlet</url-pattern>
@@ -151,6 +163,18 @@
     <servlet-mapping>
         <servlet-name>getLop</servlet-name>
         <url-pattern>/getLop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LopCRUD</servlet-name>
+        <url-pattern>/LopCRUD</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DangToanCRUD</servlet-name>
+        <url-pattern>/DangToanCRUD</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DangBTCRUD</servlet-name>
+        <url-pattern>/DangBTCRUD</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

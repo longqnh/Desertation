@@ -38,6 +38,10 @@ public class Dangtoan {
         this.dangtoanTV = dangtoanTV;
     }
 
+    public Dangtoan(String dangtoan) {
+        this.dangtoan = dangtoan;
+    }
+        
     public String getDangtoan() {
         return dangtoan;
     }
