@@ -79,7 +79,7 @@ public class FinishExam extends HttpServlet {
         for (String dangtoan : allDangtoan) {
             List<String> listQuestions = dethiDAO.getAllQuestions(made, dangtoan);
             for (String questionID : listQuestions) {
-                new QuestionDAO().updateDokho(dangtoan,questionID);
+                new QuestionDAO().updateDokho(questionID);
             }
         }        
                 

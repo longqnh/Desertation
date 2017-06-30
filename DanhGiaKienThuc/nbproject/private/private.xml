@@ -4,10 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Admin/QLDBT.jsp</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Admin/QLKD.jsp</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/dao/DangtoanDAO.java</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/controller/QuestionCRUD.java</file>
             <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Admin/QLDToan.jsp</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/controller/DangToanCRUD.java</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Admin/QLCH.jsp</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Member/DanhGia.jsp</file>
             <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/controller/DangBTCRUD.java</file>
         </group>
     </open-files>

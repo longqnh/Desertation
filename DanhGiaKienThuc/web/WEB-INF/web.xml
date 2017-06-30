@@ -88,6 +88,14 @@
         <servlet-name>DangBTCRUD</servlet-name>
         <servlet-class>controller.DangBTCRUD</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>XemSoLuot</servlet-name>
+        <servlet-class>controller.XemSoLuot</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LatexTest</servlet-name>
+        <servlet-class>controller.LatexTest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckEmailServlet</servlet-name>
         <url-pattern>/CheckEmailServlet</url-pattern>
@@ -175,6 +183,14 @@
     <servlet-mapping>
         <servlet-name>DangBTCRUD</servlet-name>
         <url-pattern>/DangBTCRUD</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>XemSoLuot</servlet-name>
+        <url-pattern>/XemSoLuot</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LatexTest</servlet-name>
+        <url-pattern>/LatexTest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

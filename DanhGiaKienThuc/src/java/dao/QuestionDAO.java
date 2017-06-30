@@ -11,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Question;
@@ -280,9 +282,9 @@ public class QuestionDAO {
         return res;
     }
     
-    public void updateDokho(String dangtoan, String id) {
+    public void updateDokho(String id) {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "CALL thongkesoluong('" + dangtoan + "','" + id + "')";
+        String sql = "CALL ThongKeSoLuot('" + id + "')";
         PreparedStatement ps;
         
         try {
@@ -290,8 +292,8 @@ public class QuestionDAO {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                int dalam = rs.getInt("dalam");
-                int lamdung = rs.getInt("lamdung");
+                int dalam = rs.getInt("tong");
+                int lamdung = rs.getInt("dung");
                 
                 if (dalam%10==0) {
                     int dokho = getDokho(lamdung, dalam);
@@ -302,5 +304,64 @@ public class QuestionDAO {
         } catch (SQLException ex) {
             Logger.getLogger(ThongkeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public List getAllQuestionByDangToan (String dangtoan, String maCH) {
+        Connection connection = DBConnect.getConnecttion();
+        
+        String sql = "SELECT * FROM NHCHTOAN WHERE dangtoan='" + dangtoan + "' AND id LIKE '%" + maCH + "'";
+        List<Question> list = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String noidung = rs.getString("noidung");
+                String dapanA = rs.getString("dapanA");
+                String dapanB = rs.getString("dapanB");
+                String dapanC = rs.getString("dapanC");
+                String dapanD = rs.getString("dapanD");
+                String dapan = rs.getString("dapan");
+                String monhoc = rs.getString("monhoc");
+                String dangbt = rs.getString("dangbt");
+                int dokho = rs.getInt("dokho");
+                int dophancach = rs.getInt("dophancach");
+                int malop = rs.getInt("malop");
+                int hinh = rs.getInt("hinh");
+                int dao = rs.getInt("dao");
+                
+                Question q = new Question(id, noidung, dapanA, dapanB, dapanC, dapanD, dapan, monhoc, dangtoan, dangbt, dokho, dophancach, malop, hinh, dao);
+                list.add(q);
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }     
+        return list;        
+    }
+    
+    public Map ThongKeSoLuot (String id) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "CALL ThongKeSoLuot('" + id + "')";
+        PreparedStatement ps;
+        Map<String, Integer> map = new HashMap<>();
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                int dalam = rs.getInt("tong");
+                int lamdung = rs.getInt("dung");
+                
+                map.put("tong", dalam);
+                map.put("dung", lamdung);
+            }
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongkeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return map;
     }
 }

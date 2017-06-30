@@ -8,19 +8,16 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dao.DangtoanDAO;
+import dao.LopDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import model.Dangtoan;
-import model.Users;
 
 /**
  *
@@ -29,10 +26,12 @@ import model.Users;
 public class DangToanCRUD extends HttpServlet {
     private HashMap<String, Object> JSONROOT = new HashMap<String, Object>();
 
-    DangtoanDAO dangtoanDAO;
+    private DangtoanDAO dangtoanDAO;
+    private LopDAO lopDAO;
     
     public DangToanCRUD() {
         dangtoanDAO = new DangtoanDAO();
+        lopDAO = new LopDAO();
     }
     
     @Override
@@ -47,12 +46,6 @@ public class DangToanCRUD extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
-
-        HttpSession session = request.getSession();
-        Users users = null;
-        if (session.getAttribute("user")!=null) {
-            users = (Users) session.getAttribute("user");
-        }
         
         String action = request.getParameter("action");
         String monhoc = request.getParameter("monhoc");
@@ -85,7 +78,7 @@ public class DangToanCRUD extends HttpServlet {
                     String jsonArray = gson.toJson(JSONROOT);
 
                     response.getWriter().print(jsonArray);
-                } else if (action.equals("create") || action.equals("delete")) {
+                } else if (action.equals("create") || action.equals("update")) {
                     Dangtoan d = new Dangtoan();
                     
                     if (request.getParameter("dangtoan")!=null) {
@@ -100,7 +93,7 @@ public class DangToanCRUD extends HttpServlet {
 
                     if (request.getParameter("madangtoan")!=null) {
                         String madangtoan = request.getParameter("madangtoan");
-                        d.setDangtoan(madangtoan);
+                        d.setMadangtoan(madangtoan);
                     }
                     
                     if (request.getParameter("malop")!=null) {
@@ -113,18 +106,23 @@ public class DangToanCRUD extends HttpServlet {
                         d.setHocky(hocky);
                     }
                     
+                    d.setMonhoc("toan");
+                    
                     if (action.equals("create")) {
                         // Create new record
-                        dangtoanDAO.InsertDangtoan(d);
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/QLKD.jsp");
-                        rd.forward(request, response);                        
+                        dangtoanDAO.InsertDangtoan(d);                     
                     } else if (action.equals("update")) {
                         // Update existing record
                         dangtoanDAO.updateDangtoan(d);
-                        request.setAttribute("message", "Cập nhật câu hỏi thành công");
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/QLKD.jsp");
-                        rd.forward(request, response);
-                    }                    
+                    }                 
+                    
+                    // Return in the format required by jTable plugin
+                    JSONROOT.put("Result", "OK");
+                    JSONROOT.put("Record", d);
+
+                    // Convert Java Object to Json
+                    String jsonArray = gson.toJson(JSONROOT);
+                    response.getWriter().print(jsonArray);
                 } else if (action.equals("delete")) {
                     // Delete record
                     if (request.getParameter("dangtoan") != null) {
@@ -138,6 +136,15 @@ public class DangToanCRUD extends HttpServlet {
                         String jsonArray = gson.toJson(JSONROOT);
                         response.getWriter().print(jsonArray);
                     }
+                } else {
+                    List allLop = lopDAO.convertToMap();
+                    // Return in the format required by jTable plugin
+                    JSONROOT.put("Result", "OK");
+                    JSONROOT.put("Options", allLop);
+
+                    // Convert Java Object to Json
+                    String jsonArray = gson.toJson(JSONROOT);
+                    response.getWriter().print(jsonArray); 
                 }
             } catch (Exception ex) {
                 JSONROOT.put("Result", "ERROR");

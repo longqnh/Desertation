@@ -1,75 +1,39 @@
 <%-- 
-    Document   : QLLop
-    Created on : Jun 26, 2017, 8:13:56 PM
+    Document   : QLCH
+    Created on : Jun 29, 2017, 10:12:24 PM
     Author     : NTL
 --%>
 
+<%@page import="model.Question"%>
+<%@page import="dao.QuestionDAO"%>
 <%@page import="model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>QUẢN LÝ KHỐI LỚP</title>
+        <title>SỐ LƯỢT LÀM CÂU HỎI</title>
         <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto'>   
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OtherStyle.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/MemberStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HeaderStyle.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/FooterStyle.css" type="text/css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        
-        <!-- Include one of jTable styles. -->
-        <link href="${pageContext.request.contextPath}/css/metro/blue/jtable.css" rel="stylesheet" type="text/css" />
-        <link href="${pageContext.request.contextPath}/css/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
-        <!-- Include jTable script file. -->
-        <script src="${pageContext.request.contextPath}/js/jquery-1.8.2.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/js/jquery.jtable.js" type="text/javascript"></script>
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#TableContainer').jtable({
-                    title: 'Danh sách khối lớp',
-                    paging: true, //Enable paging
-                    pageSize: 10, //Set page size (default: 10)
-                    sorting: true, //Enable sorting
-                    defaultSorting: 'malop ASC',
-                    selecting: true, //Enable selecting
-                    multiselect: true, //Allow multiple selecting
-                    selectingCheckboxes: true, //Show checkboxes on first column
-                    selectOnRowClick: false, //Click row on check box
-                    actions: {
-                        listAction: '${pageContext.request.contextPath}/LopCRUD?action=list',
-                        createAction: '${pageContext.request.contextPath}/LopCRUD?action=create',
-                        updateAction: '${pageContext.request.contextPath}/LopCRUD?action=update',
-                        deleteAction: '${pageContext.request.contextPath}/LopCRUD?action=delete'
+        <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js">
+            MathJax.Hub.Config({
+                extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+                jax: ["input/TeX", "output/HTML-CSS"],
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
                     },
-                    fields: {
-                        malop: {
-                            title: 'Mã lớp',
-                            key: true,
-                            list: true,
-                            edit: true,
-                            create: true
-                        },
-                        tenlop: {
-                            title: 'Tên lớp',
-                            type: 'text',
-                            edit: true
-                        }
-                    }
-                });
-                
-                $('#TableContainer').jtable('load');
-
-                //Load all records when page is first shown
-                $('#LoadRecordsButton').click();
-                        
-                //Delete selected students                        
-                $('#DeleteAllButton').button().click(function () {
-                    var $selectedRows = $('#TableContainer').jtable('selectedRows');
-                    $('#TableContainer').jtable('deleteRows', $selectedRows);
-                });
+                    "HTML-CSS": { availableFonts: ["TeX"] }
             });
+        </script>        
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>        
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
         </script>
     </head>
     <body>
@@ -189,7 +153,7 @@
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLDT.jsp">Quản lý các bài thi</a></li>                                
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLLop.jsp">Quản lý lớp</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLDToan.jsp">Quản lý dạng toán</a></li>
-                                <li><a href="<%=request.getContextPath()%>/Admin/QLDBT.jsp">Quản lý dạng bài tập</a></li>                                 
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLDBT.jsp">Quản lý dạng bài tập</a></li>  
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLCH.jsp">Xem số lượt làm câu hỏi</a></li>                                
                                 <li><a href="<%=request.getContextPath()%>/Admin/TestLatex.jsp">Kiểm tra Latex</a></li>                                                                
                         <%  } %>
@@ -198,26 +162,60 @@
                 
                 <script src="${pageContext.request.contextPath}/js/DisplaySubmenu.js" type="text/javascript"></script>
             </div>
-            
-            <style>
-                #main-right #TableContainer {
-                    width: 50%; 
-                    margin-left: auto;
-                    margin-right: auto;
-                    margin-top: 20px;
-                }
-                
-                #main-right #DeleteAllButton
-                {
-                    margin-left: 235px;
-                }
-            </style>
-            
+                        
             <div id="main-right">
-                <h2>QUẢN LÝ CÁC KHỐI LỚP</h2>                                      
-                <div id="TableContainer"></div>
-                <button type="button" id="DeleteAllButton">Delete All Selected</button>
-            </div>                
+                <h2>XEM SỐ LƯỢT LÀM</h2>     
+                                                                        
+                <form action="${pageContext.request.contextPath}/XemSoLuot" method="GET">
+                    <div class="edit-field">
+                        <label>ID: </label>
+                        <input type="text" name="id" id="id" required="">
+                        <input type="submit" id="btnEdit" value="Thống kê">
+                    </div>
+                </form>
+                
+                <div style="width: 98%; margin-top: 20px;">
+                    <%
+                        String id = request.getParameter("id");
+                        QuestionDAO qdao = new QuestionDAO();
+                        if (id != null) {
+                            Question q = qdao.getQuestionById(id); %>
+                    
+                            <p><b>(<%=q.getId()%>):</b> <%=q.getNoidung()%></p>
+                            <%
+                                if (q.getHinh()==1) { %>
+                                    <img src="${pageContext.request.contextPath}/images/NHCH/<%=q.getId()%>.JPG">
+                            <% } %>
+                            <p><b>A. </b><%=q.getDapanA()%></p>
+                            <p><b>B. </b><%=q.getDapanB()%></p>
+                            <p><b>C. </b><%=q.getDapanC()%></p>
+                            <p><b>D. </b><%=q.getDapanD()%></p>
+                    <%  }  %>
+                </div>
+
+                <script type="text/javascript">
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+
+                        var data = google.visualization.arrayToDataTable([
+                            ['Tổng','Đúng'],
+                            ['Tổng số thí sinh làm', ${requestScope.tong}],
+                            ['Số thí sinh làm đúng', ${requestScope.dung}]
+                        ]);
+
+                        var options = {
+                            title: 'Số lần làm'
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                        chart.draw(data, options);
+                    }
+                </script>
+                
+                <div id="piechart" style="width: 800px; height: 500px;"></div>
+            </div>
         </div>
             
         <script type="text/javascript" src="../js/autoscroll.js"></script>

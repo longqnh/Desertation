@@ -177,6 +177,14 @@ p {
     right: 0;
 }
 
+#user-answer-fake {
+    width: 220px;
+    height: 510px;
+    margin: 65px 20px auto;
+    position: absolute;
+    right: 0;
+}
+
 #timer {
     width: 220px;
     height: 40px;
@@ -205,6 +213,14 @@ p {
 }
 
 #user-answer.stick {
+    margin-top: 0 !important;
+    position: fixed;
+    top: 20px;
+    right: 0;
+    z-index: 10000;
+}
+
+#user-answer-fake.stick {
     margin-top: 0 !important;
     position: fixed;
     top: 20px;

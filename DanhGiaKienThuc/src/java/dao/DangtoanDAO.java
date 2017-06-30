@@ -309,15 +309,16 @@ public class DangtoanDAO {
     
     public boolean InsertDangtoan(Dangtoan dangtoan) {
         Connection connection= DBConnect.getConnecttion();
-        String sql = "INSERT INTO table_phanloaidangtoan(`dangtoan`,`madangtoan`,`malop`,`dangtoanTV`,`hocky`) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO table_phanloaidangtoan(`dangtoan`,`madangtoan`,`monhoc`,`malop`,`dangtoanTV`,`hocky`) VALUES(?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareCall(sql);
             ps.setString(1, dangtoan.getDangtoan());
             ps.setString(2, dangtoan.getMadangtoan());
-            ps.setInt(3, dangtoan.getMalop());
-            ps.setString(4, dangtoan.getDangtoanTV());            
-            ps.setInt(5, dangtoan.getHocky());
+            ps.setString(3, dangtoan.getMonhoc());
+            ps.setInt(4, dangtoan.getMalop());
+            ps.setString(5, dangtoan.getDangtoanTV());            
+            ps.setInt(6, dangtoan.getHocky());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

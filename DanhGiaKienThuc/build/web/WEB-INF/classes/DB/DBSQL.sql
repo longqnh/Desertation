@@ -364,18 +364,15 @@ GROUP BY made;
 END; $$
 
 DELIMITER $$
-DROP PROCEDURE IF EXISTS ThongKeSoLuong $$
-CREATE PROCEDURE ThongKeSoLuong(
-    IN dangtoan VARCHAR(45),
-    IN maCH VARCHAR(45)
+DROP PROCEDURE IF EXISTS ThongKeSoLuot$$
+CREATE PROCEDURE ThongKeSoLuot(
+	IN maCH VARCHAR(45)
 )
 BEGIN
-	SELECT * FROM
-		(SELECT 	id,
-				COUNT(id) as dalam, 
-				COUNT(dapan=userchoice) as lamdung 
-		FROM table_dethi as dt
-		where dt.dangtoan=dangtoan 
-		group by id) as temp
-	WHERE temp.id=maCH;
+	SELECT 	COUNT(*) AS tong, 
+			(SELECT COUNT(*) 
+			FROM table_dethi 
+			WHERE id=maCH AND dapan=userchoice) AS dung
+	FROM table_dethi 
+	WHERE id=maCH;
 END; $$

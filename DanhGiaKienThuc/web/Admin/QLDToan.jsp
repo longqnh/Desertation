@@ -68,7 +68,7 @@
                         malop: {
                             title: 'Lớp',
                             type: 'select',
-                            options: {'10': 'Lớp 10', '11': 'Lớp 11', '12': 'Lớp 12'},
+                            options: '${pageContext.request.contextPath}/DangToanCRUD?action=other',
                             edit: true
                         },
                         hocky: {
@@ -218,6 +218,8 @@
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLLop.jsp">Quản lý lớp</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLDToan.jsp">Quản lý dạng toán</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Admin/QLDBT.jsp">Quản lý dạng bài tập</a></li>                                 
+                                <li><a href="<%=request.getContextPath()%>/Admin/QLCH.jsp">Xem số lượt làm câu hỏi</a></li>                                
+                                <li><a href="<%=request.getContextPath()%>/Admin/TestLatex.jsp">Kiểm tra Latex</a></li>                                                                
                         <%  } %>
                     </ul>
                 </div>

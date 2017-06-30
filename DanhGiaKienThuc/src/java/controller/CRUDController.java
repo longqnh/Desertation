@@ -7,9 +7,9 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dao.LopDAO;
 import dao.UsersDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Users;
-import tools.MD5;
 
 /**
  *
@@ -28,9 +27,11 @@ public class CRUDController extends HttpServlet {
     private HashMap<String, Object> JSONROOT = new HashMap<String, Object>();
 
     private UsersDao dao;
+    private LopDAO lopDAO;
 
     public CRUDController() {
         dao = new UsersDao();
+        lopDAO = new LopDAO();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -152,6 +153,16 @@ public class CRUDController extends HttpServlet {
                         String jsonArray = gson.toJson(JSONROOT);
                         response.getWriter().print(jsonArray);
                     }
+                } else {
+                    List allLop = lopDAO.convertToMap();
+                    
+                    // Return in the format required by jTable plugin
+                    JSONROOT.put("Result", "OK");
+                    JSONROOT.put("Options", allLop);
+
+                    // Convert Java Object to Json
+                    String jsonArray = gson.toJson(JSONROOT);
+                    response.getWriter().print(jsonArray); 
                 }
             } catch (Exception ex) {
                 JSONROOT.put("Result", "ERROR");

@@ -11,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Lop;
@@ -110,6 +112,19 @@ public class LopDAO {
 	return count;
     }
     
+    public List convertToMap() {
+        List<Lop> allLop = GetAllLop();
+        List<Map<String, String>> list = new ArrayList<>();
+                    
+        for (Lop lop : allLop) {
+            Map<String, String> map = new HashMap<>();
+            map.put("Value", Integer.toString(lop.getMalop()));
+            map.put("DisplayText", lop.getTenlop());
+            list.add(map);
+        }
+        
+        return list;
+    }
 //    public static void main(String[] args) {
 //        LopDAO lopDAO = new LopDAO();
 //        List<Lop> dsLop = lopDAO.GetAllLop();

@@ -8,19 +8,15 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dao.DangBaiTapDAO;
+import dao.DangtoanDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import model.DangBaiTap;
-import model.Users;
 
 /**
  *
@@ -29,10 +25,12 @@ import model.Users;
 public class DangBTCRUD extends HttpServlet {
     private HashMap<String, Object> JSONROOT = new HashMap<String, Object>();
 
-    DangBaiTapDAO dangBaiTapDAO;
+    private DangBaiTapDAO dangBaiTapDAO;
+    private DangtoanDAO dangtoanDAO;
 
     public DangBTCRUD() {
         dangBaiTapDAO = new DangBaiTapDAO();
+        dangtoanDAO = new DangtoanDAO();
     }    
     
     @Override
@@ -47,12 +45,6 @@ public class DangBTCRUD extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
 
-        HttpSession session = request.getSession();
-        Users users = null;
-        if (session.getAttribute("user")!=null) {
-            users = (Users) session.getAttribute("user");
-        }
-        
         String action = request.getParameter("action");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         response.setContentType("application/json");
@@ -76,7 +68,7 @@ public class DangBTCRUD extends HttpServlet {
                     String jsonArray = gson.toJson(JSONROOT);
 
                     response.getWriter().print(jsonArray);
-                }  else if (action.equals("create") || action.equals("delete")) {
+                }  else if (action.equals("create") || action.equals("update")) {
                     DangBaiTap baiTap = new DangBaiTap();
                     
                     if (request.getParameter("dangbt")!=null) {
@@ -96,16 +88,19 @@ public class DangBTCRUD extends HttpServlet {
                     
                     if (action.equals("create")) {
                         // Create new record
-                        dangBaiTapDAO.InsertDangBT(baiTap);
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/QLKD.jsp");
-                        rd.forward(request, response);                        
+                        dangBaiTapDAO.InsertDangBT(baiTap);                    
                     } else if (action.equals("update")) {
                         // Update existing record
                         dangBaiTapDAO.updateDangBT(baiTap);
-                        request.setAttribute("message", "Cập nhật câu hỏi thành công");
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/QLKD.jsp");
-                        rd.forward(request, response);
                     }                    
+                    
+                    // Return in the format required by jTable plugin
+                    JSONROOT.put("Result", "OK");
+                    JSONROOT.put("Record", baiTap);
+
+                    // Convert Java Object to Json
+                    String jsonArray = gson.toJson(JSONROOT);
+                    response.getWriter().print(jsonArray);
                 } else if (action.equals("delete")) {
                     // Delete record
                     if (request.getParameter("dangbt")!=null) {
@@ -119,6 +114,15 @@ public class DangBTCRUD extends HttpServlet {
                         String jsonArray = gson.toJson(JSONROOT);
                         response.getWriter().print(jsonArray);
                     }
+                } else {
+                    List alldangtoan = dangtoanDAO.getAllDangToan("toan");
+                    // Return in the format required by jTable plugin
+                    JSONROOT.put("Result", "OK");
+                    JSONROOT.put("Options", alldangtoan);
+
+                    // Convert Java Object to Json
+                    String jsonArray = gson.toJson(JSONROOT);
+                    response.getWriter().print(jsonArray); 
                 }
             } catch (Exception ex) {
                 JSONROOT.put("Result", "ERROR");
