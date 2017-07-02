@@ -93,7 +93,7 @@
                     Question q = (Question) exam.get(i); %>
 
                     <div>
-                        <p><b><%=q.getId()%>:</b> <%=q.getNoidung()%></p>
+                        <p><b>(<%=q.getId()%>):</b> <%=q.getNoidung()%></p>
                         <%
                             if (q.getHinh()==1) { %>
                                 <img src="${pageContext.request.contextPath}/images/NHCH/<%=q.getId()%>.JPG">

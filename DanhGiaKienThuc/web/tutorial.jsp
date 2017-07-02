@@ -56,6 +56,8 @@
 
             <div id="main-right">
                 <h2>Hướng dẫn sử dụng</h2>
+                
+                <iframe src="https://www.youtube.com/embed/60ItHLz5WEA" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
         

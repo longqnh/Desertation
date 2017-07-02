@@ -262,3 +262,10 @@ ol li div {
 .table-thongke th, .table-thongke td {
     padding: 15px;
 }
+
+iframe {
+    width: 800px;
+    height: 500px;
+    display: block;
+    margin: 25px auto;
+}
