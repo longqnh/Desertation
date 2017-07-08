@@ -48,10 +48,16 @@ public class LamDeThi extends HttpServlet {
         
         if (request.getParameter("dethi")==null) { // mode practice
             noidung = request.getParameterValues("kienthuc");
-            lop = Integer.parseInt(request.getParameter("lop"));            
+            lop = Integer.parseInt(request.getParameter("lop"));
             level = Integer.parseInt(request.getParameter("dokho"));
-            time = Integer.parseInt(request.getParameter("time")); 
-            numQuestion = (time == 15 ? 10 : (time == 60 ? 40 : 50));
+            
+            if (request.getParameter("time") != null) {
+                time = Integer.parseInt(request.getParameter("time"));
+                numQuestion = (time == 15 ? 10 : (time == 60 ? 40 : 50));                
+            } else {
+                numQuestion = Integer.parseInt(request.getParameter("socau"));
+                time = numQuestion + 5;
+            }
         } else { // mode mock test
             String dethi = request.getParameter("dethi");
             lop = Integer.parseInt(request.getParameter("lop"));

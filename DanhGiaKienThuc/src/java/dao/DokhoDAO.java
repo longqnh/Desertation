@@ -25,7 +25,7 @@ public class DokhoDAO {
         Connection connection = DBConnect.getConnecttion();
         
         List<Dokho> dsLevel = new ArrayList();
-        String sql = "SELECT * FROM table_dokhode";
+        String sql = "SELECT * FROM table_dokhoDE";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -45,7 +45,7 @@ public class DokhoDAO {
     public String GetDoKhoTV (int dokho) {
         Connection connection = DBConnect.getConnecttion();
         
-        String sql = "SELECT * FROM table_dokhode WHERE dokho=" + dokho;
+        String sql = "SELECT * FROM table_dokhoDE WHERE dokho=" + dokho;
         PreparedStatement ps;
         String mucdo = null;
         
@@ -67,7 +67,7 @@ public class DokhoDAO {
         Connection connection = DBConnect.getConnecttion();
         
         List<Dokho> dsLevel = new ArrayList();
-        String sql = "SELECT * FROM table_dokhoch";
+        String sql = "SELECT * FROM table_dokhoCH";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();

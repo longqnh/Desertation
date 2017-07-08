@@ -39,6 +39,15 @@
             if (users==null) {
                 response.sendRedirect(request.getContextPath() + "/login.jsp");
             }
+            
+            MonHocDAO monHocDAO = new MonHocDAO();
+            List<MonHoc> dsMon = monHocDAO.GetAllMonHoc();   
+
+            LopDAO lopDAO = new LopDAO(); 
+            List<Lop> dsLop = lopDAO.GetAllLop();            
+
+            DokhoDAO dokhoDAO = new DokhoDAO();
+            List<Dokho> dsLevel = dokhoDAO.GetAllDokho();
         %>
         
         <div class="container">
@@ -82,13 +91,20 @@
             <div id="main-right">
                 <h2>Thông tin đề thi</h2>
                 
-                <form id="createExam" name="createExam" action="${pageContext.request.contextPath}/LamDeThi" method="POST">
+                <div class="search-field" style="margin-top: 20px;">
+                    <label>Chọn dạng tạo đề: </label>
+                    <select id="taode">
+                        <option value="" disabled="" selected="">Chọn dạng tạo đề</option>
+                        <option value="theond">Theo nội dung</option>
+                        <option value="theosc">Theo số câu</option>
+                    </select>
+                </div>
+                    
+                <form class="createExam" id="createExam-noidung" name="createExam" action="${pageContext.request.contextPath}/LamDeThi" method="POST">
                     <div class="search-field">
                         <label>Chọn môn: </label>
                         <select name="monhoc" id="monhoc" required>
                             <%
-                                MonHocDAO monHocDAO = new MonHocDAO();
-                                List<MonHoc> dsMon = monHocDAO.GetAllMonHoc(); 
                                 for (MonHoc mon : dsMon) { %>
                                     <option value="<%=mon.getMonhocID()%>"> <%=mon.getTenmonhoc()%> </option>                                  
                             <%  } %>
@@ -97,11 +113,9 @@
                         
                     <div class="search-field">
                         <label>Chọn lớp: </label>
-                        <select name="lop" id="lop" required>
+                        <select name="lop" class="lop" required>
                             <option value="" disabled selected>Lớp</option>
                             <%
-                                LopDAO lopDAO = new LopDAO(); 
-                                List<Lop> dsLop = lopDAO.GetAllLop(); 
                                 for (Lop lop: dsLop) { %>
                                     <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>                                  
                             <%  } %>
@@ -113,8 +127,6 @@
                         <select name="dokho" required>
                             <option value="" disabled selected>Độ khó</option>
                             <%
-                                DokhoDAO dokhoDAO = new DokhoDAO();
-                                List<Dokho> dsLevel = dokhoDAO.GetAllDokho();
                                 for (Dokho dokho:dsLevel) { %>
                                     <option value="<%=dokho.getDokho()%>"> <%=dokho.getMucdo()%> </option>
                             <%  } %>
@@ -132,45 +144,108 @@
                     </div>
                         
                     <div style="margin: 10px 0px 0px 115px">
-                        <select id="kienthuc" multiple="multiple" name="kienthuc" required></select>
-                        
-                        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.multi-select.js"></script>
-                        <script type="text/javascript">
-                            $('#kienthuc').multiSelect({
-                                selectableHeader: "<div class='custom-header' style='font-weight: bold;'>Kiến thức:</div>",
-                                selectionHeader: "<div class='custom-header' style='font-weight: bold;'>Kiến thức đã chọn:</div>"
-                            });
-                            
-                            $('#lop').change (
-                                function() {
-                                    $.ajax({
-                                        type: "GET",
-                                        url: "${pageContext.request.contextPath}/DangtoanServlet",
-                                        data: {
-                                            lop: $(this).val(), 
-                                            monhoc: $("#monhoc").val()
-                                        },
-                                        success: function(data){
-                                            $('#kienthuc').empty().multiSelect('refresh');
-                                            for(var i = 0; i < data.length; i++) {
-                                                $('#kienthuc').multiSelect('addOption', { value: data[i].dangtoan, text: data[i].dangtoanTV}); 
-                                            }
-                                        }
-                                    });                                     
-                                }
-                            );                    
-                        </script>                        
+                        <select class="kienthuc" multiple="multiple" name="kienthuc" required></select>                        
                     </div>
-
-                    <script type="text/javascript">
-                        function DoExam() {
-                            if (confirm('Bạn đã sẵn sàng làm bài chưa?') == true) {
-                                document.getElementById("createExam").submit();
-                            }
-                        }
-                    </script>
+                    
                     <input id="btnTaoDe" type="button" value="Tạo đề" onclick="DoExam()"> <!-- css in MemberStyle -->
                 </form>   
+
+                <form class="createExam" id="createExam-socau" name="createExam" action="${pageContext.request.contextPath}/LamDeThi" method="POST">
+                    <div class="search-field">
+                        <label>Chọn môn: </label>
+                        <select name="monhoc" id="monhoc" required>
+                            <%
+                                for (MonHoc mon : dsMon) { %>
+                                    <option value="<%=mon.getMonhocID()%>"> <%=mon.getTenmonhoc()%> </option>                                  
+                            <%  } %>
+                        </select>
+                    </div>
+                        
+                    <div class="search-field">
+                        <label>Chọn lớp: </label>
+                        <select name="lop" class="lop" required>
+                            <option value="" disabled selected>Lớp</option>
+                            <%
+                                for (Lop lop: dsLop) { %>
+                                    <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>                                  
+                            <%  } %>
+                        </select>
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Chọn độ khó: </label>
+                        <select name="dokho" required>
+                            <option value="" disabled selected>Độ khó</option>
+                            <%
+                                for (Dokho dokho:dsLevel) { %>
+                                    <option value="<%=dokho.getDokho()%>"> <%=dokho.getMucdo()%> </option>
+                            <%  } %>
+                        </select>
+                    </div>
+
+                    <div class="search-field">
+                        <label>Nhập số câu: </label>
+                        <input type="text" name="socau"> 
+                    </div>
+                        
+                    <div style="margin: 10px 0px 0px 115px">
+                        <select class="kienthuc" multiple="multiple" name="kienthuc" required></select>                        
+                    </div>
+                        
+                    <input id="btnTaoDe" type="button" value="Tạo đề" onclick="DoExam()"> <!-- css in MemberStyle -->
+                </form>   
+                        
+                <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.multi-select.js"></script>     
+                <script type="text/javascript">                                     
+                    $('.kienthuc').multiSelect({
+                        selectableHeader: "<div class='custom-header' style='font-weight: bold;'>Kiến thức:</div>",
+                        selectionHeader: "<div class='custom-header' style='font-weight: bold;'>Kiến thức đã chọn:</div>"
+                    });
+
+                    function DoExam() {
+                        if (confirm('Bạn đã sẵn sàng làm bài chưa?') == true) {
+                            var id = $("#taode").val();
+                            if (id === "theond") {
+                                $("#createExam-noidung").submit();
+                            } else {
+                                $("#createExam-socau").submit();
+                            }      
+                        }
+                    }
+
+                    $('.lop').change (
+                        function() {
+                            $.ajax({
+                                type: "GET",
+                                url: "${pageContext.request.contextPath}/DangtoanServlet",
+                                data: {
+                                    lop: $(this).val(), 
+                                    monhoc: $("#monhoc").val()
+                                },
+                                success: function(data){
+                                    $('.kienthuc').empty().multiSelect('refresh');
+                                    for(var i = 0; i < data.length; i++) {
+                                        $('.kienthuc').multiSelect('addOption', { value: data[i].dangtoan, text: data[i].dangtoanTV}); 
+                                    }
+                                }
+                            });                                     
+                        }
+                    );                                        
+                    
+                    $("#createExam-socau").hide();
+                    $("#createExam-noidung").hide();
+                            
+                    $("#taode").change(function () {
+                        var id = $("#taode").val();
+                        if (id === "theond") {
+                            $("#createExam-socau").hide();
+                            $("#createExam-noidung").show();
+                        } else {
+                            $("#createExam-socau").show();
+                            $("#createExam-noidung").hide();                            
+                        }
+                    });
+                </script>                                        
             </div>
         </div>
         

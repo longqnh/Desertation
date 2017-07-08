@@ -142,11 +142,11 @@ p {
     color: rgba(200, 7, 207, 1);
 }
 
-#createExam {
+.createExam {
     margin-top: 55px;
 }
 
-#createExam h5 {
+.createExam h5 {
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;

@@ -226,7 +226,7 @@ public class QuestionDAO {
         Connection connection = DBConnect.getConnecttion();
         PreparedStatement ps;
                 
-        String sql = "SELECT mucdo FROM table_dokhoch WHERE dokho = (SELECT dokho FROM nhchtoan WHERE id='" + id + "')";
+        String sql = "SELECT mucdo FROM table_dokhoCH WHERE dokho = (SELECT dokho FROM NHCHTOAN WHERE id='" + id + "')";
         String res = new String();
         
         try {
