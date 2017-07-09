@@ -159,8 +159,7 @@
                     <%  } else { %>
                             <p>Các kiến thức làm sai nhiều:</p>
                             <ul class="noidungyeu">
-                    <%      for (int i = 0; i < noidungYeu.size(); i++) { 
-                                Thongke ndY = noidungYeu.get(i); %>
+                    <%      for (Thongke ndY : noidungYeu) {  %>
                                 <li><%=ndY.getDangtoan()%></li>
                     <%      }  %>
                             </ul>
@@ -180,8 +179,21 @@
                                         <tr>
                                             <td><%=nD.getDangtoan()%></td>
                                             <td>
-                                                Bạn đã làm đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu (đạt tỉ lệ <%=nD.getTyle()%>%)
-                                                
+                                                Bạn đã làm đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu (đạt tỉ lệ <%=nD.getTyle()%>%).
+                                                <%
+                                                    if (nD.getTyle() <= 50.0) { %>
+                                                        <br>Kiến thức của bạn ở nội dung này còn hạn chế. Đặc biệt là các về các dạng toán 
+                                                        <%
+                                                            for (Thongke ndY : noidungYeu) { 
+                                                                if (ndY.getMadangtoan().equals(nD.getMadangtoan())) { %>
+                                                                <%=ndY.getDangtoan()%>, 
+                                                        <%  } } %>
+                                                        <br>Hãy tích cực ôn tập lý thuyết và làm nhiều bài tập hơn.
+                                                <%  }  else { %>
+                                                        <br>Kiến thức của bạn ở nội dung này khá tốt. 
+                                                        Tuy nhiên các dạng toán ... bạn vẫn còn làm sai.
+                                                        <br>Hãy tiếp tục luyện tập để đạt kết quả cao hơn ở những lần thi sau.
+                                                <%  }  %>
                                             </td>
                                         </tr>
                                 <% } %>

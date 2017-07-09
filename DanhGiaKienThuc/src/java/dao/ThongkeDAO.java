@@ -57,10 +57,11 @@ public class ThongkeDAO {
             ps = connection.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                String madangtoan = new DangBaiTapDAO().getDangtoanByBaiTap(rs.getString("mabt"));
                 String dangtoan = rs.getString("dangbt");
                 int socau = rs.getInt("socau");
                 int socaudung = rs.getInt("socaudung");
-                Thongke tknd = new Thongke(dangtoan, socau, socaudung);
+                Thongke tknd = new Thongke(madangtoan, dangtoan, socau, socaudung);
                 list.add(tknd);
             }
         } catch (SQLException ex) {

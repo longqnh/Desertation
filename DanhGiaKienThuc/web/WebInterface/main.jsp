@@ -70,7 +70,7 @@
                         <td><a href="<x:out select="link"/>" target="_blank"> &#x261B; <x:out select="title"/></td>
                 </x:forEach>
 		</table>
-                <c:import var="xmlContent" url="http://vietnamnet.vn/rss/giao-duc.rss"/>
+                <c:import var="xmlContent" url="http://tuoitre.vn/rss/tt-giao-duc.rss"/>
 		<x:parse var="doc" xml="${xmlContent}"/>
     		<table class="content-table" id="feed">    
 		<tr class="profile_odd">
