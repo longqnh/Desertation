@@ -68,6 +68,14 @@ public class Thongke {
         this.tyle = tyle;
     }
 
+    public Thongke(String madangtoan, String dangtoan, int socau, int socaudung, double tyle) {
+        this.madangtoan = madangtoan;
+        this.dangtoan = dangtoan;
+        this.socau = socau;
+        this.socaudung = socaudung;
+        this.tyle = tyle;
+    }
+
     public String getMadangtoan() {
         return madangtoan;
     }
