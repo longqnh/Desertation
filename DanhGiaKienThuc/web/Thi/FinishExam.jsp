@@ -147,8 +147,12 @@
                         </table>                    
                     </div>
                 </div>
+                </ol>
                 
+                <ol type="1">
                 <div id="nhanxet">
+                    <li id="tk">Thống kê</li>
+                    <div id="nhanxet-tk">
                     <%
                         if (noidungYeu.isEmpty()) { %>
                             <p>Kiến thức của bạn khá tốt, hãy tiếp tục phát huy</p>
@@ -161,9 +165,32 @@
                     <%      }  %>
                             </ul>
                     <%  }  %>
+                    </div>
+                    
+                    <li id="nhandinh">Nhận định</li>
+                    <div id="nhanxet-nhandinh">
+                        <table style="width:96%" class="table-thongke">
+                            <tr>
+                                <th style="width: 25%">Nội dung</th>
+                                <th>Nhận định</th>
+                            </tr>
+                            <tr>
+                                <%
+                                    for (Thongke nD : thongkeND) {    %>
+                                        <tr>
+                                            <td><%=nD.getDangtoan()%></td>
+                                            <td>
+                                                Bạn đã làm đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu (đạt tỉ lệ <%=nD.getTyle()%>%)
+                                                
+                                            </td>
+                                        </tr>
+                                <% } %>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 </ol>
-                
+                        
                 <form class="_btn" target="_blank" action="${pageContext.request.contextPath}/Thi/XemDapAn.jsp" method="GET">
                     <input type="button" class="btnXemDA" id="showTK" value="Thống kê">
                     <input type="button" class="btnXemDA" id="showNX" value="Nhận xét">
@@ -175,6 +202,8 @@
                     $(function() {
                         $("#thongke-dangbt").hide();
                         $("#thongke-dangtoan").hide();
+                        $("#nhanxet-tk").hide();
+                        $("#nhanxet-nhandinh").hide();
                         
                         $("#showTK").click(function() {
                             $("#nhanxet").hide();
@@ -195,6 +224,16 @@
                             $("#thongke-dangtoan").hide();
                             $("#thongke-dangbt").slideToggle();
                         });
+                        
+                        $("#tk").click(function() {
+                            $("#nhanxet-nhandinh").hide();
+                            $("#nhanxet-tk").slideToggle();
+                        });
+                        
+                        $("#nhandinh").click(function() {
+                            $("#nhanxet-tk").hide();
+                            $("#nhanxet-nhandinh").slideToggle();
+                        });                        
                     });
                 </script>
             </div>

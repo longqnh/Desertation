@@ -69,7 +69,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-#main-right > ol {
+#main-right ol {
     margin-top: 10px;
     padding-left: 25px;
     color: blue;
@@ -201,7 +201,7 @@ body {
     display: inline-block;
 }
 
-#dokho, #noidung {
+#dokho, #noidung, #tk, #nhandinh {
     cursor: pointer;
     font-weight: bold;
     font-size: 16px;

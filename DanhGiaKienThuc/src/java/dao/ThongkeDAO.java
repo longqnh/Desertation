@@ -36,8 +36,9 @@ public class ThongkeDAO {
                 String dangtoan = rs.getString("dangtoan");
                 int socau = rs.getInt("socau");
                 int socaudung = rs.getInt("socaudung");
+                double tyle = DanhGiaKienThuc.round(((double) socaudung / socau)*100);
                 
-                Thongke tknd = new Thongke(madangtoan, dangtoan, socau, socaudung);
+                Thongke tknd = new Thongke(madangtoan, dangtoan, socau, socaudung, tyle);
                 list.add(tknd);
             }
         } catch (SQLException ex) {
