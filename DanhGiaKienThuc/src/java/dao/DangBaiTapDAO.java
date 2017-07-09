@@ -145,6 +145,27 @@ public class DangBaiTapDAO {
         }
         return false;
     }
+    
+    public String getDangtoanByBaiTap (String dangbaitap) {
+        Connection connection = DBConnect.getConnecttion();
+        
+        String sql = "SELECT * FROM table_phanloaibt WHERE dangbt='" + dangbaitap + "'";
+        PreparedStatement ps;
+        String res = new String();
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                res = rs.getString("dangtoan");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DangBaiTapDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return res;
+    }
 //    public static void main(String[] args) {
 //        List<DangBaiTap> list = new DangBaiTapDAO().GetAllDangBaiTap("hamso12");
 //        
