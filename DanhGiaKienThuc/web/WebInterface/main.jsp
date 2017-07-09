@@ -67,11 +67,22 @@
                 <x:forEach var="story" begin="0"     
                     select="$doc/rss/channel/item" varStatus="status">
                     <tr class="profile_even"> 
-                        <td><a href="<x:out select="link"/>"> &#x261B; <x:out select="title"/></td>
+                        <td><a href="<x:out select="link"/>" target="_blank"> &#x261B; <x:out select="title"/></td>
                 </x:forEach>
 		</table>
-                <div id = "quickview">
-                </div>
+                <c:import var="xmlContent" url="http://vietnamnet.vn/rss/giao-duc.rss"/>
+		<x:parse var="doc" xml="${xmlContent}"/>
+    		<table class="content-table" id="feed">    
+		<tr class="profile_odd">
+	    	<td align="center" colspan="2">  
+                    <span class="title"> </span>
+                <x:forEach var="story" begin="0" end ="4"     
+                    select="$doc/rss/channel/item" varStatus="status">
+                    <tr class="profile_even"> 
+                        <td><a href="<x:out select="link"/> " target="_blank"> &#x261B; <x:out select="title"/></td>
+                </x:forEach>
+		</table>
+                
             </div>
         </div>
     </body>
