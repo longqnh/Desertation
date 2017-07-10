@@ -8,6 +8,7 @@ package controller;
 import dao.DangtoanDAO;
 import dao.DethiDAO;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Dangtoan;
 import model.Users;
 
 /**
@@ -42,7 +44,8 @@ public class LamDeThi extends HttpServlet {
         DangtoanDAO dangtoanDAO = new DangtoanDAO();
         
         String[] noidung;
-        int lop, level, time, numQuestion;
+        int lop, level, time, numQuestion, type = 0;
+        List<Integer> socau = new ArrayList<>();
 
         String monhoc = request.getParameter("monhoc");
         
@@ -54,9 +57,22 @@ public class LamDeThi extends HttpServlet {
             if (request.getParameter("time") != null) {
                 time = Integer.parseInt(request.getParameter("time"));
                 numQuestion = (time == 15 ? 10 : (time == 60 ? 40 : 50));                
-            } else {
+            } else {                
                 numQuestion = Integer.parseInt(request.getParameter("socau"));
                 time = numQuestion + 5;
+                List<Dangtoan> list = (List) session.getAttribute("cacND");
+                
+                if (list != null) {
+                    noidung = new String[list.size()];
+                    int i = 0;
+                    for (Dangtoan dangtoan : list) {
+                        String nd = dangtoan.getDangtoan();
+                        noidung[i++] = nd;
+                        int n = Integer.parseInt(request.getParameter(nd));
+                        socau.add(n);
+                    }
+                    type = 1;
+                }
             }
         } else { // mode mock test
             String dethi = request.getParameter("dethi");
@@ -89,7 +105,12 @@ public class LamDeThi extends HttpServlet {
         //
 
         // tao de
-        dethiDAO.TaoDe(monhoc,noidung, level, numQuestion, users.getUsername(), time);
+        if (type==0) {
+            dethiDAO.TaoDe(monhoc,noidung, level, numQuestion, users.getUsername(), time);
+        } else {
+            dethiDAO.TaoDe(monhoc, noidung, socau, level, users.getUsername(), time);
+        }
+        
         String made = dethiDAO.GetMade(users.getUsername());
         List exam = dethiDAO.GetDeThi(made,0);
         

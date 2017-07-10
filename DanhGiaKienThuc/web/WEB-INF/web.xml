@@ -96,6 +96,10 @@
         <servlet-name>LatexTest</servlet-name>
         <servlet-class>controller.LatexTest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Practice</servlet-name>
+        <servlet-class>controller.Practice</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckEmailServlet</servlet-name>
         <url-pattern>/CheckEmailServlet</url-pattern>
@@ -191,6 +195,10 @@
     <servlet-mapping>
         <servlet-name>LatexTest</servlet-name>
         <url-pattern>/LatexTest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Practice</servlet-name>
+        <url-pattern>/Practice</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

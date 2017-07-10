@@ -93,10 +93,11 @@
                 
                 <div class="search-field" style="margin-top: 20px;">
                     <label>Chọn dạng tạo đề: </label>
-                    <select id="taode">
+                    <select id="taode" name="taode">
                         <option value="" disabled="" selected="">Chọn dạng tạo đề</option>
-                        <option value="theond">Theo nội dung</option>
-                        <option value="theosc">Theo số câu</option>
+                        <option value="theond">Theo thời gian</option>
+                        <option value="theosc-tong">Theo số câu</option>
+                        <option value="theosc-nd">Theo nội dung</option>
                     </select>
                 </div>
                     
@@ -150,7 +151,7 @@
                     <input id="btnTaoDe" type="button" value="Tạo đề" onclick="DoExam()"> <!-- css in MemberStyle -->
                 </form>   
 
-                <form class="createExam" id="createExam-socau" name="createExam" action="${pageContext.request.contextPath}/LamDeThi" method="POST">
+                <form class="createExam" id="createExam-socau-tong" name="createExam" action="${pageContext.request.contextPath}/LamDeThi" method="POST">
                     <div class="search-field">
                         <label>Chọn môn: </label>
                         <select name="monhoc" id="monhoc" required>
@@ -194,9 +195,76 @@
                         
                     <input id="btnTaoDe" type="button" value="Tạo đề" onclick="DoExam()"> <!-- css in MemberStyle -->
                 </form>   
+
+                <form class="createExam" id="createExam-socau-noidung" name="createExam" action="${pageContext.request.contextPath}/Practice" method="POST">
+                    <div class="search-field">
+                        <label>Chọn môn: </label>
+                        <select name="monhoc" id="monhoc" required>
+                            <%
+                                for (MonHoc mon : dsMon) { %>
+                                    <option value="<%=mon.getMonhocID()%>"> <%=mon.getTenmonhoc()%> </option>                                  
+                            <%  } %>
+                        </select>
+                    </div>
+                        
+                    <div class="search-field">
+                        <label>Chọn lớp: </label>
+                        <select name="lop" class="lop" required>
+                            <option value="" disabled selected>Lớp</option>
+                            <%
+                                for (Lop lop: dsLop) { %>
+                                    <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>                                  
+                            <%  } %>
+                        </select>
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Chọn độ khó: </label>
+                        <select name="dokho" required>
+                            <option value="" disabled selected>Độ khó</option>
+                            <%
+                                for (Dokho dokho:dsLevel) { %>
+                                    <option value="<%=dokho.getDokho()%>"> <%=dokho.getMucdo()%> </option>
+                            <%  } %>
+                        </select>
+                    </div>
+
+                    <div class="search-field">
+                        <label>Nhập số câu: </label>
+                        <input type="text" name="socau"> 
+                    </div>
+                        
+                    <div style="margin: 10px 0px 0px 115px">
+                        <select class="kienthuc" multiple="multiple" name="kienthuc" required></select>                        
+                    </div>
+                        
+                    <input id="btnTaoDe" type="submit" value="Tiếp tục"> <!-- css in MemberStyle -->
+                </form>   
                         
                 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.multi-select.js"></script>     
-                <script type="text/javascript">                                     
+                <script type="text/javascript">  
+                    $(document).ready(function() {
+                        $('[type=text]').keydown(function (e) {
+                            // Allow: backspace, delete, tab, escape, enter and .
+                            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                                 // Allow: Ctrl/cmd+A
+                                (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                                 // Allow: Ctrl/cmd+C
+                                (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+                                 // Allow: Ctrl/cmd+X
+                                (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+                                 // Allow: home, end, left, right
+                                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                                     // let it happen, don't do anything
+                                     return;
+                            }
+                            // Ensure that it is a number and stop the keypress
+                            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                                e.preventDefault();
+                            }
+                        });
+                    });
+                    
                     $('.kienthuc').multiSelect({
                         selectableHeader: "<div class='custom-header' style='font-weight: bold;'>Kiến thức:</div>",
                         selectionHeader: "<div class='custom-header' style='font-weight: bold;'>Kiến thức đã chọn:</div>"
@@ -208,8 +276,12 @@
                             if (id === "theond") {
                                 $("#createExam-noidung").submit();
                             } else {
-                                $("#createExam-socau").submit();
-                            }      
+                                if (id === "theosc-tong") {
+                                    $("#createExam-socau-tong").submit();
+                                } else {
+                                    $("#createExam-socau-noidung").submit();
+                                }
+                            }
                         }
                     }
 
@@ -232,17 +304,26 @@
                         }
                     );                                        
                     
-                    $("#createExam-socau").hide();
+                    $("#createExam-socau-tong").hide();
                     $("#createExam-noidung").hide();
-                            
+                    $("#createExam-socau-noidung").hide();
+                    
                     $("#taode").change(function () {
                         var id = $("#taode").val();
                         if (id === "theond") {
-                            $("#createExam-socau").hide();
+                            $("#createExam-socau-tong").hide();
+                            $("#createExam-socau-noidung").hide();
                             $("#createExam-noidung").show();
                         } else {
-                            $("#createExam-socau").show();
-                            $("#createExam-noidung").hide();                            
+                            if (id === "theosc-tong") {
+                                $("#createExam-socau-tong").show();
+                                $("#createExam-socau-noidung").hide();
+                                $("#createExam-noidung").hide();
+                            } else {
+                                $("#createExam-socau-tong").hide();
+                                $("#createExam-socau-noidung").show();
+                                $("#createExam-noidung").hide();
+                            }
                         }
                     });
                 </script>                                        
