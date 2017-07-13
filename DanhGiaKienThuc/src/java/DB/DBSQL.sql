@@ -45,7 +45,7 @@ CREATE TABLE `danhgiakienthuc`.`table_dethi` (
   `malop` INT NULL,
   `hinh` INT NULL,
   `dao` INT NULL,
-  `made` INT(5) ZEROFILL NOT NULL,
+  `made` VARCHAR(45) NOT NULL,
   `userchoice` VARCHAR(45) NULL,
   `username` VARCHAR(25) NULL);
   
@@ -231,7 +231,7 @@ INSERT INTO `danhgiakienthuc`.`table_phanloaibt` (`dangbt`, `dangtoan`, `dangbtT
 
 CREATE TABLE `danhgiakienthuc`.`table_quanlydethi` (
   `monhoc` VARCHAR(45) NULL,
-  `made` INT(5) ZEROFILL NOT NULL AUTO_INCREMENT,
+  `made` VARCHAR(45) NOT NULL,
   `socau` INT NULL,
   `noidung` VARCHAR(100) NULL,
   `thoigian` INT NULL,
@@ -302,7 +302,7 @@ ALTER TABLE `danhgiakienthuc`.`table_quanlydethi`
 /* Stored Procedure */
 DELIMITER $$
 DROP PROCEDURE IF EXISTS thongkenoidung $$
-CREATE PROCEDURE thongkenoidung(IN madethi VARCHAR(5))
+CREATE PROCEDURE thongkenoidung(IN madethi VARCHAR(45))
 BEGIN
 select dt.dangtoan as madangtoan, pl.dangtoanTV as dangtoan, 
 	(select COUNT(*) from table_dethi as dt2
@@ -317,8 +317,8 @@ END; $$
 DELIMITER $$
 DROP PROCEDURE IF EXISTS thongkedangbt $$
 CREATE PROCEDURE thongkedangbt(
-	IN madethi VARCHAR(5),
-    IN dangtoan VARCHAR(45)
+	IN madethi VARCHAR(45),
+        IN dangtoan VARCHAR(45)
 )
 BEGIN
 select dt.dangbt as mabt, pl.dangbtTV as dangbt, 
@@ -334,7 +334,7 @@ END; $$
 DELIMITER $$
 DROP PROCEDURE IF EXISTS thongkedokho $$
 CREATE PROCEDURE thongkedokho(
-    IN madethi VARCHAR(5),
+    IN madethi VARCHAR(45),
     IN dangtoan VARCHAR(45)
 )
 BEGIN

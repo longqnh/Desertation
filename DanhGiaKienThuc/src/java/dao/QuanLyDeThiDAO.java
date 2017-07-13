@@ -85,7 +85,7 @@ public class QuanLyDeThiDAO {
                 int thoigian = rs.getInt("thoigian");
                 String mucdo = rs.getString("mucdo");
                 float diem = rs.getFloat("diem");
-                String ngaythi = rs.getString("ngaythi");
+                String ngaythi = convertTimeToDate(Long.parseLong(rs.getString("ngaythi")));
                 String username = rs.getString("username");
                 
                 QuanLyDeThi deThi = new QuanLyDeThi(made, socau, monhoc, noidung, thoigian, mucdo, diem, ngaythi, username);
@@ -164,13 +164,22 @@ public class QuanLyDeThiDAO {
         return false;        
     }
     
+    private String convertTimeToDate(long time) {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date dateobj = new Date(time);
+        String ngaythi = df.format(dateobj);
+        
+        return ngaythi;
+    }
+    
     public void updateInfo(String made, String thisinh, float diem) {
         Connection con = DBConnect.getConnecttion();
         PreparedStatement ps;
         
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date dateobj = new Date();
-        String ngaythi = df.format(dateobj);
+        String ngaythi = Long.toString(System.currentTimeMillis());
+//        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//        Date dateobj = new Date(milliseconds);
+//        String ngaythi = df.format(dateobj);
 
         String sql = "SELECT * FROM table_quanlydethi WHERE made='" + made + "'";
 

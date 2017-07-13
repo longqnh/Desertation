@@ -84,28 +84,47 @@
                 <h2>Thông tin đề thi</h2>
                 
                 <h3>Nhập số câu tương ứng vào các ô trống</h3>
+                <b><u>Lưu ý</u>:</b> Số câu ở từng nội dung phải bằng tổng số câu thì mới có thể tạo đề
                 
                 <form style="margin-top: 20px;" class="createExam" id="createExam-socau-noidung" name="createExam" action="${pageContext.request.contextPath}/LamDeThi" method="POST">
                     <div class="search-field">
                         <label>Tổng số câu: </label>
-                        <input type="text" name="socau" value="${requestScope.socau}" readonly="">
+                        <input type="text" id="socau" name="socau" value="${requestScope.socau}" readonly="">
                     </div>
-                                            
-                    <c:forEach var="noidung" items="${cacND}">
-                        <div class="search-field">
-                            <label>${noidung.dangtoanTV}:</label>
-                            <input type="text" id="${noidung.dangtoan}" name="${noidung.dangtoan}" required="">
-                        </div>
-                    </c:forEach>
+                    
+                    <div>
+                        <c:forEach var="noidung" items="${cacND}">
+                            <div class="search-field">
+                                <label>${noidung.dangtoanTV}:</label>
+                                <input type="text" class="number" id="${noidung.dangtoan}" name="${noidung.dangtoan}" required="">
+                            </div>
+                        </c:forEach>
+                    </div>
                     
                     <input type="text" name="lop" value="${requestScope.lop}" hidden="">
                     <input type="text" name="monhoc" value="${requestScope.monhoc}" hidden="">
                     <input type="text" name="dokho" value="${requestScope.dokho}" hidden="">
                     
+                    <h4 id="thongbao"></h4><br>
                     <input id="btnTaoDe" type="button" value="Tạo đề" onclick="DoExam()"> <!-- css in MemberStyle -->
                 </form>   
+                                                               
+                <script type="text/javascript">                          
+                    $('.number').blur(function () {
+                        var sum = 0;
+                        $('.number').each(function() {
+                            sum += Number($(this).val());
+                        });
                         
-                <script type="text/javascript">        
+                        if (sum == $("#socau").val()) {
+                            $("#thongbao").html("Số câu trùng khớp").css("color", "green");
+                            $("#btnTaoDe").prop("disabled",false);
+                        } else {
+                            $("#thongbao").html("Số câu không trùng khớp").css("color", "red");
+                            $("#btnTaoDe").prop("disabled",true);
+                        }
+                    });                    
+                    
                     $(document).ready(function() {
                         $('[type=text]').keydown(function (e) {
                             // Allow: backspace, delete, tab, escape, enter and .

@@ -17,6 +17,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Dethi;
+import tools.MD5;
 
 /**
  *
@@ -113,6 +114,28 @@ public class DethiDAO {
         int tong = nd.getSoCauNB()+nd.getSoCauTH()+nd.getSoCauVD()+nd.getSocauVDC();
         int socau = nd.getSoCau();
         
+        while (tong < socau) {
+            int min = nd.getSoCauNB();
+            
+            if (min >= nd.getSoCauTH()) {
+                min = nd.getSoCauTH();
+                nd.setSoCauTH(min+1);
+            } else {
+                if (min >= nd.getSoCauVD()) {
+                    min = nd.getSoCauVD();
+                    nd.setSoCauVD(min+1);
+                } else {
+                    if (min >= nd.getSocauVDC()) {
+                        min = nd.getSocauVDC();
+                        nd.setSocauVDC(min+1);
+                    } else {
+                        nd.setSoCauNB(min+1);
+                    }
+                }
+            }
+            tong = nd.getSoCauNB()+nd.getSoCauTH()+nd.getSoCauVD()+nd.getSocauVDC();
+        }
+        
         while (tong > socau) {
             int max = nd.getSoCauNB();
             
@@ -167,14 +190,16 @@ public class DethiDAO {
                 break;
         }     
 
+        String made = generateMade();
+        
 	try {
             // excute multiple queries (sql1 and sql2)
             Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             //String sql1 = "TRUNCATE table_dethi";
             
             // update table_quanlydethi
-            String update_qldethi = "INSERT INTO table_quanlydethi(`monhoc`,`socau`,`noidung`,`thoigian`,`mucdo`,`username`) VALUES ('" +
-                                    monHocDAO.getTenMonHoc(monhoc) + "','" + tongsocau + "','" + cacNoiDung + "','" + time + "','" + dokhoDAO.GetDoKhoTV(level) + "','" + username + "')";
+            String update_qldethi = "INSERT INTO table_quanlydethi(`monhoc`,`made`,`socau`,`noidung`,`thoigian`,`mucdo`,`username`) VALUES ('" +
+                                    monHocDAO.getTenMonHoc(monhoc) + "','" + made + "','" + tongsocau + "','" + cacNoiDung + "','" + time + "','" + dokhoDAO.GetDoKhoTV(level) + "','" + username + "')";
             
             // update table_dethi
             String update_dethi = "INSERT INTO table_dethi(`id`,`noidung`,`dapanA`,`dapanB`,`dapanC`,`dapanD`,`dapan`,`monhoc`,`dangtoan`,`dangbt`,`dokho`,`dophancach`,`malop`,`hinh`,`dao`,`made`) " +
@@ -242,15 +267,17 @@ public class DethiDAO {
                 SetSocauTheoNoiDung(nd, 0.2, 0.3, 0.3, 0.2);
                 break;
         }     
-
+        
+        String made = generateMade();
+        
 	try {
             // excute multiple queries (sql1 and sql2)
             Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             //String sql1 = "TRUNCATE table_dethi";
             
             // update table_quanlydethi
-            String update_qldethi = "INSERT INTO table_quanlydethi(`monhoc`,`socau`,`noidung`,`thoigian`,`mucdo`,`username`) VALUES ('" +
-                                    monHocDAO.getTenMonHoc(monhoc) + "','" + numQuestion + "','" + cacNoiDung + "','" + time + "','" + dokhoDAO.GetDoKhoTV(level) + "','" + username + "')";
+            String update_qldethi = "INSERT INTO table_quanlydethi(`monhoc`,`made`,`socau`,`noidung`,`thoigian`,`mucdo`,`username`) VALUES ('" +
+                                    monHocDAO.getTenMonHoc(monhoc) + "','" + made + "','" + numQuestion + "','" + cacNoiDung + "','" + time + "','" + dokhoDAO.GetDoKhoTV(level) + "','" + username + "')";
             
             // update table_dethi
             String update_dethi = "INSERT INTO table_dethi(`id`,`noidung`,`dapanA`,`dapanB`,`dapanC`,`dapanD`,`dapan`,`monhoc`,`dangtoan`,`dangbt`,`dokho`,`dophancach`,`malop`,`hinh`,`dao`,`made`) " +
@@ -284,7 +311,28 @@ public class DethiDAO {
             e.printStackTrace();
 	}
     }
-
+    
+    public String generateMade() {
+        String time = String.valueOf(System.currentTimeMillis());
+//        String temp = MD5.encryption(time);
+//        int length = temp.length();
+//        
+//        String made = new String();
+//        Random random = new Random();
+//        
+//        while (true) {
+//            int x = random.nextInt(length);
+//            int y = random.nextInt(length);
+//            
+//            if (x < y && y - x >= 5 && y - x <= 10) {
+//                made = temp.substring(x, y);
+//                break;
+//            }
+//        }
+        
+        return time;
+    }
+  
     public String GetMade(String username) {
         String made = null;
         Connection connection = DBConnect.getConnecttion();
