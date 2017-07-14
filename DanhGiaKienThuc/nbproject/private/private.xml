@@ -3,14 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/controller/DethiCRUD.java</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/controller/Practice.java</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/controller/LamDeThi.java</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/dao/QuanLyDeThiDAO.java</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Thi/Practice-new.jsp</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/dao/DethiDAO.java</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Thi/Practice.jsp</file>
-            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Admin/QLDT.jsp</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/tools/DanhGiaKienThuc.java</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/src/java/controller/thongke.java</file>
+            <file>file:/C:/Users/NTL/Documents/GitHub/Dissertation/DanhGiaKienThuc/web/Member/DanhGia.jsp</file>
         </group>
     </open-files>
 </project-private>
