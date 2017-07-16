@@ -42,8 +42,10 @@ public class DanhGiaKienThuc {
                 int socaudung = rs.getInt("socaudung");
                 int dopc = rs.getInt("dopc");
 
-                tong += dopc;
-                nangluc += ((double) socaudung/socau) * dopc;
+                if (socau > 0) {
+                    tong += dopc;
+                    nangluc += ((double) socaudung/socau) * dopc;
+                }
             }
             connection.close();
         } catch (SQLException ex) {
@@ -53,7 +55,7 @@ public class DanhGiaKienThuc {
     
         return round(nangluc);
     }    
-    
+        
     public double DanhGiaNangLuc(String username, String noidung) {
         QuanLyDeThiDAO qldtdao = new QuanLyDeThiDAO();
         List<String> DeThi = qldtdao.GetAllMade(username,DangtoanDAO.GetNoidungTV(noidung));
@@ -67,6 +69,27 @@ public class DanhGiaKienThuc {
         nangluc/=solanthi;
         
         return nangluc;
+    }
+    
+    public String DanhGiaSauThi(String made, String dangtoan) {
+        double nangluc = GetNangLuc(made, dangtoan);
+        String nhanxet = new String();
+        
+        if (nangluc < 0.5) {
+            nhanxet = "Kiến thức của bạn ở nội dung này còn hạn chế, "
+                    + "bạn hãy tích cực ôn tập lý thuyết và làm nhiều bài tập hơn. "
+                    + "Đặc biệt là các về các dạng toán: ";
+        } else if (nangluc >= 0.5 && nangluc < 0.8) {
+            nhanxet = "Bạn có kiến thức tương đối ổn ở nội dung này. "
+                    + "Dù vậy, bạn hãy vẫn tích cực luyện tập thêm để nâng cao điểm số hơn nữa. "
+                    + "Đặc biệt là các về các dạng toán: ";
+        } else {
+            nhanxet = "Nội dung này có vẻ là điểm mạnh của bạn, "
+                    + "hãy tích cực làm nhiều bài tập ở mức độ khó để đạt được mức điểm tối đa. "
+                    + "Dù vậy, bạn vẫn còn làm sai ở một số dạng toán như: ";
+        }
+        
+        return nhanxet;
     }
     
 //    private double GetPPChuan(int dotincay) {
@@ -128,165 +151,5 @@ public class DanhGiaKienThuc {
 //        }
 //        
 //        return res;
-//    }    
-    
-//    public double DanhGiaNangLuc(String made, String noidung) {
-//        Connection connection = DBConnect.getConnecttion();       
-//        PreparedStatement ps;
-//        String sql = "CALL thongkedokho('" + made + "','" + noidung + "')";
-//        
-//        double nangluc=0;
-//        int tongsocau=0;
-//        
-//        try {
-//            ps = connection.prepareCall(sql);
-//            ResultSet rs = ps.executeQuery();
-//
-//            while (rs.next()) {
-//                int socau = rs.getInt("socau");
-//                int socaudung = rs.getInt("socaudung");
-//                int dopc = rs.getInt("dopc");
-//
-//                tongsocau += dopc;
-//                nangluc += ((double) socaudung/socau) * dopc;
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        nangluc/=tongsocau;  
-//    
-//        return round(nangluc);
-//    }
-        
-//    public HashMap UocLuong(String username, String dangtoan) {
-//        DangtoanDAO dangtoanDAO = new DangtoanDAO();
-//        HashMap<String, Double> khoanguocluong = new HashMap<>();        
-//
-//        double kyvong = dangtoanDAO.GetKyVong(username, dangtoan);
-//        double phuongsai = dangtoanDAO.GetPhuongSai(username, dangtoan);
-//        
-//        int solanthi = QuanLyDeThiDAO.GetSolanthi(username, DangtoanDAO.GetNoidungTV(dangtoan));
-//        double epsilon;
-//        if (solanthi==1) {
-//            kyvong = 1;
-//            epsilon = 1;
-//        } else {
-//            epsilon = 1.96 * (phuongsai/Math.sqrt(solanthi));
-//        }
-//        epsilon = round(epsilon);
-//        
-//        khoanguocluong.put("max", kyvong + epsilon);
-//        khoanguocluong.put("min", kyvong - epsilon);
-//        return khoanguocluong;
-//    }
-//
-//    public int KiemDinh(String username, String dangtoan, double nangluc, int solanthi, int dotincay) {
-//        DangtoanDAO dangtoanDAO = new DangtoanDAO();
-//
-//        double kyvong = dangtoanDAO.GetKyVong(username, dangtoan);        
-//        double phuongsai = dangtoanDAO.GetPhuongSai(username, dangtoan);
-//        double z = round(Math.abs(((double)(kyvong - nangluc)* Math.sqrt(solanthi))/phuongsai));
-//        
-//        double chuan = GetPPChuan(dotincay);
-//        
-//        if (z > chuan) {
-//            return 1;
-//        }
-//        
-//        return 0;
-//    }
-//    
-//    public void updateKyVong(Users user, String noidung) {
-//        Connection connection = DBConnect.getConnecttion();
-//        
-//        DethiDAO dethiDAO = new DethiDAO();
-//        DanhGiaKienThuc danhgia = new DanhGiaKienThuc();
-//        
-//        int solanthi = QuanLyDeThiDAO.GetSolanthi(user.getUsername(), DangtoanDAO.GetNoidungTV(noidung));
-//        String made = dethiDAO.GetMade(user.getUsername(), DangtoanDAO.GetNoidungTV(noidung));
-//
-//        if (solanthi==0 || made==null) {
-//            return;
-//        }
-//
-//        double nangluc = danhgia.DanhGiaNangLuc(made, noidung);
-//
-//        double kyvong = 0;
-//
-//        String sql = "SELECT * FROM table_kyvong WHERE username='" + user.getUsername() + "'";
-//        PreparedStatement ps;      
-//
-//        try {
-//            ps = connection.prepareCall(sql);
-//            ResultSet rs = ps.executeQuery();
-//
-//            while (rs.next()) {
-//                if (solanthi==1) {
-//                    kyvong = (nangluc/solanthi);
-//                } else {
-//                    kyvong = rs.getDouble(noidung);
-//                    kyvong += ((double) nangluc/(solanthi-1));
-//                    kyvong *= ((double) (solanthi-1)/solanthi);
-//                }
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        kyvong = round(kyvong);
-//        
-//        sql = "UPDATE table_kyvong SET " + noidung + "='" + kyvong + "' WHERE username='" + user.getUsername() + "'";
-//        try {
-//            ps = connection.prepareCall(sql);
-//            ps.execute(sql);
-//            connection.close();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }    
-//    
-//    public void updatePhuongSai (Users user, String noidung) {
-//        Connection connection = DBConnect.getConnecttion();
-//        PreparedStatement ps;
-//
-//        DethiDAO dethiDAO = new DethiDAO();
-//        DanhGiaKienThuc danhgia = new DanhGiaKienThuc();
-//        
-//        String made = dethiDAO.GetMade(user.getUsername(), DangtoanDAO.GetNoidungTV(noidung));
-//        if (made==null) {
-//            return;
-//        }
-//            
-//        double ability = danhgia.DanhGiaNangLuc(made, noidung);
-//
-//        String nangluc = "";
-//        String sql = "SELECT * FROM table_phuongsai WHERE username='" + user.getUsername() + "'";
-//        try {
-//            ps = connection.prepareCall(sql);
-//            ResultSet rs = ps.executeQuery();
-//
-//            while (rs.next()) {
-//                String tmp = rs.getString(noidung);
-//                if (tmp.equals("0")) {
-//                    nangluc = Double.toString(round(ability));
-//                } else {
-//                    nangluc = rs.getString(noidung) + " " + Double.toString(round(ability));
-//                }
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
-//        }      
-//
-//        sql = "UPDATE table_phuongsai SET " + noidung + "='" + nangluc + "' WHERE username='" + user.getUsername() + "'";
-//        try {
-//            ps = connection.prepareCall(sql);
-//            ps.execute(sql);            
-//            connection.close();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
-//        }          
-//    }   
-    
-//    public static void main(String[] args) {
-//        System.out.println(new DanhgiaDAO().GetPPChuan(95));
 //    }    
 }

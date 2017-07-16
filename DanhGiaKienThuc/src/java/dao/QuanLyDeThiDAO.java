@@ -85,7 +85,10 @@ public class QuanLyDeThiDAO {
                 int thoigian = rs.getInt("thoigian");
                 String mucdo = rs.getString("mucdo");
                 float diem = rs.getFloat("diem");
-                String ngaythi = convertTimeToDate(Long.parseLong(rs.getString("ngaythi")));
+                String ngaythi = null;
+                if (rs.getString("ngaythi") != null) {
+                    ngaythi = convertTimeToDate(Long.parseLong(rs.getString("ngaythi")));
+                }                
                 String username = rs.getString("username");
                 
                 QuanLyDeThi deThi = new QuanLyDeThi(made, socau, monhoc, noidung, thoigian, mucdo, diem, ngaythi, username);

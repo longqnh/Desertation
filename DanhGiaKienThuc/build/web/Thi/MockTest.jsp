@@ -110,7 +110,6 @@
                     <div class="search-field">
                         <label>Danh sách đề thi: </label>
                         <select name="dethi" id="lop" required>
-                            <option value="" disabled selected>Chọn đề thi</option>
                             <option value="hk1"> Học kỳ 1 </option> 
                             <option value="hk2"> Học kỳ 2 </option> 
                             <option value="canam"> Cả năm </option>

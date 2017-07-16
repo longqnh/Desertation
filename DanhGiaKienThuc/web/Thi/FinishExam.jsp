@@ -4,6 +4,7 @@
     Author     : NTL
 --%>
 
+<%@page import="tools.DanhGiaKienThuc"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.ThongkeDAO"%>
 <%@page import="dao.QuanLyDeThiDAO"%>
@@ -67,6 +68,8 @@
                     QuanLyDeThiDAO qldeThiDAO = new QuanLyDeThiDAO();
                     float Diem = qldeThiDAO.GetDiem(made);
                                        
+                    DanhGiaKienThuc danhgia = new DanhGiaKienThuc();
+                    
                     List<Thongke> noidungYeu = new ArrayList<>();
                     int []socaudung = new int [5];
                     int []socau = new int [5];
@@ -179,21 +182,16 @@
                                         <tr>
                                             <td><%=nD.getDangtoan()%></td>
                                             <td>
-                                                Bạn đã làm đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu (đạt tỉ lệ <%=nD.getTyle()%>%).
+                                                Bạn đã làm đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu (đạt tỉ lệ <%=nD.getTyle()%>%).<br>
                                                 <%
-                                                    if (nD.getTyle() <= 50.0) { %>
-                                                        <br>Kiến thức của bạn ở nội dung này còn hạn chế. Đặc biệt là các về các dạng toán 
-                                                        <%
-                                                            for (Thongke ndY : noidungYeu) { 
-                                                                if (ndY.getMadangtoan().equals(nD.getMadangtoan())) { %>
-                                                                <%=ndY.getDangtoan()%>, 
-                                                        <%  } } %>
-                                                        <br>Hãy tích cực ôn tập lý thuyết và làm nhiều bài tập hơn.
-                                                <%  }  else { %>
-                                                        <br>Kiến thức của bạn ở nội dung này khá tốt. 
-                                                        Tuy nhiên các dạng toán ... bạn vẫn còn làm sai.
-                                                        <br>Hãy tiếp tục luyện tập để đạt kết quả cao hơn ở những lần thi sau.
-                                                <%  }  %>
+                                                    String nhanxet = danhgia.DanhGiaSauThi(made, nD.getMadangtoan());
+                                                %>
+                                                <%=nhanxet%>
+                                                <%
+                                                    for (Thongke ndY : noidungYeu) { 
+                                                        if (ndY.getMadangtoan().equals(nD.getMadangtoan())) { %>
+                                                            <%=ndY.getDangtoan()%>,
+                                                <%  } } %>
                                             </td>
                                         </tr>
                                 <% } %>

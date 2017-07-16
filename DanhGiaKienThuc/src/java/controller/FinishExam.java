@@ -80,7 +80,6 @@ public class FinishExam extends HttpServlet {
             }
         }        
                 
-//        response.sendRedirect("Thi/FinishExam.jsp?made=" + made);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/Thi/FinishExam.jsp?made=" + made);
         rd.forward(request, response);
     }
