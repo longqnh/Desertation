@@ -17,7 +17,7 @@ public class Dethi extends Question{
         super();
     }
 
-    public Dethi(String made, String id, String noidung, String dapanA, String dapanB, String dapanC, String dapanD, String dapan, String monhoc, String dangtoan, String dangbt, int dokho, int dophancach, int malop, int hinh, int dao) {
+    public Dethi(String made, String id, String noidung, String dapanA, String dapanB, String dapanC, String dapanD, String dapan, String monhoc, String dangtoan, String dangbt, int dokho, double dophancach, int malop, int hinh, int dao) {
         super(id, noidung, dapanA, dapanB, dapanC, dapanD, dapan, monhoc, dangtoan, dangbt, dokho, dophancach, malop, hinh, dao);
         this.made = made;
     }

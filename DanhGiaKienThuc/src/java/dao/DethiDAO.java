@@ -480,7 +480,7 @@ public class DethiDAO {
                 question.setDangtoan(rs.getString("dangtoan"));
                 question.setDangbt(rs.getString("dangbt"));
                 question.setDokho(rs.getInt("dokho"));
-                question.setDophancach(rs.getInt("dophancach"));
+                question.setDophancach(rs.getDouble("dophancach"));
                 question.setMalop(rs.getInt("malop"));
                 question.setHinh(rs.getInt("hinh"));
                 question.setMade(rs.getString("made"));
@@ -523,7 +523,7 @@ public class DethiDAO {
                 question.setDangtoan(rs.getString("dangtoan"));
                 question.setDangbt(rs.getString("dangbt"));
                 question.setDokho(rs.getInt("dokho"));
-                question.setDophancach(rs.getInt("dophancach"));
+                question.setDophancach(rs.getDouble("dophancach"));
                 question.setMalop(rs.getInt("malop"));
                 question.setHinh(rs.getInt("hinh"));
                 question.setMade(rs.getString("made"));

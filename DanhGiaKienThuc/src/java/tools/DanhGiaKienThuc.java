@@ -43,9 +43,9 @@ public class DanhGiaKienThuc {
                 int dopc = rs.getInt("dopc");
 
                 if (socau > 0) {
-                    tong += dopc;
                     nangluc += ((double) socaudung/socau) * dopc;
                 }
+                tong += dopc;
             }
             connection.close();
         } catch (SQLException ex) {

@@ -14,7 +14,7 @@ public class Question {
     private String noidung, dapanA, dapanB, dapanC, dapanD, dapan;
     private String monhoc, dangtoan, dangbt;
     private int dokho;
-    private int dophancach;
+    private double dophancach;
     private int malop;
     private int hinh;
     private int dao;
@@ -22,7 +22,7 @@ public class Question {
     public Question() {
     }
 
-    public Question(String id, String noidung, String dapanA, String dapanB, String dapanC, String dapanD, String dapan, String monhoc, String dangtoan, String dangbt, int dokho, int dophancach, int malop, int hinh, int dao) {
+    public Question(String id, String noidung, String dapanA, String dapanB, String dapanC, String dapanD, String dapan, String monhoc, String dangtoan, String dangbt, int dokho, double dophancach, int malop, int hinh, int dao) {
         this.id = id;
         this.noidung = noidung;
         this.dapanA = dapanA;
@@ -132,11 +132,11 @@ public class Question {
         this.dokho = dokho;
     }
 
-    public int getDophancach() {
+    public double getDophancach() {
         return dophancach;
     }
 
-    public void setDophancach(int dophancach) {
+    public void setDophancach(double dophancach) {
         this.dophancach = dophancach;
     }
 

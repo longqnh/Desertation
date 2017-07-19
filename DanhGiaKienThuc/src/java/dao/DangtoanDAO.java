@@ -360,7 +360,36 @@ public class DangtoanDAO {
             ex.printStackTrace();
         }
         return false;
-    }    
+    }
+    
+    public void updateTrongSo(String dangtoan, int level) {
+        Connection connection = DBConnect.getConnecttion();
+        
+        String str;
+        switch (level) {
+            case 0:
+                str = "dopc_de";
+                break;
+            case 1:
+                str = "dopc_tb";
+                break;
+            case 2:
+                str = "dopc_tbk";
+                break;
+            default:
+                str = "dopc_kho";
+                break;
+        }
+        
+        String sql = "UPDATE table_phanloaidangtoan SET " + str + "=(SELECT AVG(dophancach) FROM NHCHTOAN WHERE dokho=" + level + ") WHERE dangtoan='" + dangtoan + "'";
+        try {
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
 //    public static void main(String[] args) {
 //        System.out.println(DangtoanDAO.GetNoidungTV("thongke"));
 //    }

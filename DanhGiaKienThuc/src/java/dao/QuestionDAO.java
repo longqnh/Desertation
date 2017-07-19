@@ -43,7 +43,7 @@ public class QuestionDAO {
             ps.setString(9, q.getDangtoan());
             ps.setString(10, q.getDangbt());
             ps.setInt(11, q.getDokho());
-            ps.setInt(12, q.getDophancach());
+            ps.setDouble(12, q.getDophancach());
             ps.setInt(13, q.getMalop());
             ps.setInt(14, q.getHinh());
             ps.setInt(15, q.getDao());
@@ -121,7 +121,7 @@ public class QuestionDAO {
                 String dangtoan = rs.getString("dangtoan");
                 String dangbt = rs.getString("dangbt");
                 int dokho = rs.getInt("dokho");
-                int dophancach = rs.getInt("dophancach");
+                double dophancach = rs.getDouble("dophancach");
                 int malop = rs.getInt("malop");
                 int hinh = rs.getInt("hinh");
                 int dao = rs.getInt("dao");
@@ -176,7 +176,7 @@ public class QuestionDAO {
                 q.setDangtoan(rs.getString("dangtoan"));
                 q.setDangbt(rs.getString("dangbt"));
                 q.setDokho(rs.getInt("dokho"));
-                q.setDophancach(rs.getInt("dophancach"));
+                q.setDophancach(rs.getDouble("dophancach"));
                 q.setMalop(rs.getInt("malop"));
                 q.setHinh(rs.getInt("hinh"));
                 q.setDao(rs.getInt("dao"));
@@ -295,7 +295,7 @@ public class QuestionDAO {
                 int dalam = rs.getInt("tong");
                 int lamdung = rs.getInt("dung");
                 
-                if (dalam%10==0) {
+                if (dalam % 10 == 0) {
                     int dokho = getDokho(lamdung, dalam);
                     updateDokho(id, dokho);
                 }
@@ -326,7 +326,7 @@ public class QuestionDAO {
                 String monhoc = rs.getString("monhoc");
                 String dangbt = rs.getString("dangbt");
                 int dokho = rs.getInt("dokho");
-                int dophancach = rs.getInt("dophancach");
+                double dophancach = rs.getDouble("dophancach");
                 int malop = rs.getInt("malop");
                 int hinh = rs.getInt("hinh");
                 int dao = rs.getInt("dao");
@@ -363,5 +363,67 @@ public class QuestionDAO {
         }
 
         return map;
+    }
+    
+    public int getSoLuotLamCH(String id) {
+        Connection connection = DBConnect.getConnecttion();
+        int soluot = 0;
+        String sql = "SELECT COUNT(*) AS soluot FROM table_dethi WHERE id='" + id + "'";
+        PreparedStatement ps;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                soluot = rs.getInt("soluot");
+            }
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongkeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return soluot;
+    }
+    
+    public int getDoPhanCach(String id, int type) {
+        Connection connection = DBConnect.getConnecttion();
+        
+        int res = 0;        
+        String sql =    "SELECT COUNT(*) AS soluong " +
+                        "FROM table_dethi AS DT JOIN table_quanlydethi AS QLDT " +
+                        "ON (DT.id='" + id + "') AND (DT.made=QLDT.made) AND (DT.userchoice!=DT.dapan)" +
+                        "ORDER BY QLDT.diem " + 
+                        ((type == 0) ? "DESC" : "ASC");
+        
+        try {
+            PreparedStatement ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                res = rs.getInt("soluong");
+            }
+            connection.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        
+        return res;
+    }
+    
+    public void updateDoPhanCach(String id) {
+        Connection connection = DBConnect.getConnecttion();
+        
+        int cao = getDoPhanCach(id, 0);
+        int thap = getDoPhanCach(id, 1);
+        double p = 0.27 * (cao - thap);
+        
+        String sql = "UPDATE NHCHTOAN SET dophancach=" + p + " WHERE id='" + id + "'";
+        try {
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
