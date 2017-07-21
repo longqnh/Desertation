@@ -354,7 +354,7 @@ public class QuestionDAO {
                 int dalam = rs.getInt("tong");
                 int lamdung = rs.getInt("dung");
                 
-                map.put("tong", dalam);
+                map.put("sai", dalam-lamdung);
                 map.put("dung", lamdung);
             }
             connection.close();

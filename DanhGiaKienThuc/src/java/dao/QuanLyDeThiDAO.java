@@ -131,7 +131,7 @@ public class QuanLyDeThiDAO {
         List<String> list = new ArrayList<>();
         
         Connection connection = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM table_quanlydethi WHERE username='" + thisinh + "'";
+        String sql = "SELECT * FROM table_quanlydethi WHERE username='" + thisinh + "' ORDER BY ngaythi DESC";
         PreparedStatement ps;
         
         try {

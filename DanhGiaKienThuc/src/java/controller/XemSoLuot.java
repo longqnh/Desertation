@@ -29,7 +29,7 @@ public class XemSoLuot extends HttpServlet {
         Map thongke = questionDAO.ThongKeSoLuot(id);
                 
         request.setAttribute("dung", thongke.get("dung"));
-        request.setAttribute("tong", thongke.get("tong"));
+        request.setAttribute("sai", thongke.get("sai"));
         
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/QLCH.jsp");
         rd.forward(request, response);

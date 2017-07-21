@@ -142,10 +142,7 @@ public class QuestionCRUD extends HttpServlet {
                         q.setDokho(Integer.parseInt(dokho));
                     }
 
-                    if (request.getParameter("dophancach") != null) {
-                        String dophancach = request.getParameter("dophancach");
-                        q.setDophancach(Double.parseDouble(dophancach));
-                    }
+                    q.setDophancach((double)(q.getDokho()+1));
                     
                     int malop = ddao.GetLop(kienthuc);
                     q.setMalop(malop);

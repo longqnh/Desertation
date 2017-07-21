@@ -208,13 +208,13 @@ public class DethiDAO {
             for (int i=0; i < nd.length; i++) {
                 int lop = dangtoanDAO.GetLop(nd[i].getNoidung());
                 String dangtoan = nd[i].getNoidung();
-                update_dethi += "(SELECT * FROM NHCHTOAN WHERE dokho=0 AND monhoc='" + monhoc + "' AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
+                update_dethi += "(SELECT * FROM NHCHTOAN WHERE (dokho=0) AND (monhoc='" + monhoc + "') AND (dangtoan='" + dangtoan + "') AND (malop=" + lop + ") AND (dophancach > 0) ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN WHERE dokho=1 AND monhoc='" + monhoc + "' AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
+                                "(SELECT * FROM NHCHTOAN WHERE (dokho=1) AND (monhoc='" + monhoc + "') AND (dangtoan='" + dangtoan + "') AND (malop=" + lop + ") AND (dophancach > 0) ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN WHERE dokho=2 AND monhoc='" + monhoc + "' AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
+                                "(SELECT * FROM NHCHTOAN WHERE (dokho=2) AND (monhoc='" + monhoc + "') AND (dangtoan='" + dangtoan + "') AND (malop=" + lop + ") AND (dophancach > 0) ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN WHERE dokho=3 AND monhoc='" + monhoc + "' AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
+                                "(SELECT * FROM NHCHTOAN WHERE (dokho=3) AND (monhoc='" + monhoc + "') AND (dangtoan='" + dangtoan + "') AND (malop=" + lop + ") AND (dophancach > 0) ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
                 if (i < nd.length - 1) {
                     update_dethi += "UNION ALL ";
                 }
@@ -286,13 +286,13 @@ public class DethiDAO {
             for (int i=0; i < nd.length; i++) {
                 int lop = dangtoanDAO.GetLop(nd[i].getNoidung());
                 String dangtoan = nd[i].getNoidung();
-                update_dethi += "(SELECT * FROM NHCHTOAN WHERE dokho=0 AND monhoc='" + monhoc + "' AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
+                update_dethi += "(SELECT * FROM NHCHTOAN WHERE (dokho=0) AND (monhoc='" + monhoc + "') AND (dangtoan='" + dangtoan + "') AND (malop=" + lop + ") AND (dophancach > 0) ORDER BY RAND() LIMIT " + nd[i].getSoCauNB() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN WHERE dokho=1 AND monhoc='" + monhoc + "' AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
+                                "(SELECT * FROM NHCHTOAN WHERE (dokho=1) AND (monhoc='" + monhoc + "') AND (dangtoan='" + dangtoan + "') AND (malop=" + lop + ") AND (dophancach > 0) ORDER BY RAND() LIMIT " + nd[i].getSoCauTH() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN WHERE dokho=2 AND monhoc='" + monhoc + "' AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
+                                "(SELECT * FROM NHCHTOAN WHERE (dokho=2) AND (monhoc='" + monhoc + "') AND (dangtoan='" + dangtoan + "') AND (malop=" + lop + ") AND (dophancach > 0) ORDER BY RAND() LIMIT " + nd[i].getSoCauVD() + ") " +
                                 "UNION ALL " +
-                                "(SELECT * FROM NHCHTOAN WHERE dokho=3 AND monhoc='" + monhoc + "' AND dangtoan='" + dangtoan + "' AND malop=" + lop + " ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
+                                "(SELECT * FROM NHCHTOAN WHERE (dokho=3) AND (monhoc='" + monhoc + "') AND (dangtoan='" + dangtoan + "') AND (malop=" + lop + ") AND (dophancach > 0) ORDER BY RAND() LIMIT " + nd[i].getSocauVDC() + ") ";
                 if (i < nd.length - 1) {
                     update_dethi += "UNION ALL ";
                 }
@@ -312,25 +312,8 @@ public class DethiDAO {
 	}
     }
     
-    public String generateMade() {
-        String time = String.valueOf(System.currentTimeMillis());
-//        String temp = MD5.encryption(time);
-//        int length = temp.length();
-//        
-//        String made = new String();
-//        Random random = new Random();
-//        
-//        while (true) {
-//            int x = random.nextInt(length);
-//            int y = random.nextInt(length);
-//            
-//            if (x < y && y - x >= 5 && y - x <= 10) {
-//                made = temp.substring(x, y);
-//                break;
-//            }
-//        }
-        
-        return time;
+    public String generateMade() {        
+        return String.valueOf(System.currentTimeMillis());
     }
   
     public String GetMade(String username) {

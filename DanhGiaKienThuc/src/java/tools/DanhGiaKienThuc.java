@@ -8,6 +8,7 @@ package tools;
 import connect.DBConnect;
 import dao.DangtoanDAO;
 import dao.QuanLyDeThiDAO;
+import dao.ThongkeDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Thongke;
 
 /**
  *
@@ -90,6 +92,49 @@ public class DanhGiaKienThuc {
         }
         
         return nhanxet;
+    }
+    
+    public String DanhGiaTongQuat(String username, String noidung, double nangluc) {
+        ThongkeDAO thongkeDAO = new ThongkeDAO();
+        StringBuilder nhanxet = new StringBuilder("Kết quả thi gần nhất cho thấy ");
+        
+        String noidungID = DangtoanDAO.getMaDangtoan(noidung);
+        List<Thongke> dsBaiLam = thongkeDAO.thongkekienthuc(username, noidungID);
+        
+        double sau = dsBaiLam.get(dsBaiLam.size()-1).getTyle();
+        double truoc = dsBaiLam.get(dsBaiLam.size()-2).getTyle();
+        
+        if (sau < truoc/2) {
+            nhanxet.append("bạn đang có sự sa sút đáng kể.");
+        } else if (sau <= truoc) {
+            nhanxet.append("bạn đang có dấu hiệu sa sút.");
+        } else if (sau >= 1.5*truoc) {
+            nhanxet.append("bạn đang có sự tiến bộ vượt bậc.");            
+        } else {
+            nhanxet.append("bạn đang có sự tiến bộ.");            
+        }
+        
+        nhanxet.append(" Nhìn một cách tổng thể, ");
+        
+        if (nangluc <= 0.3) {
+            nhanxet.append("bạn vẫn còn yếu phần kiến thức này, chưa nắm vững kiến thức cơ bản. Hãy xem lại những lý thuyết căn bản và làm nhiều bài tập hơn.");                
+        } else {
+            if (nangluc > 0.3 && nangluc <= 0.5) {
+                nhanxet.append("ở dạng toán này, kiến thức của bạn chỉ ở mức trung bình, nắm được kiến thức ở mức căn bản. Hãy luyện tập nhiều hơn để nâng cao trình độ");                                    
+            } else {
+                if (0.5 < nangluc && nangluc <= 0.7) {
+                    nhanxet.append("ở dạng toán này, bạn có kiến thức ở mức độ tương đối. Hãy luyện tập thêm nhiều bài tập để cải thiện kiến thức");                                        
+                } else {
+                    if (0.7 < nangluc && nangluc < 0.9) {
+                        nhanxet.append("ở dạng toán này, bạn có kiến thức khá tốt, nắm chắc lý thuyết phần kiến thức này. Hãy luyện tập thêm nhiều câu hỏi khó để đạt đến mức điểm tối đa.");                                            
+                    } else {
+                        nhanxet.append("ở dạng toán này, bạn có kiến thức ở mức giỏi, hãy phát huy và tiếp tục ôn luyện cho những phần kiến thức khác.");                    
+                    }
+                }
+            }
+        }
+        
+        return nhanxet.toString();
     }
     
 //    private double GetPPChuan(int dotincay) {

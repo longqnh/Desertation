@@ -199,9 +199,9 @@
                     function drawChart() {
 
                         var data = google.visualization.arrayToDataTable([
-                            ['Tổng','Đúng'],
-                            ['Tổng số thí sinh làm', ${requestScope.tong}],
-                            ['Số thí sinh làm đúng', ${requestScope.dung}]
+                            ['Đúng','Sai'],
+                            ['Số thí sinh làm đúng', ${requestScope.dung}],
+                            ['Số thí sinh làm sai', ${requestScope.sai}]                            
                         ]);
 
                         var options = {

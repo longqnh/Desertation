@@ -255,6 +255,27 @@ public class DangtoanDAO {
         return res;
     }    
     
+    public static String getMaDangtoan(String dangtoanTV) {
+        Connection connection = DBConnect.getConnecttion();
+        PreparedStatement ps;
+        String sql = "SELECT * FROM table_phanloaidangtoan WHERE dangtoanTV LIKE '%" + dangtoanTV + "%'";
+        String res = null;
+        
+        try {
+            ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                res = rs.getString("dangtoan");
+            }
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyDeThiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return res;
+    }
+    
     public String getDangtoanID(String dangtoan) {
         Connection connection = DBConnect.getConnecttion();
         PreparedStatement ps;
@@ -307,7 +328,7 @@ public class DangtoanDAO {
     
     public boolean InsertDangtoan(Dangtoan dangtoan) {
         Connection connection= DBConnect.getConnecttion();
-        String sql = "INSERT INTO table_phanloaidangtoan(`dangtoan`,`madangtoan`,`monhoc`,`malop`,`dangtoanTV`,`hocky`) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO table_phanloaidangtoan(`dangtoan`,`madangtoan`,`monhoc`,`malop`,`dangtoanTV`,`hocky`,`dopc_de`,`dopc_tb`,`dopc_tbk`,`dopc_kho`) VALUES(?,?,?,?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareCall(sql);
@@ -317,6 +338,10 @@ public class DangtoanDAO {
             ps.setInt(4, dangtoan.getMalop());
             ps.setString(5, dangtoan.getDangtoanTV());            
             ps.setInt(6, dangtoan.getHocky());
+            ps.setDouble(7, 1.0);
+            ps.setDouble(8, 2.0);
+            ps.setDouble(9, 3.0);
+            ps.setDouble(10, 4.0);            
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

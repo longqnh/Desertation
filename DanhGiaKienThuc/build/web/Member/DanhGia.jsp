@@ -149,7 +149,7 @@
                             vAxis: {
                               title: 'Tỉ lệ đúng (%)'
                             },
-                            height: 500
+                            height: 480
                         };
                         // Instantiate and draw our chart, passing in some options.
                         var chart = new google.visualization.LineChart(document.getElementById('Chart'));
