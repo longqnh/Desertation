@@ -58,15 +58,23 @@
 
                 <div id="main-left-bottom">
                     <ul>
-                        <li><a> Toán </a>
+                        <li><a href="${pageContext.request.contextPath}/index.jsp"> Trang chủ</a></li>                       
+                        <li><a> Làm đề thi </a>
                             <ul class="submnu">
-                                <li><a href="Lop12.jsp"> Lớp 12 </a></li>
-                                <li><a href="Lop11.jsp"> Lớp 11 </a></li>
-                                <li><a href="Lop10.jsp"> Lớp 10 </a></li>
+                                <li><a href="${pageContext.request.contextPath}/Thi/MockTest.jsp"> Thi thử </a></li>
+                                <li><a href="${pageContext.request.contextPath}/Thi/Practice.jsp"> Luyện tập </a></li>
                             </ul>
                         </li>
-
-                        <li><a href="LyThuyetTracNghiem.jsp"> Lý thuyết trắc nghiệm</a></li>
+                        <li><a> Lý thuyết</a>
+                            <ul class="submnu">
+                                <li><a href="${pageContext.request.contextPath}/OnLyThuyet/Lop12.jsp"> Toán 12 </a></li>
+                                <li><a href="${pageContext.request.contextPath}/OnLyThuyet/Lop11.jsp"> Toán 11 </a></li>
+                                <li><a href="${pageContext.request.contextPath}/OnLyThuyet/Lop10.jsp"> Toán 10 </a></li>
+                            </ul>                            
+                        </li>
+                        <li><a href="${pageContext.request.contextPath}/tutorial.jsp"> Hướng dẫn</a></li>
+                        <li><a href="${pageContext.request.contextPath}/information.jsp"> Giới thiệu</a></li>
+                        <li><a href="${pageContext.request.contextPath}/contact.jsp"> Liên hệ - Góp ý</a></li>
                     </ul>
                 </div>
                 
@@ -86,14 +94,50 @@
                         </div>
                     </li>
                     <li>
-                        <a href="" class="content"> Phương trình - HPT - BPT - BĐT </a>
+                        <a href="" class="content"> Hàm số bậc nhất và bậc hai </a>
+                        <div>
+                            <%=lythuyetDAO.getContent("hamso10")%>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="hamso10">Cập nhật</button>                                                
+                            <% } %>                              
+                        </div>
+                    </li>                    
+                    <li>
+                        <a href="" class="content"> Phương trình </a>
                         <div>
                             <%=lythuyetDAO.getContent("phuongtrinh")%>
                             <% if (canEdit==true) { %>
-                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="pt">Cập nhật</button>                                                
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="phuongtrinh">Cập nhật</button>                                                
                             <% } %>                              
                         </div>
                     </li>
+                    <li>
+                        <a href="" class="content"> Hệ phương trình </a>
+                        <div>
+                            <%=lythuyetDAO.getContent("hept")%>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="hept">Cập nhật</button>                                                
+                            <% } %>                              
+                        </div>
+                    </li>
+                    <li>
+                        <a href="" class="content"> Bất phương trình </a>
+                        <div>
+                            <%=lythuyetDAO.getContent("batpt")%>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="batpt">Cập nhật</button>                                                
+                            <% } %>                              
+                        </div>
+                    </li>
+                    <li>
+                        <a href="" class="content"> Bất đẳng thức </a>
+                        <div>
+                            <%=lythuyetDAO.getContent("bdt")%>
+                            <% if (canEdit==true) { %>
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="bdt">Cập nhật</button>                                                
+                            <% } %>                              
+                        </div>
+                    </li>      
                     <li>
                         <a href="" class="content"> Thống kê </a>
                         <div>
@@ -126,7 +170,7 @@
                         <div>
                             <%=lythuyetDAO.getContent("luonggiac10")%>
                             <% if (canEdit==true) { %>
-                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="luonggiac">Cập nhật</button>                                                
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="luonggiac10">Cập nhật</button>                                                
                             <% } %>                              
                         </div>                        
                     </li>

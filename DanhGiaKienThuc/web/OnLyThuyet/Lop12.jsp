@@ -58,15 +58,23 @@
 
                 <div id="main-left-bottom">
                     <ul>
-                        <li><a> Toán </a>
+                        <li><a href="${pageContext.request.contextPath}/index.jsp"> Trang chủ</a></li>                       
+                        <li><a> Làm đề thi </a>
                             <ul class="submnu">
-                                <li><a href="Lop12.jsp"> Lớp 12 </a></li>
-                                <li><a href="Lop11.jsp"> Lớp 11 </a></li>
-                                <li><a href="Lop10.jsp"> Lớp 10 </a></li>
+                                <li><a href="${pageContext.request.contextPath}/Thi/MockTest.jsp"> Thi thử </a></li>
+                                <li><a href="${pageContext.request.contextPath}/Thi/Practice.jsp"> Luyện tập </a></li>
                             </ul>
                         </li>
-
-                        <li><a href="LyThuyetTracNghiem.jsp"> Lý thuyết trắc nghiệm</a></li>
+                        <li><a> Lý thuyết</a>
+                            <ul class="submnu">
+                                <li><a href="${pageContext.request.contextPath}/OnLyThuyet/Lop12.jsp"> Toán 12 </a></li>
+                                <li><a href="${pageContext.request.contextPath}/OnLyThuyet/Lop11.jsp"> Toán 11 </a></li>
+                                <li><a href="${pageContext.request.contextPath}/OnLyThuyet/Lop10.jsp"> Toán 10 </a></li>
+                            </ul>                            
+                        </li>
+                        <li><a href="${pageContext.request.contextPath}/tutorial.jsp"> Hướng dẫn</a></li>
+                        <li><a href="${pageContext.request.contextPath}/information.jsp"> Giới thiệu</a></li>
+                        <li><a href="${pageContext.request.contextPath}/contact.jsp"> Liên hệ - Góp ý</a></li>
                     </ul>
                 </div>
                 
@@ -117,7 +125,7 @@
                         <div>
                             <%=lythuyetDAO.getContent("hhkg12")%>
                             <% if (canEdit==true) { %>
-                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="hhkg">Cập nhật</button>                                                
+                                <button id="btnUpdateLT" type="submit" name="kienthuc" value="hhkg12">Cập nhật</button>                                                
                             <% } %>          
                         </div>
                     </li>

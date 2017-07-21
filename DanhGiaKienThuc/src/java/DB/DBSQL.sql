@@ -245,31 +245,6 @@ CREATE TABLE `danhgiakienthuc`.`table_lythuyet` (
   `kienthuc` VARCHAR(45) NOT NULL,
   `noidung` LONGTEXT NULL,
   PRIMARY KEY (`kienthuc`));
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('hamso12', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('loga', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('tichphan', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('sophuc', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('oxyz', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('hhkg12', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('luonggiac11', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('tohop', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('gioihan', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('phepdoihinh', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('hhkg11', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('menhde', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('phuongtrinh', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('thongke', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('oxy', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('luonggiac10', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('vector', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('tinhtincay', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('tinhgiatri', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('dokho', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('dophancach', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('dungsai', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('dadapan', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('dienkhuyet', 'Đang cập nhật');
-INSERT INTO `danhgiakienthuc`.`table_lythuyet` (`kienthuc`, `noidung`) VALUES ('doichieu', 'Đang cập nhật');
 
 /* CREATE FOREIGN KEY */
 ALTER TABLE `danhgiakienthuc`.`table_user` ADD FOREIGN KEY (`lop`) REFERENCES `danhgiakienthuc`.`table_lop`(`malop`);	
