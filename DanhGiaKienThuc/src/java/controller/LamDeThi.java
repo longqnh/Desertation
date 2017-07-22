@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Dangtoan;
 import model.Users;
+import tools.DanhGiaKienThuc;
 
 /**
  *
@@ -42,6 +43,7 @@ public class LamDeThi extends HttpServlet {
         
         DethiDAO dethiDAO = new DethiDAO();
         DangtoanDAO dangtoanDAO = new DangtoanDAO();
+        DanhGiaKienThuc danhgia = new DanhGiaKienThuc();
         
         String[] noidung;
         int lop, level, time, numQuestion, type = 0;
@@ -52,7 +54,19 @@ public class LamDeThi extends HttpServlet {
         if (request.getParameter("dethi")==null) { // mode practice
             noidung = request.getParameterValues("kienthuc");
             lop = Integer.parseInt(request.getParameter("lop"));
-            level = Integer.parseInt(request.getParameter("dokho"));
+            
+            if (request.getParameter("dokho") != null) {
+                level = Integer.parseInt(request.getParameter("dokho"));
+            } else {
+                double nangluc = danhgia.DanhGiaNangLuc(users.getUsername(), noidung[0]);
+                if (nangluc <= 0.5) {
+                    level = 0;
+                } else if (nangluc <=8) {
+                    level = 1;
+                } else {
+                    level = 2;
+                }
+            }
             
             if (request.getParameter("time") != null) {
                 time = Integer.parseInt(request.getParameter("time"));
@@ -60,18 +74,21 @@ public class LamDeThi extends HttpServlet {
             } else {                
                 numQuestion = Integer.parseInt(request.getParameter("socau"));
                 time = numQuestion + 5;
-                List<Dangtoan> list = (List) session.getAttribute("cacND");
                 
-                if (list != null) {
-                    noidung = new String[list.size()];
-                    int i = 0;
-                    for (Dangtoan dangtoan : list) {
-                        String nd = dangtoan.getDangtoan();
-                        noidung[i++] = nd;
-                        int n = Integer.parseInt(request.getParameter(nd));
-                        socau.add(n);
+                if (request.getParameter("dokho") != null) {
+                    List<Dangtoan> list = (List) session.getAttribute("cacND");
+
+                    if (list != null) {
+                        noidung = new String[list.size()];
+                        int i = 0;
+                        for (Dangtoan dangtoan : list) {
+                            String nd = dangtoan.getDangtoan();
+                            noidung[i++] = nd;
+                            int n = Integer.parseInt(request.getParameter(nd));
+                            socau.add(n);
+                        }
+                        type = 1;
                     }
-                    type = 1;
                 }
             }
         } else { // mode mock test

@@ -97,6 +97,7 @@
                         <option value="theond">Theo thời gian</option>
                         <option value="theosc-tong">Theo số câu</option>
                         <option value="theosc-nd">Theo nội dung</option>
+                        <option value="theodokho">Theo độ khó</option>
                     </select>
                 </div>
                     
@@ -195,7 +196,7 @@
                     <input id="btnTaoDe" type="button" value="Tạo đề" onclick="DoExam()"> <!-- css in MemberStyle -->
                 </form>   
 
-                <form class="createExam" id="createExam-socau-noidung" name="createExam" action="${pageContext.request.contextPath}/Practice" method="POST">
+                <form class="createExam" id="createExam-socau-noidung" name="createExam" action="${pageContext.request.contextPath}/Practice" method="POST">                    
                     <div class="search-field">
                         <label>Chọn môn: </label>
                         <select name="monhoc" id="monhoc" required>
@@ -239,6 +240,63 @@
                         
                     <input id="btnTaoDe" type="submit" value="Tiếp tục"> <!-- css in MemberStyle -->
                 </form>   
+
+                <form class="createExam" id="createExam-dokho" name="createExam" action="${pageContext.request.contextPath}/LamDeThi" method="POST">
+                    <div class="search-field">
+                        <h3>Đề thi sẽ được tạo theo mức năng lực hiện tại của bạn </h3>
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Chọn môn: </label>
+                        <select name="monhoc" id="monhoc" required>
+                            <%
+                                for (MonHoc mon : dsMon) { %>
+                                    <option value="<%=mon.getMonhocID()%>"> <%=mon.getTenmonhoc()%> </option>                                  
+                            <%  } %>
+                        </select>
+                    </div>
+                        
+                    <div class="search-field">
+                        <label>Chọn lớp: </label>
+                        <select name="lop" class="lop" required>
+                            <option value="" disabled selected>Lớp</option>
+                            <%
+                                for (Lop lop: dsLop) { %>
+                                    <option value="<%=lop.getMalop()%>"> <%=lop.getTenlop()%> </option>                                  
+                            <%  } %>
+                        </select>
+                    </div>
+                                            
+                    <div class="search-field">
+                        <label>Chọn nội dung kiến thức: </label>                        
+                        <select id="kienthuc" name="kienthuc" required></select>                        
+                    </div>
+                        
+                    <div class="search-field">
+                        <label>Nhập số câu: </label>
+                        <input type="text" name="socau"> 
+                    </div>
+                        
+                    <script type="text/javascript">
+                        $('.lop').change (
+                            function() {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "${pageContext.request.contextPath}/DangtoanServlet",
+                                    data: {
+                                        lop: $(this).val(), 
+                                        monhoc: $("#monhoc").val()
+                                    },
+                                    success: function(data){
+                                        $("#kienthuc").html(data);
+                                    }
+                                });
+                            }
+                        );
+                    </script>
+                    
+                    <input id="btnTaoDe" type="button" value="Tạo đề" onclick="DoExam()"> <!-- css in MemberStyle -->
+                </form>
                         
                 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.multi-select.js"></script>     
                 <script type="text/javascript">  
@@ -277,8 +335,10 @@
                             } else {
                                 if (id === "theosc-tong") {
                                     $("#createExam-socau-tong").submit();
-                                } else {
+                                } else if (id === "theosc-nd") {
                                     $("#createExam-socau-noidung").submit();
+                                } else if (id === "theodokho") {
+                                    $("#createExam-dokho").submit();
                                 }
                             }
                         }
@@ -306,6 +366,7 @@
                     $("#createExam-socau-tong").hide();
                     $("#createExam-noidung").hide();
                     $("#createExam-socau-noidung").hide();
+                    $("#createExam-dokho").hide();
                     
                     $("#taode").change(function () {
                         var id = $("#taode").val();
@@ -313,15 +374,23 @@
                             $("#createExam-socau-tong").hide();
                             $("#createExam-socau-noidung").hide();
                             $("#createExam-noidung").show();
+                            $("#createExam-dokho").hide();
                         } else {
                             if (id === "theosc-tong") {
                                 $("#createExam-socau-tong").show();
                                 $("#createExam-socau-noidung").hide();
                                 $("#createExam-noidung").hide();
-                            } else {
+                                $("#createExam-dokho").hide();
+                            } else if (id === "theosc-nd") {
                                 $("#createExam-socau-tong").hide();
                                 $("#createExam-socau-noidung").show();
                                 $("#createExam-noidung").hide();
+                                $("#createExam-dokho").hide();                                
+                            } else if (id === "theodokho") {
+                                $("#createExam-socau-tong").hide();
+                                $("#createExam-socau-noidung").hide();
+                                $("#createExam-noidung").hide();
+                                $("#createExam-dokho").show();
                             }
                         }
                     });

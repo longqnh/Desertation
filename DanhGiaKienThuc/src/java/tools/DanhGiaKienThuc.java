@@ -63,11 +63,16 @@ public class DanhGiaKienThuc {
         List<String> DeThi = qldtdao.GetAllMade(username,DangtoanDAO.GetNoidungTV(noidung));
         
         int solanthi = DeThi.size();
+        if (solanthi == 0) {
+            return 0;
+        }
+        
         double nangluc = 0;
         
         for (String made : DeThi) {
             nangluc += GetNangLuc(made, noidung);            
         }
+        
         nangluc/=solanthi;
         
         return nangluc;
