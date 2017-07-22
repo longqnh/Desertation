@@ -15,8 +15,12 @@ $(document).ready(function () {
     $('.content').nextAll('div').hide();
 //    $('.content').next('div').slideToggle();
     $('.content').click(function(){ 
-        $('.content').next('div').slideUp();
-        $(this).next('div').slideToggle(); 
+//        $('.content').next('div').slideUp();
+        if ($(this).is(":visible") === true ) {
+            $(this).next('div').slideToggle(); 
+        } else {
+            $(this).next('div').hide();
+        }
         return false;
     });    
 });

@@ -66,7 +66,7 @@ public class thongke extends HttpServlet {
         int solanthi = QuanLyDeThiDAO.GetSolanthi(users.getUsername(), noidung);
         if (solanthi > 0) {
             double nangluc = danhgia.DanhGiaNangLuc(users.getUsername(), kienthuc);
-            String nhanxet = danhgia.DanhGiaTongQuat(users.getUsername(), noidung, nangluc);
+            String nhanxet = danhgia.DanhGiaTongQuat(users.getUsername(), noidung, nangluc, solanthi);            
             request.setAttribute("Message",nhanxet);
         }
         

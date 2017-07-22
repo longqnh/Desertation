@@ -94,27 +94,32 @@ public class DanhGiaKienThuc {
         return nhanxet;
     }
     
-    public String DanhGiaTongQuat(String username, String noidung, double nangluc) {
+    public String DanhGiaTongQuat(String username, String noidung, double nangluc, int solanthi) {
         ThongkeDAO thongkeDAO = new ThongkeDAO();
-        StringBuilder nhanxet = new StringBuilder("Kết quả thi gần nhất cho thấy ");
+        StringBuilder nhanxet = new StringBuilder();
         
-        String noidungID = DangtoanDAO.getMaDangtoan(noidung);
-        List<Thongke> dsBaiLam = thongkeDAO.thongkekienthuc(username, noidungID);
-        
-        double sau = dsBaiLam.get(dsBaiLam.size()-1).getTyle();
-        double truoc = dsBaiLam.get(dsBaiLam.size()-2).getTyle();
-        
-        if (sau < truoc/2) {
-            nhanxet.append("bạn đang có sự sa sút đáng kể.");
-        } else if (sau <= truoc) {
-            nhanxet.append("bạn đang có dấu hiệu sa sút.");
-        } else if (sau >= 1.5*truoc) {
-            nhanxet.append("bạn đang có sự tiến bộ vượt bậc.");            
+        if (solanthi == 1) {
+            nhanxet.append("Hệ thống hiện tại chưa thể đánh giá sự tiến bộ của bạn. Hiện tại năng lực ");
         } else {
-            nhanxet.append("bạn đang có sự tiến bộ.");            
-        }
+            nhanxet.append("Kết quả thi gần nhất cho thấy ");
         
-        nhanxet.append(" Nhìn một cách tổng thể, ");
+            String noidungID = DangtoanDAO.getMaDangtoan(noidung);
+            List<Thongke> dsBaiLam = thongkeDAO.thongkekienthuc(username, noidungID);
+
+            double sau = dsBaiLam.get(dsBaiLam.size()-1).getTyle();
+            double truoc = dsBaiLam.get(dsBaiLam.size()-2).getTyle();
+
+            if (sau < truoc/2) {
+                nhanxet.append("bạn đang có sự sa sút đáng kể.");
+            } else if (sau <= truoc) {
+                nhanxet.append("bạn đang có dấu hiệu sa sút.");
+            } else if (sau >= 1.5*truoc) {
+                nhanxet.append("bạn đang có sự tiến bộ vượt bậc.");            
+            } else {
+                nhanxet.append("bạn đang có sự tiến bộ.");            
+            }
+            nhanxet.append(" Nhìn một cách tổng thể, ");            
+        }
         
         if (nangluc <= 0.3) {
             nhanxet.append("bạn vẫn còn yếu phần kiến thức này, chưa nắm vững kiến thức cơ bản. Hãy xem lại những lý thuyết căn bản và làm nhiều bài tập hơn.");                
@@ -133,7 +138,7 @@ public class DanhGiaKienThuc {
                 }
             }
         }
-        
+                
         return nhanxet.toString();
     }
     

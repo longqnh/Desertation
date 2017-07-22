@@ -131,7 +131,7 @@ public class QuanLyDeThiDAO {
         List<String> list = new ArrayList<>();
         
         Connection connection = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM table_quanlydethi WHERE username='" + thisinh + "' ORDER BY ngaythi DESC";
+        String sql = "SELECT * FROM table_quanlydethi WHERE (username='" + thisinh + "') AND (noidung LIKE '%" + noidung + "%') AND (ngaythi IS NOT NULL) ORDER BY ngaythi DESC";
         PreparedStatement ps;
         
         try {
@@ -140,10 +140,7 @@ public class QuanLyDeThiDAO {
             
             while (rs.next()) {
                 String made = rs.getString("made");
-                String cacnoidung = rs.getString("noidung");
-                if (cacnoidung.contains(noidung)) {
-                    list.add(made);
-                }
+                list.add(made);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DanhGiaKienThuc.class.getName()).log(Level.SEVERE, null, ex);
