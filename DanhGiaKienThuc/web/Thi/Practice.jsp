@@ -186,7 +186,7 @@
 
                     <div class="search-field">
                         <label>Nhập số câu: </label>
-                        <input type="text" name="socau"> 
+                        <input type="text" name="socau">
                     </div>
                         
                     <div style="margin: 10px 0px 0px 115px">
@@ -243,7 +243,7 @@
 
                 <form class="createExam" id="createExam-dokho" name="createExam" action="${pageContext.request.contextPath}/LamDeThi" method="POST">
                     <div class="search-field">
-                        <h3>Đề thi sẽ được tạo theo mức năng lực hiện tại của bạn </h3>
+                        <h3> Đề thi sẽ được tạo có độ khó phù hợp mức năng lực hiện tại của bạn </h3>
                     </div>
                     
                     <div class="search-field">
@@ -274,7 +274,7 @@
                         
                     <div class="search-field">
                         <label>Nhập số câu: </label>
-                        <input type="text" name="socau"> 
+                        <input type="text" name="socau">
                     </div>
                         
                     <script type="text/javascript">
@@ -318,10 +318,10 @@
                             // Ensure that it is a number and stop the keypress
                             if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
                                 e.preventDefault();
-                            }
+                            }                
                         });
                     });
-                    
+                           
                     $('.kienthuc').multiSelect({
                         selectableHeader: "<div class='custom-header' style='font-weight: bold;'>Kiến thức:</div>",
                         selectionHeader: "<div class='custom-header' style='font-weight: bold;'>Kiến thức đã chọn:</div>"
@@ -343,7 +343,7 @@
                             }
                         }
                     }
-
+                                        
                     $('.lop').change (
                         function() {
                             $.ajax({
