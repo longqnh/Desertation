@@ -184,7 +184,7 @@
                                             <td>
                                                 Bạn đã làm đúng <%=nD.getSocaudung()%>/<%=nD.getSocau()%> câu (đạt tỉ lệ <%=nD.getTyle()%>%).<br>
                                                 <%
-                                                    String nhanxet = danhgia.DanhGiaSauThi(made, nD.getMadangtoan());
+                                                    String nhanxet = danhgia.DanhGiaSauThi(made, nD.getMadangtoan(), nD.getTyle()/100);
                                                 %>
                                                 <%=nhanxet%>
                                                 <%

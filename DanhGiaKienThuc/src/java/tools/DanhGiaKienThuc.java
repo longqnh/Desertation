@@ -78,8 +78,8 @@ public class DanhGiaKienThuc {
         return nangluc;
     }
     
-    public String DanhGiaSauThi(String made, String dangtoan) {
-        double nangluc = GetNangLuc(made, dangtoan);
+    public String DanhGiaSauThi(String made, String dangtoan, double nangluc) {
+//        double nangluc = GetNangLuc(made, dangtoan);
         String nhanxet = new String();
         
         if (nangluc < 0.5) {

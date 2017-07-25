@@ -73,7 +73,7 @@ public class LamDeThi extends HttpServlet {
                 numQuestion = (time == 15 ? 10 : (time == 60 ? 40 : 50));                
             } else {                
                 numQuestion = Integer.parseInt(request.getParameter("socau"));
-                time = numQuestion + 5;
+                time = (int)(numQuestion*1.5);
                 
                 if (request.getParameter("dokho") != null) {
                     List<Dangtoan> list = (List) session.getAttribute("cacND");
